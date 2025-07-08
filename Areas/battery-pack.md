@@ -21,6 +21,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 - **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir.
 - **Ana sigorta ve kontaktör** ile acil durumda tüm sistemi izole etmek mümkündür.
 - **BMS üzerinden RS485/CanBus ile Home Assistant’a veri aktarımı ve otomasyon tetikleme** mümkündür.
+- **Güneş paneli çıkışı doğrudan EasySolar-II'nin entegre MPPT girişine bağlanır.**
 
 ## 🛠️ Ürün Listesi
 
@@ -37,6 +38,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 ### İzleme Noktaları
 - **BMS RS485/CanBus**: Hücre voltajları, toplam voltaj, akım, sıcaklık, SOC, hata durumları
 - **Ana Sigorta/Kontaktör**: Açık/kapalı durumu, otomatik izole
+- **EasySolar-II GX**: Tüm AC ve güneş enerjisi akışı tek cihazdan izlenir
 
 ### Otomasyon Senaryoları
 - **Düşük SOC Otomasyonu**: Batarya %5 altına inerse kritik yükleri kapat, kullanıcıya uyarı gönder
@@ -55,7 +57,8 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 2. **BMS Montajı**: Tüm hücrelere balans kabloları ve ana akım bağlantısı
 3. **Sigorta ve Kontaktör**: Ana hatta sigorta ve kontaktör montajı
 4. **Sensör ve Haberleşme**: RS485/CanBus/MQTT entegrasyonu
-5. **Home Assistant Konfigürasyonu**: Sensörlerin ve otomasyonların tanımlanması
+5. **Güneş Paneli Bağlantısı**: Esnek 400W panel doğrudan EasySolar-II MPPT girişine bağlanır
+6. **Home Assistant Konfigürasyonu**: Sensörlerin ve otomasyonların tanımlanması
 
 ### Bakım Planı
 * **Aylık**: Hücre voltajı ve bağlantı kontrolü
@@ -79,4 +82,4 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 
 ---
 
-*Bu sistem, modern karavan enerji ihtiyaçları için güvenli, akıllı ve ölçeklenebilir bir batarya çözümü sunar.*
+*Bu sistem, EasySolar-II ile tüm AC ve güneş enerjisi altyapısını tek cihazda birleştirerek, güvenli, akıllı ve ölçeklenebilir bir batarya çözümü sunar.*
