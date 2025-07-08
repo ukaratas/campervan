@@ -83,6 +83,14 @@ Karavana gerektiğinde sıcak su sağlamak için kullanılacak tesisatın bütü
 * **Sıcaklık Stabilitesi**: ±2°C hassasiyetle kontrol
 * **Donma Koruması**: -20°C'ye kadar güvenli çalışma
 
+## 🔄 Devre Bağımsızlığı ve Güvenlik
+
+Motorun orijinal soğutma devresi (radyatör ve motorun kendi su pompası) ile boyler devresi birbirinden bağımsızdır. Boyler devresi, motordan alınan sıcak suyun ayrı bir hat üzerinden boylerin içindeki ısı eşanjöründen geçirilmesiyle çalışır. 
+
+- **Boyler devirdaim pompası** sadece boyler hattında suyun dolaşmasını sağlar. Bu pompa çalışmazsa, yalnızca boyler hattında su dolaşmaz ve boyler ısınmaz.
+- **Motorun ana soğutma devresi** ise, her zaman güvenli şekilde çalışmaya devam eder ve motorun aşırı ısınmasını önler. Boyler devresindeki pompanın durması, motorun ana devresini hiçbir şekilde etkilemez.
+- Bu sayede, boyler devresi bakım veya arıza durumunda devre dışı kalsa bile aracın motor soğutma sistemi tam güvenli şekilde çalışır.
+
 ---
 
 *Bu sistem, modern karavan konfor standartlarına uygun, enerji verimli ve tamamen otomatik sıcak su çözümü sunar.*

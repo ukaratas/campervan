@@ -1,6 +1,6 @@
 # 🚐 Karavan Projesi - Ducato Dönüşüm
 
-Bu proje, Fiat Ducato L4H2 aracının tam donanımlı karavana dönüştürülmesi sürecini dokümante eder.
+Bu proje, Fiat Ducato L4H2 (SCA 214 popup roof) tabanlı bir karavanın tüm sistemlerinin profesyonel, modüler ve otomasyona uygun şekilde tasarlanıp uygulanmasını dokümante eder.
 
 ## 🚗 Araç Bilgileri
 
@@ -17,13 +17,17 @@ Bu proje, Fiat Ducato L4H2 aracının tam donanımlı karavana dönüştürülme
 - **Yakıt**: (detaylar eklenecek)
 - **Yük Kapasitesi**: (detaylar eklenecek)
 
-## 🏗️ Proje Alanları
+## 🏗️ Proje Alanları ve Modüller
 
-### Tamamlanan Alanlar
-- 🚿 **Hot Water System** - Sıcak su tesisatı planlaması başlatıldı
+Her sistem ayrı bir markdown dosyasında detaylandırılmıştır. Teknik bütünlük, güvenlik ve Home Assistant entegrasyonu ön plandadır.
+
+### Tamamlanan ve Detaylandırılan Alanlar
+- 🔋 [**Batarya Grubu (Battery Pack)**](Areas/battery-pack.md): 24V LiFePO4 prizmatik hücreler, akıllı BMS, RS485/CanBus ile Home Assistant entegrasyonu, güvenlik ve otomasyon.
+- ⚡ [**220V AC Sistem**](Areas/220v.md): Victron MultiPlus GX inverter/şarj cihazı, shore power, galvanik izolasyon, akıllı dağıtım ve Home Assistant entegrasyonu.
+- 🚿 [**Sıcak Su Sistemi**](Areas/hot-water.md): Quick Nautic Boiler B3, motor entegreli ısıtma, otomasyon, donma koruması ve Home Assistant entegrasyonu.
+- 🔌 [**DC-DC Alternatör Şarj**](Areas/dc-charge-alternator.md): Victron Orion XS ile alternatörden yaşam aküsüne şarj, izleme ve otomasyon.
 
 ### Planlanacak Alanlar
-- 🔋 **Elektrik Sistemi** - 12V/24V DC ve 220V AC sistemler
 - 🛏️ **Yatak Alanı** - Popup roof entegrasyonu
 - 🍳 **Mutfak** - Ocak, buzdolabı, depolama
 - 🚿 **Banyo** - Duş, tuvalet, lavabo
@@ -35,20 +39,27 @@ Bu proje, Fiat Ducato L4H2 aracının tam donanımlı karavana dönüştürülme
 
 ## 📋 Proje Durumu
 
-| Alan | Durum | Tamamlanma |
-|------|--------|------------|
-| Sıcak Su Sistemi | 🟡 Planlanıyor | 15% |
-| Elektrik Sistemi | ⚪ Başlanmadı | 0% |
-| Yatak Alanı | ⚪ Başlanmadı | 0% |
-| Mutfak | ⚪ Başlanmadı | 0% |
-| Banyo | ⚪ Başlanmadı | 0% |
+| Alan                        | Durum         | Tamamlanma |
+|-----------------------------|---------------|------------|
+| Batarya Grubu               | 🟢 Detaylandı | 90%        |
+| 220V AC Sistem              | 🟢 Detaylandı | 90%        |
+| Sıcak Su Sistemi            | 🟢 Detaylandı | 90%        |
+| DC-DC Alternatör Şarj       | 🟢 Detaylandı | 90%        |
+| Yatak Alanı                 | ⚪ Başlanmadı | 0%         |
+| Mutfak                      | ⚪ Başlanmadı | 0%         |
+| Banyo                       | ⚪ Başlanmadı | 0%         |
+| Oturma Alanı                | ⚪ Başlanmadı | 0%         |
+| Isıtma/Soğutma              | ⚪ Başlanmadı | 0%         |
+| Su Sistemi                  | ⚪ Başlanmadı | 0%         |
+| Haberleşme                  | ⚪ Başlanmadı | 0%         |
+| Depolama                    | ⚪ Başlanmadı | 0%         |
 
 ## 🎯 Hedefler
 
 ### Kısa Vadeli (1-3 ay)
-- [ ] Sıcak su sistemi detaylandırılması
-- [ ] Elektrik sistemi planlaması (24V DC tabanlı)
-- [ ] Genel layout tasarımı
+- [x] Sıcak su sistemi detaylandırılması
+- [x] Elektrik sistemi (24V DC, 220V AC, batarya, alternatör şarj) planlaması
+- [ ] Genel layout ve mekanik tasarım
 
 ### Orta Vadeli (3-6 ay)
 - [ ] İzolasyon ve iç döşeme
@@ -64,26 +75,29 @@ Bu proje, Fiat Ducato L4H2 aracının tam donanımlı karavana dönüştürülme
 
 ```
 campervan/
-├── Areas/                  # Proje alanları
+├── Areas/                  # Proje alanları (her sistem için ayrı markdown)
+│   ├── battery-pack.md     # Batarya grubu
+│   ├── 220v.md            # 220V AC sistem
 │   ├── hot-water.md       # Sıcak su sistemi
+│   ├── dc-charge-alternator.md # Alternatör şarj
 │   └── ...                # Diğer alanlar (eklenecek)
 ├── Documentation/         # Teknik dökümanlar (eklenecek)
 ├── Plans/                 # Çizimler ve planlar (eklenecek)
-├── Budget/               # Bütçe takibi (eklenecek)
-└── README.md             # Bu dosya
+├── Budget/                # Bütçe takibi (eklenecek)
+└── README.md              # Bu dosya
 ```
 
 ## 📝 Notlar
 
-- Karavanın tüm elektrik altyapısı 24V DC tabanlı olarak planlanmaktadır.
-- Bu ilk sıcak su sistemi projesi
-- Popup roof SCA 214 ile entegrasyon düşünülecek
-- Motor suyu ile ısıtma sistemi planlanıyor
-- 220V shore power desteği olacak
+- Tüm elektrik altyapısı **24V DC** tabanlıdır. Yüksek verim, düşük kayıp ve güvenlik önceliklidir.
+- **Home Assistant** entegrasyonu ile tüm sistemler merkezi olarak izlenebilir ve otomasyona açıktır.
+- Her sistem modüler, profesyonel ve genişletilebilir şekilde planlanmıştır.
+- Teknik detaylar ve ürün listeleri ilgili markdown dosyalarında bulunur.
+- SCA 214 popup roof entegrasyonu ve mekanik alanlar ileride detaylandırılacaktır.
 
 ## 🚀 Başlarken
 
-1. Her yeni alan için `Areas/` klasörü altında markdown dosyası oluşturun
+1. Her yeni sistem/alan için `Areas/` klasörü altında markdown dosyası oluşturun
 2. Teknik çizimler ve planlar için `Plans/` klasörünü kullanın
 3. Bütçe takibi için `Budget/` klasörünü kullanın
 4. Her değişiklik için git commit'leri yapın
