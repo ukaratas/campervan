@@ -143,3 +143,16 @@ campervan/
 ---
 
 *Bu proje sürekli güncellenmektedir. Her alan tamamlandıkça dokümantasyon genişletilecektir.* 
+
+## Fiziksel Yerleşim Planı
+
+Aşağıda, modüllerin araç içindeki yaklaşık konumlarını gösteren genel yerleşim planı bulunmaktadır:
+
+![Fiziksel Yerleşim Planı](assets/Images/layout.png)
+
+- **Yatak Altı:** Akü, Şofben
+- **Şasi Altı:** Temiz/Su tankı
+- **Mutfak:** Wallas 1200D, Buzdolabı, Bulaşık Makinesi
+- **Isıtıcı:** Sürücü koltuğu arkası
+- **Banyo:** Sol arka köşe
+- **Popup Roof:** SCA 214, tavan üstü 
