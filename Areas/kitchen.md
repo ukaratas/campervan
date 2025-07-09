@@ -12,7 +12,7 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 
 | Kategori | Ürün/Model | Özellikler |
 |----------|------------|------------|
-| **Ocak** | Wallas 1200D | Dizel, cam üst, 12V besleme |
+| **Ocak** | Wallas 1200D | Dizel, cam üst, 12V besleme (~1-4A, başlatma sırasında 7-9A) |
 | **Buzdolabı** | EvaCool Eva Berlin 90Lt | 24V DC, 418x485x975mm, çift yönlü kapı |
 | **Evye** | Paslanmaz çelik, tek musluk | Sıcak/soğuk su, termostatik vana ile sabit ılık su |
 | **Bulaşık Makinesi** | Elektrolux ESF2400O | 220V, ankastre, tezgah altı |
@@ -33,7 +33,7 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 - **Bulaşık makinesi:** 220V enerji, gri su çıkışı
 - **Buzdolabı:** 24V enerji
 - **Evye:** Temiz su girişi, gri su çıkışı
-- **Ocak:** 12V enerji (24V to 12V DC konvertör ile, 20-30A kapasiteli; detay battery-pack dosyasında)
+- **Ocak:** 12V enerji (24V to 12V DC konvertör ile, 20-30A kapasiteli; Wallas 1200D için ~1-4A sürekli, başlatma sırasında 7-9A; detay battery-pack dosyasında)
 - **Prizler:** 2x220V, 2x24V, 1x12V (tezgah üstü)
 - **Aydınlatma:** 24V spot ve LED şerit, push button ile otomasyon
 
