@@ -74,6 +74,13 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 - **Kablo Kesiti**: Yüksek akım hatlarında uygun kalınlıkta kablo ve kaliteli bağlantı elemanları kullanılmalı
 - **Yedekleme**: Kritik durumlar için manuel bypass veya acil şarj hattı planlanabilir
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 12V DC (araç aküsü/alternatör), 24V DC (yaşam aküsü), DC-DC şarj cihazı
+- **Kablo ve Sigorta:** Yüksek akım kablosu, ANL sigorta, bağlantı noktaları
+- **Otomasyon:** Şarj durumu, voltaj/akım sensörleri, Home Assistant entegrasyonu
+- **Su:** Doğrudan bağlantı yok
+
 ---
 
 *Bu sistem, karavan alternatöründen yaşam aküsüne güvenli, verimli ve otomasyona uygun şarj çözümü sunar.*

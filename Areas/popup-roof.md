@@ -40,6 +40,13 @@
 - **Enerji üretim geçmişi** Grafana/InfluxDB ile izlenebilir
 - **Otomasyon:** Güneş üretimine göre yük yönetimi ve batarya şarj optimizasyonu
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 24V DC (güneş paneli çıkışı), MPPT girişine doğrudan bağlantı
+- **Kablo Güzergahı:** Tavan üstünden, tercihen mutfak üstü, elektrik panosuna kısa güzergah
+- **Otomasyon:** Güneş üretimi Home Assistant ile izlenir
+- **Su:** Doğrudan bağlantı yok
+
 ---
 
 *Bu sistem, popup roof entegrasyonu ile maksimum enerji verimi ve estetik/teknik bütünlük sağlar.* 

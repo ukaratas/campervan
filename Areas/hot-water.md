@@ -91,6 +91,13 @@ Motorun orijinal soğutma devresi (radyatör ve motorun kendi su pompası) ile b
 - **Motorun ana soğutma devresi** ise, her zaman güvenli şekilde çalışmaya devam eder ve motorun aşırı ısınmasını önler. Boyler devresindeki pompanın durması, motorun ana devresini hiçbir şekilde etkilemez.
 - Bu sayede, boyler devresi bakım veya arıza durumunda devre dışı kalsa bile aracın motor soğutma sistemi tam güvenli şekilde çalışır.
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 220V AC (boiler), 24V DC (devirdaim pompası, otomatik vana, sensörler)
+- **Otomasyon:** Sıcaklık, basınç, seviye sensörleri, Home Assistant entegrasyonu
+- **Su:** Temiz su girişi, sıcak su çıkışı, motor suyu hattı, otomatik boşaltma
+- **Sensörler:** Sıcaklık, basınç, kaçak sensörleri önerilir
+
 ---
 
 *Bu sistem, modern karavan konfor standartlarına uygun, enerji verimli ve tamamen otomatik sıcak su çözümü sunar.*

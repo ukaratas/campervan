@@ -18,9 +18,9 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 
 - **LiFePO4 prizmatik hücreler** yüksek çevrim ömrü ve termal güvenlik sunar.
 - **BMS (Battery Management System)** hücre dengeleme, aşırı akım/gerilim/ısı koruması ve iletişim sağlar.
-- **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir.
+- **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir. 12V gerektiren cihazlar için 24V to 12V DC konvertör ile ayrı bir 12V hat oluşturulur (ör. mutfak ocak, portatif cihazlar, prizler).
 - **Ana sigorta ve kontaktör** ile acil durumda tüm sistemi izole etmek mümkündür.
-- **BMS üzerinden RS485/CanBus ile Home Assistant’a veri aktarımı ve otomasyon tetikleme** mümkündür.
+- **BMS üzerinden RS485/CanBus ile Home Assistant’a veri aktarımı ve otomasyon tetikleme** mümkündür. 12V hattın enerji tüketimi ve durumu da izlenebilir.
 - **Güneş paneli çıkışı doğrudan EasySolar-II'nin entegre MPPT girişine bağlanır.**
 
 ## 🛠️ Ürün Listesi
@@ -32,6 +32,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 | **Ana Sigorta** | MEGA/ANL Sigorta | 200A | 1 adet | $10-20 |
 | **Kontaktör** | 24V DC Ana Kontaktör | Uzaktan açma/kapama | 200A | $30-50 |
 | **Sensörler** | Akım/gerilim/sıcaklık sensörleri | Hall effect/NTC/PT100 | - | $20-40 |
+| **Konvertör** | 24V to 12V DC Konvertör | 20-30A, yüksek verimli, 12V zorunlu cihazlar için (ör. Wallas ocak, portatif cihazlar) | 12V, 20-30A | $60-120 |
 
 ## 🏠 Home Assistant Entegrasyonu
 
@@ -79,6 +80,14 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 - **Yangın Güvenliği**: Batarya bölmesinde duman dedektörü ve havalandırma önerilir
 - **Acil İzolasyon**: Ana kontaktör Home Assistant veya acil buton ile uzaktan kapatılabilir
 - **Kablo Kesiti**: Yüksek akım hatlarında uygun kalınlıkta kablo ve kaliteli bağlantı elemanları kullanılmalı
+
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji Dağıtımı:** 24V DC ana hat, 12V DC (konvertör ile), 220V AC (inverter/shore)
+- **Ana Bağlantılar:** Akü çıkışları, ana sigorta, kontaktör, BMS, inverter, şarj cihazı, DC-DC charger
+- **Otomasyon ve İzleme:** BMS, akım/gerilim/sıcaklık sensörleri, Home Assistant entegrasyonu
+- **Su:** Doğrudan bağlantı yok, ancak batarya bölmesi için yangın ve nem sensörü önerilir
+- **Kablo Kesiti ve Koruma:** Yüksek akım hatlarında uygun kalınlıkta kablo, sigorta ve kontaktör kullanılır
 
 ---
 

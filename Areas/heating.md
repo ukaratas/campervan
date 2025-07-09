@@ -52,6 +52,13 @@ Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şek
 - Dış hava sensörü ve iç ortam sensörü ile otomasyon hassasiyeti artırılabilir
 - Yedek sigorta ve acil kapatma anahtarı önerilir
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 24V DC ana hat (ısıtıcı ve kontrol paneli)
+- **Otomasyon:** Röle/modül ile Home Assistant entegrasyonu, sıcaklık sensörleri
+- **Yakıt:** Dizel hattı (harici tank veya ana depo)
+- **Su:** Doğrudan bağlantı yok, ancak ısıtıcı bölmesinde nem ve yangın sensörü önerilir
+
 ---
 
 *Bu sistem, karavanın kış koşullarında konforlu, güvenli ve otomasyona uygun şekilde ısıtılmasını sağlar.*

@@ -52,6 +52,13 @@ Karavanın tüm temiz su ihtiyacını karşılayan, güvenli, otomasyona uygun v
 - Donma riski yüksek bölgelerde depo ve hatlar izole edilmeli
 - Su kaçağı sensörü ile ek güvenlik sağlanabilir
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 24V DC ana hat (pompa, genleşme kabı, actuator valf)
+- **Otomasyon:** Seviye sensörü, valf ve pompa Home Assistant ile entegre
+- **Su:** Temiz su girişi, basınçlı dağıtım, gri su çıkışı, otomatik drenaj
+- **Sensörler:** Seviye, basınç, kaçak sensörleri önerilir
+
 ---
 
 *Bu sistem, karavan için güvenli, hijyenik ve otomasyona uygun bir temiz su altyapısı sunar.* 

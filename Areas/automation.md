@@ -44,6 +44,13 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 - Endüstriyel modüller sayesinde uzun ömür ve güvenilirlik
 - Yedekli güç (UPS) ile kesintisiz otomasyon
 
+## ⚡ Elektrik ve Su Tesisatı
+
+- **Enerji:** 24V DC ana hat (Raspberry Pi, modüller, röleler), UPS ile yedekli
+- **İletişim:** RS485/Modbus, dijital/analog giriş-çıkışlar
+- **Otomasyon:** Röle, sensör, aktüatör, push button, Home Assistant entegrasyonu
+- **Su:** Doğrudan bağlantı yok, ancak su ve nem sensörleriyle izleme yapılabilir
+
 ---
 
 *Bu altyapı, karavanın tüm sistemlerinin akıllı, güvenli ve merkezi olarak yönetilmesini sağlar.*
