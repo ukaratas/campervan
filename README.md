@@ -21,14 +21,24 @@ Bu proje, Fiat Ducato L4H2 (SCA 214 popup roof) tabanlı bir karavanın tüm sis
 
 Aşağıdaki plan, karavanın ana yaşam ve teknik alanlarının yerleşimini ve sistemlerin entegrasyonunu özetler:
 
-- **Ön Kabin:** İki döner koltuk (sürücü ve yolcu), arka tarafa dönük kullanılabilir.
-- **Orta Alan:** Sürücü koltuğu arkasında çift kişilik koltuk (oturma/yemek alanı). Bu koltuk altı sadece Eberspacher D4L ısıtıcı ve boyler için ayrılmıştır. Elektrik panosu ve diğer teknik ekipmanlar burada bulunmaz.
-- **Arka Sabit Yatak:** Yatak sabit ve enlemesine, FlareSpace yan çıkıntıları ile 140cm’den 200cm’ye uzatılmıştır. Yatak altı, ana teknik alan olarak kullanılır: batarya paketi, ana elektrik panosu, otomasyon modülleri, BMS, inverter, şarj cihazı burada, sol veya sağ duvara dayalı şekilde yerleştirilir.
-- **Mutfak Modülü:** Orta sol kısımda, üstte sadece dokunmatik Raspberry Pi ekranı (Home Assistant arayüzü) bulunur. Buzdolabı, ocak, lavabo gibi detaylar ileride netleşecektir.
-- **Banyo/WC:** Sağ arka köşede, tavan havalandırması (heki) mümkün değil (popup roof nedeniyle), ancak pencere ile doğal havalandırma sağlanacaktır.
-- **Temiz ve Atık Su Depoları:** Şasi altında, donma riskine karşı otomatik drenaj ve valf otomasyonu ile korunur.
-- **Güneş Paneli:** Popup roof üstünde esnek 400W panel, kablo inişi tercihen mutfak üstünden, elektrik panosuna kısa güzergahla iner.
-- **Ekstra Depolama:** Ana depolama arka yatak altı ve mutfak altı; tavan dolapları veya taban altı depolama ileride eklenebilir.
+```mermaid
+flowchart TD
+    A["Ön Kabin<br/>Döner Sürücü ve Yolcu Koltuğu"] --> B["Orta Alan<br/>Çift Kişilik Koltuk (altında Isıtıcı ve Boyler)"]
+    B --> C["Arka Sabit Yatak<br/>(Altında Batarya, Elektrik Panosu, Otomasyon)"]
+    B --> D["Mutfak Modülü<br/>(Tezgah, Buzdolabı, Evye, Bulaşık Makinesi, Üstte Raspberry Pi Ekran)"]
+    C --> E["Temiz & Atık Su Depoları<br/>(Şasi Altı)"]
+    D --> F["Popup Roof<br/>(Üstte 400W Esnek Güneş Paneli)"]
+    C --> G["Ekstra Depolama<br/>(Yatak Altı, Mutfak Altı, Tavan Dolapları)"]
+    B --> H["Banyo/WC<br/>(Sağ Arka, Pencere ile Havalandırma)"]
+    style F fill:#e0f7fa,stroke:#00796b,stroke-width:2px
+    style E fill:#e1bee7,stroke:#6a1b9a,stroke-width:2px
+    style C fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style D fill:#ffe0b2,stroke:#e65100,stroke-width:2px
+    style B fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style H fill:#b3e5fc,stroke:#0288d1,stroke-width:2px
+    style G fill:#f5f5f5,stroke:#757575,stroke-width:1px
+    style A fill:#f8bbd0,stroke:#ad1457,stroke-width:2px
+```
 
 ## 🏗️ Proje Alanları ve Modüller
 
@@ -116,6 +126,7 @@ campervan/
 - Her sistem modüler, profesyonel ve genişletilebilir şekilde planlanmıştır.
 - Temiz su, otomasyon ve ısıtma altyapısı, donma koruması ve uzaktan izleme ile tam entegredir.
 - Teknik detaylar ve ürün listeleri ilgili markdown dosyalarında bulunur.
+- **Her modülün kendi markdown dosyasında, o sisteme ait 'Elektrik ve Su Tesisatı' başlığı altında enerji, su, otomasyon ve sensör altyapısı özetlenmiştir. Böylece bakım, genişletme ve entegrasyon kolayca takip edilebilir.**
 - SCA 214 popup roof entegrasyonu ve mekanik alanlar ileride detaylandırılacaktır.
 - **Güneş paneli olarak esnek 400W panel, popup roof üzerine entegre edilecektir.**
 - **Banyo için tavan havalandırması (heki) mümkün değildir, pencere ile doğal havalandırma sağlanacaktır.**
