@@ -16,6 +16,10 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 | **Röle Modülleri** | Modbus RTU 8-ch Latching Relay (C) | RS485, uzun süre açık kalacak cihazlar için |
 | | Modbus RTU 4-ch 30A High Current Relay | RS485, yüksek akım (pompa, motor vb.) için, LED göstergeli |
 | **Analog Giriş** | Industrial 8-Ch Analog Acquisition Module | 12-bit hassasiyet, voltaj/akım okuma, RS485 |
+| **Gaz Dedektörleri** | Waveshare Industrial RS485 Gas Detector | LPG/Doğalgaz algılama, ön ve arka pozisyon |
+| **Hava İstasyonu** | Waveshare Environmental Monitoring RS485 | Nem, sıcaklık, basınç, hava kalitesi (PM2.5, CO2) |
+| **GPS Modülü** | Raspberry Pi GPS HAT/USB | Sürekli lokasyon takibi, Home Assistant entegrasyonu |
+| **4G Bağlantı** | Raspberry Pi 4G/LTE HAT | Cloud etkileşim, uzaktan erişim, bildirimler |
 
 ## 🏠 Home Assistant Entegrasyonu
 
@@ -27,7 +31,11 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 - **Enerji Yönetimi:** Yüksek akım çeken cihazların (pompa, ısıtıcı vb.) otomatik aç/kapatılması
 - **Donma Koruması:** Sıcaklık sensörüne göre valf/pompa otomasyonu
 - **Su Yönetimi:** Seviye sensörüne göre pompa ve valf kontrolü
-- **Uzaktan İzleme:** Tüm sistemlerin mobil/web arayüzden izlenmesi ve bildirim
+- **Gaz Güvenliği:** LPG/doğalgaz algılandığında otomatik valf kapatma ve alarm
+- **Hava Kalitesi:** CO2 seviyesi yüksekse otomatik havalandırma
+- **Nem Kontrolü:** Yüksek nem algılandığında fan devreye girme
+- **GPS Takip:** Sürekli lokasyon izleme ve geofencing uyarıları
+- **Uzaktan İzleme:** 4G ile cloud bağlantısı ve mobil bildirimler
 - **Güvenlik:** Kaçak akım, aşırı sıcaklık/akım durumunda otomatik müdahale ve alarm
 
 ## 🔧 Kurulum ve Bakım
@@ -44,10 +52,39 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 - Endüstriyel modüller sayesinde uzun ömür ve güvenilirlik
 - Yedekli güç (UPS) ile kesintisiz otomasyon
 
+## 🔗 Sensör ve Cihaz Detayları
+
+### Gaz Dedektörleri (2 adet)
+- **Konum:** Ön bölge (mutfak) ve arka bölge (yatak alanı)
+- **Algılama:** LPG, doğalgaz, propan
+- **İletişim:** RS485/Modbus RTU
+- **Alarm:** Sesli uyarı + Home Assistant bildirimi
+- **Otomasyon:** Gaz algılandığında otomatik gaz vanası kapatma
+
+### Hava İstasyonu
+- **Konum:** İç mekan merkezi (tavan montajı)
+- **Metrikler:** Sıcaklık, nem, basınç, hava kalitesi (PM2.5), CO2
+- **İletişim:** RS485/Modbus RTU
+- **Otomasyon:** Hava kalitesine göre otomatik havalandırma kontrolü
+
+### GPS ve 4G Modülleri
+- **GPS:** Sürekli konum takibi, geofencing
+- **4G/LTE:** Cloud bağlantısı, uzaktan Home Assistant erişimi
+- **Veri Senkronizasyonu:** Sensör verileri cloud'a yedekleme
+- **Mobil Bildirimler:** Kritik durumlarda push notification
+
+### Harici Aydınlatma Sistemi
+- **LED Şeritler:** 24V LED yan taraf aydınlatması
+- **Awning/Tente:** LED şerit entegrasyonu, IP65 koruma
+- **Kontrol:** Home Assistant ile otomatik/manuel açma-kapama
+- **Senaryo:** Kapı açıldığında otomatik aydınlatma
+
 ## ⚡ Elektrik ve Su Tesisatı
 
 - **Enerji:** 24V DC ana hat (Raspberry Pi, modüller, röleler), UPS ile yedekli
-- **İletişim:** RS485/Modbus, dijital/analog giriş-çıkışlar
+- **İletişim:** RS485/Modbus, dijital/analog giriş-çıkışlar, GPS, 4G
+- **Sensörler:** Gaz dedektörleri, hava istasyonu, GPS modülü
+- **Harici Aydınlatma:** 24V LED şeritler (yan taraf + awning/tente)
 - **Otomasyon:** Röle, sensör, aktüatör, push button, Home Assistant entegrasyonu
 - **Su:** Doğrudan bağlantı yok, ancak su ve nem sensörleriyle izleme yapılabilir
 
