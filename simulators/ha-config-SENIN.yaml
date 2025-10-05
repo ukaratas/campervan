@@ -1,0 +1,43 @@
+# ==========================================
+# HOME ASSISTANT CONFIGURATION - SENIN IP
+# ==========================================
+# Mac IP: 192.168.1.45
+# Home Assistant: http://homeassistant.local:8123
+# UTM Bridge Network: ✓
+
+# Bu konfigürasyonu Home Assistant configuration.yaml dosyasına ekle!
+
+modbus:
+  - name: "Karavan_Test"
+    type: tcp
+    host: 192.168.1.45  # Mac IP adresi
+    port: 5020
+    
+    # Yatak Alanı Işığı (Coil 0)
+    lights:
+      - name: "Yatak Işık"
+        slave: 1
+        address: 0
+        write_type: coil
+
+# ==========================================
+# ADIMLAR
+# ==========================================
+# 1. Home Assistant'a git: http://homeassistant.local:8123
+# 2. File Editor add-on'u kur (yoksa)
+# 3. configuration.yaml aç
+# 4. Yukarıdaki modbus konfigürasyonunu EN ALTA ekle
+# 5. Developer Tools → YAML → Check Configuration ✓
+# 6. Settings → System → Restart
+# 7. Restart sonrası Overview'a git
+# 8. Add Card → Entities
+# 9. "yatak" ara, light.yatak_isik'i ekle
+# 10. Toggle et ve test et!
+
+# ==========================================
+# SIMÜLATÖR DURUMU
+# ==========================================
+# ✓ Simülatör çalışıyor: 192.168.1.45:5020
+# ✓ 1 Push Button (DI 0) - Henüz kullanılmıyor
+# ✓ 1 Lamba (Coil 0) - Yatak Işık
+
