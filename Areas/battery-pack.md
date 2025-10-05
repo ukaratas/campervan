@@ -18,7 +18,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 
 - **LiFePO4 prizmatik hücreler** yüksek çevrim ömrü ve termal güvenlik sunar.
 - **BMS (Battery Management System)** hücre dengeleme, aşırı akım/gerilim/ısı koruması ve iletişim sağlar.
-- **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir. 12V gerektiren cihazlar için 24V to 12V DC konvertör ile ayrı bir 12V hat oluşturulur (Truma Combi D4 inet: 2-8A; portatif cihazlar: 2-5A; toplam 12V yük: ~20A max).
+- **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir. 12V gerektiren cihazlar için 24V to 12V DC konvertör ile ayrı bir 12V hat oluşturulur (Truma Combi D4 inet: 2-8A; Clesana C1: 0.05A standby, 0.5A flush; portatif cihazlar: 2-5A; toplam 12V yük: ~10A max).
 - **Ana sigorta ve kontaktör** ile acil durumda tüm sistemi izole etmek mümkündür.
 - **BMS üzerinden RS485/CanBus ile Home Assistant’a veri aktarımı ve otomasyon tetikleme** mümkündür. 12V hattın enerji tüketimi ve durumu da izlenebilir.
 - **Güneş paneli çıkışı doğrudan EasySolar-II'nin entegre MPPT girişine bağlanır.**
@@ -32,7 +32,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 | **Ana Sigorta** | MEGA/ANL Sigorta | 200A | 1 adet | $10-20 |
 | **Kontaktör** | 24V DC Ana Kontaktör | Uzaktan açma/kapama | 200A | $30-50 |
 | **Sensörler** | Akım/gerilim/sıcaklık sensörleri | Hall effect/NTC/PT100 | - | $20-40 |
-| **Konvertör** | 24V to 12V DC Konvertör | 30-40A, yüksek verimli, 12V zorunlu cihazlar için (Truma Combi D4 inet: 2-8A; portatif cihazlar) | 12V, 30-40A | $80-150 |
+| **Konvertör** | 24V to 12V DC Konvertör | 15-20A, yüksek verimli, 12V zorunlu cihazlar için (Truma Combi D4 inet: 2-8A; Clesana C1: 0.05A standby; portatif cihazlar) | 12V, 15-20A | $50-100 |
 
 ## 🏠 Home Assistant Entegrasyonu
 

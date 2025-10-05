@@ -6,7 +6,7 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 
 - **Konum:** Araç arkasında, giriş kapısı yanında
 - **Alan:** 150cm (araç uzunluğu boyunca)
-- **Yatak Boyutu:** 150x200cm (King size çift kişilik)
+- **Yatak Boyutu:** 150x200cm 
 - **Yerleştirme:** Enine (150cm araç uzunluğu boyunca, 200cm araç genişliği boyunca)
 - **Flarespace:** İç genişlik 200-205cm'ye çıkarıldı (200cm yatak enine sığar)
 - **Malzeme:** Yüksek kaliteli yatak minderi ve özel çarşaf seti
@@ -15,15 +15,15 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 ## ❄️ 24V Klima Sistemi
 
 ### Klima Özellikleri
-- **Model:** Dometic CoolAir RTX 2000 24V
-- **Soğutma Gücü:** 1700W
+- **Model:** Eva Cool Eva 24V 20T Premium Mini Klima
+- **Soğutma Gücü:** : 1950W
 - **Voltaj:** 24V DC (batarya sistemi ile uyumlu)
 - **Tüketim:** ~70A 24V (başlangıç), ~30-40A sürekli
-- **Boyut:** 859 x 645 x 308mm
-- **Ağırlık:** ~32kg
+- **Boyut:** 725x700x286mm
+- **Ağırlık:** ~24kg
 
 ### Montaj Konumu
-- **Konum:** Ana yatak alanının üstünde, popup roof kapandıktan sonra
+- **Konum:** Ana yatak ustune konumlanacak sekilde, arac tavaninda, popup tavanin bittigi noktada konumlanacak.
 - **Tavan Montajı:** Araç tavanına güçlü montaj
 - **Havalandırma:** Ana yatak alanına doğrudan soğutma
 - **Erişim:** Bakım için kolay erişim imkanı
@@ -44,13 +44,6 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Kontrol:** Manuel açma/kapama kolu
 - **Perde:** Entegre perde ve sineklik
 
-### Yıldız İzleme İmkanı
-- **Geniş Görüş:** 50x70cm büyük cam yüzey
-- **Şeffaf Cam:** Yıldız izleme için crystal clear
-- **Yataktan Görüş:** Yatağa uzanarak doğrudan gökyüzü
-- **Perde Kontrolü:** Gerektiğinde karanlık sağlama
-- **Havalandırma:** Gece taze hava sirkülasyonu
-
 ### Konfor Avantajları
 - **Doğal Işık:** Gündüz doğal aydınlatma
 - **Panoramik Görüş:** Gece gökyüzü manzarası
@@ -59,70 +52,27 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 
 ## 🔧 Flarespace Modifikasyonu
 
-### Teknik Detaylar
 - **Ürün:** [Flarespace Fiat Ducato Van Flares](https://flarespace.com/products/fiat-ducato-campervan-windows)
 - **Malzeme:** Dayanıklı fiberglass yapı
 - **Montaj:** Araç yan duvarlarına sabit montaj
 - **Genişlik Artışı:** 185cm'den 200-205cm'ye (15-20cm kazanç)
-
-### Flarespace Özellikleri
 - **Sabit Çıkıntılar:** Hem baş hem ayak tarafında
 - **Pencere Durumu:** Her iki extension da pencere olmayan model
 - **Yük Kapasitesi:** Güvenli ve test edilmiş yapı
 - **Estetik:** Araç tasarımı ile uyumlu görünüm
 
-### Arka Kapı Üstü Pencereler
+## Arka Kapı Üstü Pencereler
 - **Konum:** Her iki arka kapının üstüne simetrik yerleştirme
 - **Boyut:** 30x50cm (her biri)
 - **Sayı:** 2 adet (sağ ve sol kapı üstü)
 - **Tip:** Açılabilir pencere (havalandırma için)
 - **Malzeme:** Çift cam, su sızdırmaz çerçeve
-
-### Avantajları
-- **King Size Yatak:** 150x200cm yatak enine yerleştirme imkanı (200cm araç genişliği boyunca)
-- **Genişlik Artışı:** 185cm'den 200-205cm'ye çıkarılan iç genişlik
-- **Konfor:** Standart karavan yatağından çok daha geniş
-- **Depolama Korunuyor:** Yatak altı alan korunur
-- **Estetik Bütünlük:** Profesyonel görünüm
-
-### Arka Pencere Avantajları
 - **Doğal Havalandırma:** Çapraz hava akışı (heki ile birlikte)
 - **Geri Görüş:** Araç arkasını izleme imkanı
 - **Doğal Işık:** Yatak alanına ek doğal aydınlatma
-- **Acil Çıkış:** Gerektiğinde alternatif çıkış imkanı
-- **Simetrik Tasarım:** Estetik ve fonksiyonel denge
 
-## 🎯 Tasarım ve Konfor
 
-### Yatak Sistemi
-- **Çerçeve:** Sağlam ve hafif ahşap çerçeve (150x200cm)
-- **Minder:** Yüksek kaliteli foam yatak minderi (150x200cm)
-- **Sabitleme:** Güvenli yatak sabitleme sistemi
-- **Çarşaf:** 150x200cm enine yerleştirme için özel boyut
-- **Orientasyon:** Enine yerleştirme (150cm araç uzunluğu, 200cm araç genişliği)
-
-### Yatak Pozisyonu ve Erişim
-- **Alan Dağılımı:**
-  - Yatak alanı: 150cm (araç uzunluğu boyunca)
-  - Banyo alanı: 120cm (araç uzunluğu boyunca)
-  - Oturma alanı: 130cm (araç uzunluğu boyunca)
-- **Yatak Erişimi:**
-  - Banyo tarafı: 60cm yatak kenarı erişimi
-  - Mutfak tarafı: 70cm yatak kenarı erişimi
-  - Koridor: 50cm geçiş alanı
-- **Yatak Orientasyonu:**
-  - Baş pozisyonu: Mutfak tarafında (sosyal alan görüşü)
-  - Ayak pozisyonu: Banyo tarafında (monitor montajı)
-  - Boyutlar: 150cm (araç uzunluğu boyunca) x 200cm (araç genişliği boyunca)
-- **Avantaj:** Her iki taraftan da erişim mevcut, optimal alan kullanımı
-
-### Çok Amaçlı Kullanım
-- **Gece:** King size yatak konforu (150x200cm)
-- **Gündüz:** Geniş oturma/dinlenme alanı
-- **Depolama:** Yatak altında gizli depolama bölmeleri
-- **Erişim:** Yatak yanından teknik ekipman erişimi
-
-### 32" Smart Monitor Entegrasyonu - Yatak Ayak Ucu
+## 32" Smart Monitor Entegrasyonu - Yatak Ayak Ucu
 - **Monitor:** Samsung 32" Smart Monitor M8 4K (seating.md ile aynı monitor)
 - **İşlev:** TV modu (Netflix, YouTube, medya oynatma)
 - **Android TV:** Native Android TV desteği (kablo/bilgisayar bağımsız)
@@ -162,37 +112,6 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Yıldız İzleme Modu:** Tüm ışıkları kapat, monitor kapat, heki açık bırak
 - **Güvenlik Modu:** Hareket algılandığında otomatik aydınlatma
 
-## 🔧 Kurulum ve Montaj
-
-### Klima Sistemi Kurulumu
-1. **Tavan Hazırlığı:** Klima montajı için tavan güçlendirme
-2. **Klima Montajı:** RTX 2000 24V profesyonel kurulum
-3. **Elektrik Bağlantısı:** 24V DC batarya sistemine bağlantı
-4. **Havalandırma:** Soğuk hava dağıtım sistemi
-
-### Heki Kurulumu
-1. **Tavan Kesimi:** 50x70cm heki için tavan açılması
-2. **Heki Montajı:** Su sızdırmazlık ile güvenli montaj
-3. **Perde Sistemi:** Entegre perde ve sineklik kurulumu
-4. **Havalandırma:** Doğal hava akışı optimizasyonu
-
-### Flarespace Kurulumu
-1. **Ön Hazırlık:** Araç yan duvarlarının hazırlanması
-2. **Fiberglass Flare Montajı:** Profesyonel montaj gerekli
-3. **İç Kaplama:** Flare iç kısmının kaplanması
-4. **Yalıtım:** Ses ve ısı yalıtımı eklenmesi
-
-### Arka Pencere Kurulumu
-1. **Arka Kapı Kesimi:** Her iki kapıda 30x50cm pencere açılması
-2. **Pencere Montajı:** Su sızdırmaz çerçeve ile güvenli montaj
-3. **Cam Sistemi:** Çift cam montajı ve izolasyon
-4. **Açılma Mekanizması:** Havalandırma için açılabilir sistem
-
-### Yatak Sistemi Kurulumu
-1. **Çerçeve Montajı:** Güçlü ahşap yatak çerçevesi
-2. **Depolama Entegrasyonu:** Yatak altı çekmeceler ve bölmeler
-3. **Elektrik Altyapısı:** Aydınlatma ve priz bağlantıları
-4. **Teknik Ekipman Erişimi:** Batarya ve otomasyon paneli erişimi
 
 ### Aydınlatma ve Priz Kurulumu
 1. **Yatak Başı Sol (Mutfak Tarafı):** 220V+24V priz, USB, anahtarlar, okuma lambası
