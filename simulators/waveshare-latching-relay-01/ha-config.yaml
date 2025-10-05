@@ -1,0 +1,62 @@
+# ==========================================
+# Waveshare Latching Relay Instance 01
+# Aydınlatma Kontrol
+# ==========================================
+# Port: 5023
+# Mac IP: 192.168.1.45
+
+modbus:
+  - name: "Aydinlatma_Kontrol"
+    type: tcp
+    host: 192.168.1.45
+    port: 5023
+    
+    lights:
+      - name: "Mutfak Işık"
+        slave: 1
+        address: 0
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Mutfak Tezgâh Işık"
+        slave: 1
+        address: 1
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Orta Alan Işık"
+        slave: 1
+        address: 2
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Yatak Alanı Işık"
+        slave: 1
+        address: 3
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Popup Yatak Işık"
+        slave: 1
+        address: 4
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Sol Okuma Işık"
+        slave: 1
+        address: 5
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Sağ Okuma Işık"
+        slave: 1
+        address: 6
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Tente Işık"
+        slave: 1
+        address: 7
+        write_type: coil
+        scan_interval: 1
+
