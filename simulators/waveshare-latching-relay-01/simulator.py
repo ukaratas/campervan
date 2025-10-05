@@ -72,9 +72,11 @@ def run():
     global simulator
     
     # Modbus Data Store
+    # NOT: ModbusSequentialDataBlock başlangıç adresi 0, ama 8 element için 0-7 erişimi gerekli
+    # Waveshare için address 0-7, toplam 8 coil
     store = ModbusSlaveContext(
         di=ModbusSequentialDataBlock(0, [0]*100),
-        co=ModbusSequentialDataBlock(0, [0]*8),    # 8 Coils
+        co=ModbusSequentialDataBlock(0, [0]*100),   # Coils - 100 element (0-99 erişim)
         hr=ModbusSequentialDataBlock(0, [0]*200),
         ir=ModbusSequentialDataBlock(0, [0]*200)
     )

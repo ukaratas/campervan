@@ -1,28 +1,27 @@
 # Waveshare Modbus Simülatörleri
 
-Her Waveshare modülü için ayrı klasör yapısı.
+Her Waveshare modülü instance bazlı klasörlerde.
 
-## 📁 Klasör Yapısı
+## 📁 Yapı
 
 ```
 simulators/
-├── waveshare-latching-relay-01/    # Instance 01
-│   ├── simulator.py                # Simülatör
-│   ├── kontrol.py                  # Kontrol aracı
-│   ├── izle.py                     # İzleme aracı
-│   ├── ha-config.yaml              # HA konfigürasyonu
-│   └── README.md                   # Kullanım kılavuzu
+├── waveshare-latching-relay-01/    ✅ Aydınlatma kontrol (8 röle)
+│   ├── simulator.py
+│   ├── kontrol.py
+│   ├── izle.py
+│   ├── ha-config.yaml
+│   └── README.md
 │
-├── waveshare-latching-relay-02/    # Instance 02 (ileride)
-├── waveshare-di-do-01/             # Instance 01 (ileride)
+├── waveshare-di-do-01/             ⏳ Gelecek (Push buttons + DO)
 │
-└── requirements.txt                # Ortak bağımlılıklar
+├── requirements.txt                 Ortak bağımlılıklar
+└── venv/                           Python virtual environment
 ```
 
 ## 🚀 Hızlı Başlangıç
 
-### 1. Kurulum (İlk Defa)
-
+### İlk Kurulum
 ```bash
 cd simulators
 python3 -m venv venv
@@ -30,64 +29,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Latching Relay Başlat
-
+### Latching Relay Başlat
 ```bash
 cd waveshare-latching-relay-01
 source ../venv/bin/activate
 python3 simulator.py
 ```
 
-### 3. Kontrol Et (Yeni Terminal)
-
+### Test Et
 ```bash
+# Yeni terminal
 cd waveshare-latching-relay-01
 source ../venv/bin/activate
-
-python3 kontrol.py toggle 3    # Yatak ışığı aç/kapa
-python3 kontrol.py durum       # Tüm durumları göster
+python3 kontrol.py toggle 3    # Yatak ışığı
 ```
 
-### 4. İzle (Yeni Terminal)
+## 📖 Detaylar
 
-```bash
-cd waveshare-latching-relay-01
-source ../venv/bin/activate
-python3 izle.py
-```
-
----
-
-## 📋 Mevcut Simülatörler
-
-### ✅ waveshare-latching-relay-01
-- **Port:** 5023
-- **Tip:** 8-Ch Latching Relay
-- **Kullanım:** Aydınlatma kontrol
-- **Status:** Hazır ✓
-
-### ⏳ waveshare-di-do-01
-- **Port:** 5022
-- **Tip:** 8-Ch DI/DO Module
-- **Kullanım:** Push buttons + relay triggers
-- **Status:** Geliştirilecek
-
----
+Her klasörde kendi `README.md` var.
 
 ## 🏠 Home Assistant
 
-Her klasördeki `ha-config.yaml` dosyasını Home Assistant `configuration.yaml`'a ekle.
-
----
-
-## 💡 Yeni Instance Eklemek
-
-İkinci latching relay eklemek için:
-
-```bash
-cp -r waveshare-latching-relay-01 waveshare-latching-relay-02
-```
-
-Sonra `waveshare-latching-relay-02/` içinde:
-- Port değiştir (örn: 5024)
-- Etiketleri güncelle
+Her instance klasöründeki `ha-config.yaml` → HA `configuration.yaml`'a ekle.
