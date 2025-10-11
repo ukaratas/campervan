@@ -14,48 +14,56 @@
   
   lights:
     - name: "Mutfak Işık"
+      unique_id: relay_01_light_0
       slave: 1
       address: 0
       write_type: coil
       scan_interval: 1
     
     - name: "Mutfak Tezgâh Işık"
+      unique_id: relay_01_light_1
       slave: 1
       address: 1
       write_type: coil
       scan_interval: 1
     
     - name: "Orta Alan Işık"
+      unique_id: relay_01_light_2
       slave: 1
       address: 2
       write_type: coil
       scan_interval: 1
     
     - name: "Yatak Alanı Işık"
+      unique_id: relay_01_light_3
       slave: 1
       address: 3
       write_type: coil
       scan_interval: 1
     
     - name: "Popup Yatak Işık"
+      unique_id: relay_01_light_4
       slave: 1
       address: 4
       write_type: coil
       scan_interval: 1
     
     - name: "Sol Okuma Işık"
+      unique_id: relay_01_light_5
       slave: 1
       address: 5
       write_type: coil
       scan_interval: 1
     
     - name: "Sağ Okuma Işık"
+      unique_id: relay_01_light_6
       slave: 1
       address: 6
       write_type: coil
       scan_interval: 1
     
     - name: "Tente Işık"
+      unique_id: relay_01_light_7
       slave: 1
       address: 7
       write_type: coil
@@ -72,48 +80,56 @@
   # Digital Inputs (Push Buttons)
   binary_sensors:
     - name: "Sağ Yatak Butonu"
+      unique_id: dido_01_di_0
       slave: 1
       address: 0
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Sol Yatak Butonu"
+      unique_id: dido_01_di_1
       slave: 1
       address: 1
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Popup Yatak Butonu"
+      unique_id: dido_01_di_2
       slave: 1
       address: 2
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Dış Aydınlatma Butonu"
+      unique_id: dido_01_di_3
       slave: 1
       address: 3
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Otomatik Basamak Butonu"
+      unique_id: dido_01_di_4
       slave: 1
       address: 4
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Mutfak Butonu"
+      unique_id: dido_01_di_5
       slave: 1
       address: 5
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Orta Alan Butonu"
+      unique_id: dido_01_di_6
       slave: 1
       address: 6
       input_type: discrete_input
       scan_interval: 1
     
     - name: "Banyo Butonu"
+      unique_id: dido_01_di_7
       slave: 1
       address: 7
       input_type: discrete_input
@@ -122,48 +138,56 @@
   # Digital Outputs (Switches)
   switches:
     - name: "Alarm Siren"
+      unique_id: dido_01_do_0
       slave: 1
       address: 0
       write_type: coil
       scan_interval: 1
     
     - name: "Havalandırma Fan"
+      unique_id: dido_01_do_1
       slave: 1
       address: 1
       write_type: coil
       scan_interval: 1
     
     - name: "Su Pompası"
+      unique_id: dido_01_do_2
       slave: 1
       address: 2
       write_type: coil
       scan_interval: 1
     
     - name: "Isıtıcı"
+      unique_id: dido_01_do_3
       slave: 1
       address: 3
       write_type: coil
       scan_interval: 1
     
     - name: "Soğutucu"
+      unique_id: dido_01_do_4
       slave: 1
       address: 4
       write_type: coil
       scan_interval: 1
     
     - name: "Valf 1"
+      unique_id: dido_01_do_5
       slave: 1
       address: 5
       write_type: coil
       scan_interval: 1
     
     - name: "Valf 2"
+      unique_id: dido_01_do_6
       slave: 1
       address: 6
       write_type: coil
       scan_interval: 1
     
     - name: "Uyarı Lambası"
+      unique_id: dido_01_do_7
       slave: 1
       address: 7
       write_type: coil
@@ -179,12 +203,14 @@
   
   lights:
     - name: "Banyo Aydınlatma"
+      unique_id: relay_02_light_0
       slave: 1
       address: 0
       write_type: coil
       scan_interval: 1
     
     - name: "Banyo Ayna Aydınlatma"
+      unique_id: relay_02_light_1
       slave: 1
       address: 1
       write_type: coil
@@ -192,36 +218,42 @@
   
   switches:
     - name: "Temiz Su Hidrofor"
+      unique_id: relay_02_switch_2
       slave: 1
       address: 2
       write_type: coil
       scan_interval: 1
     
     - name: "Macerator Pompa"
+      unique_id: relay_02_switch_3
       slave: 1
       address: 3
       write_type: coil
       scan_interval: 1
     
     - name: "Rezerv 5"
+      unique_id: relay_02_switch_4
       slave: 1
       address: 4
       write_type: coil
       scan_interval: 1
     
     - name: "Rezerv 6"
+      unique_id: relay_02_switch_5
       slave: 1
       address: 5
       write_type: coil
       scan_interval: 1
     
     - name: "Rezerv 7"
+      unique_id: relay_02_switch_6
       slave: 1
       address: 6
       write_type: coil
       scan_interval: 1
     
     - name: "Rezerv 8"
+      unique_id: relay_02_switch_7
       slave: 1
       address: 7
       write_type: coil
@@ -237,48 +269,56 @@
   
   switches:
     - name: "Buzdolabı"
+      unique_id: relay_03_switch_0
       slave: 1
       address: 0
       write_type: coil
       scan_interval: 1
     
     - name: "USB Kutusu Mutfak"
+      unique_id: relay_03_switch_1
       slave: 1
       address: 1
       write_type: coil
       scan_interval: 1
     
     - name: "USB Kutusu Yatak"
+      unique_id: relay_03_switch_2
       slave: 1
       address: 2
       write_type: coil
       scan_interval: 1
     
     - name: "USB Kutusu Banyo"
+      unique_id: relay_03_switch_3
       slave: 1
       address: 3
       write_type: coil
       scan_interval: 1
     
     - name: "USB Kutusu Popup"
+      unique_id: relay_03_switch_4
       slave: 1
       address: 4
       write_type: coil
       scan_interval: 1
     
     - name: "Truma Combi D4"
+      unique_id: relay_03_switch_5
       slave: 1
       address: 5
       write_type: coil
       scan_interval: 1
     
     - name: "Gri Su Pompası"
+      unique_id: relay_03_switch_6
       slave: 1
       address: 6
       write_type: coil
       scan_interval: 1
     
     - name: "Rezerv 8"
+      unique_id: relay_03_switch_7
       slave: 1
       address: 7
       write_type: coil
