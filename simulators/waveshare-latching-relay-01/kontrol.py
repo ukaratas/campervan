@@ -10,19 +10,20 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from pymodbus.client import ModbusTcpClient
 
-PORT = 5023
-SLAVE = 1
+# Config import
+from config import (
+    DEVICE_NAME, PORT, SLAVE_ID, HOST,
+    RELAY_COUNT, START_ADDRESS, RELAY_LABELS_SHORT
+)
 
-RELAY_LABELS = [
-    "Mutfak", "Tezgâh", "Orta Alan", "Yatak Alanı",
-    "Popup", "Sol Okuma", "Sağ Okuma", "Tente"
-]
+SLAVE = SLAVE_ID
+RELAY_LABELS = RELAY_LABELS_SHORT
 
 def connect():
-    client = ModbusTcpClient('localhost', port=PORT)
+    client = ModbusTcpClient(HOST, port=PORT)
     if client.connect():
         return client
-    print(f"❌ Port {PORT}'e bağlanılamadı!")
+    print(f"❌ {HOST}:{PORT}'e bağlanılamadı!")
     print("   Simülatörün çalıştığından emin ol:")
     print("   python3 simulator.py")
     sys.exit(1)
@@ -53,14 +54,14 @@ def toggle(role):
 def durum():
     """Tüm röle durumlarını göster"""
     client = connect()
-    result = client.read_coils(0, 8, slave=SLAVE)
+    result = client.read_coils(START_ADDRESS, RELAY_COUNT, slave=SLAVE)
     
     print("\n" + "="*50)
     print("📊 RÖLE DURUMLARI")
     print("="*50)
     
     bits = result.bits if hasattr(result, 'bits') else []
-    for i in range(8):
+    for i in range(RELAY_COUNT):
         status = "🟢 AÇIK" if (i < len(bits) and bits[i]) else "⚫ KAPALI"
         print(f"   R{i} {RELAY_LABELS[i]}: {status}")
     print("="*50 + "\n")
@@ -69,19 +70,19 @@ def durum():
 def tumunu_kapat():
     """Tüm röleleri kapat"""
     client = connect()
-    client.write_coils(0, [False]*8, slave=SLAVE)
+    client.write_coils(START_ADDRESS, [False]*RELAY_COUNT, slave=SLAVE)
     print("⚫ Tüm ışıklar KAPANDI")
     client.close()
 
 def yardim():
     print("\n" + "="*60)
-    print("🎮 LATCHING RELAY KONTROL - Instance 01")
+    print(f"🎮 LATCHING RELAY KONTROL - {DEVICE_NAME}")
     print("="*60)
     print("\nKullanım: python3 kontrol.py <komut> [role]")
     print("\nKomutlar:")
-    print("  ac <0-7>      - Röleyi aç")
-    print("  kapat <0-7>   - Röleyi kapat")
-    print("  toggle <0-7>  - Röleyi toggle et")
+    print(f"  ac <0-{RELAY_COUNT-1}>      - Röleyi aç")
+    print(f"  kapat <0-{RELAY_COUNT-1}>   - Röleyi kapat")
+    print(f"  toggle <0-{RELAY_COUNT-1}>  - Röleyi toggle et")
     print("  durum         - Tüm röle durumlarını göster")
     print("  tumunu-kapat  - Tüm röleleri kapat")
     print("\nRöle Listesi:")
@@ -102,11 +103,11 @@ if __name__ == "__main__":
     
     if komut in ["ac", "kapat", "toggle"]:
         if len(sys.argv) < 3:
-            print("❌ Röle numarası gerekli! (0-7)")
+            print(f"❌ Röle numarası gerekli! (0-{RELAY_COUNT-1})")
             sys.exit(1)
         role = int(sys.argv[2])
-        if role < 0 or role > 7:
-            print("❌ Geçersiz röle numarası! (0-7)")
+        if role < 0 or role >= RELAY_COUNT:
+            print(f"❌ Geçersiz röle numarası! (0-{RELAY_COUNT-1})")
             sys.exit(1)
         
         if komut == "ac":

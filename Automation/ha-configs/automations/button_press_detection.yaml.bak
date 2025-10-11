@@ -1,0 +1,455 @@
+# ==========================================
+# Push Button Press Detection Automations
+# ==========================================
+# Bu dosyayı configuration.yaml'a dahil et:
+# automation: !include_dir_merge_list automations/
+
+# ===================
+# DI0: SAĞ YATAK
+# ===================
+- id: sag_yatak_button_pressed
+  alias: "Sağ Yatak - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sag_yatak_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.sag_yatak_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: sag_yatak_button_released
+  alias: "Sağ Yatak - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sag_yatak_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.sag_yatak_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    # Long press algılandı mı?
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Sağ okuma lambası
+        - service: event.fire
+          data:
+            event_type: sag_yatak_long_press
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.sag_yatak_press_count
+          data:
+            value: 0
+      else:
+        # Short press - double bekle
+        - service: input_number.increment
+          target:
+            entity_id: input_number.sag_yatak_press_count
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.sag_yatak_waiting_double
+        - delay:
+            milliseconds: 400
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.sag_yatak_waiting_double
+        
+        # Timeout sonrası press sayısına bak
+        - if:
+            - condition: template
+              value_template: "{{ states('input_number.sag_yatak_press_count') | int >= 2 }}"
+          then:
+            # DOUBLE PRESS - Tüm aydınlatma kapat
+            - event: sag_yatak_double_press
+          else:
+            # SHORT PRESS - Yatak alanı aç/kapa
+            - event: sag_yatak_short_press
+        
+        # Counter'ı sıfırla
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.sag_yatak_press_count
+          data:
+            value: 0
+
+# ===================
+# DI1: SOL YATAK
+# ===================
+- id: sol_yatak_button_pressed
+  alias: "Sol Yatak - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sol_yatak_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.sol_yatak_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: sol_yatak_button_released
+  alias: "Sol Yatak - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sol_yatak_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.sol_yatak_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Sol okuma lambası
+        - event: sol_yatak_long_press
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.sol_yatak_press_count
+          data:
+            value: 0
+      else:
+        # Short press - double bekle
+        - service: input_number.increment
+          target:
+            entity_id: input_number.sol_yatak_press_count
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.sol_yatak_waiting_double
+        - delay:
+            milliseconds: 400
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.sol_yatak_waiting_double
+        
+        - if:
+            - condition: template
+              value_template: "{{ states('input_number.sol_yatak_press_count') | int >= 2 }}"
+          then:
+            # DOUBLE PRESS - Tüm aydınlatma kapat
+            - event: sol_yatak_double_press
+          else:
+            # SHORT PRESS - Yatak alanı aç/kapa
+            - event: sol_yatak_short_press
+        
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.sol_yatak_press_count
+          data:
+            value: 0
+
+# ===================
+# DI2: POPUP YATAK
+# ===================
+- id: popup_yatak_button_pressed
+  alias: "Popup Yatak - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.popup_yatak_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.popup_yatak_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: popup_yatak_button_released
+  alias: "Popup Yatak - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.popup_yatak_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.popup_yatak_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Popup ambiyans
+        - event: popup_yatak_long_press
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.popup_yatak_press_count
+          data:
+            value: 0
+      else:
+        - service: input_number.increment
+          target:
+            entity_id: input_number.popup_yatak_press_count
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.popup_yatak_waiting_double
+        - delay:
+            milliseconds: 400
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.popup_yatak_waiting_double
+        
+        - if:
+            - condition: template
+              value_template: "{{ states('input_number.popup_yatak_press_count') | int >= 2 }}"
+          then:
+            # DOUBLE PRESS - Tüm aydınlatma kapat
+            - event: popup_yatak_double_press
+          else:
+            # SHORT PRESS - Popup aydınlatma aç/kapa
+            - event: popup_yatak_short_press
+        
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.popup_yatak_press_count
+          data:
+            value: 0
+
+# ===================
+# DI3: DIŞ AYDINLATMA
+# ===================
+- id: dis_aydinlatma_button_pressed
+  alias: "Dış Aydınlatma - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dis_aydinlatma_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.dis_aydinlatma_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: dis_aydinlatma_button_released
+  alias: "Dış Aydınlatma - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dis_aydinlatma_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.dis_aydinlatma_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Tente ambiyans
+        - event: dis_aydinlatma_long_press
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.dis_aydinlatma_press_count
+          data:
+            value: 0
+      else:
+        - service: input_number.increment
+          target:
+            entity_id: input_number.dis_aydinlatma_press_count
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.dis_aydinlatma_waiting_double
+        - delay:
+            milliseconds: 400
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dis_aydinlatma_waiting_double
+        
+        - if:
+            - condition: template
+              value_template: "{{ states('input_number.dis_aydinlatma_press_count') | int >= 2 }}"
+          then:
+            # DOUBLE PRESS - Tüm aydınlatma kapat
+            - event: dis_aydinlatma_double_press
+          else:
+            # SHORT PRESS - Tente altı aç/kapa
+            - event: dis_aydinlatma_short_press
+        
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.dis_aydinlatma_press_count
+          data:
+            value: 0
+
+# ===================
+# DI4: OTOMATIK BASAMAK
+# ===================
+- id: basamak_button_pressed
+  alias: "Basamak - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.otomatik_basamak_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.basamak_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: basamak_button_released
+  alias: "Basamak - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.otomatik_basamak_butonu
+      to: "off"
+  action:
+    # Sadece SHORT PRESS var
+    - event: basamak_short_press
+
+# ===================
+# DI5: MUTFAK
+# ===================
+- id: mutfak_button_pressed
+  alias: "Mutfak - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mutfak_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.mutfak_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: mutfak_button_released
+  alias: "Mutfak - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mutfak_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.mutfak_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Tezgâh lambası
+        - event: mutfak_long_press
+      else:
+        # SHORT PRESS - Mutfak lambası
+        - event: mutfak_short_press
+
+# ===================
+# DI6: ORTA ALAN
+# ===================
+- id: orta_alan_button_pressed
+  alias: "Orta Alan - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.orta_alan_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.orta_alan_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: orta_alan_button_released
+  alias: "Orta Alan - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.orta_alan_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.orta_alan_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Ambiyans aydınlatma
+        - event: orta_alan_long_press
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.orta_alan_press_count
+          data:
+            value: 0
+      else:
+        - service: input_number.increment
+          target:
+            entity_id: input_number.orta_alan_press_count
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.orta_alan_waiting_double
+        - delay:
+            milliseconds: 400
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.orta_alan_waiting_double
+        
+        - if:
+            - condition: template
+              value_template: "{{ states('input_number.orta_alan_press_count') | int >= 2 }}"
+          then:
+            # DOUBLE PRESS - Tüm aydınlatma kapat
+            - event: orta_alan_double_press
+          else:
+            # SHORT PRESS - Orta alan aydınlatma
+            - event: orta_alan_short_press
+        
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.orta_alan_press_count
+          data:
+            value: 0
+
+# ===================
+# DI7: BANYO
+# ===================
+- id: banyo_button_pressed
+  alias: "Banyo - Buton Basıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.banyo_butonu
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.banyo_press_time
+      data:
+        datetime: "{{ now().isoformat() }}"
+
+- id: banyo_button_released
+  alias: "Banyo - Buton Bırakıldı"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.banyo_butonu
+      to: "off"
+  action:
+    - variables:
+        press_duration: >
+          {{ (now() - states('input_datetime.banyo_press_time') | as_datetime).total_seconds() }}
+        is_long: "{{ press_duration > 0.8 }}"
+        
+    - if:
+        - condition: template
+          value_template: "{{ is_long }}"
+      then:
+        # LONG PRESS - Banyo ayna lambası
+        - event: banyo_long_press
+      else:
+        # SHORT PRESS - Banyo aydınlatma
+        - event: banyo_short_press
+

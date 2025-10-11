@@ -2,6 +2,14 @@
 
 8 kanallı aydınlatma kontrol modülü simülatörü.
 
+## ⚙️ Konfigürasyon
+
+Tüm ayarlar `config.py` dosyasında merkezi olarak yönetiliyor:
+- **Cihaz bilgileri:** Device name, type, description
+- **Network:** Port, Slave ID, hostname
+- **Röle tanımları:** Labels, power consumption
+- **Home Assistant:** Hostname ayarları
+
 ## 🚀 Başlatma
 
 ```bash
@@ -34,6 +42,31 @@ python3 izle.py
 ## 🏠 Home Assistant
 
 `ha-config.yaml` içeriğini Home Assistant `configuration.yaml`'a ekle.
+
+**Otomatik Deployment:**
+```bash
+cd ../../Automation/ha-configs
+python3 deploy.py --auto
+```
+
+### Dinamik IP Çözümü
+Simülatör Mac'in IP adresi değişse bile çalışır:
+- `config.py` içinde `HA_HOSTNAME = "ugurs-macbook-m4-pro.local"` (mDNS)
+- Home Assistant `.local` hostname üzerinden bağlanır
+- IP değişikliği umursanmaz
+
+### Troubleshooting
+
+**Sorun:** `[Errno 48] address already in use`
+- **Çözüm:** Simülatör zaten çalışıyor. `pkill -f simulator.py` ile durdur.
+
+**Sorun:** Home Assistant bağlanamıyor
+- **Kontrol 1:** Simülatör çalışıyor mu? (`ps aux | grep simulator.py`)
+- **Kontrol 2:** Port açık mı? (`nc -zv ugurs-macbook-m4-pro.local 5023`)
+- **Kontrol 3:** Hostname çözülüyor mu? (`ping ugurs-macbook-m4-pro.local`)
+
+**Sorun:** Loglar dosyaya yazılmıyor
+- **Çözüm:** `simulator.log` dosyası otomatik oluşturulur, klasör yazılabilir olmalı.
 
 ## 📋 Röle Haritası
 

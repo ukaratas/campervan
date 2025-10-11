@@ -3,13 +3,19 @@
 # Aydınlatma Kontrol
 # ==========================================
 # Port: 5023
-# Mac IP: 192.168.1.45
+# Slave ID: 1
+# 
+# NOT: Host olarak .local hostname kullanılıyor (mDNS/Bonjour)
+#      Bu sayede Mac'in IP'si değişse bile bağlantı kopmaz.
+#      Config dosyasında (config.py) HA_HOSTNAME değişkeninden alınır.
+#
+# Host: ugurs-macbook-m4-pro.local (dinamik IP'den bağımsız)
 
 modbus:
   - name: "Aydinlatma_Kontrol"
     type: tcp
-    host: 192.168.1.45
-    port: 5023
+    host: ugurs-macbook-m4-pro.local  # config.py -> HA_HOSTNAME
+    port: 5023                         # config.py -> PORT
     
     lights:
       - name: "Mutfak Işık"

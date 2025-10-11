@@ -1,0 +1,6 @@
+
+# Home Assistant credentials
+ha_credentials.py
+
+# SSH keys (backed up in .ssh/ folder in project)
+# Private key should stay local, but we keep a copy in project for backup

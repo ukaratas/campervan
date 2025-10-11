@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 Waveshare Modbus RTU 8-ch Latching Relay Module (C) - Instance 01
-Port: 5023 | Slave ID: 1
 
 Wiki: https://www.waveshare.com/wiki/Modbus_RTU_Relay_(C)
 """
@@ -16,46 +15,48 @@ from pymodbus.device import ModbusDeviceIdentification
 import logging
 import threading
 import time
+import pathlib
 
+# Config import
+from config import (
+    DEVICE_NAME, DEVICE_TYPE, DEVICE_DESCRIPTION,
+    PORT, SLAVE_ID, RELAY_COUNT, START_ADDRESS,
+    RELAY_LABELS, POWER_WATTS
+)
+
+# Log dizinini belirle
+LOG_FILE = pathlib.Path(__file__).parent / "simulator.log"
+
+# Hem console hem de dosyaya loglama
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - [Relay-01] - %(message)s',
-    datefmt='%H:%M:%S'
+    format=f'%(asctime)s - [{DEVICE_NAME}] - %(message)s',
+    datefmt='%H:%M:%S',
+    handlers=[
+        logging.FileHandler(LOG_FILE, mode='a', encoding='utf-8'),
+        logging.StreamHandler()
+    ]
 )
 log = logging.getLogger()
-
-# Röle etiketleri
-RELAY_LABELS = [
-    "R0: Mutfak Işık",
-    "R1: Mutfak Tezgâh Işık",
-    "R2: Orta Alan Işık",
-    "R3: Yatak Alanı Işık",
-    "R4: Popup Yatak Işık",
-    "R5: Sol Okuma Işık",
-    "R6: Sağ Okuma Işık",
-    "R7: Tente Işık"
-]
-
-POWER_WATTS = [8, 7, 12, 14, 6, 4, 4, 12]
 
 class RelayMonitor:
     def __init__(self, context):
         self.context = context
         self.running = True
-        self.previous_states = [0] * 8
+        self.previous_states = [0] * RELAY_COUNT
         
     def monitor(self):
         """Röle değişikliklerini izle"""
         while self.running:
             try:
                 slave_id = 0x00
-                current_states = self.context[slave_id].getValues(1, 0, 8)  # Coils
+                current_states = self.context[slave_id].getValues(1, START_ADDRESS, RELAY_COUNT)  # Coils
                 
                 # Holding register sync
-                self.context[slave_id].setValues(3, 0, current_states)
+                self.context[slave_id].setValues(3, START_ADDRESS, current_states)
                 
                 # Değişiklikleri logla
-                for i in range(min(8, len(current_states))):
+                for i in range(min(RELAY_COUNT, len(current_states))):
                     if current_states[i] != self.previous_states[i]:
                         status = "🟢 AÇILDI" if current_states[i] else "⚫ KAPANDI"
                         log.info(f"💡 {RELAY_LABELS[i]} → {status}")
@@ -86,7 +87,7 @@ def run():
     identity = ModbusDeviceIdentification()
     identity.VendorName = 'Waveshare'
     identity.ProductCode = 'Modbus RTU Relay (C)'
-    identity.ProductName = 'Modbus RTU 8-ch Latching Relay Module'
+    identity.ProductName = f'Modbus RTU {RELAY_COUNT}-ch {DEVICE_TYPE} Module'
     identity.MajorMinorRevision = '3.00'
     
     # Monitor başlat
@@ -95,9 +96,9 @@ def run():
     monitor_thread.start()
     
     print("\n" + "="*70)
-    print("💡 WAVESHARE LATCHING RELAY #01 - AYDINLATMA KONTROL")
+    print(f"💡 WAVESHARE {DEVICE_TYPE.upper()} #{DEVICE_NAME} - {DEVICE_DESCRIPTION.upper()}")
     print("="*70)
-    print("📡 Port: 5023 | Slave ID: 1")
+    print(f"📡 Port: {PORT} | Slave ID: {SLAVE_ID}")
     print("📖 Wiki: https://www.waveshare.com/wiki/Modbus_RTU_Relay_(C)")
     print()
     for i, label in enumerate(RELAY_LABELS):
@@ -107,7 +108,7 @@ def run():
     print("="*70 + "\n")
     
     # Server başlat
-    StartTcpServer(context=context, identity=identity, address=("0.0.0.0", 5023))
+    StartTcpServer(context=context, identity=identity, address=("0.0.0.0", PORT))
 
 if __name__ == "__main__":
     run()

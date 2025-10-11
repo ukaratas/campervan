@@ -80,15 +80,18 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 #### Yüksek Güç (>100W)
 | Cihaz | Güç | Akım | Kontrol | Notlar |
 |-------|-----|------|---------|--------|
-| 24V Klima (Eva Cool Eva 24V 20T Premium) | 720-960W | 30-40A | High Latching Relay | Ana yatak soğutma |
-| Temiz su hidrofor pompası | 240-360W | 10-15A | High Latching Relay | Basınçlı su sistemi |
-| Gri su boşaltma pompası | 240-360W | 10-15A | High Current Relay | Atık su boşaltma |
+| 24V Klima (Eva Cool Eva 24V 20T Premium) | 720-960W | 30-40A | Kontaktör + DI/DO | Ana yatak soğutma |
+| Macerator pompa (gri su boşaltma) | ~192W | 8A | Low Latching Relay | WC atık su boşaltma |
+| Temiz su hidrofor pompası | 72-96W | 3-4A (5A sigorta) | Low Latching Relay | Basınçlı su sistemi |
 
 #### Orta Güç (10-100W)
 | Cihaz | Güç | Akım | Kontrol | Notlar |
 |-------|-----|------|---------|--------|
 | Buzdolabı (EvaCool Eva Berlin 90L) | 50-80W | 2-3A | High Latching Relay | Sürekli çalışma |
-| USB şarj çıkışları | 50-100W | 2-4A | High Latching Relay | Telefon, tablet |
+| USB Şarj Kutusu #1 (Mutfak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
+| USB Şarj Kutusu #2 (Yatak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
+| USB Şarj Kutusu #3 (Popup) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
+| USB Şarj Kutusu #4 (Banyo) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | 24V genel prizler | Değişken | Değişken | High Latching Relay | Portatif cihazlar |
 
 #### Düşük Güç (<10W)
@@ -108,15 +111,14 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 | Ortam ambiyans (RGB) | 10-20W | 4C Dimmer | RGB LED şerit |
 
 #### Sensörler ve Valfler
-| Cihaz | Güç | Kontrol | Notlar |
-|-------|-----|---------|--------|
-| Su seviye sensörleri | <1W | Analog Module | Temiz/gri su tankları |
-| Actuator valf (temiz su) | 5-10W | Home Assistant | Donma koruması |
-| Elektrikli vana (gri su) | 5-10W | Home Assistant | Boşaltma kontrolü |
-| Hareket sensörleri | <1W | DI Module | Otomatik aydınlatma |
-| Nem sensörleri | <1W | Analog Module | Hava kalitesi |
-| Popup roof fanı (opsiyonel) | 10-20W | Home Assistant | Havalandırma |
-| Banyo fanı (opsiyonel) | 10-20W | Home Assistant | Nem kontrolü |
+| Cihaz | Güç | Akım | Kontrol | Notlar |
+|-------|-----|------|---------|--------|
+| Su seviye sensörleri | <1W | <0.1A | Analog Module | Temiz/gri su tankları |
+| Elektrikli actuator valf (temiz su) | 2.4W | 0.1A | DI/DO Module (DO1) | Donma koruması boşaltma |
+| Hareket sensörleri | <1W | <0.1A | DI Module | Otomatik aydınlatma |
+| Nem sensörleri | <1W | <0.1A | Analog Module | Hava kalitesi |
+| Popup roof fanı (opsiyonel) | 10-20W | <1A | Home Assistant | Havalandırma |
+| Banyo fanı (opsiyonel) | 10-20W | <1A | Home Assistant | Nem kontrolü |
 
 ### 12V DC Tüketiciler (24V'dan Konvertör ile)
 | Cihaz | Güç | Akım | Kontrol | Notlar |
@@ -124,7 +126,6 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 | Truma Combi D4 inet | 24-96W | 2-8A | Truma inet / HA | Dizel kombi |
 | Clesana C1 susuz tuvalet | 0.6W standby / 6.6W flush | 0.05A / 0.55A | Home Assistant | Susuz tuvalet |
 | 12V genel prizler | 24-60W | 2-5A | High Latching Relay | Portatif cihazlar |
-| Macerator pompa | ~120W | 10A | High Current Relay | Kısa süreli |
 
 **24V to 12V DC Konvertör:** 15-20A (180-240W) kapasite
 
@@ -182,34 +183,107 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 
 ---
 
+## 📦 Latching Relay Detaylı Liste
+
+Karavanda toplam **3 adet Latching Relay** modülü kullanılacak:
+
+### ✅ LOW Latching Relay #1 (8 Kanal) - MEVCUT
+**Kullanım:** Aydınlatma sistemleri (düşük güç, uzun çalışma süresi)
+
+| Kanal | Cihaz | Güç | Akım | Notlar |
+|-------|-------|-----|------|--------|
+| R1 | Mutfak aydınlatma | 5-10W | <1A | LED spot |
+| R2 | Mutfak tezgâh aydınlatma | 5-10W | <1A | Dolap altı LED |
+| R3 | Orta alan aydınlatma | 10-15W | <1A | Genel aydınlatma |
+| R4 | Yatak alanı aydınlatma | 10-15W | <1A | Ana yatak |
+| R5 | Popup yatak aydınlatma | 5-10W | <1A | Popup roof içi |
+| R6 | Yatak sol baş okuma | 3-5W | <1A | Okuma lambası |
+| R7 | Yatak sağ baş okuma | 3-5W | <1A | Okuma lambası |
+| R8 | Tente altı aydınlatma | 10-15W | <1A | Dış aydınlatma |
+
+**Durum:** ✅ Mevcut ve çalışıyor
+
+---
+
+### ❌ LOW Latching Relay #2 (8 Kanal) - YENİ GEREKLİ
+**Kullanım:** Banyo aydınlatma + Su sistemi pompaları
+
+| Kanal | Cihaz | Güç | Akım | Notlar |
+|-------|-------|-----|------|--------|
+| R1 | Banyo aydınlatma | 5-10W | <1A | LED genel banyo |
+| R2 | Banyo ayna aydınlatması | 5-10W | <1A | Ayna LED |
+| R3 | Temiz su hidrofor pompası | 72-96W | 3-4A | 5A sigorta, basınçlı su |
+| R4 | Macerator pompa (gri su) | ~192W | 8A | WC atık su boşaltma |
+| R5 | **BOŞ** | - | - | Genişleme |
+| R6 | **BOŞ** | - | - | Genişleme |
+| R7 | **BOŞ** | - | - | Genişleme |
+| R8 | **BOŞ** | - | - | Genişleme |
+
+**Durum:** ❌ Yeni sipariş gerekli
+
+---
+
+### ❌ HIGH Latching Relay #1 (8 Kanal) - YENİ GEREKLİ
+**Kullanım:** Yüksek güç cihazları (buzdolabı, USB kutuları, prizler)
+
+| Kanal | Cihaz | Güç | Akım | Notlar |
+|-------|-------|-----|------|--------|
+| R1 | Buzdolabı (Eva Berlin 90L) | 50-80W | 2-3A | Sürekli çalışma |
+| R2 | USB Şarj Kutusu #1 | ~200W | 8A | Mutfak bölgesi |
+| R3 | USB Şarj Kutusu #2 | ~200W | 8A | Yatak bölgesi |
+| R4 | USB Şarj Kutusu #3 | ~200W | 8A | Popup bölgesi |
+| R5 | USB Şarj Kutusu #4 | ~200W | 8A | Banyo/genel alan |
+| R6 | 24V genel prizler | Değişken | Değişken | Portatif cihazlar |
+| R7 | 12V genel prizler | 24-60W | 2-5A | Konvertör üzerinden |
+| R8 | **BOŞ** | - | - | Genişleme |
+
+**Durum:** ❌ Yeni sipariş gerekli
+
+---
+
+### 🎯 DI/DO Modülü - DO Çıkışları (8 Kanal, 500mA/kanal)
+**Kullanım:** Düşük akım kontrol sinyalleri, valfler, kontaktör tetikleme
+
+| Kanal | Cihaz | Güç | Akım | Notlar |
+|-------|-------|-----|------|--------|
+| DO1 | Elektrikli vana (temiz su) | 2.4W | 0.1A | Kış donma koruması için boşaltma |
+| DO2 | Kontaktör tetikleme (klima) | <5W | <0.5A | 24V kontaktör bobini tetikleme |
+| DO3 | **BOŞ** | - | - | Genişleme (valf, sensör vb.) |
+| DO4 | **BOŞ** | - | - | Genişleme |
+| DO5 | **BOŞ** | - | - | Genişleme |
+| DO6 | **BOŞ** | - | - | Genişleme |
+| DO7 | **BOŞ** | - | - | Genişleme |
+| DO8 | **BOŞ** | - | - | Genişleme |
+
+---
+
+### 🔥 Harici Kontaktör (DI/DO ile tetiklenir)
+**Kullanım:** Çok yüksek akım çeken cihazlar
+
+| Cihaz | Güç | Akım | Kontrol | Notlar |
+|-------|-----|------|---------|--------|
+| 24V Klima (Eva Cool 24V 20T) | 720-960W | 30-40A | Kontaktör (DO2 ile tetiklenir) | Ana yatak soğutma |
+
+---
+
+### 📊 Özet
+
+```
+✅ LOW Latching Relay #1 (8 kanal) → Aydınlatma (8/8 DOLU)
+❌ LOW Latching Relay #2 (8 kanal) → Banyo + Su sistemi (4/8 kullanılıyor)
+❌ HIGH Latching Relay #1 (8 kanal) → Yüksek güç cihazları (7/8 kullanılıyor)
+🎯 DI/DO Modülü (8 DO kanal) → Valfler + Kontaktör tetikleme (2/8 kullanılıyor)
+🔥 Kontaktör (harici) → 24V Klima (30-40A)
+
+TOPLAM: 3 adet Latching Relay (1 mevcut + 2 yeni sipariş)
+```
+
+---
+
 ## 🔌 IO Haritası - Girişler ve Çıkışlar
 
-### Çıkışlar - High Current Relay (30A, 4 Kanal)
-Kısa süreli yüksek yük alacak cihazlar için kullanılır.
-
-| Kanal | Bağlı Cihaz | Güç | Çalışma Süresi |
-|-------|-------------|-----|----------------|
-| R1 | Macerator pompa | 12V, ~120W | Kısa süreli (1-2 dk) |
-| R2 | Rezerv | - | - |
-| R3 | Rezerv | - | - |
-| R4 | Rezerv | - | - |
-
-### Çıkışlar - High Latching Relay (Bistable, 8 Kanal)
-Uzun süre açık kalacak yüksek güç yükleri için. DI/DO modülü ile tetiklenir, bistable röle ile kalıcı açık/kapalı.
-
-| Kanal | Bağlı Cihaz | Güç | Notlar |
-|-------|-------------|-----|--------|
-| DO1 | Buzdolabı | 24V DC, 50-80W | Sürekli çalışma |
-| DO2 | Temiz su hidrofor | 24V DC, 240-360W | Talep üzerine |
-| DO3 | 24V klima | 24V DC, 720-960W | Mevsimsel |
-| DO4 | Truma Combi | 12V DC, 24-96W | Kış/sıcak su |
-| DO5 | USB şarj çıkışları | 24V DC, 50-100W | Gerektiğinde |
-| DO6 | 24V genel çıkışlar | 24V DC, değişken | Portatif cihazlar |
-| DO7 | 12V genel çıkışlar | 12V DC, 24-60W | Konvertör üzerinden |
-| DO8 | Rezerv | - | - |
-
-### Çıkışlar - Low Latching Relay (8 Kanal)
-Uzun süre açık kalacak düşük güç yükleri (aydınlatma).
+### Çıkışlar - Low Latching Relay #1 (8 Kanal) ✅ MEVCUT
+Aydınlatma sistemleri için.
 
 | Kanal | Bağlı Cihaz | Güç | Notlar |
 |-------|-------------|-----|--------|
@@ -222,7 +296,33 @@ Uzun süre açık kalacak düşük güç yükleri (aydınlatma).
 | R7 | Yatak sağ baş okuma | 24V LED, 3-5W | Okuma lambası |
 | R8 | Tente altı aydınlatma | 24V LED, 10-15W | Dış aydınlatma |
 
-**Not:** Banyo aydınlatma (5-10W) ve banyo ayna (5-10W) için ek modül veya R1-R8'den birkaç kanal birleştirilebilir.
+### Çıkışlar - Low Latching Relay #2 (8 Kanal) ❌ YENİ
+Banyo aydınlatma ve su sistemi pompaları için.
+
+| Kanal | Bağlı Cihaz | Güç | Notlar |
+|-------|-------------|-----|--------|
+| R1 | Banyo aydınlatma | 24V LED, 5-10W | Genel banyo |
+| R2 | Banyo ayna aydınlatması | 24V LED, 5-10W | Ayna LED |
+| R3 | Temiz su hidrofor | 24V DC, 72-96W | 3-4A, 5A sigorta |
+| R4 | Macerator pompa | 24V DC, ~192W | 8A, gri su boşaltma |
+| R5 | BOŞ | - | Genişleme |
+| R6 | BOŞ | - | Genişleme |
+| R7 | BOŞ | - | Genişleme |
+| R8 | BOŞ | - | Genişleme |
+
+### Çıkışlar - High Latching Relay #1 (8 Kanal) ❌ YENİ
+Yüksek güç cihazları için.
+
+| Kanal | Bağlı Cihaz | Güç | Notlar |
+|-------|-------------|-----|--------|
+| R1 | Buzdolabı | 24V DC, 50-80W | Sürekli çalışma |
+| R2 | USB Kutusu #1 | 24V DC, ~200W | 8A, mutfak |
+| R3 | USB Kutusu #2 | 24V DC, ~200W | 8A, yatak |
+| R4 | USB Kutusu #3 | 24V DC, ~200W | 8A, popup |
+| R5 | USB Kutusu #4 | 24V DC, ~200W | 8A, banyo |
+| R6 | 24V genel çıkışlar | 24V DC, değişken | Portatif cihazlar |
+| R7 | 12V genel çıkışlar | 12V DC, 24-60W | Konvertör üzerinden |
+| R8 | BOŞ | - | Genişleme |
 
 ### Çıkışlar - 4C Dimmer Module (4 Kanal PWM)
 RGB LED şeritler ve dimmer kontrolü gereken aydınlatmalar.
@@ -234,7 +334,21 @@ RGB LED şeritler ve dimmer kontrolü gereken aydınlatmalar.
 | CH3 | Rezerv | - | - |
 | CH4 | Rezerv | - | - |
 
-### Girişler - DI Module (8 Kanal)
+### Çıkışlar - DI/DO Module (8 DO Kanal, 500mA/kanal)
+Düşük akım kontrol sinyalleri, valfler, kontaktör tetikleme için.
+
+| Kanal | Bağlı Cihaz | Güç | Akım | Notlar |
+|-------|-------------|-----|------|--------|
+| DO1 | Elektrikli vana (temiz su) | 2.4W | 0.1A | Kış donma koruması |
+| DO2 | Kontaktör tetikleme (24V klima) | <5W | <0.5A | 30-40A kontaktör bobini |
+| DO3 | BOŞ | - | - | Genişleme |
+| DO4 | BOŞ | - | - | Genişleme |
+| DO5 | BOŞ | - | - | Genişleme |
+| DO6 | BOŞ | - | - | Genişleme |
+| DO7 | BOŞ | - | - | Genişleme |
+| DO8 | BOŞ | - | - | Genişleme |
+
+### Girişler - DI/DO Module (8 DI Kanal)
 Push button girişleri için dijital input.
 
 | Kanal | Push Button | Short Press | Long Press | Double Press |
@@ -499,6 +613,56 @@ Analog sensör okumaları (12-bit hassasiyet).
 * **Home Assistant Yedekleme:** Haftalık otomatik yedekleme
 * **SD Kart Yedekleme:** Aylık tam sistem imajı
 * **Manuel Kontrol:** Kritik sistemler için fiziksel bypass anahtarları
+
+---
+
+## 🚀 Home Assistant Konfigürasyon Deployment
+
+Home Assistant konfigürasyonları `Automation/ha-configs/` klasöründe bulunur ve **otomatik deployment** ile yüklenebilir.
+
+### Hızlı Deployment:
+
+```bash
+cd Automation/ha-configs
+python3 deploy.py --auto  # Tam otomatik: Dosyalar + Reload
+```
+
+### Deployment Script Özellikleri:
+
+✅ **6 Dosyayı Otomatik Yükler (SCP):**
+- `helpers/input_datetime.yaml` (8 buton için press time)
+- `helpers/input_number.yaml` (8 buton için press count)
+- `helpers/input_boolean.yaml` (8 buton için double wait flag)
+- `automations/button_press_detection.yaml` (16 detection automation)
+- `automations/button_actions.yaml` (16 action automation)
+- `modbus_combined.yaml` (Modbus cihaz tanımları)
+
+✅ **4 Servisi Otomatik Reload Eder:**
+- `automation` → Tüm automation'ları yeniden yükler
+- `input_datetime` → DateTime helper'ları yeniler
+- `input_number` → Number helper'ları yeniler
+- `input_boolean` → Boolean helper'ları yeniler
+
+✅ **Hata Kontrolü:** Bağlantı, dosya transfer ve reload kontrolü
+
+### Gereksinimler:
+
+1. **Home Assistant API Token** (Long-Lived Access Token)
+2. **SSH Key** (Otomatik oluşturuldu: `~/.ssh/homeassistant`)
+3. **Advanced SSH & Web Terminal Addon** (SFTP aktif, username: root)
+
+Detaylı kurulum: [`Automation/ha-configs/README.md`](ha-configs/README.md)
+
+---
+
+## 📚 Dokümantasyon Yapısı
+
+| Dosya | İçerik |
+|-------|--------|
+| **Automation/readme.md** | Bu dosya - Sistem mimarisi, IO haritası, cihaz listeleri |
+| **Automation/ha-configs/README.md** | HA konfigürasyonları, button mapping, troubleshooting |
+| **Automation/ha-configs/KURULUM.md** | Adım adım kurulum rehberi |
+| **simulators/*/README.md** | Simülatör kullanım kılavuzları |
 
 ---
 

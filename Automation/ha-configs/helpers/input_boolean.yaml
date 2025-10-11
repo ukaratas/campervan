@@ -1,0 +1,45 @@
+# ==========================================
+# Push Button - Boolean Helpers
+# ==========================================
+# Double press bekleme durumunu tutar
+
+# DI0: Sağ Yatak
+sag_yatak_waiting_double:
+  name: "Sağ Yatak Waiting Double Press"
+  initial: false
+
+# DI1: Sol Yatak
+sol_yatak_waiting_double:
+  name: "Sol Yatak Waiting Double Press"
+  initial: false
+
+# DI2: Popup Yatak
+popup_yatak_waiting_double:
+  name: "Popup Yatak Waiting Double Press"
+  initial: false
+
+# DI3: Dış Aydınlatma
+dis_aydinlatma_waiting_double:
+  name: "Dış Aydınlatma Waiting Double Press"
+  initial: false
+
+# DI4: Otomatik Basamak
+basamak_waiting_double:
+  name: "Basamak Waiting Double Press"
+  initial: false
+
+# DI5: Mutfak
+mutfak_waiting_double:
+  name: "Mutfak Waiting Double Press"
+  initial: false
+
+# DI6: Orta Alan
+orta_alan_waiting_double:
+  name: "Orta Alan Waiting Double Press"
+  initial: false
+
+# DI7: Banyo
+banyo_waiting_double:
+  name: "Banyo Waiting Double Press"
+  initial: false
+

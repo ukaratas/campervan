@@ -1,0 +1,171 @@
+# ==========================================
+# Combined Modbus Configuration
+# ==========================================
+# Bu dosyayı configuration.yaml'a dahil et:
+# modbus: !include modbus_combined.yaml
+
+# ===========================================
+# DEVICE 1: Latching Relay (Aydınlatma)
+# ===========================================
+- name: "Aydinlatma_Kontrol"
+  type: tcp
+  host: ugurs-macbook-m4-pro.local  
+  port: 5023
+  
+  lights:
+    - name: "Mutfak Işık"
+      slave: 1
+      address: 0
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Mutfak Tezgâh Işık"
+      slave: 1
+      address: 1
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Orta Alan Işık"
+      slave: 1
+      address: 2
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Yatak Alanı Işık"
+      slave: 1
+      address: 3
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Popup Yatak Işık"
+      slave: 1
+      address: 4
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Sol Okuma Işık"
+      slave: 1
+      address: 5
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Sağ Okuma Işık"
+      slave: 1
+      address: 6
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Tente Işık"
+      slave: 1
+      address: 7
+      write_type: coil
+      scan_interval: 1
+
+# ===========================================
+# DEVICE 2: DI/DO Module (Push Buttons + Outputs)
+# ===========================================
+- name: "DI_DO_Kontrol"
+  type: tcp
+  host: ugurs-macbook-m4-pro.local
+  port: 5024
+  
+  # Digital Inputs (Push Buttons)
+  binary_sensors:
+    - name: "Sağ Yatak Butonu"
+      slave: 1
+      address: 0
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Sol Yatak Butonu"
+      slave: 1
+      address: 1
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Popup Yatak Butonu"
+      slave: 1
+      address: 2
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Dış Aydınlatma Butonu"
+      slave: 1
+      address: 3
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Otomatik Basamak Butonu"
+      slave: 1
+      address: 4
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Mutfak Butonu"
+      slave: 1
+      address: 5
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Orta Alan Butonu"
+      slave: 1
+      address: 6
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Banyo Butonu"
+      slave: 1
+      address: 7
+      input_type: discrete_input
+      scan_interval: 1
+  
+  # Digital Outputs (Switches)
+  switches:
+    - name: "Alarm Siren"
+      slave: 1
+      address: 0
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Havalandırma Fan"
+      slave: 1
+      address: 1
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Su Pompası"
+      slave: 1
+      address: 2
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Isıtıcı"
+      slave: 1
+      address: 3
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Soğutucu"
+      slave: 1
+      address: 4
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Valf 1"
+      slave: 1
+      address: 5
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Valf 2"
+      slave: 1
+      address: 6
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Uyarı Lambası"
+      slave: 1
+      address: 7
+      write_type: coil
+      scan_interval: 1
+

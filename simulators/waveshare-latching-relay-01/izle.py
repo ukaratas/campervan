@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Latching Relay İzleme - Instance 01
-Port 5023'teki simülatörü izler
+Latching Relay İzleme
+Simülatörü gerçek zamanlı izler
 """
 
 import sys
@@ -11,38 +11,39 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pymodbus.client import ModbusTcpClient
 import time
 
-PORT = 5023
-SLAVE = 1
+# Config import
+from config import (
+    DEVICE_NAME, PORT, SLAVE_ID, HOST,
+    RELAY_COUNT, START_ADDRESS, RELAY_LABELS_WATCH
+)
 
-RELAY_LABELS = [
-    "R0: Mutfak", "R1: Tezgâh", "R2: Orta Alan", "R3: Yatak",
-    "R4: Popup", "R5: Sol Okuma", "R6: Sağ Okuma", "R7: Tente"
-]
+SLAVE = SLAVE_ID
+RELAY_LABELS = RELAY_LABELS_WATCH
 
 def main():
     print("\n" + "="*70)
-    print("👁️  LATCHING RELAY İZLEME - Instance 01")
+    print(f"👁️  LATCHING RELAY İZLEME - {DEVICE_NAME}")
     print("="*70)
-    print(f"📡 Port: {PORT}")
+    print(f"📡 Host: {HOST}:{PORT}")
     print("📺 Röle değişiklikleri izleniyor... (Ctrl+C ile çık)\n")
     
-    client = ModbusTcpClient('localhost', port=PORT)
+    client = ModbusTcpClient(HOST, port=PORT)
     if not client.connect():
-        print(f"❌ Port {PORT}'e bağlanılamadı!")
+        print(f"❌ {HOST}:{PORT}'e bağlanılamadı!")
         print("   Simülatörü başlat: python3 simulator.py")
         sys.exit(1)
     
     print("✅ Bağlandı\n")
     
-    previous = [None] * 8
+    previous = [None] * RELAY_COUNT
     
     try:
         while True:
-            result = client.read_coils(0, 8, slave=SLAVE)
+            result = client.read_coils(START_ADDRESS, RELAY_COUNT, slave=SLAVE)
             if result.isError():
                 continue
             
-            for i in range(8):
+            for i in range(RELAY_COUNT):
                 if result.bits[i] != previous[i]:
                     status = "🟢 AÇILDI" if result.bits[i] else "⚫ KAPANDI"
                     timestamp = time.strftime("%H:%M:%S")

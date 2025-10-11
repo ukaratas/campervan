@@ -1,0 +1,241 @@
+# ==========================================
+# Push Button Actions
+# ==========================================
+# Event trigger'lara göre gerçek aksiyonlar
+# Kendi light entity'lerinize göre düzenleyin
+
+# ===================
+# SAĞ YATAK BUTON
+# ===================
+- id: sag_yatak_short_press_action
+  alias: "Sağ Yatak - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: sag_yatak_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.yatak_alani_isik
+
+- id: sag_yatak_long_press_action
+  alias: "Sağ Yatak - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: sag_yatak_long_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.sag_okuma_isik
+
+- id: sag_yatak_double_press_action
+  alias: "Sağ Yatak - Double Press Action"
+  trigger:
+    - platform: event
+      event_type: sag_yatak_double_press
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+# ===================
+# SOL YATAK BUTON
+# ===================
+- id: sol_yatak_short_press_action
+  alias: "Sol Yatak - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: sol_yatak_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.yatak_alani_isik
+
+- id: sol_yatak_long_press_action
+  alias: "Sol Yatak - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: sol_yatak_long_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.sol_okuma_isik
+
+- id: sol_yatak_double_press_action
+  alias: "Sol Yatak - Double Press Action"
+  trigger:
+    - platform: event
+      event_type: sol_yatak_double_press
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+# ===================
+# POPUP YATAK BUTON
+# ===================
+- id: popup_yatak_short_press_action
+  alias: "Popup Yatak - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: popup_yatak_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.popup_yatak_isik
+
+- id: popup_yatak_long_press_action
+  alias: "Popup Yatak - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: popup_yatak_long_press
+  action:
+    # Popup ambiyans - örnek: %30 parlaklık
+    - service: light.turn_on
+      target:
+        entity_id: light.popup_yatak_isik
+      data:
+        brightness_pct: 30
+
+- id: popup_yatak_double_press_action
+  alias: "Popup Yatak - Double Press Action"
+  trigger:
+    - platform: event
+      event_type: popup_yatak_double_press
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+# ===================
+# DIŞ AYDINLATMA BUTON
+# ===================
+- id: dis_aydinlatma_short_press_action
+  alias: "Dış Aydınlatma - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: dis_aydinlatma_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.tente_isik
+
+- id: dis_aydinlatma_long_press_action
+  alias: "Dış Aydınlatma - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: dis_aydinlatma_long_press
+  action:
+    # Tente ambiyans
+    - service: light.turn_on
+      target:
+        entity_id: light.tente_isik
+      data:
+        brightness_pct: 30
+
+- id: dis_aydinlatma_double_press_action
+  alias: "Dış Aydınlatma - Double Press Action"
+  trigger:
+    - platform: event
+      event_type: dis_aydinlatma_double_press
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+# ===================
+# OTOMATIK BASAMAK BUTON
+# ===================
+- id: basamak_short_press_action
+  alias: "Basamak - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: basamak_short_press
+  action:
+    # Basamak aydınlatma toggle
+    # NOT: Gerçek entity name'i güncelle
+    - service: light.toggle
+      target:
+        entity_id: light.basamak_isik
+
+# ===================
+# MUTFAK BUTON
+# ===================
+- id: mutfak_short_press_action
+  alias: "Mutfak - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: mutfak_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.mutfak_isik
+
+- id: mutfak_long_press_action
+  alias: "Mutfak - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: mutfak_long_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.mutfak_tezgah_isik
+
+# ===================
+# ORTA ALAN BUTON
+# ===================
+- id: orta_alan_short_press_action
+  alias: "Orta Alan - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: orta_alan_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.orta_alan_isik
+
+- id: orta_alan_long_press_action
+  alias: "Orta Alan - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: orta_alan_long_press
+  action:
+    # Ambiyans aydınlatma
+    - service: light.turn_on
+      target:
+        entity_id: light.orta_alan_isik
+      data:
+        brightness_pct: 30
+
+- id: orta_alan_double_press_action
+  alias: "Orta Alan - Double Press Action"
+  trigger:
+    - platform: event
+      event_type: orta_alan_double_press
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+# ===================
+# BANYO BUTON
+# ===================
+- id: banyo_short_press_action
+  alias: "Banyo - Short Press Action"
+  trigger:
+    - platform: event
+      event_type: banyo_short_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.banyo_aydinlatma
+
+- id: banyo_long_press_action
+  alias: "Banyo - Long Press Action"
+  trigger:
+    - platform: event
+      event_type: banyo_long_press
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.banyo_ayna_lambasi
+

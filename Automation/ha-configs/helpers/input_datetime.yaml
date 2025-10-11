@@ -1,0 +1,53 @@
+# ==========================================
+# Push Button - DateTime Helpers
+# ==========================================
+# Her butonun son basılma zamanını tutar
+
+# DI0: Sağ Yatak
+sag_yatak_press_time:
+  name: "Sağ Yatak Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI1: Sol Yatak
+sol_yatak_press_time:
+  name: "Sol Yatak Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI2: Popup Yatak
+popup_yatak_press_time:
+  name: "Popup Yatak Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI3: Dış Aydınlatma
+dis_aydinlatma_press_time:
+  name: "Dış Aydınlatma Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI4: Otomatik Basamak
+basamak_press_time:
+  name: "Basamak Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI5: Mutfak
+mutfak_press_time:
+  name: "Mutfak Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI6: Orta Alan
+orta_alan_press_time:
+  name: "Orta Alan Buton Press Time"
+  has_date: true
+  has_time: true
+
+# DI7: Banyo
+banyo_press_time:
+  name: "Banyo Buton Press Time"
+  has_date: true
+  has_time: true
+
