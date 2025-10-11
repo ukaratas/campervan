@@ -1,0 +1,188 @@
+# Helpers Include
+input_datetime: !include helpers/input_datetime.yaml
+input_number: !include helpers/input_number.yaml
+input_boolean: !include helpers/input_boolean.yaml
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Automations Include
+automation: !include_dir_merge_list automations/
+
+
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# ==========================================
+# Waveshare Latching Relay Instance 01
+# Aydınlatma Kontrol
+# ==========================================
+# Port: 5023
+# Mac IP: 192.168.1.45
+
+modbus:
+  - name: "Aydinlatma_Kontrol"
+    type: tcp
+    host: ugurs-macbook-m4-pro.local
+    port: 5023
+    
+    lights:
+      - name: "Mutfak Işık"
+        slave: 1
+        address: 0
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Mutfak Tezgâh Işık"
+        slave: 1
+        address: 1
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Orta Alan Işık"
+        slave: 1
+        address: 2
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Yatak Alanı Işık"
+        slave: 1
+        address: 3
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Popup Yatak Işık"
+        slave: 1
+        address: 4
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Sol Okuma Işık"
+        slave: 1
+        address: 5
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Sağ Okuma Işık"
+        slave: 1
+        address: 6
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Tente Işık"
+        slave: 1
+        address: 7
+        write_type: coil
+        scan_interval: 1
+  - name: "DI_DO_Kontrol"
+    type: tcp
+    host: ugurs-macbook-m4-pro.local  # config.py -> HA_HOSTNAME
+    port: 5024                         # config.py -> PORT
+    
+    # ==========================================
+    # DIGITAL INPUTS (Push Buttons)
+    # ==========================================
+    binary_sensors:
+      - name: "Sağ Yatak Butonu"
+        slave: 1
+        address: 0
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Sol Yatak Butonu"
+        slave: 1
+        address: 1
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Popup Yatak Butonu"
+        slave: 1
+        address: 2
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Dış Aydınlatma Butonu"
+        slave: 1
+        address: 3
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Otomatik Basamak Butonu"
+        slave: 1
+        address: 4
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Mutfak Butonu"
+        slave: 1
+        address: 5
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Orta Alan Butonu"
+        slave: 1
+        address: 6
+        input_type: discrete_input
+        scan_interval: 1
+      
+      - name: "Banyo Butonu"
+        slave: 1
+        address: 7
+        input_type: discrete_input
+        scan_interval: 1
+    
+    # ==========================================
+    # DIGITAL OUTPUTS (Switches)
+    # ==========================================
+    switches:
+      - name: "Alarm Siren"
+        slave: 1
+        address: 0
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Havalandırma Fan"
+        slave: 1
+        address: 1
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Su Pompası"
+        slave: 1
+        address: 2
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Isıtıcı"
+        slave: 1
+        address: 3
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Soğutucu"
+        slave: 1
+        address: 4
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Valf 1"
+        slave: 1
+        address: 5
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Valf 2"
+        slave: 1
+        address: 6
+        write_type: coil
+        scan_interval: 1
+      
+      - name: "Uyarı Lambası"
+        slave: 1
+        address: 7
+        write_type: coil
+        scan_interval: 1
