@@ -38,7 +38,7 @@ pymodbus==3.5.4
 
 ### Option 1: Ayrı Terminal'lerde (Önerilen)
 
-**Terminal 1 - Latching Relay:**
+**Terminal 1 - Latching Relay 01 (Aydınlatma):**
 ```bash
 cd simulators/waveshare-latching-relay-01
 source ../venv/bin/activate
@@ -52,17 +52,31 @@ source ../venv/bin/activate
 python3 simulator.py
 ```
 
+**Terminal 3 - Latching Relay 02 (Banyo + Su):**
+```bash
+cd simulators/waveshare-latching-relay-02
+source ../venv/bin/activate
+python3 simulator.py
+```
+
+**Terminal 4 - Latching Relay 03 (Yüksek Tüketim):**
+```bash
+cd simulators/waveshare-latching-relay-03
+source ../venv/bin/activate
+python3 simulator.py
+```
+
 ### Option 2: Background Process
 
 ```bash
 cd simulators
 source venv/bin/activate
 
-# Latching Relay - Port 5023
+# Latching Relay 01 - Port 5023 (Aydınlatma)
 cd waveshare-latching-relay-01
 python3 simulator.py > simulator.log 2>&1 &
-RELAY_PID=$!
-echo "Latching Relay started (PID: $RELAY_PID)"
+RELAY01_PID=$!
+echo "Latching Relay 01 started (PID: $RELAY01_PID)"
 
 # DI/DO Module - Port 5024
 cd ../waveshare-di-do-01
@@ -70,8 +84,20 @@ python3 simulator.py > simulator.log 2>&1 &
 DIDO_PID=$!
 echo "DI/DO Module started (PID: $DIDO_PID)"
 
-# Simülatörleri durdurmak için:
-# kill $RELAY_PID $DIDO_PID
+# Latching Relay 02 - Port 5025 (Banyo + Su)
+cd ../waveshare-latching-relay-02
+python3 simulator.py > simulator.log 2>&1 &
+RELAY02_PID=$!
+echo "Latching Relay 02 started (PID: $RELAY02_PID)"
+
+# Latching Relay 03 - Port 5026 (Yüksek Tüketim)
+cd ../waveshare-latching-relay-03
+python3 simulator.py > simulator.log 2>&1 &
+RELAY03_PID=$!
+echo "Latching Relay 03 started (PID: $RELAY03_PID)"
+
+# Tüm simülatörleri durdurmak için:
+# kill $RELAY01_PID $DIDO_PID $RELAY02_PID $RELAY03_PID
 ```
 
 ## 📋 Modül Listesi
@@ -80,6 +106,8 @@ echo "DI/DO Module started (PID: $DIDO_PID)"
 |-------|------|----------|--------|
 | **Latching Relay 01** | 5023 | 8-kanal bistable röle<br/>Aydınlatma kontrolü | `waveshare-latching-relay-01/` |
 | **DI/DO 01** | 5024 | 8 Digital Input (push buttons)<br/>8 Digital Output (switches) | `waveshare-di-do-01/` |
+| **Latching Relay 02** | 5025 | 8-kanal bistable röle<br/>Banyo + Su sistemi | `waveshare-latching-relay-02/` |
+| **Latching Relay 03** | 5026 | 8-kanal bistable röle<br/>Yüksek tüketim cihazları | `waveshare-latching-relay-03/` |
 
 ## 🎮 Kullanım
 
@@ -219,10 +247,12 @@ pip install pymodbus==3.5.4
 ps aux | grep simulator.py
 ```
 
-**Kontrol 2:** Port açık mı?
+**Kontrol 2:** Portlar açık mı?
 ```bash
-nc -zv ugurs-macbook-m4-pro.local 5023
-nc -zv ugurs-macbook-m4-pro.local 5024
+nc -zv ugurs-macbook-m4-pro.local 5023  # Relay 01
+nc -zv ugurs-macbook-m4-pro.local 5024  # DI/DO
+nc -zv ugurs-macbook-m4-pro.local 5025  # Relay 02
+nc -zv ugurs-macbook-m4-pro.local 5026  # Relay 03
 ```
 
 **Kontrol 3:** Hostname çözülüyor mu?

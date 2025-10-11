@@ -169,3 +169,118 @@
       write_type: coil
       scan_interval: 1
 
+# ===========================================
+# DEVICE 3: Latching Relay #2 (Banyo + Su Sistemi)
+# ===========================================
+- name: "Banyo_Su_Kontrol"
+  type: tcp
+  host: ugurs-macbook-m4-pro.local
+  port: 5025
+  
+  lights:
+    - name: "Banyo Aydınlatma"
+      slave: 1
+      address: 0
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Banyo Ayna Aydınlatma"
+      slave: 1
+      address: 1
+      write_type: coil
+      scan_interval: 1
+  
+  switches:
+    - name: "Temiz Su Hidrofor"
+      slave: 1
+      address: 2
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Macerator Pompa"
+      slave: 1
+      address: 3
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Rezerv 5"
+      slave: 1
+      address: 4
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Rezerv 6"
+      slave: 1
+      address: 5
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Rezerv 7"
+      slave: 1
+      address: 6
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Rezerv 8"
+      slave: 1
+      address: 7
+      write_type: coil
+      scan_interval: 1
+
+# ===========================================
+# DEVICE 4: Latching Relay #3 (Yüksek Tüketim)
+# ===========================================
+- name: "Yuksek_Tuketim_Kontrol"
+  type: tcp
+  host: ugurs-macbook-m4-pro.local
+  port: 5026
+  
+  switches:
+    - name: "Buzdolabı"
+      slave: 1
+      address: 0
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "USB Kutusu Mutfak"
+      slave: 1
+      address: 1
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "USB Kutusu Yatak"
+      slave: 1
+      address: 2
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "USB Kutusu Banyo"
+      slave: 1
+      address: 3
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "USB Kutusu Popup"
+      slave: 1
+      address: 4
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Truma Combi D4"
+      slave: 1
+      address: 5
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Gri Su Pompası"
+      slave: 1
+      address: 6
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Rezerv 8"
+      slave: 1
+      address: 7
+      write_type: coil
+      scan_interval: 1
+

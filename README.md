@@ -134,14 +134,18 @@ campervan/
 │       └── KURULUM.md         # Adım adım kurulum rehberi
 ├── simulators/                # Waveshare modül simülatörleri (geliştirme/test için)
 │   ├── venv/                  # Python virtual environment (pymodbus)
-│   ├── waveshare-latching-relay-01/ # 8-kanal latching relay simülatörü
+│   ├── waveshare-latching-relay-01/ # Relay 01: Aydınlatma (Port 5023)
 │   │   ├── simulator.py       # Modbus TCP simülatör
 │   │   ├── config.py          # Merkezi konfigürasyon
 │   │   ├── kontrol.py         # Röle kontrol utility
 │   │   ├── izle.py            # Real-time monitoring
 │   │   ├── ha-config.yaml     # Home Assistant entegrasyonu
 │   │   └── README.md          # Dokümantasyon
-│   └── waveshare-di-do-01/    # 8DI/8DO modül simülatörü
+│   ├── waveshare-latching-relay-02/ # Relay 02: Banyo + Su Sistemi (Port 5025)
+│   │   └── ... (aynı dosya yapısı)
+│   ├── waveshare-latching-relay-03/ # Relay 03: Yüksek Tüketim (Port 5026)
+│   │   └── ... (aynı dosya yapısı)
+│   └── waveshare-di-do-01/    # 8DI/8DO modül simülatörü (Port 5024)
 │       ├── simulator.py       # Push button simülasyonu dahil
 │       ├── config.py          # Merkezi konfigürasyon
 │       ├── kontrol.py         # DI/DO kontrol utility
@@ -188,13 +192,18 @@ Gerçek donanım olmadan geliştirme ve test için Modbus TCP simülatörleri me
 cd simulators
 source venv/bin/activate
 
-# Latching Relay simülatörü (Port 5023)
-cd waveshare-latching-relay-01
-python3 simulator.py &
+# 4 ayrı terminal'de simülatörleri başlat:
+# Terminal 1: Relay 01 - Aydınlatma (Port 5023)
+cd waveshare-latching-relay-01 && python3 simulator.py
 
-# DI/DO simülatörü (Port 5024) - Push button simülasyonu dahil
-cd ../waveshare-di-do-01
-python3 simulator.py &
+# Terminal 2: DI/DO - Push Buttons (Port 5024)
+cd waveshare-di-do-01 && python3 simulator.py
+
+# Terminal 3: Relay 02 - Banyo + Su (Port 5025)
+cd waveshare-latching-relay-02 && python3 simulator.py
+
+# Terminal 4: Relay 03 - Yüksek Tüketim (Port 5026)
+cd waveshare-latching-relay-03 && python3 simulator.py
 ```
 
 **2. Home Assistant Konfigürasyonlarını Deploy Et:**
