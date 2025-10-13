@@ -308,9 +308,22 @@ Finder 20.22.0.024.0000 Röle
 
 **ÖNEMLİ:** Tüm 220V yüksek güç cihazları bu röle sistemi üzerinden kontrol edilecek:
 
-1. **İndüksiyon Ocak** (Omake 1800W)
-2. **Bulaşık Makinesi** (Electrolux)
-3. **Diğer 220V Cihazlar** (eklenecek)
+| # | Cihaz | Model | Güç | Finder | Notlar |
+|---|-------|-------|-----|--------|--------|
+| 1 | **İndüksiyon Ocak** | Omake 1800W | 1800W | Finder-1 | Mutfak |
+| 2 | **Bulaşık Makinesi** | Electrolux | 1200-1800W | Finder-2 | Mutfak |
+| 3 | **Çamaşır Makinesi** | [FİX Mini](https://portofmarin.com/urun/waf-mini-camasir-makinesi-beyaz/) | 160W (maks) | Finder-3 | 3 KG, 50W yıkama + 160W santrifüj |
+| 4 | **Rezerv** | - | - | Finder-4 | Genişleme |
+
+**Çamaşır Makinesi Teknik Özellikler:**
+- Model: FİX Mini Tekne/Karavan Çamaşır Makinesi
+- Güç: 220V/50Hz
+- Yıkama Gücü: 50W
+- Santrifüj Gücü: 160W (maksimum tüketim)
+- Kapasite: 3 KG
+- Program Sayısı: 6
+- Maksimum Devir: 600 RPM
+- **Avantaj:** Çok düşük güç tüketimi (160W), karavan için ideal
 
 **Not:** Latching relay kullanılmaz! Finder + DI/DO sistemi kullanılır. Bu sayede HA her zaman cihazların gerçek durumunu bilir.
 

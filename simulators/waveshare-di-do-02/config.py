@@ -25,8 +25,8 @@ START_ADDRESS = 0
 DI_LABELS = [
     "DI0: Finder-1 STATUS (İndüksiyon Ocak)",
     "DI1: Finder-2 STATUS (Bulaşık Makinesi)",
-    "DI2: Finder-3 STATUS (220V Cihaz)",
-    "DI3: Finder-4 STATUS (220V Cihaz)",
+    "DI2: Finder-3 STATUS (Çamaşır Makinesi - FİX Mini 160W)",
+    "DI3: Finder-4 STATUS (Rezerv)",
     "DI4: Finder-5 STATUS (Rezerv)",
     "DI5: Finder-6 STATUS (Rezerv)",
     "DI6: Finder-7 STATUS (Rezerv)",
@@ -47,13 +47,15 @@ DO_LABELS = [
 
 # Kısa etiketler (kontrol.py için)
 DI_LABELS_SHORT = [
-    "F1-Status", "F2-Status", "F3-Status", "F4-Status",
-    "F5-Status", "F6-Status", "F7-Status", "F8-Status"
+    "İndüksiyon", "Bulaşık Mak.", "Çamaşır Mak.", "Rezerv-4",
+    "Rezerv-5", "Rezerv-6", "Rezerv-7", "Rezerv-8"
 ]
 
 DO_LABELS_SHORT = [
-    "F1-SET", "F1-RESET", "F2-SET", "F2-RESET",
-    "F3-SET", "F3-RESET", "F4-SET", "F4-RESET"
+    "İndüksiyon-AÇ", "İndüksiyon-KAPA",
+    "Bulaşık-AÇ", "Bulaşık-KAPA",
+    "Çamaşır-AÇ", "Çamaşır-KAPA",
+    "Rezerv4-AÇ", "Rezerv4-KAPA"
 ]
 
 # İzleme (watch) etiketleri (simulator.py logging için)
