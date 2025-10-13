@@ -266,16 +266,71 @@ Karavanda toplam **3 adet Latching Relay** modülü kullanılacak:
 
 ---
 
+### ⚡ 220V Cihazlar - Finder Röle Sistemi
+**Model:** Finder 20.22.0.024.0000  
+**Kontrol:** Waveshare DI/DO modülü üzerinden
+
+#### 📐 Sistem Mimarisi:
+
+```
+Home Assistant
+    ↓
+Waveshare DI/DO Modülü
+    ↓ DO (Digital Output) → Finder Röle AÇ
+    ↓ DO (Digital Output) → Finder Röle KAPA
+    ↑ DI (Digital Input)  ← Finder Röle STATUS
+    ↓
+Finder 20.22.0.024.0000 Röle
+    ↓
+220V Cihazlar
+```
+
+#### 🔧 Finder Röle Özellikleri:
+
+- **2 Kanal Kontrol:** SET (AÇ) + RESET (KAPA)
+- **Status Feedback:** DI ile gerçek durum okunur
+- **Avantajlar:**
+  - ✅ Home Assistant her zaman cihaz durumunu bilir
+  - ✅ Fiziksel buton ile manuel kontrol edilse bile HA senkronize kalır
+  - ✅ Gerçek durum feedback'i (relay kapalıysa HA da kapalı gösterir)
+  - ✅ Güvenli: Çift kanallı kontrol, yanlış açılma/kapanma riski yok
+
+#### 🔌 Waveshare DI/DO Kullanımı:
+
+**Digital Output (DO):**
+- DO1 → Finder SET (AÇ komutu)
+- DO2 → Finder RESET (KAPA komutu)
+
+**Digital Input (DI):**
+- DI1 → Finder STATUS (Röle durumu: 1=Açık, 0=Kapalı)
+
+#### 📋 Bağlanacak 220V Cihazlar:
+
+**ÖNEMLİ:** Tüm 220V yüksek güç cihazları bu röle sistemi üzerinden kontrol edilecek:
+
+1. **İndüksiyon Ocak** (Omake 1800W)
+2. **Bulaşık Makinesi** (Electrolux)
+3. **Diğer 220V Cihazlar** (eklenecek)
+
+**Not:** Latching relay kullanılmaz! Finder + DI/DO sistemi kullanılır. Bu sayede HA her zaman cihazların gerçek durumunu bilir.
+
+---
+
 ### 📊 Özet
 
 ```
 ✅ LOW Latching Relay #1 (8 kanal) → Aydınlatma (8/8 DOLU)
 ❌ LOW Latching Relay #2 (8 kanal) → Banyo + Su sistemi (4/8 kullanılıyor)
 ❌ HIGH Latching Relay #1 (8 kanal) → Yüksek güç cihazları (7/8 kullanılıyor)
-🎯 DI/DO Modülü (8 DO kanal) → Valfler + Kontaktör tetikleme (2/8 kullanılıyor)
+🎯 DI/DO Modülü (8 DO + 8 DI) → Push buttons + Valfler + Kontaktör + Finder kontrol
 🔥 Kontaktör (harici) → 24V Klima (30-40A)
+⚡ Finder Röle (DI/DO ile kontrol) → 220V cihazlar (İndüksiyon, Bulaşık makinesi)
 
-TOPLAM: 3 adet Latching Relay (1 mevcut + 2 yeni sipariş)
+TOPLAM: 
+- 3x Latching Relay (24V DC cihazlar)
+- 1x DI/DO Modülü (Push buttons + Finder + Kontaktör)
+- 1x Finder Röle (220V cihazlar)
+- 1x Kontaktör (24V Klima)
 ```
 
 ---
@@ -341,26 +396,36 @@ Düşük akım kontrol sinyalleri, valfler, kontaktör tetikleme için.
 |-------|-------------|-----|------|--------|
 | DO1 | Elektrikli vana (temiz su) | 2.4W | 0.1A | Kış donma koruması |
 | DO2 | Kontaktör tetikleme (24V klima) | <5W | <0.5A | 30-40A kontaktör bobini |
-| DO3 | BOŞ | - | - | Genişleme |
-| DO4 | BOŞ | - | - | Genişleme |
+| DO3 | **Finder Röle SET (AÇ)** | <5W | <0.5A | **220V cihazlar açma** |
+| DO4 | **Finder Röle RESET (KAPA)** | <5W | <0.5A | **220V cihazlar kapama** |
 | DO5 | BOŞ | - | - | Genişleme |
 | DO6 | BOŞ | - | - | Genişleme |
 | DO7 | BOŞ | - | - | Genişleme |
 | DO8 | BOŞ | - | - | Genişleme |
 
-### Girişler - DI/DO Module (8 DI Kanal)
-Push button girişleri için dijital input.
+**⚡ 220V Cihazlar (DO3+DO4 üzerinden):**
+- İndüksiyon Ocak (Omake 1800W)
+- Bulaşık Makinesi (Electrolux)
+- Diğer 220V yüksek güç cihazları
 
-| Kanal | Push Button | Short Press | Long Press | Double Press |
-|-------|-------------|-------------|------------|--------------|
-| DI1 | Sağ yatak | Yatak alanı aç/kapa | Sağ okuma lambası | Tüm aydınlatma kapat |
-| DI2 | Sol yatak | Yatak alanı aç/kapa | Sol okuma lambası | Tüm aydınlatma kapat |
-| DI3 | Popup yatak | Popup aydınlatma aç/kapa | Popup ambiyans | Tüm aydınlatma kapat |
-| DI4 | Dış aydınlatma | Tente altı aç/kapa | Tente ambiyans | Tüm aydınlatma kapat |
-| DI5 | Otomatik basamak | Basamak aç/kapa | - | - |
-| DI6 | Mutfak | Mutfak lambası | Tezgâh lambası | - |
-| DI7 | Orta alan | Orta alan aydınlatma | Ambiyans aydınlatma | Tüm aydınlatma kapat |
-| DI8 | Banyo | Banyo aydınlatma | Banyo ayna lambası | - |
+### Girişler - DI/DO Module (8 DI Kanal)
+Push button girişleri ve status feedback için dijital input.
+
+| Kanal | Kullanım | Short Press | Long Press | Double Press |
+|-------|----------|-------------|------------|--------------|
+| DI1 | Sağ yatak butonu | Yatak alanı aç/kapa | Sağ okuma lambası | Tüm aydınlatma kapat |
+| DI2 | Sol yatak butonu | Yatak alanı aç/kapa | Sol okuma lambası | Tüm aydınlatma kapat |
+| DI3 | Popup yatak butonu | Popup aydınlatma aç/kapa | Popup ambiyans | Tüm aydınlatma kapat |
+| DI4 | Dış aydınlatma butonu | Tente altı aç/kapa | Tente ambiyans | Tüm aydınlatma kapat |
+| DI5 | Otomatik basamak butonu | Basamak aç/kapa | - | - |
+| DI6 | Mutfak butonu | Mutfak lambası | Tezgâh lambası | - |
+| DI7 | Orta alan butonu | Orta alan aydınlatma | Ambiyans aydınlatma | Tüm aydınlatma kapat |
+| DI8 | **Finder Röle STATUS** | **220V cihaz durumu (1=Açık, 0=Kapalı)** | - | - |
+
+**⚡ Finder Status (DI8):**
+- Gerçek zamanlı durum feedback'i
+- Home Assistant her zaman 220V cihazların durumunu bilir
+- Manuel kontrol edilse bile HA senkronize kalır
 
 **Push Button Zamanlama:**
 * **Short press:** <400ms
