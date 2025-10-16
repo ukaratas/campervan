@@ -1,0 +1,218 @@
+# ==========================================
+# ⚡ ENERJİ - DASHBOARD
+# ==========================================
+# Bu dashboard enerji tüketimi ve batarya izleme içindir
+# 2 farklı view (tab) içerir
+
+title: ⚡ Enerji
+views:
+  # ==========================================
+  # VIEW 1: GÜÇTÜKETIM
+  # ==========================================
+  - title: Güç Tüketim
+    path: tuketim
+    icon: mdi:flash
+    badges: []
+    cards:
+      # 24V DC Cihazlar - Düşük Tüketim
+      - type: entities
+        title: 🔋 24V DC - Düşük Tüketim (Latching Relay)
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: Aydınlatma (24V LED)
+          - entity: light.mutfak_isik
+            name: Mutfak (8W)
+            secondary_info: last-changed
+          - entity: light.mutfak_tezgah_isik
+            name: Tezgâh (7W)
+            secondary_info: last-changed
+          - entity: light.orta_alan_isik
+            name: Orta Alan (12W)
+            secondary_info: last-changed
+          - entity: light.yatak_alani_isik
+            name: Yatak (14W)
+            secondary_info: last-changed
+          - entity: light.popup_yatak_isik
+            name: Popup (6W)
+            secondary_info: last-changed
+          - entity: light.sol_okuma_isik
+            name: Sol Okuma (4W)
+            secondary_info: last-changed
+          - entity: light.sag_okuma_isik
+            name: Sağ Okuma (4W)
+            secondary_info: last-changed
+          - entity: light.tente_isik
+            name: Tente (12W)
+            secondary_info: last-changed
+          - type: section
+            label: Banyo
+          - entity: light.banyo_aydinlatma
+            name: Banyo (8W)
+            secondary_info: last-changed
+          - entity: light.banyo_ayna_aydinlatma
+            name: Ayna (8W)
+            secondary_info: last-changed
+
+      # 24V DC - Orta Tüketim
+      - type: entities
+        title: 🔋 24V DC - Orta Tüketim
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: Su Sistemi
+          - entity: switch.temiz_su_hidrofor
+            name: Su Hidrofor (84W - 3.5A)
+            secondary_info: last-changed
+          - entity: switch.gri_su_pompasi
+            name: Gri Su Pompası (120W - 5A)
+            secondary_info: last-changed
+          - type: section
+            label: Diğer
+          - entity: switch.truma_combi_d4
+            name: Truma Combi (50W - 2A)
+            secondary_info: last-changed
+          - entity: switch.buzdolabi
+            name: Buzdolabı (65W - 2.7A)
+            secondary_info: last-changed
+
+      # 24V DC - Yüksek Tüketim
+      - type: entities
+        title: ⚠️ 24V DC - Yüksek Tüketim
+        show_header_toggle: false
+        entities:
+          - entity: switch.macerator_pompa
+            name: Macerator Pompa (192W - 8A)
+            secondary_info: last-changed
+            icon: mdi:pump
+          - entity: switch.usb_kutusu_mutfak
+            name: USB Kutusu Mutfak (200W - 8A)
+            secondary_info: last-changed
+          - entity: switch.usb_kutusu_yatak
+            name: USB Kutusu Yatak (200W - 8A)
+            secondary_info: last-changed
+          - entity: switch.usb_kutusu_banyo
+            name: USB Kutusu Banyo (200W - 8A)
+            secondary_info: last-changed
+          - entity: switch.usb_kutusu_popup
+            name: USB Kutusu Popup (200W - 8A)
+            secondary_info: last-changed
+
+      # 220V AC Cihazlar
+      - type: entities
+        title: 🔌 220V AC Cihazlar (Inverter Gerekli)
+        show_header_toggle: false
+        entities:
+          - entity: switch.induksiyon_ocak
+            name: İndüksiyon Ocak (1800W)
+            secondary_info: last-changed
+          - entity: switch.bulasik_makinesi
+            name: Bulaşık Makinesi (1200-1800W)
+            secondary_info: last-changed
+          - entity: switch.camasir_makinesi
+            name: Çamaşır Makinesi (160W)
+            secondary_info: last-changed
+
+      # Toplam Güç Bilgisi
+      - type: markdown
+        content: |
+          ### 📊 Güç Tüketim Özeti
+          
+          **24V DC Toplam:**
+          - 💡 Aydınlatma: **~85W** (tümü açık)
+          - 🔋 Sürekli: **~115W** (Buzdolabı + Truma)
+          - 💧 Pompalar: **~400W** (tümü açık - nadir)
+          - 🔌 USB: **~800W** (tümü açık - nadir)
+          
+          **220V AC Toplam:**
+          - 🔥 İndüksiyon: **1800W** (inverter)
+          - 🧼 Bulaşık: **1200-1800W** (inverter)
+          - 👕 Çamaşır: **160W** (inverter)
+          
+          ⚠️ **Uyarı:** 220V cihazları aynı anda kullanmayın!
+
+  # ==========================================
+  # VIEW 2: BATARYA & ŞARJ
+  # ==========================================
+  - title: Batarya
+    path: batarya
+    icon: mdi:battery
+    badges: []
+    cards:
+      # Batarya Durumu (Placeholder - sensörler eklendiğinde)
+      - type: markdown
+        content: |
+          ### 🔋 Batarya İzleme
+          
+          Bu bölüm gelecekte batarya yönetim sistemi (BMS) 
+          eklendiğinde aktif olacak.
+          
+          **İzlenecek Değerler:**
+          - 🔋 Batarya Seviyesi (%)
+          - ⚡ Anlık Tüketim (W)
+          - 🔌 Şarj Durumu
+          - 🌡️ Batarya Sıcaklığı
+          - 📊 Günlük Tüketim (kWh)
+          - ☀️ Solar Panel Üretim (W)
+
+      # Manuel Güç Yönetimi
+      - type: entities
+        title: 🔧 Manuel Güç Yönetimi
+        show_header_toggle: false
+        entities:
+          - type: button
+            name: Tüm Işıkları Kapat
+            icon: mdi:lightbulb-off
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              target:
+                entity_id: all
+          - type: button
+            name: Tüm USB Kutularını Kapat
+            icon: mdi:usb-port
+            tap_action:
+              action: call-service
+              service: switch.turn_off
+              target:
+                entity_id:
+                  - switch.usb_kutusu_mutfak
+                  - switch.usb_kutusu_yatak
+                  - switch.usb_kutusu_banyo
+                  - switch.usb_kutusu_popup
+          - type: button
+            name: Tüm 220V Cihazları Kapat
+            icon: mdi:power-plug-off
+            tap_action:
+              action: call-service
+              service: switch.turn_off
+              target:
+                entity_id:
+                  - switch.induksiyon_ocak
+                  - switch.bulasik_makinesi
+                  - switch.camasir_makinesi
+
+      # Enerji Tasarrufu Modları
+      - type: markdown
+        content: |
+          ### 💡 Enerji Tasarrufu Modları
+          
+          **Gece Modu:**
+          - Sadece yatak okuma lambaları
+          - USB kutuları kapalı
+          - 220V cihazlar kapalı
+          
+          **Seyahat Modu:**
+          - Tüm ışıklar kapalı
+          - Sadece buzdolabı açık
+          - USB kutuları kapalı
+          
+          **Şarj Modu:**
+          - Yüksek tüketim cihazlar kapalı
+          - Batarya şarj oluyor
+          
+          **Tam Güç Modu:**
+          - Tüm sistemler kullanılabilir
+          - 220V cihazlar dikkatli kullanılmalı
+
+
