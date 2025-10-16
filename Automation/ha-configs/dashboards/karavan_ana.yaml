@@ -209,17 +209,23 @@ views:
 
       # Güç Tüketim Uyarısı
       - type: markdown
-        content: |
-          ### ⚠️ Güç Tüketim Bilgisi
+        content: >
+          ### Güç Tüketim Bilgisi
+          
           
           **Yüksek Güç Tüketimi:**
-          - 🔥 İndüksiyon Ocak: **1800W**
-          - 🧼 Bulaşık Makinesi: **1200-1800W**
+          
+          - İndüksiyon Ocak: 1800W
+          
+          - Bulaşık Makinesi: 1200-1800W
+          
           
           **Düşük Güç Tüketimi:**
-          - 👕 Çamaşır Makinesi: **160W** (maks)
           
-          ⚡ **Not:** İndüksiyon ve Bulaşık makinesini aynı anda çalıştırmayın!
+          - Çamaşır Makinesi: 160W (maks)
+          
+          
+          **Not:** İndüksiyon ve Bulaşık makinesini aynı anda çalıştırmayın!
 
   # ==========================================
   # VIEW 4: SU SİSTEMİ
@@ -249,18 +255,25 @@ views:
 
       # Su Sistemi Bilgi
       - type: markdown
-        content: |
-          ### 💧 Su Sistemi Bilgisi
+        content: >
+          ### Su Sistemi Bilgisi
+          
           
           **Temiz Su:**
+          
           - Hidrofor pompası otomatik çalışır
+          
           - Basınç tankı ile sabit su basıncı
           
+          
           **Atık Su:**
+          
           - Macerator: WC atık suyu
+          
           - Gri su: Lavabo/duş atık suyu
           
-          💡 **İpucu:** Pompaları sadece gerektiğinde çalıştırın.
+          
+          **İpucu:** Pompaları sadece gerektiğinde çalıştırın.
 
   # ==========================================
   # VIEW 5: KONFOR & DİĞER
@@ -308,13 +321,16 @@ views:
 
       # Genel Bilgi
       - type: markdown
-        content: |
-          ### 🔋 Enerji Tasarrufu İpuçları
+        content: >
+          ### Enerji Tasarrufu İpuçları
           
-          1. 💡 Kullanmadığınız ışıkları kapatın
-          2. 🔌 USB kutularını gerektiğinde açın
-          3. ❄️ Buzdolabı kapısını uzun süre açık bırakmayın
-          4. 🔥 220V cihazları aynı anda çalıştırmayın
-          5. 💧 Su pompalarını gereksiz çalıştırmayın
-
-
+          
+          - Kullanmadığınız ışıkları kapatın
+          
+          - USB kutularını gerektiğinde açın
+          
+          - Buzdolabı kapısını uzun süre açık bırakmayın
+          
+          - 220V cihazları aynı anda çalıştırmayın
+          
+          - Su pompalarını gereksiz çalıştırmayın
