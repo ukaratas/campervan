@@ -146,10 +146,8 @@ views:
     badges: []
     cards:
       # Hızlı Test Butonları
-      - type: entities
-        title: 🧪 Hızlı Test
-        show_header_toggle: false
-        entities:
+      - type: vertical-stack
+        cards:
           - type: button
             name: Test - Tüm Işıkları Yanıp Söndür
             icon: mdi:lightbulb-multiple
@@ -158,6 +156,8 @@ views:
               service: light.toggle
               target:
                 entity_id: all
+            show_name: true
+            show_icon: true
           - type: button
             name: Test - Mutfak Işık Toggle
             icon: mdi:chef-hat
@@ -166,6 +166,8 @@ views:
               service: light.toggle
               target:
                 entity_id: light.mutfak_isik
+            show_name: true
+            show_icon: true
           - type: button
             name: Test - İndüksiyon AÇ
             icon: mdi:stove
@@ -174,6 +176,8 @@ views:
               service: switch.turn_on
               target:
                 entity_id: switch.induksiyon_ocak
+            show_name: true
+            show_icon: true
           - type: button
             name: Test - İndüksiyon KAPAT
             icon: mdi:stove-off
@@ -182,6 +186,8 @@ views:
               service: switch.turn_off
               target:
                 entity_id: switch.induksiyon_ocak
+            show_name: true
+            show_icon: true
 
       # Manuel Finder Kontrol
       - type: entities
@@ -192,12 +198,8 @@ views:
             label: "İndüksiyon Ocak"
           - entity: switch.induksiyon_ocak_set
             name: "SET (Aç)"
-            tap_action:
-              action: toggle
           - entity: switch.induksiyon_ocak_reset
             name: "RESET (Kapat)"
-            tap_action:
-              action: toggle
           - entity: binary_sensor.induksiyon_ocak_status
             name: "Status"
           - type: section
