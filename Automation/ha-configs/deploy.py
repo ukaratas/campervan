@@ -111,6 +111,7 @@ def deploy_files_via_scp(host="homeassistant.local", user="root"):
         ("automations/button_press_detection.yaml", "/config/automations/button_press_detection.yaml"),
         ("automations/button_actions.yaml", "/config/automations/button_actions.yaml"),
         ("modbus_combined.yaml", "/config/modbus_combined.yaml"),
+        ("template_switches_220v.yaml", "/config/template_switches_220v.yaml"),
     ]
     
     success_count = 0
@@ -167,7 +168,12 @@ def show_manual_instructions():
     print("   • /config/configuration.yaml'da şu satırları ekle:")
     print("     modbus: !include modbus_combined.yaml")
     
-    print("\n4️⃣ RELOAD ET:")
+    print("\n4️⃣ TEMPLATE SWITCHES (220V CİHAZLAR):")
+    print("   • /config/ klasörüne template_switches_220v.yaml'ı kopyala")
+    print("   • /config/configuration.yaml'da şu satırları ekle:")
+    print("     switch: !include template_switches_220v.yaml")
+    
+    print("\n5️⃣ RELOAD ET:")
     print("   • Developer Tools → YAML → All YAML Configuration → Reload")
     
     print("\n" + "="*60)

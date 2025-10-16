@@ -324,3 +324,99 @@
       write_type: coil
       scan_interval: 1
 
+# ===========================================
+# DEVICE 5: DI/DO Module 02 (220V Finder Röle Kontrol)
+# ===========================================
+- name: "Finder_220V_Kontrol"
+  type: tcp
+  host: ugurs-macbook-m4-pro.local
+  port: 5027
+  
+  # Digital Inputs (Finder Status Feedback)
+  binary_sensors:
+    - name: "İndüksiyon Ocak Status"
+      unique_id: finder_220v_di_0
+      slave: 1
+      address: 0
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Bulaşık Makinesi Status"
+      unique_id: finder_220v_di_1
+      slave: 1
+      address: 1
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Çamaşır Makinesi Status"
+      unique_id: finder_220v_di_2
+      slave: 1
+      address: 2
+      input_type: discrete_input
+      scan_interval: 1
+    
+    - name: "Finder-4 Status"
+      unique_id: finder_220v_di_3
+      slave: 1
+      address: 3
+      input_type: discrete_input
+      scan_interval: 1
+  
+  # Digital Outputs (Finder SET/RESET)
+  switches:
+    - name: "İndüksiyon Ocak SET"
+      unique_id: finder_220v_do_0
+      slave: 1
+      address: 0
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "İndüksiyon Ocak RESET"
+      unique_id: finder_220v_do_1
+      slave: 1
+      address: 1
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Bulaşık Makinesi SET"
+      unique_id: finder_220v_do_2
+      slave: 1
+      address: 2
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Bulaşık Makinesi RESET"
+      unique_id: finder_220v_do_3
+      slave: 1
+      address: 3
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Çamaşır Makinesi SET"
+      unique_id: finder_220v_do_4
+      slave: 1
+      address: 4
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Çamaşır Makinesi RESET"
+      unique_id: finder_220v_do_5
+      slave: 1
+      address: 5
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Finder-4 SET"
+      unique_id: finder_220v_do_6
+      slave: 1
+      address: 6
+      write_type: coil
+      scan_interval: 1
+    
+    - name: "Finder-4 RESET"
+      unique_id: finder_220v_do_7
+      slave: 1
+      address: 7
+      write_type: coil
+      scan_interval: 1
+

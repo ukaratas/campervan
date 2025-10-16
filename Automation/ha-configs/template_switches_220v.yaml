@@ -1,0 +1,101 @@
+# ==========================================
+# Template Switches - 220V Finder Röle Kontrol
+# ==========================================
+# Bu dosyayı configuration.yaml'a dahil et:
+# switch: !include template_switches_220v.yaml
+#
+# Bu template'ler Finder rölelerini kullanıcı dostu hale getirir:
+# - Tek bir switch ile AÇ/KAPA kontrolü
+# - Status feedback'den gerçek durumu okuma
+# - İkonlar duruma göre değişir
+
+- platform: template
+  switches:
+    induksiyon_ocak:
+      friendly_name: "İndüksiyon Ocak"
+      unique_id: induksiyon_ocak_220v
+      value_template: "{{ is_state('binary_sensor.induksiyon_ocak_status', 'on') }}"
+      turn_on:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.induksiyon_ocak_set
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.induksiyon_ocak_set
+      turn_off:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.induksiyon_ocak_reset
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.induksiyon_ocak_reset
+      icon_template: >-
+        {% if is_state('binary_sensor.induksiyon_ocak_status', 'on') %}
+          mdi:stove
+        {% else %}
+          mdi:stove-off
+        {% endif %}
+    
+    bulasik_makinesi:
+      friendly_name: "Bulaşık Makinesi"
+      unique_id: bulasik_makinesi_220v
+      value_template: "{{ is_state('binary_sensor.bulasik_makinesi_status', 'on') }}"
+      turn_on:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.bulasik_makinesi_set
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.bulasik_makinesi_set
+      turn_off:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.bulasik_makinesi_reset
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.bulasik_makinesi_reset
+      icon_template: >-
+        {% if is_state('binary_sensor.bulasik_makinesi_status', 'on') %}
+          mdi:dishwasher
+        {% else %}
+          mdi:dishwasher-off
+        {% endif %}
+    
+    camasir_makinesi:
+      friendly_name: "Çamaşır Makinesi"
+      unique_id: camasir_makinesi_220v
+      value_template: "{{ is_state('binary_sensor.camasir_makinesi_status', 'on') }}"
+      turn_on:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.camasir_makinesi_set
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.camasir_makinesi_set
+      turn_off:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.camasir_makinesi_reset
+        - delay:
+            milliseconds: 100
+        - service: switch.turn_off
+          target:
+            entity_id: switch.camasir_makinesi_reset
+      icon_template: >-
+        {% if is_state('binary_sensor.camasir_makinesi_status', 'on') %}
+          mdi:washing-machine
+        {% else %}
+          mdi:washing-machine-off
+        {% endif %}
+
+
