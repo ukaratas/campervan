@@ -151,7 +151,7 @@
       write_type: coil
       scan_interval: 1
     
-    - name: "Su Pompası"
+    - name: "Temiz Su Boşaltma Vanası"
       unique_id: dido_01_do_2
       slave: 1
       address: 2

@@ -36,7 +36,7 @@ DI_LABELS = [
 DO_LABELS = [
     "DO0: Alarm Siren",
     "DO1: Havalandırma Fan",
-    "DO2: Su Pompası",
+    "DO2: Temiz Su Boşaltma Vanası",
     "DO3: Isıtıcı",
     "DO4: Soğutucu",
     "DO5: Valf 1",
@@ -51,7 +51,7 @@ DI_LABELS_SHORT = [
 ]
 
 DO_LABELS_SHORT = [
-    "Alarm", "Fan", "Pompa", "Isıtıcı",
+    "Alarm", "Fan", "Temiz Su Vana", "Isıtıcı",
     "Soğutucu", "Valf 1", "Valf 2", "Uyarı"
 ]
 
@@ -62,7 +62,7 @@ DI_LABELS_WATCH = [
 ]
 
 DO_LABELS_WATCH = [
-    "DO0: Alarm", "DO1: Fan", "DO2: Pompa", "DO3: Isıtıcı",
+    "DO0: Alarm", "DO1: Fan", "DO2: Temiz Su Vana", "DO3: Isıtıcı",
     "DO4: Soğutucu", "DO5: Valf 1", "DO6: Valf 2", "DO7: Uyarı"
 ]
 
