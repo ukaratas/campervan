@@ -289,7 +289,7 @@
       write_type: coil
       scan_interval: 1
     
-    - name: "USB Kutusu Banyo"
+    - name: "USB Kutusu Salon"
       unique_id: relay_03_switch_3
       slave: 1
       address: 3

@@ -28,9 +28,9 @@ views:
             name: Sağ Okuma
           - entity: light.tente_isik
             name: Tente Işık
-          - entity: switch.banyo_aydinlatma
+          - entity: light.banyo_aydinlatma
             name: Banyo Aydınlatma
-          - entity: switch.banyo_ayna_aydinlatma
+          - entity: light.banyo_ayna_aydinlatma
             name: Banyo Ayna
       
       # 220V Cihazlar
@@ -64,16 +64,16 @@ views:
           - entity: switch.truma_combi_d4
             name: Truma Combi D4
             icon: mdi:radiator
-          - entity: switch.usb_kutusu_1_mutfak
+          - entity: switch.usb_kutusu_mutfak
             name: USB Kutusu - Mutfak
             icon: mdi:usb-port
-          - entity: switch.usb_kutusu_2_yatak
+          - entity: switch.usb_kutusu_yatak
             name: USB Kutusu - Yatak
             icon: mdi:usb-port
-          - entity: switch.usb_kutusu_3_banyo
-            name: USB Kutusu - Banyo
+          - entity: switch.usb_kutusu_banyo
+            name: USB Kutusu - Salon
             icon: mdi:usb-port
-          - entity: switch.usb_kutusu_4_popup
+          - entity: switch.usb_kutusu_popup
             name: USB Kutusu - Popup
             icon: mdi:usb-port
 
@@ -170,23 +170,23 @@ views:
       - type: entities
         title: 🚿 Relay-02 (Banyo & Su)
         entities:
-          - switch.banyo_aydinlatma
-          - switch.banyo_ayna_aydinlatma
+          - light.banyo_aydinlatma
+          - light.banyo_ayna_aydinlatma
           - switch.temiz_su_hidrofor
           - switch.macerator_pompa
           - switch.rezerv_5
           - switch.rezerv_6
           - switch.rezerv_7
-          - switch.rezerv_8_banyo_su
+          - switch.rezerv_8
       
       - type: entities
         title: ⚙️ Relay-03 (Yüksek Tüketim)
         entities:
           - switch.buzdolabi
-          - switch.usb_kutusu_1_mutfak
-          - switch.usb_kutusu_2_yatak
-          - switch.usb_kutusu_3_banyo
-          - switch.usb_kutusu_4_popup
+          - switch.usb_kutusu_mutfak
+          - switch.usb_kutusu_yatak
+          - switch.usb_kutusu_banyo
+          - switch.usb_kutusu_popup
           - switch.truma_combi_d4
           - switch.gri_su_pompasi
           - switch.rezerv_8_yuksek_tuketim
@@ -249,6 +249,6 @@ views:
           - switch.rezerv_5
           - switch.rezerv_6
           - switch.rezerv_7
-          - switch.rezerv_8_banyo_su
+          - switch.rezerv_8
           - switch.rezerv_8_yuksek_tuketim
 

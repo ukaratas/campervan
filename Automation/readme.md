@@ -91,7 +91,7 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 | USB Şarj Kutusu #1 (Mutfak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | USB Şarj Kutusu #2 (Yatak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | USB Şarj Kutusu #3 (Popup) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
-| USB Şarj Kutusu #4 (Banyo) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
+| USB Şarj Kutusu #4 (Salon) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | 24V genel prizler | Değişken | Değişken | High Latching Relay | Portatif cihazlar |
 
 #### Düşük Güç (<10W)
@@ -232,7 +232,7 @@ Karavanda toplam **3 adet Latching Relay** modülü kullanılacak:
 | R2 | USB Şarj Kutusu #1 | ~200W | 8A | Mutfak bölgesi |
 | R3 | USB Şarj Kutusu #2 | ~200W | 8A | Yatak bölgesi |
 | R4 | USB Şarj Kutusu #3 | ~200W | 8A | Popup bölgesi |
-| R5 | USB Şarj Kutusu #4 | ~200W | 8A | Banyo/genel alan |
+| R5 | USB Şarj Kutusu #4 | ~200W | 8A | Salon/genel alan |
 | R6 | 24V genel prizler | Değişken | Değişken | Portatif cihazlar |
 | R7 | 12V genel prizler | 24-60W | 2-5A | Konvertör üzerinden |
 | R8 | **BOŞ** | - | - | Genişleme |
@@ -387,7 +387,7 @@ Yüksek güç cihazları için.
 | R2 | USB Kutusu #1 | 24V DC, ~200W | 8A, mutfak |
 | R3 | USB Kutusu #2 | 24V DC, ~200W | 8A, yatak |
 | R4 | USB Kutusu #3 | 24V DC, ~200W | 8A, popup |
-| R5 | USB Kutusu #4 | 24V DC, ~200W | 8A, banyo |
+| R5 | USB Kutusu #4 | 24V DC, ~200W | 8A, salon |
 | R6 | 24V genel çıkışlar | 24V DC, değişken | Portatif cihazlar |
 | R7 | 12V genel çıkışlar | 12V DC, 24-60W | Konvertör üzerinden |
 | R8 | BOŞ | - | Genişleme |
