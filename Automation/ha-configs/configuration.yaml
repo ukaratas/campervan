@@ -33,4 +33,4 @@ lovelace:
       title: Karavan
       icon: mdi:van-passenger
       show_in_sidebar: true
-      filename: dashboards/karavan_v2.yaml
+      filename: dashboards/karavan_full.yaml
