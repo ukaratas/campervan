@@ -1,0 +1,36 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Helpers Include
+input_datetime: !include helpers/input_datetime.yaml
+input_number: !include helpers/input_number.yaml
+input_boolean: !include helpers/input_boolean.yaml
+
+# Modbus Include
+modbus: !include modbus_combined.yaml
+
+# Template Switches (220V Finder)
+switch: !include template_switches_220v.yaml
+
+# Automations Include
+automation: !include_dir_merge_list automations/
+
+# Lovelace Dashboards
+lovelace:
+  mode: storage
+  dashboards:
+    karavan-dashboard:
+      mode: yaml
+      title: Karavan
+      icon: mdi:van-passenger
+      show_in_sidebar: true
+      filename: dashboards/karavan_v2.yaml
