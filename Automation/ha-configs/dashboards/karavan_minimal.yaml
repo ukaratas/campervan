@@ -1,0 +1,18 @@
+# Minimal Karavan Dashboard - Test
+title: Karavan Test
+views:
+  - title: Test
+    path: test
+    icon: mdi:test-tube
+    cards:
+      # Sadece basit bir entity listesi
+      - type: entities
+        title: Işıklar
+        entities:
+          - entity: light.mutfak_isik
+            name: Mutfak
+          - entity: light.orta_alan_isik
+            name: Orta Alan
+          - entity: light.yatak_alani_isik
+            name: Yatak
+

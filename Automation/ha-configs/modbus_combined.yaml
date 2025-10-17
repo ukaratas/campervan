@@ -252,7 +252,7 @@
       write_type: coil
       scan_interval: 1
     
-    - name: "Rezerv 8"
+    - name: "Rezerv 8 (Banyo-Su)"
       unique_id: relay_02_switch_7
       slave: 1
       address: 7
@@ -317,7 +317,7 @@
       write_type: coil
       scan_interval: 1
     
-    - name: "Rezerv 8"
+    - name: "Rezerv 8 (Yüksek Tüketim)"
       unique_id: relay_03_switch_7
       slave: 1
       address: 7
