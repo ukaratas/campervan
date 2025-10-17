@@ -1,0 +1,393 @@
+title: Su Sistemi
+views:
+  # ==========================================
+  # TAB 1: GENEL BAKIŞ
+  # ==========================================
+  - title: Genel
+    path: genel
+    icon: mdi:water
+    cards:
+      # ==========================================
+      # TEMİZ SU BÖLÜMÜ
+      # ==========================================
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              ## 💧 Temiz Su Sistemi
+          
+          # Temiz Su Seviye Gauge (Büyük, Merkezi)
+          - type: gauge
+            entity: sensor.temiz_su_seviyesi
+            name: Temiz Su Seviyesi
+            min: 0
+            max: 100
+            needle: true
+            segments:
+              - from: 0
+                color: '#db4437'  # Kırmızı (Kritik)
+              - from: 20
+                color: '#ff9800'  # Turuncu (Düşük)
+              - from: 40
+                color: '#fdd835'  # Sarı (Orta)
+              - from: 60
+                color: '#7cb342'  # Açık Yeşil (İyi)
+              - from: 80
+                color: '#0f9d58'  # Yeşil (Dolu)
+          
+          # Temiz Su Kontrol Paneli
+          - type: entities
+            title: Temiz Su Kontrolleri
+            show_header_toggle: false
+            entities:
+              - entity: sensor.temiz_su_seviyesi
+                name: Seviye
+                icon: mdi:water-percent
+              - type: divider
+              - entity: switch.temiz_su_hidrofor
+                name: Hidrofor Pompası
+                icon: mdi:water-pump
+              - type: attribute
+                entity: switch.temiz_su_hidrofor
+                attribute: friendly_name
+                name: Pompa Durumu
+      
+      # ==========================================
+      # GRİ SU BÖLÜMÜ
+      # ==========================================
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              ## 🚿 Gri Su Sistemi
+          
+          # Gri Su Seviye Gauge (Büyük, Merkezi)
+          - type: gauge
+            entity: sensor.gri_su_seviyesi
+            name: Gri Su Seviyesi
+            min: 0
+            max: 100
+            needle: true
+            segments:
+              - from: 0
+                color: '#0f9d58'  # Yeşil (Boş - İyi)
+              - from: 40
+                color: '#7cb342'  # Açık Yeşil
+              - from: 60
+                color: '#fdd835'  # Sarı (Dolmaya başladı)
+              - from: 80
+                color: '#ff9800'  # Turuncu (Yüksek)
+              - from: 90
+                color: '#db4437'  # Kırmızı (Kritik - Taşma riski!)
+          
+          # Gri Su Kontrol Paneli
+          - type: entities
+            title: Gri Su Kontrolleri
+            show_header_toggle: false
+            entities:
+              - entity: sensor.gri_su_seviyesi
+                name: Seviye
+                icon: mdi:water-off-outline
+              - type: divider
+              - entity: switch.gri_su_pompasi
+                name: Gri Su Pompası
+                icon: mdi:water-pump
+              - entity: switch.macerator_pompa
+                name: Macerator Pompa
+                icon: mdi:water-pump-off
+      
+      # ==========================================
+      # HIZLI İŞLEMLER
+      # ==========================================
+      - type: entities
+        title: ⚡ Hızlı İşlemler
+        show_header_toggle: false
+        entities:
+          - type: button
+            name: Temiz Su Doldur
+            icon: mdi:water-plus
+            tap_action:
+              action: call-service
+              service: switch.turn_on
+              target:
+                entity_id: switch.temiz_su_hidrofor
+          
+          - type: button
+            name: Gri Su Boşalt
+            icon: mdi:water-minus
+            tap_action:
+              action: call-service
+              service: switch.turn_on
+              target:
+                entity_id: switch.gri_su_pompasi
+
+  # ==========================================
+  # TAB 2: DETAYLI GÖRÜNÜM
+  # ==========================================
+  - title: Detay
+    path: detay
+    icon: mdi:chart-line
+    cards:
+      # İki Gauge Yan Yana
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.temiz_su_seviyesi
+            name: Temiz Su
+            min: 0
+            max: 100
+            severity:
+              green: 60
+              yellow: 30
+              red: 0
+          
+          - type: gauge
+            entity: sensor.gri_su_seviyesi
+            name: Gri Su
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 60
+              red: 85
+      
+      # Su Seviyesi Geçmişi (24 saat)
+      - type: history-graph
+        title: Su Seviyeleri Geçmişi (24 Saat)
+        entities:
+          - entity: sensor.temiz_su_seviyesi
+            name: Temiz Su
+          - entity: sensor.gri_su_seviyesi
+            name: Gri Su
+        hours_to_show: 24
+        refresh_interval: 0
+      
+      # Tüm Su Sistemi Cihazları
+      - type: entities
+        title: 💧 Temiz Su Sistemi - Detaylı
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: Sensörler
+          - entity: sensor.temiz_su_seviyesi
+            name: Su Seviyesi
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          
+          - type: section
+            label: Pompalar & Valfler
+          - entity: switch.temiz_su_hidrofor
+            name: Hidrofor Pompası (72-96W)
+            icon: mdi:water-pump
+            secondary_info: last-changed
+          
+          - type: section
+            label: Bilgi
+          - type: attribute
+            entity: sensor.temiz_su_seviyesi
+            attribute: unit_of_measurement
+            name: Birim
+      
+      - type: entities
+        title: 🚿 Gri Su Sistemi - Detaylı
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: Sensörler
+          - entity: sensor.gri_su_seviyesi
+            name: Su Seviyesi
+            icon: mdi:water-off-outline
+            secondary_info: last-changed
+          
+          - type: section
+            label: Pompalar
+          - entity: switch.gri_su_pompasi
+            name: Gri Su Pompası (120W)
+            icon: mdi:water-pump
+            secondary_info: last-changed
+          
+          - entity: switch.macerator_pompa
+            name: Macerator Pompa (192W)
+            icon: mdi:water-pump-off
+            secondary_info: last-changed
+      
+      # Güç Tüketimi Bilgisi
+      - type: markdown
+        content: >
+          ### ⚡ Güç Tüketimi
+          
+          **Temiz Su:**
+          
+          - Hidrofor: 72-96W (3-4A @ 24V)
+          
+          
+          **Gri Su:**
+          
+          - Gri Su Pompası: 120W (5A @ 24V)
+          
+          - Macerator: 192W (8A @ 24V)
+
+  # ==========================================
+  # TAB 3: OTOMASYON & ALARMLAR
+  # ==========================================
+  - title: Otomasyon
+    path: otomasyon
+    icon: mdi:robot
+    cards:
+      # Alarm Durumları - Basit Versiyon
+      - type: entities
+        title: ⚠️ Alarm Durumları
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: sensor.temiz_su_seviyesi
+            name: Temiz Su Seviyesi
+            icon: mdi:water-alert
+          
+          - entity: sensor.gri_su_seviyesi
+            name: Gri Su Seviyesi
+            icon: mdi:water-alert-outline
+      
+      # Alarm Bilgisi (Markdown)
+      - type: markdown
+        content: >
+          ### ⚠️ Alarm Eşikleri
+          
+          
+          **Temiz Su:**
+          
+          - 🟢 Normal: %40+
+          
+          - 🟡 Düşük: %20-%40
+          
+          - 🔴 Kritik: %20 altı
+          
+          
+          **Gri Su:**
+          
+          - 🟢 Normal: %80 altı
+          
+          - 🟡 Yüksek: %80-%90
+          
+          - 🔴 Kritik: %90 üstü
+      
+      # Önerilen Otomasyonlar
+      - type: markdown
+        content: >
+          ### 🤖 Önerilen Otomasyonlar
+          
+          
+          **Temiz Su:**
+          
+          - %20 altı → Bildirim gönder
+          
+          - %10 altı → Kritik alarm
+          
+          
+          **Gri Su:**
+          
+          - %80 üstü → Boşaltma önerisi
+          
+          - %90 üstü → Otomatik boşaltma başlat
+          
+          - %95 üstü → Kritik alarm
+          
+          
+          Bu otomasyonlar `automations/` klasöründe oluşturulabilir.
+      
+      # Manuel Kontroller
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: 🎛️ Manuel Kontroller
+            show_header_toggle: false
+            entities:
+              - entity: switch.temiz_su_hidrofor
+                name: Hidrofor Pompası
+                icon: mdi:water-pump
+                tap_action:
+                  action: toggle
+              
+              - entity: switch.gri_su_pompasi
+                name: Gri Su Pompası
+                icon: mdi:water-pump
+                tap_action:
+                  action: toggle
+              
+              - entity: switch.macerator_pompa
+                name: Macerator Pompa
+                icon: mdi:water-pump-off
+                tap_action:
+                  action: toggle
+
+  # ==========================================
+  # TAB 4: İSTATİSTİKLER
+  # ==========================================
+  - title: İstatistikler
+    path: istatistikler
+    icon: mdi:chart-box
+    cards:
+      # Günlük Tüketim (Placeholder - gerçek data için automation gerekir)
+      - type: markdown
+        content: |
+          ## 📊 Su Kullanım İstatistikleri
+          
+          *Not: Detaylı istatistikler için ek sensörler ve automasyonlar gereklidir.*
+      
+      # Haftalık Geçmiş
+      - type: history-graph
+        title: Haftalık Su Seviyeleri
+        entities:
+          - entity: sensor.temiz_su_seviyesi
+            name: Temiz Su
+          - entity: sensor.gri_su_seviyesi
+            name: Gri Su
+        hours_to_show: 168  # 7 gün
+      
+      # Pompa Çalışma Süreleri (Placeholder)
+      - type: entities
+        title: ⏱️ Pompa Çalışma Süreleri
+        show_header_toggle: false
+        entities:
+          - entity: switch.temiz_su_hidrofor
+            name: Hidrofor
+            secondary_info: last-changed
+          - entity: switch.gri_su_pompasi
+            name: Gri Su
+            secondary_info: last-changed
+          - entity: switch.macerator_pompa
+            name: Macerator
+            secondary_info: last-changed
+      
+      # Sistem Bilgileri
+      - type: markdown
+        content: >
+          ### 📋 Sistem Bilgileri
+          
+          
+          **Temiz Su Tankı:**
+          
+          - Kapasıte: ~100L (değişebilir)
+          
+          - Şamandıra: 10-180Ω
+          
+          - Sensör: AI0 (Modbus Analog Input)
+          
+          
+          **Gri Su Tankı:**
+          
+          - Kapasıte: ~80L (değişebilir)
+          
+          - Şamandıra: 10-180Ω
+          
+          - Sensör: AI1 (Modbus Analog Input)
+          
+          
+          **Pompalar:**
+          
+          - Hidrofor: Relay-02 R2
+          
+          - Gri Su: Relay-03 R6
+          
+          - Macerator: Relay-02 R3
+
