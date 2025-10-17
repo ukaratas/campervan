@@ -252,3 +252,90 @@ views:
           - switch.rezerv_8
           - switch.rezerv_8_yuksek_tuketim
 
+
+  # ==========================================
+  # TAB 6: SENSÖRLER
+  # ==========================================
+  - title: Sensörler
+    path: sensorler
+    icon: mdi:gauge
+    cards:
+      # Su Seviyeleri
+      - type: entities
+        title: 💧 Su Seviyeleri
+        entities:
+          - entity: sensor.temiz_su_seviyesi
+            name: Temiz Su
+            icon: mdi:water
+          - entity: sensor.gri_su_seviyesi
+            name: Gri Su
+            icon: mdi:water-off
+      
+      # Sıcaklık Sensörleri
+      - type: entities
+        title: 🌡️ Sıcaklık Sensörleri
+        entities:
+          - entity: sensor.banyo_sicaklik
+            name: Banyo
+          - entity: sensor.salon_sicaklik
+            name: Salon
+          - entity: sensor.yatak_sicaklik
+            name: Yatak
+          - entity: sensor.elektronik_ortam_sicaklik
+            name: Elektronik Ortam
+          - entity: sensor.dis_sicaklik
+            name: Dış Ortam
+      
+      # Hava Kalitesi
+      - type: entities
+        title: 💨 Hava Kalitesi
+        entities:
+          - entity: sensor.salon_co2_seviyesi
+            name: Salon CO2
+            icon: mdi:molecule-co2
+      
+      # Gauge Cards - Su Seviyeleri
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.temiz_su_seviyesi
+            name: Temiz Su
+            min: 0
+            max: 100
+            severity:
+              green: 50
+              yellow: 30
+              red: 0
+          
+          - type: gauge
+            entity: sensor.gri_su_seviyesi
+            name: Gri Su
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 50
+              red: 80
+      
+      # Grafik - Sıcaklık Tarihi
+      - type: history-graph
+        title: Sıcaklık Geçmişi (24 saat)
+        entities:
+          - entity: sensor.salon_sicaklik
+          - entity: sensor.banyo_sicaklik
+          - entity: sensor.yatak_sicaklik
+          - entity: sensor.dis_sicaklik
+        hours_to_show: 24
+      
+      # Markdown - Bilgi
+      - type: markdown
+        content: >
+          **Sensör Bilgileri:**
+          
+          - Temiz Su: %20 altı = Uyarı
+          
+          - Gri Su: %80 üstü = Tahliye gerekli
+          
+          - CO2: 400-800 ppm ideal, >1000 ppm kötü
+          
+          - Elektronik: >40°C aşırı ısınma
