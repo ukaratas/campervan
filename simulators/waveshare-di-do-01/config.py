@@ -13,7 +13,7 @@ DEVICE_DESCRIPTION = "Dijital Giriş/Çıkış Kontrol"
 # Network Ayarları
 PORT = 5024
 SLAVE_ID = 1
-HOST = "localhost"  # Yerel testler için localhost, uzaktan erişim için IP veya hostname
+HOST = "0.0.0.0"  # Tüm interface'lerde dinle (Home Assistant erişimi için)
 
 # Modbus Ayarları
 DI_COUNT = 8  # Digital Input kanalları

@@ -11,7 +11,7 @@ DEVICE_DESCRIPTION = "Su Seviyeleri ve Sıcaklık Sensörleri"
 # Modbus Konfigürasyonu
 PORT = 5028  # Yeni port
 SLAVE_ID = 1
-HOST = "ugurs-macbook-m4-pro.local"
+HOST = "0.0.0.0"  # Tüm interface'lerde dinle (Home Assistant erişimi için)
 HA_HOSTNAME = "ugurs-macbook-m4-pro.local"
 
 # Analog Input Konfigürasyonu

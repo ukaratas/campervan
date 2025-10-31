@@ -11,7 +11,7 @@ DEVICE_DESCRIPTION = "Aydınlatma Kontrol"
 # Network Ayarları
 PORT = 5023
 SLAVE_ID = 1
-HOST = "localhost"  # Yerel testler için localhost, uzaktan erişim için IP veya hostname
+HOST = "0.0.0.0"  # Tüm interface'lerde dinle (Home Assistant erişimi için)
 
 # Modbus Ayarları
 RELAY_COUNT = 8
