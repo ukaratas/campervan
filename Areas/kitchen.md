@@ -13,13 +13,13 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 | Kategori | Ürün/Model | Özellikler |
 |----------|------------|------------|
 | **Ocak** | Omake Ankastre İndüksiyon | 1800W, ankastre, 220V besleme |
-| **Mikrodalga** | Profilo FRIAT9AN | 800W, 20L, 220V besleme |
 | **Buzdolabı** | EvaCool Eva Berlin 90Lt | 24V DC, 418x485x975mm, çift yönlü kapı |
 | **Evye** | Paslanmaz çelik, tek musluk | Sıcak/soğuk su, termostatik vana ile sabit ılık su |
 | **Bulaşık Makinesi** | Elektrolux ESF2400O | 220V, ankastre, tezgah altı |
-| **Prizler** | 2x220V, 2x24V, 1x12V | Tezgah üstü, portatif cihazlar için |
+| **Prizler** | 2x220V, 1x12V | Tezgah üstü, portatif cihazlar için |
+| **USB Şarj** | 2x otomotiv USB-C soket | 24V giriş, 100W PD, ayrı hat, tezgah üstü |
 | **Aydınlatma** | 24V spot ve LED şerit | Dolap altı ve oturma grubu dahil |
-| **Push Button** | 3 adet, Waveshare DI | Aydınlatma otomasyonu için |
+| **Push Button** | 2 adet, Waveshare DI | Aydınlatma otomasyonu için (spot, şerit) |
 | **Üst Dolap** | Modüler, tezgah üstü | Ek depolama |
 
 ## 🗺️ Yerleşim ve Fonksiyonel Detaylar
@@ -27,7 +27,6 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 - Buzdolabı tezgah altında, kapısı hem içe hem dışa açılır (kayarlı kapı yanında)
 - Evye tek musluklu, sıcak/soğuk su termostatik vanadan sabitlenmiş
 - Bulaşık makinesi tezgah altında, ankastre
-- Mikrodalga fırın üst dolap seviyesinde, kolay erişim
 - Üstte dokunmatik Raspberry Pi ekranı (Home Assistant arayüzü)
 - Üst dolap ve dolap altı spot aydınlatma
 
@@ -36,8 +35,8 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 - **Buzdolabı:** 24V enerji
 - **Evye:** Temiz su girişi, gri su çıkışı
 - **Ocak:** 220V enerji (1800W Omake ankastre indüksiyon ocak)
-- **Mikrodalga:** 220V enerji (800W Profilo FRIAT9AN)
-- **Prizler:** 2x220V, 2x24V, 1x12V (tezgah üstü)
+- **Prizler:** 2x220V, 1x12V (tezgah üstü)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
 - **Aydınlatma:** 24V spot ve LED şerit, push button ile otomasyon
 
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
@@ -47,8 +46,8 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 
 ### Tipik Otomasyon Senaryoları
 - **Aydınlatma:** Push button ile aç/kapat, zamanlayıcı veya ortam sensörüne göre otomatik
-- **Enerji Yönetimi:** İndüksiyon ocak (1800W), mikrodalga (800W), bulaşık makinesi ve buzdolabı enerji tüketimi izleme
-- **Yük Yönetimi:** İndüksiyon ocak + bulaşık makinesi eş zamanlı çalışması (3500W) inverter kapasitesini aşar - Home Assistant otomasyonu ile önlenir. Mikrodalga + ocak (2600W) veya mikrodalga + bulaşık makinesi (2500W) kombinasyonları güvenli.
+- **Enerji Yönetimi:** İndüksiyon ocak (1800W), bulaşık makinesi ve buzdolabı enerji tüketimi izleme
+- **Yük Yönetimi:** İndüksiyon ocak (1800W) + bulaşık makinesi (1700W) = 3500W > 3000W inverter → eş zamanlı çalışmayı Home Assistant otomasyonu ile önle. Shore modunda serbest.
 - **Su Yönetimi:** Evye ve bulaşık makinesi su kullanımı izleme
 
 ## 🔧 Kurulum ve Bakım

@@ -18,7 +18,7 @@ input_boolean: !include helpers/input_boolean.yaml
 # Modbus Include
 modbus: !include modbus_combined.yaml
 
-# Template Switches (220V Finder)
+# Template Switches (220V Finder Kontaktör)
 switch: !include template_switches_220v.yaml
 
 # Automations Include

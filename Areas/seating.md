@@ -32,36 +32,10 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 - **Bilgisayar Çalışması:** Ergonomik pozisyon
 - **Toplantı Modu:** Video konferans için optimal
 
-## 💻 Teknoloji Entegrasyonu
-
-### 32" Smart Monitor Sistemi
-- **Model:** Samsung 32" Smart Monitor M8 4K
-- **Boyut:** 32 inç (yaklaşık 81cm)
-- **Çözünürlük:** 4K UHD (çalışma ve medya için mükemmel)
-- **Bağlantı:** USB-C (bilgisayar + güç)
-- **Android TV:** Native Android TV desteği
-- **Çift İşlev:** Bilgisayar monitörü + Smart TV
-- **Taşınabilirlik:** VESA mount ile kolay hareket
-
-### Çift Montaj Sistemi
-- **Çalışma Alanı:** Masa arkasında monitor arm
-- **Yatak Alanı:** Yatak ayak ucunda monitor arm
-- **Geçiş:** Pratik VESA mount ile kolay taşıma
-- **VESA Quick Release:** Pratik sok-tak braket sistemi (hızlı geçiş)
-- **Kablo Yönetimi:** Her iki pozisyon için kablo çözümleri
-
-### Bağlantı ve Performans
-- **USB-C:** Tek kablo ile görüntü + güç (bilgisayar bağlantısı)
-- **Android TV:** Native Netflix, YouTube, Prime Video uygulamaları
-- **Bilgisayar Desteği:** Laptop/mini PC uyumlu
-- **Smart TV İşlevi:** Kablo/bilgisayar bağımsız streaming
-- **WiFi:** Dahili WiFi ile internet bağlantısı
-- **Ses:** Dahili hoparlörler veya harici ses sistemi
-
 ## ⚡ Elektrik Altyapısı
 
 ### Priz Konfigürasyonu
-- **2x 220V AC:** Bilgisayar, şarj cihazları, monitor
+- **2x 220V AC:** Bilgisayar, şarj cihazları
 - **2x 24V DC:** DC ekipmanlar, aydınlatma
 - **1x 12V DC:** Küçük aksesuarlar, araç aksesuarları
 
@@ -74,20 +48,18 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 ### Aydınlatma Sistemi
 - **Çalışma Aydınlatması:** Bilgisayar çalışması için optimize
 - **Ambient Aydınlatma:** Sosyal alan için yumuşak
-- **Okuma Lambası:** Kişisel kullanım
-- **Dimmer Kontrolü:** Aydınlatma seviyesi ayarı
+- **Dimmer Kontrolü:** Shelly Plus RGBW PM ile aydınlatma seviyesi ve renk ayarı (Wi-Fi üzerinden Home Assistant entegrasyonu)
 
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
 
 ### Akıllı Kontroller
 - **Aydınlatma:** Çalışma/sosyal mod otomatik geçiş
 - **Priz Kontrolü:** Uzaktan açma/kapama
-- **Monitor Kontrolü:** Samsung 32" Smart Monitor M8 4K otomatik açma/kapama
 - **Sıcaklık:** Çalışma alanı için optimal ısı
 
 ### Çalışma Modu Senaryoları
-- **Ofis Modu:** Aydınlatma + monitor + çalışma pozisyonu
-- **Dinlenme Modu:** Ambient aydınlatma + TV modu
+- **Ofis Modu:** Aydınlatma + çalışma pozisyonu
+- **Dinlenme Modu:** Ambient aydınlatma
 - **Toplantı Modu:** Optimal aydınlatma + ses ayarı
 - **Gece Modu:** Minimum aydınlatma + güç tasarrufu
 
@@ -113,10 +85,8 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 
 ### Teknoloji Kurulumu
 1. **Elektrik Altyapısı:** Priz ve kablo altyapısı
-2. **Monitor Arm:** Çift pozisyon montaj sistemi
-3. **VESA Quick Release:** Pratik sok-tak braket sistemi kurulumu
-4. **Kablo Yönetimi:** Düzenli kablo geçişleri
-5. **Aydınlatma:** Çalışma alanı aydınlatma sistemi
+2. **Kablo Yönetimi:** Düzenli kablo geçişleri
+3. **Aydınlatma:** Çalışma alanı aydınlatma sistemi
 
 ## 💡 Ek Özellikler ve Öneriler
 
@@ -142,28 +112,25 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 
 ### Ofis Modu
 - **Sürücü koltuğu döner** → masaya doğru
-- **Monitor çalışma pozisyonuna** taşınır (VESA quick release)
 - **Aydınlatma çalışma moduna** geçer
 - **Tam ofis ortamı** hazır
 
 ### Sosyal Mod
 - **Çift koltuk** normal pozisyonda
 - **Masa orta** konumda
-- **Monitor yatak ayak ucunda** (TV modu - VESA quick release)
 - **Ambient aydınlatma** aktif
 
 ### Seyahat Modu
 - **Emniyet kemerleri** bağlı
 - **Masa sabitlenmiş** pozisyonda
-- **Monitor güvenli** konumda
 - **Tüm gevşek eşyalar** sabitlenmiş
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **220V AC:** 2x priz (bilgisayar, monitor, şarj cihazları)
+- **220V AC:** 2x priz (bilgisayar, şarj cihazları)
 - **24V DC:** 2x priz (DC ekipmanlar, aydınlatma)
 - **12V DC:** 1x priz (küçük aksesuarlar)
-- **USB:** Type-C hub (monitor + cihaz bağlantıları)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
 - **Aydınlatma:** 24V LED çalışma aydınlatma sistemi
 - **Otomasyon:** Tüm sistemler Home Assistant entegrasyonlu
 - **Su:** Doğrudan su bağlantısı yok

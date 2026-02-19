@@ -10,7 +10,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 * **Otomatik Kontrol**: Şarj işleminin voltaj ve akım limitleriyle otomatik yönetilmesi
 
 ### İkincil Hedefler
-* **Marş Aküsüne Destek**: Araç aküsü belirli bir voltajın altına düştüğünde, yaşam aküsünden marş aküsüne destek şarjı (manuel veya otomatik)
+* **Marş Aküsü Float Şarj**: Kampta park halindeyken 220V (inverter/shore) üzerinden araç aküsünü float tutarak boşalmayı önlemek (araç ECU, merkezi kilit, alarm vb. parasitik yükler)
 * **Otomasyon ve İzleme**: Home Assistant ile şarj durumu, akım, voltaj ve hata izleme
 * **Güvenlik**: Aşırı akım, aşırı sıcaklık ve ters akım koruması
 
@@ -18,7 +18,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 
 - **DC-DC Şarj Cihazı**: Alternatör çıkışından alınan 12V DC, Victron Orion XS 12/24-50 gibi bir DC-DC şarj cihazı ile 24V LiFePO4 aküye uygun voltaj ve akımda şarj edilir.
 - **Akü Tipi Uyumluluğu**: Araç aküsü 12V kurşun, yaşam aküsü 24V LiFePO4’tur. DC-DC şarj cihazı bu dönüşümü güvenli şekilde sağlar.
-- **Bidirectional (Çift Yönlü) Şarj**: Victron Orion XS serisinde çift yönlü şarj özelliği yoktur. Marş aküsüne destek için ek bir cihaz veya manuel anahtarlama gerekir.
+- **Araç Aküsü Float Şarj**: Kampta park halindeyken Victron Blue Smart IP65 12/5A şarj aleti, 220V (inverter veya shore) üzerinden araç 12V aküsünü float modda tutar. Parasitik yüklerden (ECU, alarm, merkezi kilit) kaynaklanan boşalmayı önler.
 - **Otomasyon**: Home Assistant ile şarj işlemi, voltaj eşikleri ve hata durumları izlenebilir ve otomasyon tetiklenebilir.
 
 ## 🛠️ Ürün Listesi
@@ -28,7 +28,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 | **DC-DC Şarj Cihazı** | Victron Orion XS 12/24-50 | 12V→24V, 50A, LiFePO4 uyumlu, izlenebilir | 1200W | €350-450 |
 | **Kablo ve Sigorta** | H07RN-F, ANL Sigorta | 16mm², 60A | - | €50-80 |
 | **Akü İzleme** | Victron SmartShunt veya BMV | Bluetooth, Home Assistant uyumlu | - | €100-150 |
-| **Yedek Şarj Cihazı** | (Opsiyonel) | Yaşam aküsünden marş aküsüne DC-DC charger | 12V, 10-20A | €80-150 |
+| **Araç Aküsü Float Şarj** | Victron Blue Smart IP65 12/5A + DC connector | 220V AC giriş, 12V/5A çıkış, 7 adımlı akıllı şarj, Bluetooth, IP65, float modda <0.5W | 60W max | €80-120 |
 
 ## 🏠 Home Assistant Entegrasyonu
 
@@ -39,7 +39,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 
 ### Otomasyon Senaryoları
 - **Şarj Başlatma**: Araç çalıştığında (D+ sinyali veya voltaj eşiği ile) DC-DC şarjı başlat
-- **Marş Aküsü Desteği**: Araç aküsü 12.4V altına düştüğünde, yaşam aküsünden destek şarjı başlat (manuel veya otomatik anahtarlama ile)
+- **Araç Aküsü Float**: Park halinde Blue Smart IP65 ile araç aküsünü sürekli float modda tut. Akü voltajı düşerse Bluetooth üzerinden uyarı gönder
 - **Aşırı Sıcaklık/Akım**: Hata durumunda şarjı otomatik durdur ve uyarı gönder
 
 ### Entegrasyon Yöntemleri
@@ -68,7 +68,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 * **Güvenlik**: Aşırı akım, aşırı sıcaklık, ters akım korumaları
 
 ## 💡 Ek Görüşler ve Öneriler
-- **Bidirectional Şarj**: Victron Orion XS serisinde çift yönlü şarj yoktur. Marş aküsüne destek için ayrı bir DC-DC charger veya manuel anahtarlama gerekir.
+- **Araç Aküsü Float Şarj**: Victron Blue Smart IP65 12/5A, 220V üzerinden (inverter/shore) araç aküsünü kalıcı olarak float modda tutar. Kampta birkaç gün park halinde araç aküsü boşalmaz.
 - **D+ Sinyali**: Şarj işlemini sadece motor çalışırken başlatmak için D+ sinyali veya voltaj algılayıcı kullanılabilir.
 - **Akü Tipi Uyumu**: Lityum ve kurşun akü kombinasyonlarında şarj voltajı ve akım limitlerine dikkat edilmeli
 - **Kablo Kesiti**: Yüksek akım hatlarında uygun kalınlıkta kablo ve kaliteli bağlantı elemanları kullanılmalı
@@ -76,11 +76,12 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **Enerji:** 12V DC (araç aküsü/alternatör), 24V DC (yaşam aküsü), DC-DC şarj cihazı
+- **Enerji:** 12V DC (araç aküsü/alternatör), 24V DC (yaşam aküsü), DC-DC şarj cihazı, 220V AC (Blue Smart IP65 beslemesi)
 - **Kablo ve Sigorta:** Yüksek akım kablosu, ANL sigorta, bağlantı noktaları
+- **Araç Aküsü Float:** Victron Blue Smart IP65 12/5A + DC connector, 220V AC → 12V araç aküsü float şarj
 - **Otomasyon:** Şarj durumu, voltaj/akım sensörleri, Home Assistant entegrasyonu
 - **Su:** Doğrudan bağlantı yok
 
 ---
 
-*Bu sistem, karavan alternatöründen yaşam aküsüne güvenli, verimli ve otomasyona uygun şarj çözümü sunar.*
+*Bu sistem, seyir halinde alternatörden yaşam aküsüne şarj ve park halinde 220V üzerinden araç aküsünü float modda tutma olmak üzere çift yönlü enerji akışı sağlar.*

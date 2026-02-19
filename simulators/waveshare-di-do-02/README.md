@@ -1,6 +1,6 @@
 # Waveshare Modbus RTU IO 8CH - Instance 02
 
-220V Finder Röle Kontrol Sistemi simülatörü.
+220V Finder Kontaktör Kontrol Sistemi simülatörü.
 
 **Wiki:** https://www.waveshare.com/wiki/Modbus_RTU_IO_8CH
 
@@ -9,12 +9,18 @@
 Tüm ayarlar `config.py` dosyasında merkezi olarak yönetiliyor:
 - **Cihaz bilgileri:** Device name, type, description
 - **Network:** Port 5027, Slave ID, hostname
-- **DI/DO tanımları:** Finder SET/RESET/STATUS mapping
+- **DI/DO tanımları:** Kontaktör bobin kontrol + status mapping
 - **Home Assistant:** Hostname ayarları
 
-## 🔧 Finder Röle Mantığı
+## 🔧 Finder 22.22.9.024.4000 Kontaktör Mantığı
 
-Bu modül **Finder 20.22.0.024.0000** rölelerini kontrol eder.
+Bu modül **Finder 22.22.9.024.4000** modüler kontaktörleri kontrol eder.
+
+### Kontaktör Özellikleri:
+- **Tip:** Modüler kontaktör (DIN rail)
+- **Kontaklar:** 2 NO (normally open), 25A @ 250VAC
+- **Bobin:** 24V DC (~70mA, ~1.7W)
+- **Kontak Malzemesi:** AgSnO2
 
 ### Sistem Mimarisi:
 
@@ -22,33 +28,33 @@ Bu modül **Finder 20.22.0.024.0000** rölelerini kontrol eder.
 Home Assistant
     ↓
 DI/DO-02 Modülü
-    ↓ DO (SET/RESET) → Finder Röle Kontrol
-    ↑ DI (STATUS)    ← Finder Röle Durum Feedback
+    ↓ DO (HIGH=AÇ, LOW=KAPA) → Kontaktör Bobin Kontrol
+    ↑ DI (STATUS)              ← Kontaktör Yardımcı Kontak
     ↓
 220V Cihazlar
 ```
 
-### IO Mapping:
+### IO Mapping (1 DO + 1 DI per cihaz):
 
-**Finder-1 (İndüksiyon Ocak):**
-- DO0: SET (AÇ)
-- DO1: RESET (KAPA)
+**Finder-1 (İndüksiyon Ocak, 1800W):**
+- DO0: Bobin kontrol (HIGH=AÇ, LOW=KAPA)
 - DI0: STATUS (1=Açık, 0=Kapalı)
 
-**Finder-2 (Bulaşık Makinesi):**
-- DO2: SET (AÇ)
-- DO3: RESET (KAPA)
+**Finder-2 (Bulaşık Makinesi, 1700W):**
+- DO1: Bobin kontrol
 - DI1: STATUS
 
-**Finder-3 (Rezerv):**
-- DO4: SET (AÇ)
-- DO5: RESET (KAPA)
+**Finder-3 (Çamaşır Makinesi, 160W):**
+- DO2: Bobin kontrol
 - DI2: STATUS
 
-**Finder-4 (Rezerv):**
-- DO6: SET (AÇ)
-- DO7: RESET (KAPA)
+**Finder-4 (Mikrodalga Fırın, 800W):**
+- DO3: Bobin kontrol
 - DI3: STATUS
+
+**Finder-5 (Rezerv):**
+- DO4: Bobin kontrol
+- DI4: STATUS
 
 ## 🚀 Başlatma
 
@@ -60,20 +66,20 @@ python3 simulator.py
 
 ## 🎮 Kontrol
 
-### Digital Output (Finder Kontrol)
+### Digital Output (Kontaktör Aç/Kapa)
 
 ```bash
 # Finder-1 (İndüksiyon Ocak) AÇ
-python3 kontrol.py do-ac 0        # DO0: SET
+python3 kontrol.py do-ac 0        # DO0: HIGH → Kontaktör çeker
 
 # Finder-1 (İndüksiyon Ocak) KAPA
-python3 kontrol.py do-ac 1        # DO1: RESET
+python3 kontrol.py do-kapa 0      # DO0: LOW → Kontaktör düşer
 
 # Finder-2 (Bulaşık Makinesi) AÇ
-python3 kontrol.py do-ac 2        # DO2: SET
+python3 kontrol.py do-ac 1        # DO1: HIGH
 
-# Finder-2 (Bulaşık Makinesi) KAPA
-python3 kontrol.py do-ac 3        # DO3: RESET
+# Finder-4 (Mikrodalga) AÇ
+python3 kontrol.py do-ac 3        # DO3: HIGH
 ```
 
 ### Digital Input (Status Okuma)
@@ -121,41 +127,34 @@ Simülatör Mac'in IP adresi değişse bile çalışır:
 - **Kontrol 2:** Port açık mı? (`nc -zv ugurs-macbook-m4-pro.local 5027`)
 - **Kontrol 3:** Hostname çözülüyor mu? (`ping ugurs-macbook-m4-pro.local`)
 
-## 📋 Finder Mapping Tablosu
+## 📋 Kontaktör Mapping Tablosu
 
-| Finder | Cihaz | DO SET | DO RESET | DI STATUS |
-|--------|-------|--------|----------|-----------|
-| Finder-1 | İndüksiyon Ocak (1800W) | DO0 | DO1 | DI0 |
-| Finder-2 | Bulaşık Makinesi | DO2 | DO3 | DI1 |
-| Finder-3 | 220V Cihaz (Rezerv) | DO4 | DO5 | DI2 |
-| Finder-4 | 220V Cihaz (Rezerv) | DO6 | DO7 | DI3 |
+| Kontaktör | Cihaz | Güç | DO (Bobin) | DI (Status) |
+|-----------|-------|-----|------------|-------------|
+| Finder-1 | İndüksiyon Ocak | 1800W | DO0 | DI0 |
+| Finder-2 | Bulaşık Makinesi | 1700W | DO1 | DI1 |
+| Finder-3 | Çamaşır Makinesi | 160W | DO2 | DI2 |
+| Finder-4 | Mikrodalga Fırın | 800W | DO3 | DI3 |
+| Finder-5 | Rezerv | - | DO4 | DI4 |
 
-**DI4-7:** Rezerv (8 Finder için 2. modül gerekir)
+**DO5-7, DI5-7:** Rezerv (genişleme için)
 
 ## ⚡ Özellikler
 
-- **Gerçek Durum Feedback:** DI'lar Finder rölelerin gerçek durumunu gösterir
-- **2 Kanallı Kontrol:** SET (AÇ) ve RESET (KAPA) ayrı DO'lar
-- **Simülasyon Mantığı:** DO SET/RESET komutları otomatik olarak DI'ları günceller
-- **Home Assistant Entegrasyonu:** Binary sensor (status) + Switch (kontrol)
+- **Basit Kontrol:** DO HIGH = AÇ, DO LOW = KAPA (pulse timing gerekmez)
+- **Fail-safe:** Güç kesilirse tüm kontaktörler düşer → 220V cihazlar kapanır
+- **Gerçek Durum Feedback:** DI'lar kontaktör yardımcı kontağından durumu okur
+- **1:1 Mapping:** Her cihaz 1 DO + 1 DI kullanır
+- **Home Assistant Entegrasyonu:** Basit switch entity (SET/RESET karmaşıklığı yok)
 
 ## 🔧 Teknik Özellikler
 
-- **DI:** 8 kanal, 5-36V, Finder status feedback
-- **DO:** 8 kanal, 5-40V, open-drain, 500mA/kanal
+- **DI:** 8 kanal, 5-36V, kontaktör status feedback
+- **DO:** 8 kanal, 5-40V, open-drain, 500mA/kanal (kontaktör bobini ~70mA)
 - **Protokol:** Modbus TCP
 - **Port:** 5027
 - **Slave ID:** 1
 
-## 💡 Finder Röle Avantajları
-
-✅ Home Assistant her zaman gerçek durumu bilir  
-✅ Fiziksel buton ile kontrol edilse bile HA senkronize kalır  
-✅ Güvenli: 2 kanallı kontrol (SET/RESET)  
-✅ Status feedback ile doğrulama  
-✅ 220V yüksek güç cihazları için ideal
-
 ---
 
-**Not:** Bu simülatör geliştirme ve test amaçlıdır. Gerçek kurulumda Waveshare fiziksel modülü ve Finder 20.22.0.024.0000 röleleri kullanılacaktır.
-
+**Not:** Bu simülatör geliştirme ve test amaçlıdır. Gerçek kurulumda Waveshare fiziksel modülü ve Finder 22.22.9.024.4000 kontaktörler kullanılacaktır.

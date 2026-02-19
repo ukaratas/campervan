@@ -65,9 +65,6 @@ SCA 214 popup roof içinde yer alan ikinci yatak alanı. Güneş paneli entegras
 
 ### Aydınlatma Sistemi
 - **Popup İç Aydınlatma:** 24V LED spot sistemi
-- **Okuma Lambası:** Popup yatak için özel
-- **Ambient Aydınlatma:** Yumuşak gece aydınlatması
-- **Acil Aydınlatma:** Güç kesintisinde otomatik
 
 ### Konfor Kontrolleri
 - **Havalandırma Fanı:** Popup roof havalandırma kontrolü
@@ -126,6 +123,7 @@ SCA 214 popup roof içinde yer alan ikinci yatak alanı. Güneş paneli entegras
 - **Güneş Paneli:** 400W esnek panel, 24V DC çıkış
 - **MPPT Bağlantısı:** EasySolar-II entegre MPPT girişi
 - **Aydınlatma:** 24V LED popup roof içi aydınlatma
+- **USB Şarj:** 1x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
 - **Kablo Güzergahı:** Tavan üstünden elektrik panosuna
 - **Havalandırma:** 24V fan sistemi (opsiyonel)
 - **Su:** Doğrudan bağlantı yok

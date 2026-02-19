@@ -12,28 +12,29 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Malzeme:** Yüksek kaliteli yatak minderi ve özel çarşaf seti
 - **Depolama:** Yatak altında teknik ekipmanlar (batarya, otomasyon)
 
-## ❄️ 24V Klima Sistemi
+## ❄️ 220V Klima Sistemi
 
 ### Klima Özellikleri
-- **Model:** Eva Cool Eva 24V 20T Premium Mini Klima
-- **Soğutma Gücü:** : 1950W
-- **Voltaj:** 24V DC (batarya sistemi ile uyumlu)
-- **Tüketim:** ~70A 24V (başlangıç), ~30-40A sürekli
-- **Boyut:** 725x700x286mm
-- **Ağırlık:** ~24kg
+- **Model:** Evacool Eva RV 2700 Premium Klima
+- **Soğutma Kapasitesi:** ~2700W
+- **Voltaj:** 220V AC
+- **Tüketim:** ~900-1100W (~4-5A @220V)
+- **Kontrol:** Finder 22.22.9.024.4000 kontaktör + Waveshare DI/DO ile Home Assistant üzerinden aç/kapa
+- **Ağırlık:** ~28-31kg
 
 ### Montaj Konumu
-- **Konum:** Ana yatak ustune konumlanacak sekilde, arac tavaninda, popup tavanin bittigi noktada konumlanacak.
+- **Konum:** Ana yatak üstüne konumlanacak şekilde, araç tavanında, popup tavanın bittiği noktada konumlanacak
 - **Tavan Montajı:** Araç tavanına güçlü montaj
 - **Havalandırma:** Ana yatak alanına doğrudan soğutma
 - **Erişim:** Bakım için kolay erişim imkanı
 
 ### Teknik Avantajlar
-- **24V DC:** Doğrudan batarya sistemi ile çalışır
+- **220V AC:** Shore power veya inverter (3000W) ile çalışır
 - **Sessiz Çalışma:** Inverter compressor teknolojisi
-- **Enerji Verimliliği:** Eco mod ile uzun çalışma süresi
-- **Otomatik Kontrol:** Termostat ile sıcaklık kontrolü
-- **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu
+- **Enerji Verimliliği:** Eco mod ile uzun çalışma süresi, ~1000W tüketim inverter kapasitesinin 1/3'ü
+- **Sıcak/Soğuk:** Hem soğutma hem ısıtma fonksiyonu
+- **Otomatik Kontrol:** Dijital kontrol paneli ile sıcaklık kontrolü
+- **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu (Finder kontaktör ile aç/kapa)
 
 ## 🌟 Heki Roof Window - Yıldız İzleme
 
@@ -72,51 +73,38 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Doğal Işık:** Yatak alanına ek doğal aydınlatma
 
 
-## 32" Smart Monitor Entegrasyonu - Yatak Ayak Ucu
-- **Monitor:** Samsung 32" Smart Monitor M8 4K (seating.md ile aynı monitor)
-- **İşlev:** TV modu (Netflix, YouTube, medya oynatma)
-- **Android TV:** Native Android TV desteği (kablo/bilgisayar bağımsız)
-- **Montaj:** Yatak ayak ucunda duvar/tavan montaj arm
-- **VESA Mount:** Kolay taşınabilir sistem (çalışma alanı ↔ yatak)
-- **VESA Quick Release:** Praktik sok-tak braket sistemi (hızlı geçiş)
-- **Görüş Açısı:** Yataktan optimal TV izleme pozisyonu (32" büyük ekran)
-- **Kontrol:** Uzaktan kumanda + Home Assistant
-
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
 
 ### Aydınlatma Sistemi
-- **Genel Yatak Aydınlatması:** Tavan LED'leri, dimmer ile ayarlanabilir
+- **Genel Yatak Aydınlatması:** Tavan LED'leri, Shelly Plus RGBW PM ile dimmer ve renk ayarlanabilir
 - **Okuma Lambası Sol (Mutfak Tarafı):** Yatak başı sol taraf, bağımsız kontrol
 - **Okuma Lambası Sağ (Banyo Tarafı):** Yatak başı sağ taraf, bağımsız kontrol
-- **Gece Modu:** Düşük seviye ambient aydınlatma
-- **Acil Aydınlatma:** Güç kesintisinde otomatik devreye giriş
+- **Gece Zemin Aydınlatması:** Karanlıkta adım görme, zemin seviyesinde düşük yoğunluklu LED
 
 ### Aydınlatma Kontrolleri
-- **Yatak Başı Sol:** Genel aydınlatma anahtarı + sol okuma lambası anahtarı
-- **Yatak Başı Sağ:** Genel aydınlatma anahtarı + sağ okuma lambası anahtarı
-- **Dimmer Kontrol:** Her iki tarafta da genel aydınlatma dimmer
+- **Yatak Başı Sol:** Genel aydınlatma push button + sol okuma lambası push button
+- **Yatak Başı Sağ:** Genel aydınlatma push button + sağ okuma lambası push button
+- **Dimmer Kontrol:** Her iki tarafta da Shelly Plus RGBW PM ile genel aydınlatma dimmer ve renk kontrolü
 - **Home Assistant:** Tüm aydınlatma otomatik kontrol
 
 ### Konfor Kontrolleri
-- **Klima Kontrolü:** 24V RTX 2000 otomatik sıcaklık yönetimi
+- **Klima Kontrolü:** Evacool Eva RV 2700 Premium, 220V AC, Finder kontaktör ile Home Assistant üzerinden aç/kapa
 - **Heki Havalandırma:** Heki açma/kapama durumu izleme
-- **Monitor Kontrolü:** Samsung 32" Smart Monitor M8 4K otomatik açma/kapama, ses seviyesi
 - **Perde Sistemi:** Otomatik veya manuel perde kontrolü
 - **Güvenlik:** Hareket sensörü ve gece güvenlik sistemi
 
 ### Otomasyon Senaryoları
-- **Uyku Modu:** Klima sessiz moda geçiş, ışıkları kapat, monitor kapat, güvenlik modunu etkinleştir
+- **Uyku Modu:** Klima sessiz moda, ışıkları kapat, güvenlik modunu etkinleştir
 - **Uyanma Modu:** Kademeli aydınlatma artışı, klima optimal sıcaklığa ayarla
 - **Okuma Modu:** Optimum aydınlatma seviyesi, klima sessiz mod
-- **TV İzleme Modu:** Ambient aydınlatma, monitor aç (TV modu), klima konfor seviyesi
-- **Yıldız İzleme Modu:** Tüm ışıkları kapat, monitor kapat, heki açık bırak
+- **Yıldız İzleme Modu:** Tüm ışıkları kapat, heki açık bırak
 - **Güvenlik Modu:** Hareket algılandığında otomatik aydınlatma
 
 
 ### Aydınlatma ve Priz Kurulumu
-1. **Yatak Başı Sol (Mutfak Tarafı):** 220V+24V priz, USB, anahtarlar, okuma lambası
-2. **Yatak Başı Sağ (Banyo Tarafı):** 220V+24V priz, USB, anahtarlar, okuma lambası
-3. **Yatak Ayak Ucu:** 220V+24V priz, monitor arm montajı
+1. **Yatak Başı Sol (Mutfak Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
+2. **Yatak Başı Sağ (Banyo Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
+3. **Yatak Ayak Ucu:** 220V+24V priz
 4. **Kablo Yönetimi:** Gizli kablo kanalları, düzenli bağlantılar
 
 ## 💡 Ek Özellikler ve Öneriler
@@ -143,29 +131,30 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **24V Klima:** RTX 2000 24V, ~30-40A sürekli tüketim
+- **220V Klima:** Evacool Eva RV 2700 Premium, 220V AC, ~900-1100W, Finder kontaktör ile kontrol
 - **Aydınlatma:** 24V LED spot ve şerit aydınlatma sistemi
 
 ### Yatak Başı Elektrik (Mutfak Tarafı - Sol)
-- **Prizler:** 1x 220V, 1x 24V, 2x USB
-- **Anahtarlar:** Genel yatak aydınlatması, sol okuma lambası, dimmer
+- **Prizler:** 1x 220V
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
+- **Push Buttonlar:** Genel yatak aydınlatması, sol okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sol taraf)
 
 ### Yatak Başı Elektrik (Banyo Tarafı - Sağ)
-- **Prizler:** 1x 220V, 1x 24V, 2x USB
-- **Anahtarlar:** Genel yatak aydınlatması, sağ okuma lambası, dimmer
+- **Prizler:** 1x 220V
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
+- **Push Buttonlar:** Genel yatak aydınlatması, sağ okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sağ taraf)
 
 ### Yatak Ayak Ucu Elektrik (Banyo Tarafı)
-- **Prizler:** 1x 220V (monitor), 1x 24V (aksesuarlar)
-- **Monitor Sistemi:** Samsung 32" Smart Monitor M8 4K, VESA mount, kablo yönetimi
+- **Prizler:** 1x 220V, 1x 24V (aksesuarlar)
 
 ### Otomasyon ve Kontrol
-- **Home Assistant:** Tüm aydınlatma, perde, fan, klima, monitor kontrolü
-- **Güvenlik:** Hareket sensörü, acil aydınlatma sistemi
+- **Home Assistant:** Tüm aydınlatma, perde, fan, klima (220V kontaktör) kontrolü
+- **Güvenlik:** Hareket sensörü, gece zemin aydınlatması
 - **Kablo Yönetimi:** Düzenli kablo kanalları ve gizleme
 - **Su:** Doğrudan su bağlantısı yok
 
 ---
 
-*Bu sistem, Flarespace modifikasyonu sayesinde dar karavan alanında King size yatak konforu sunar, 24V klima ile soğutma ve büyük heki ile yıldız izleme imkanı sağlar.* 
+*Bu sistem, Flarespace modifikasyonu sayesinde dar karavan alanında King size yatak konforu sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 

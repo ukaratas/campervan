@@ -62,10 +62,14 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 * **Özellikler:** 12-bit hassasiyet, voltaj/akım okuma
 * **Kullanım:** Su tank seviye sensörleri (temiz su, gri su)
 
-#### 6. RGB Dimmer Module
-* **Model:** RS-485 Modbus RTU 4-channel dimmer WBPRO-LEDDIM
-* **Özellikler:** 4 kanal PWM dimming, RGB kontrol
-* **Kullanım:** Ambiyans aydınlatma (tente, ortam)
+#### 6. RGB Dimmer — Shelly Plus RGBW PM (x2)
+* **Model:** Shelly Plus RGBW PM (SNDC-0D4P10WW) — 2 adet
+* **Özellikler:** 4 kanal PWM dimming (kanal başı 4A, toplam 10A), 12/24V DC, Wi-Fi + Bluetooth, güç ölçümü, scripting desteği
+* **Bağlantı:** Wi-Fi üzerinden Home Assistant entegrasyonu (Modbus gerektirmez)
+* **Kullanım:**
+  - **Shelly #1:** Tente ambiyans (RGBW LED şerit)
+  - **Shelly #2:** Ortam ambiyans (RGBW LED şerit)
+* **Detay:** https://www.shelly.com/products/shelly-plus-rgbw-pm
 
 ### Ethernet Üzerinden Bağlanan Cihazlar
 * **Victron EasySolar-II 3kVA MPPT 250/70 GX** — Inverter/şarj/MPPT kombine, VE.Bus/Modbus TCP
@@ -107,8 +111,8 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 | Tente altı aydınlatma | 10-15W | Low Latching Relay | Dış aydınlatma |
 | Banyo aydınlatma | 5-10W | Low Latching Relay | Genel banyo |
 | Banyo ayna aydınlatması | 5-10W | Low Latching Relay | Ayna LED |
-| Tente ambiyans (RGB) | 10-20W | 4C Dimmer | RGB LED şerit |
-| Ortam ambiyans (RGB) | 10-20W | 4C Dimmer | RGB LED şerit |
+| Tente ambiyans (RGBW) | 10-20W | Shelly Plus RGBW PM #1 | RGBW LED şerit, Wi-Fi kontrol |
+| Ortam ambiyans (RGBW) | 10-20W | Shelly Plus RGBW PM #2 | RGBW LED şerit, Wi-Fi kontrol |
 
 #### Sensörler ve Valfler
 | Cihaz | Güç | Akım | Kontrol | Notlar |
@@ -134,9 +138,9 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 #### Yüksek Güç (>1000W)
 | Cihaz | Güç | Kontrol | Notlar |
 |-------|-----|---------|--------|
-| Omake ankastre indüksiyon ocak | 1800W | EasySolar-II / HA | Yük yönetimi gerekli |
-| Electrolux bulaşık makinesi (ESF2400O) | 1500W (ısıtıcı) + 200W (pompa) | EasySolar-II / HA | Yük yönetimi gerekli |
-| Profilo FRIAT9AN mikrodalga fırın | 800W | EasySolar-II / HA | 20L kapasite |
+| Omake ankastre indüksiyon ocak | 1800W | Finder 22.22 kontaktör + DI/DO-02 | Yük yönetimi gerekli |
+| Electrolux bulaşık makinesi (ESF2400O) | 1500W (ısıtıcı) + 200W (pompa) | Finder 22.22 kontaktör + DI/DO-02 | Yük yönetimi gerekli |
+| Profilo FRIAT9AN mikrodalga fırın | 800W | Finder 22.22 kontaktör + DI/DO-02 | 20L kapasite |
 
 #### Orta Güç (100-1000W)
 | Cihaz | Güç | Kontrol | Notlar |
@@ -158,6 +162,7 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 | Modbus röle modülleri | 1-2W/adet | 4 adet modül |
 | DI/DO modülleri | 2-5W | Push button + DO |
 | Analog modüller | 2-5W | Tank sensörleri |
+| Shelly Plus RGBW PM (x2) | <1.2W/adet | RGB ambiyans, Wi-Fi |
 
 ### Şarj ve Enerji Yönetimi
 | Cihaz | Kapasite | Notlar |
@@ -266,54 +271,60 @@ Karavanda toplam **3 adet Latching Relay** modülü kullanılacak:
 
 ---
 
-### ⚡ 220V Cihazlar - Finder Röle Sistemi
-**Model:** Finder 20.22.0.024.0000  
-**Kontrol:** Waveshare DI/DO modülü üzerinden
+### ⚡ 220V Cihazlar - Finder Kontaktör Sistemi
+**Model:** Finder 22.22.9.024.4000 (Modüler Kontaktör)  
+**Kontrol:** Waveshare DI/DO modülü üzerinden (her cihaz için 1 DO + 1 DI)
 
 #### 📐 Sistem Mimarisi:
 
 ```
 Home Assistant
     ↓
-Waveshare DI/DO Modülü
-    ↓ DO (Digital Output) → Finder Röle AÇ
-    ↓ DO (Digital Output) → Finder Röle KAPA
-    ↑ DI (Digital Input)  ← Finder Röle STATUS
+Waveshare DI/DO Modülü (DI/DO-02)
+    ↓ DO (Digital Output) → Finder Kontaktör Bobin (DO HIGH = AÇ, DO LOW = KAPA)
+    ↑ DI (Digital Input)  ← Finder Kontaktör Status (Yardımcı kontak)
     ↓
-Finder 20.22.0.024.0000 Röle
+Finder 22.22.9.024.4000 Kontaktör (25A, 2NO, 24V DC bobin)
     ↓
 220V Cihazlar
 ```
 
-#### 🔧 Finder Röle Özellikleri:
+#### 🔧 Finder 22.22.9.024.4000 Kontaktör Özellikleri:
 
-- **2 Kanal Kontrol:** SET (AÇ) + RESET (KAPA)
-- **Status Feedback:** DI ile gerçek durum okunur
+- **Tip:** Modüler kontaktör (DIN rail montaj)
+- **Kontaklar:** 2 NO (normally open), 25A @ 250VAC
+- **Bobin:** 24V DC (~70mA, ~1.7W)
+- **Kontak Malzemesi:** AgSnO2 (endüktif yüklere dayanıklı)
+- **Kontrol:** DO HIGH = kontaktör çeker (cihaz açık), DO LOW = kontaktör düşer (cihaz kapalı)
+- **Fail-safe:** Güç kesilirse tüm kontaktörler düşer → 220V cihazlar otomatik kapanır
 - **Avantajlar:**
-  - ✅ Home Assistant her zaman cihaz durumunu bilir
-  - ✅ Fiziksel buton ile manuel kontrol edilse bile HA senkronize kalır
-  - ✅ Gerçek durum feedback'i (relay kapalıysa HA da kapalı gösterir)
-  - ✅ Güvenli: Çift kanallı kontrol, yanlış açılma/kapanma riski yok
+  - ✅ Basit kontrol: DO HIGH = AÇ, DO LOW = KAPA (pulse timing gerekmez)
+  - ✅ Her cihaz için 1 DO yeterli (impulse relay'deki SET+RESET yerine)
+  - ✅ Fail-safe: Güç kesintisinde tüm 220V cihazlar güvenli şekilde kapanır
+  - ✅ DI ile gerçek durum feedback'i (yardımcı kontak üzerinden)
+  - ✅ 2 NO kontak ile hem L hem N hattı kesilebilir (tam izolasyon)
+  - ✅ 25A kapasite tüm cihazlar için fazlasıyla yeterli
 
-#### 🔌 Waveshare DI/DO Kullanımı:
+#### 🔌 Waveshare DI/DO-02 Kullanımı:
 
-**Digital Output (DO):**
-- DO1 → Finder SET (AÇ komutu)
-- DO2 → Finder RESET (KAPA komutu)
+**Digital Output (DO) — Her cihaz 1 DO kanalı:**
+- DO HIGH = Kontaktör bobini enerjili → Cihaz AÇ
+- DO LOW = Kontaktör bobini enerjisiz → Cihaz KAPA
 
-**Digital Input (DI):**
-- DI1 → Finder STATUS (Röle durumu: 1=Açık, 0=Kapalı)
+**Digital Input (DI) — Her cihaz 1 DI kanalı:**
+- DI = Kontaktör yardımcı kontak durumu (1=Açık, 0=Kapalı)
 
 #### 📋 Bağlanacak 220V Cihazlar:
 
-**ÖNEMLİ:** Tüm 220V yüksek güç cihazları bu röle sistemi üzerinden kontrol edilecek:
+**ÖNEMLİ:** Tüm 220V cihazlar bu kontaktör sistemi üzerinden kontrol edilecek:
 
-| # | Cihaz | Model | Güç | Finder | Notlar |
-|---|-------|-------|-----|--------|--------|
-| 1 | **İndüksiyon Ocak** | Omake 1800W | 1800W | Finder-1 | Mutfak |
-| 2 | **Bulaşık Makinesi** | Electrolux | 1200-1800W | Finder-2 | Mutfak |
-| 3 | **Çamaşır Makinesi** | [FİX Mini](https://portofmarin.com/urun/waf-mini-camasir-makinesi-beyaz/) | 160W (maks) | Finder-3 | 3 KG, 50W yıkama + 160W santrifüj |
-| 4 | **Rezerv** | - | - | Finder-4 | Genişleme |
+| # | Cihaz | Model | Güç | Akım (220V) | Kontaktör | Notlar |
+|---|-------|-------|-----|-------------|-----------|--------|
+| 1 | **İndüksiyon Ocak** | Omake 1800W | 1800W | 8.2A | Finder-1 | Mutfak |
+| 2 | **Bulaşık Makinesi** | Electrolux ESF2400O | 1200-1800W | 7.7A | Finder-2 | Mutfak |
+| 3 | **Çamaşır Makinesi** | [FİX Mini](https://portofmarin.com/urun/waf-mini-camasir-makinesi-beyaz/) | 160W (maks) | 0.73A | Finder-3 | 3 KG, 50W yıkama + 160W santrifüj |
+| 4 | **Mikrodalga Fırın** | Profilo FRIAT9AN | 800W | 3.6A | Finder-4 | 20L kapasite |
+| 5 | **Rezerv** | - | - | - | Finder-5 | Genişleme |
 
 **Çamaşır Makinesi Teknik Özellikler:**
 - Model: FİX Mini Tekne/Karavan Çamaşır Makinesi
@@ -325,7 +336,7 @@ Finder 20.22.0.024.0000 Röle
 - Maksimum Devir: 600 RPM
 - **Avantaj:** Çok düşük güç tüketimi (160W), karavan için ideal
 
-**Not:** Latching relay kullanılmaz! Finder + DI/DO sistemi kullanılır. Bu sayede HA her zaman cihazların gerçek durumunu bilir.
+**Not:** Impulse/bistable röle kullanılmaz! Finder 22.22.9.024.4000 modüler kontaktör + DI/DO sistemi kullanılır. DO durumu = cihaz durumu, DI ile donanım seviyesinde doğrulama yapılır.
 
 ---
 
@@ -335,15 +346,17 @@ Finder 20.22.0.024.0000 Röle
 ✅ LOW Latching Relay #1 (8 kanal) → Aydınlatma (8/8 DOLU)
 ❌ LOW Latching Relay #2 (8 kanal) → Banyo + Su sistemi (4/8 kullanılıyor)
 ❌ HIGH Latching Relay #1 (8 kanal) → Yüksek güç cihazları (7/8 kullanılıyor)
-🎯 DI/DO Modülü (8 DO + 8 DI) → Push buttons + Valfler + Kontaktör + Finder kontrol
+🎯 DI/DO Modülü #1 (8 DO + 8 DI) → Push buttons + Valfler + Klima kontaktörü
+⚡ DI/DO Modülü #2 (8 DO + 8 DI) → Finder 22.22 kontaktör kontrol (220V cihazlar)
 🔥 Kontaktör (harici) → 24V Klima (30-40A)
-⚡ Finder Röle (DI/DO ile kontrol) → 220V cihazlar (İndüksiyon, Bulaşık makinesi)
+⚡ 5x Finder 22.22.9.024.4000 → 220V cihazlar (DO HIGH=AÇ, DO LOW=KAPA)
 
 TOPLAM: 
 - 3x Latching Relay (24V DC cihazlar)
-- 1x DI/DO Modülü (Push buttons + Finder + Kontaktör)
-- 1x Finder Röle (220V cihazlar)
+- 2x DI/DO Modülü (#1: Push buttons + valfler, #2: 220V kontaktör kontrol)
+- 5x Finder 22.22.9.024.4000 Kontaktör (220V cihazlar)
 - 1x Kontaktör (24V Klima)
+- 2x Shelly Plus RGBW PM (RGB ambiyans, Wi-Fi)
 ```
 
 ---
@@ -392,37 +405,47 @@ Yüksek güç cihazları için.
 | R7 | 12V genel çıkışlar | 12V DC, 24-60W | Konvertör üzerinden |
 | R8 | BOŞ | - | Genişleme |
 
-### Çıkışlar - 4C Dimmer Module (4 Kanal PWM)
-RGB LED şeritler ve dimmer kontrolü gereken aydınlatmalar.
+### Çıkışlar - Shelly Plus RGBW PM (2 Adet, Wi-Fi)
+RGBW LED şeritler ve dimmer kontrolü gereken aydınlatmalar. Her Shelly cihazı 4 kanal PWM çıkışına sahiptir (kanal başı 4A, toplam 10A). 24V DC ile beslenir, Wi-Fi üzerinden Home Assistant'a bağlanır (Modbus gerektirmez).
+
+**Shelly Plus RGBW PM #1 — Tente Ambiyans:**
 
 | Kanal | Bağlı Cihaz | Güç | Kontrol |
 |-------|-------------|-----|---------|
-| CH1 | Tente ambiyans (RGB LED) | 10-20W | RGB + dimming |
-| CH2 | Ortam ambiyans (RGB LED) | 10-20W | RGB + dimming |
-| CH3 | Rezerv | - | - |
-| CH4 | Rezerv | - | - |
+| R | Tente RGBW LED — Kırmızı | - | RGBW + dimming |
+| G | Tente RGBW LED — Yeşil | - | RGBW + dimming |
+| B | Tente RGBW LED — Mavi | - | RGBW + dimming |
+| W | Tente RGBW LED — Beyaz | - | RGBW + dimming |
+| **Toplam** | Tente ambiyans (RGBW LED şerit) | 10-20W | Wi-Fi, güç ölçümü |
 
-### Çıkışlar - DI/DO Module (8 DO Kanal, 500mA/kanal)
+**Shelly Plus RGBW PM #2 — Ortam Ambiyans:**
+
+| Kanal | Bağlı Cihaz | Güç | Kontrol |
+|-------|-------------|-----|---------|
+| R | Ortam RGBW LED — Kırmızı | - | RGBW + dimming |
+| G | Ortam RGBW LED — Yeşil | - | RGBW + dimming |
+| B | Ortam RGBW LED — Mavi | - | RGBW + dimming |
+| W | Ortam RGBW LED — Beyaz | - | RGBW + dimming |
+| **Toplam** | Ortam ambiyans (RGBW LED şerit) | 10-20W | Wi-Fi, güç ölçümü |
+
+**Not:** Shelly Plus RGBW PM cihazları RS485/Modbus kullanmaz. Wi-Fi üzerinden doğrudan Home Assistant'a entegre olur. Güç ölçümü özelliği ile enerji tüketimi izlenebilir. Scripting desteği ile lokal otomasyon senaryoları da oluşturulabilir.
+
+### Çıkışlar - DI/DO Module #1 (8 DO Kanal, 500mA/kanal)
 Düşük akım kontrol sinyalleri, valfler, kontaktör tetikleme için.
 
 | Kanal | Bağlı Cihaz | Güç | Akım | Notlar |
 |-------|-------------|-----|------|--------|
 | DO1 | Elektrikli vana (temiz su) | 2.4W | 0.1A | Kış donma koruması |
 | DO2 | Kontaktör tetikleme (24V klima) | <5W | <0.5A | 30-40A kontaktör bobini |
-| DO3 | **Finder Röle SET (AÇ)** | <5W | <0.5A | **220V cihazlar açma** |
-| DO4 | **Finder Röle RESET (KAPA)** | <5W | <0.5A | **220V cihazlar kapama** |
+| DO3 | BOŞ | - | - | Genişleme |
+| DO4 | BOŞ | - | - | Genişleme |
 | DO5 | BOŞ | - | - | Genişleme |
 | DO6 | BOŞ | - | - | Genişleme |
 | DO7 | BOŞ | - | - | Genişleme |
 | DO8 | BOŞ | - | - | Genişleme |
 
-**⚡ 220V Cihazlar (DO3+DO4 üzerinden):**
-- İndüksiyon Ocak (Omake 1800W)
-- Bulaşık Makinesi (Electrolux)
-- Diğer 220V yüksek güç cihazları
-
-### Girişler - DI/DO Module (8 DI Kanal)
-Push button girişleri ve status feedback için dijital input.
+### Girişler - DI/DO Module #1 (8 DI Kanal)
+Push button girişleri için dijital input.
 
 | Kanal | Kullanım | Short Press | Long Press | Double Press |
 |-------|----------|-------------|------------|--------------|
@@ -433,12 +456,41 @@ Push button girişleri ve status feedback için dijital input.
 | DI5 | Otomatik basamak butonu | Basamak aç/kapa | - | - |
 | DI6 | Mutfak butonu | Mutfak lambası | Tezgâh lambası | - |
 | DI7 | Orta alan butonu | Orta alan aydınlatma | Ambiyans aydınlatma | Tüm aydınlatma kapat |
-| DI8 | **Finder Röle STATUS** | **220V cihaz durumu (1=Açık, 0=Kapalı)** | - | - |
+| DI8 | Banyo butonu | Banyo aydınlatma | Banyo ayna lambası | - |
 
-**⚡ Finder Status (DI8):**
-- Gerçek zamanlı durum feedback'i
-- Home Assistant her zaman 220V cihazların durumunu bilir
-- Manuel kontrol edilse bile HA senkronize kalır
+### Çıkışlar - DI/DO Module #2 (8 DO Kanal, 500mA/kanal)
+220V Finder kontaktör bobin kontrolü. Her DO kanalı bir kontaktörün 24V DC bobinini sürer (~70mA).
+
+| Kanal | Bağlı Cihaz | Güç | Akım | Notlar |
+|-------|-------------|-----|------|--------|
+| DO0 | **Finder-1 Kontaktör (İndüksiyon Ocak)** | ~1.7W | ~70mA | DO HIGH=AÇ, LOW=KAPA |
+| DO1 | **Finder-2 Kontaktör (Bulaşık Makinesi)** | ~1.7W | ~70mA | DO HIGH=AÇ, LOW=KAPA |
+| DO2 | **Finder-3 Kontaktör (Çamaşır Makinesi)** | ~1.7W | ~70mA | DO HIGH=AÇ, LOW=KAPA |
+| DO3 | **Finder-4 Kontaktör (Mikrodalga Fırın)** | ~1.7W | ~70mA | DO HIGH=AÇ, LOW=KAPA |
+| DO4 | **Finder-5 Kontaktör (Rezerv)** | ~1.7W | ~70mA | Genişleme |
+| DO5 | BOŞ | - | - | Genişleme |
+| DO6 | BOŞ | - | - | Genişleme |
+| DO7 | BOŞ | - | - | Genişleme |
+
+### Girişler - DI/DO Module #2 (8 DI Kanal)
+Finder kontaktör status feedback. Her DI kanalı bir kontaktörün yardımcı kontağından durum okur.
+
+| Kanal | Kullanım | Açıklama |
+|-------|----------|----------|
+| DI0 | **Finder-1 Status (İndüksiyon Ocak)** | 1=Açık, 0=Kapalı |
+| DI1 | **Finder-2 Status (Bulaşık Makinesi)** | 1=Açık, 0=Kapalı |
+| DI2 | **Finder-3 Status (Çamaşır Makinesi)** | 1=Açık, 0=Kapalı |
+| DI3 | **Finder-4 Status (Mikrodalga Fırın)** | 1=Açık, 0=Kapalı |
+| DI4 | **Finder-5 Status (Rezerv)** | 1=Açık, 0=Kapalı |
+| DI5 | BOŞ | Genişleme |
+| DI6 | BOŞ | Genişleme |
+| DI7 | BOŞ | Genişleme |
+
+**⚡ Kontaktör Kontrol Mantığı:**
+- DO HIGH → Kontaktör bobini enerjilenir → Kontak kapanır → 220V cihaz açılır
+- DO LOW → Kontaktör bobini enerjisizleşir → Kontak açılır → 220V cihaz kapanır
+- DI → Yardımcı kontak ile gerçek durum doğrulanır
+- **Fail-safe:** Güç kesilirse tüm kontaktörler düşer, 220V cihazlar güvenli şekilde kapanır
 
 **Push Button Zamanlama:**
 * **Short press:** <400ms
@@ -684,7 +736,7 @@ Analog sensör okumaları (12-bit hassasiyet).
 ### Genişleme İmkanları
 * **Analog modül:** 6 boş kanal (sıcaklık, basınç, akım sensörleri için)
 * **DI/DO modül:** Ek push button veya sensör girişleri
-* **4C Dimmer:** 2 boş kanal (ek RGB aydınlatma)
+* **Shelly Plus RGBW PM:** Her cihaz RGBW veya 4x bağımsız beyaz kanal olarak kullanılabilir; ek Shelly cihazı ile kolayca genişletilebilir
 * **Röle modülleri:** Paralel bağlantı ile ek röle kanalları
 
 ### Yedekleme ve Güvenlik
