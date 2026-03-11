@@ -17,6 +17,7 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 | **Master Röle** | CHINT NJMC1 32A 4P (Camper ON/OFF) | 220V + 24V + 12V rail anahtarlama |
 | **Bireysel Röleler** | CHINT NJMC1 16A 2P bistable × 19 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
 | **Analog Giriş** | Industrial 8-Ch Analog Acquisition Module | 12-bit hassasiyet, voltaj/akım okuma, RS485 |
+| **Kontrol Paneli** | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | Giriş kapısı üstü, HDMI + USB direkt bağlantı, HA dashboard |
 
 ## 🏠 Home Assistant Entegrasyonu
 

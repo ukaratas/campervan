@@ -18,7 +18,8 @@ Karavan inşaatına başlamadan önce temin edilmesi gereken otomasyon ve kontro
 | 6 | Araç Aküsü Float Şarj | Victron Blue Smart IP65s 12/5A + DC connector | 1 | ~5.000 ₺ | ~5.000 ₺ | Tekmobil / MarinReyon |
 | 7 | Sigortalı Dağıtım Kutusu | 12'li İkaz Işıklı Negatif Barali Sigorta Kutusu | 1 | ~€24 (~1.225 ₺) | ~1.225 ₺ | karavanicin.com |
 | 8 | RS485 Kablo + Konnektör | CAT5e/shielded + terminal bloklar | 1 set | ~500 ₺ | ~500 ₺ | Genel |
-| | | | | **T0 TOPLAM** | **~20.964 ₺** | |
+| 9 | Kontrol Paneli Ekranı | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch (Capacitive, Toughened Glass) | 1 | ~$103 (~4.538 ₺) | ~4.538 ₺ | [Waveshare](https://www.waveshare.com/11.9inch-HDMI-LCD.htm) |
+| | | | | **T0 TOPLAM** | **~25.502 ₺** | |
 
 > **Kur:** 1 USD = 44,07 ₺, 1 EUR = 51,21 ₺ (17 Şubat 2026)
 >
@@ -32,6 +33,7 @@ Karavan inşaatına başlamadan önce temin edilmesi gereken otomasyon ve kontro
 - **#6**: Araç aküsü float şarj (EasySolar-II AC OUT 2'den beslenir)
 - **#7**: DC taraf sigorta dağıtımı
 - **#8**: Modüller arası RS485 haberleşme kablolaması
+- **#9**: Kontrol paneli ekranı — giriş kapısı üstü, HDMI + USB direkt IPCBOX-CM5-A bağlantısı, HA dashboard
 
 ---
 

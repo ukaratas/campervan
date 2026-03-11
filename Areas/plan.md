@@ -12,7 +12,7 @@ Her adımda:
 ## Adım 0 — Otomasyon Geliştirme (Evde)
 > **DIY** | Bağımlılık: Yok
 
-Otomasyon yazılımının ve donanımlarının tedariki. Home Assistant kurulumu, Modbus entegrasyonu, DI/DO testleri. Araç olmadan evde masaüstünde yapılır.
+Otomasyon yazılımının ve donanımlarının tedariki. Home Assistant kurulumu, Modbus entegrasyonu, DI/DO testleri, kontrol paneli ekranı entegrasyonu. Araç olmadan evde masaüstünde yapılır.
 
 | Ürün | Model | Adet | Fiyat | Önden |
 |------|-------|------|-------|-------|
@@ -24,7 +24,8 @@ Otomasyon yazılımının ve donanımlarının tedariki. Home Assistant kurulumu
 | Araç Aküsü Float Şarj | Victron Blue Smart IP65s 12/5A | 1 | ~5.000 ₺ | E |
 | Sigortalı Dağıtım Kutusu | 12'li sigorta kutusu | 1 | ~1.225 ₺ | E |
 | RS485 Kablo + Konnektör | CAT5e shielded + terminal bloklar | 1 set | ~500 ₺ | E |
-| | | | **~20.964 ₺** | |
+| Kontrol Paneli Ekranı | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | 1 | ~4.538 ₺ | E |
+| | | | **~25.502 ₺** | |
 
 > Detay: [budget-management.md](budget-management.md) T0 bölümü
 
@@ -257,7 +258,6 @@ Tüm beyaz eşya, mutfak cihazları, banyo donanımları ve güneş paneli monta
 | Banyo Batarya | Sıcak/soğuk spiralli | 1 | TBD | E |
 | Duş Batarya | Termostatik duş bataryası | 1 | TBD | E |
 | Güneş Paneli | 400W esnek/rigid, sabit çatıya montaj | 1 | TBD | E |
-| HA Ekranı | HDMI dokunmatik ekran | 1 | TBD | E |
 
 ---
 

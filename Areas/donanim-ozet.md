@@ -96,6 +96,7 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 | 4 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 19 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
 | 5 | Shelly Plus RGBW PM | Shelly (Wi-Fi, HA entegre, 24V) | 2 | Dimmer + renk LED aydınlatma (Camper ON ile aktif) |
 | 6 | Analog Modülü | Waveshare 8-ch Analog (RS485) | 1 | Su tankı seviye, sıcaklık sensörleri |
+| 7 | Kontrol Paneli | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | 1 | Giriş kapısı üstü, HDMI+USB direkt HA bağlantısı |
 
 ---
 
