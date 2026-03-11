@@ -30,7 +30,7 @@ Karavan inşaatına başlamadan önce temin edilmesi gereken otomasyon ve kontro
 - **#1-3**: Waveshare IPCBOX-CM5-A endüstriyel kutu + RPi CM5 8GB + 512GB NVMe SSD = Home Assistant ana bilgisayar (4x RS485, CAN, 2DI/2DO, 7-36V DC direkt besleme, dual ETH)
 - **#4**: 3x 8DI/8DO → bistable röle toggle (DO) + durum feedback (DI)
 - **#5**: Su tankı seviye sensörleri, sıcaklık okumaları
-- **#6**: Araç aküsü float şarj (EasySolar-II AC OUT 2'den beslenir)
+- **#6**: Victron Blue Smart IP65 12/5A (220V AC → 12V DC) — geliştirme sürecinde otomasyon cihazlarının güç kaynağı olarak kullanılır, karavanda EasySolar-II AC OUT 2'den araç aküsü float şarj
 - **#7**: DC taraf sigorta dağıtımı
 - **#8**: Modüller arası RS485 haberleşme kablolaması
 - **#9**: Kontrol paneli ekranı — giriş kapısı üstü, HDMI + USB direkt IPCBOX-CM5-A bağlantısı, HA dashboard

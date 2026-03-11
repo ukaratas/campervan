@@ -21,7 +21,7 @@ Otomasyon yazılımının ve donanımlarının tedariki. Home Assistant kurulumu
 | NVMe SSD | 512GB M.2 2242 NVMe | 1 | ~1.000 ₺ | E |
 | DI/DO Modülü | Waveshare 8DI/8DO (RS485) | 3 | ~4.284 ₺ | E |
 | Analog Giriş Modülü | Waveshare 8-Ch Analog (RS485) | 1 | ~1.555 ₺ | E |
-| Araç Aküsü Float Şarj | Victron Blue Smart IP65s 12/5A | 1 | ~5.000 ₺ | E |
+| Araç Aküsü Float Şarj / Dev PSU | Victron Blue Smart IP65 12/5A (220V AC→12V DC, 60W) | 1 | ~5.000 ₺ | E |
 | Sigortalı Dağıtım Kutusu | 12'li sigorta kutusu | 1 | ~1.225 ₺ | E |
 | RS485 Kablo + Konnektör | CAT5e shielded + terminal bloklar | 1 set | ~500 ₺ | E |
 | Kontrol Paneli Ekranı | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | 1 | ~4.538 ₺ | E |
