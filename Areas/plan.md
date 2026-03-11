@@ -80,10 +80,31 @@ Ses ve ısı yalıtımının tamamlanması. Kabuk hazırlıktan sonra, kablo dö
 
 ---
 
-## Adım 5 — Elektrik 1. Fix: Kablo Döşeme
+## Adım 5 — Elektrik Altyapı: Ekipman Montajı + Kablo Döşeme
 > **DIY** | Bağımlılık: Adım 4
 
-Tüm elektrik kablolarının duvar/tavan/zemin altına döşenmesi. **İç kaplama yapılmadan ÖNCE tamamlanmalı.**
+Ana yatak altı teknik alana batarya, inverter (EasySolar-II), otomasyon panosu, Orion XS ve dağıtım donanımlarının fiziksel montajı. Ardından tüm elektrik kablolarının duvar/tavan/zemin altına döşenmesi. Güneş paneli kabloları (Adım 3) bu aşamada EasySolar-II MPPT'ye bağlanır. **İç kaplama yapılmadan ÖNCE tamamlanmalı.**
+
+**Merkezi Ekipman (Teknik Alan)**
+
+| Ürün | Model | Adet | Fiyat | Önden |
+|------|-------|------|-------|-------|
+| LiFePO4 Hücre | EVE 3.2V 280Ah prizmatik | 8 | TBD | E |
+| BMS | JBD/Overkill 8S 200A RS485/CAN | 1 | TBD | E |
+| İnverter/Şarj/MPPT | Victron EasySolar-II 3kVA MPPT 250/70 GX | 1 | TBD | E |
+| DC-DC Şarj | Victron Orion XS 1400 | 1 | TBD | E |
+| Master Bistable Röle | CHINT NJMC1 32A 4P | 1 | ~350 ₺ | E |
+| Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 20 | ~4.000 ₺ | E |
+| Blade Fuse Block | 8 pozisyonlu | 2 | ~500 ₺ | E |
+| 220V Sigorta Kutusu | Panasonic modüler sıva üstü | 1 | ~500 ₺ | E |
+| MCB Sigortalar | CHNT C16 otomatik | 8 | ~640 ₺ | E |
+| Kaçak Akım Rölesi | 30mA, 2P | 1 | TBD | E |
+| Ana Sigorta | MEGA/ANL 200A | 1 | TBD | E |
+| Ana Kontaktör | 24V DC, 200A | 1 | TBD | E |
+| Shore Power Girişi | Marin tip priz IP67, 16A | 1 | TBD | E |
+| Ana akım kablosu | 16mm² (batarya-inverter) | ~5m | TBD | E |
+
+**Kablolama**
 
 | Ürün | Model | Adet | Fiyat | Önden |
 |------|-------|------|-------|-------|
@@ -95,7 +116,7 @@ Tüm elektrik kablolarının duvar/tavan/zemin altına döşenmesi. **İç kapla
 | RS485 Haberleşme kablosu | CAT5e shielded | ~30m | TBD | E |
 | Kablo bağı + klips | Montaj malzemesi | 1 set | TBD | E |
 
-> Not: Kablo güzergahları [donanim-ozet.md](donanim-ozet.md) elektrik noktaları tablosuna göre planlanır.
+> Not: Kablo güzergahları [donanim-ozet.md](donanim-ozet.md) elektrik noktaları tablosuna göre planlanır. Detay: [budget-management.md](budget-management.md) T2 bölümü.
 
 ---
 
@@ -160,29 +181,17 @@ Elektrik ve su 1. fix tamamlandıktan sonra duvar, tavan ve zemin kaplaması.
 
 ---
 
-## Adım 10 — Elektrik Pano ve Batarya Montajı
-> **DIY** | Bağımlılık: Adım 9
+## Adım 10 — Elektrik Bağlantı Tamamlama
+> **DIY** | Bağımlılık: Adım 5, Adım 9
 
-Ana yatak altı teknik alana batarya, inverter, dağıtım panosu ve otomasyon donanımlarının montajı.
+Adım 5'te yerleştirilen merkezi ekipman ve döşenen kabloların, iç kaplama (Adım 9) sonrası uç noktalarına sonlandırılması. Pano içi kablo bağlantıları, sigorta atamaları ve RS485 bus terminasyonlarının tamamlanması.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| LiFePO4 Hücre | EVE 3.2V 280Ah prizmatik | 8 | TBD | E |
-| BMS | JBD/Overkill 8S 200A RS485/CAN | 1 | TBD | E |
-| İnverter/Şarj/MPPT | Victron EasySolar-II 3kVA MPPT 250/70 GX | 1 | TBD | E |
-| DC-DC Şarj | Victron Orion XS 1400 | 1 | TBD | E |
-| Master Bistable Röle | CHINT NJMC1 32A 4P | 1 | ~350 ₺ | E |
-| Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 20 | ~4.000 ₺ | E |
-| Blade Fuse Block | 8 pozisyonlu | 2 | ~500 ₺ | E |
-| 220V Sigorta Kutusu | Panasonic modüler sıva üstü | 1 | ~500 ₺ | E |
-| MCB Sigortalar | CHNT C16 otomatik | 8 | ~640 ₺ | E |
-| Kaçak Akım Rölesi | 30mA, 2P | 1 | TBD | E |
-| Ana Sigorta | MEGA/ANL 200A | 1 | TBD | E |
-| Ana Kontaktör | 24V DC, 200A | 1 | TBD | E |
-| Shore Power Girişi | Marin tip priz IP67, 16A | 1 | TBD | E |
-| Ana akım kablosu | 16mm² (batarya-inverter) | ~5m | TBD | E |
-
-> Detay: [budget-management.md](budget-management.md) T2 bölümü, [donanim-ozet.md](donanim-ozet.md) otomasyon donanım özeti
+- [ ] Tüm kablo uçlarının panoya terminasyonu
+- [ ] Bistable röle bobinlerinin DI/DO'ya bağlantısı
+- [ ] RS485 bus sonlandırma dirençleri
+- [ ] Batarya hücre bağlantıları ve BMS konfigürasyonu
+- [ ] EasySolar-II AC/DC bağlantıları
+- [ ] Shore power hattı sonlandırma
 
 ---
 
@@ -291,12 +300,12 @@ Tüm sistemlerin entegre testi ve Home Assistant konfigürasyonunun finalize edi
 | 2 | Araç Alımı | DIY | - |
 | 3 | Kabuk Hazırlık (kesim, pencere, klima) | FİRMA | 2 |
 | 4 | Yalıtım (ses + ısı) | DIY | 3 |
-| 5 | Elektrik 1. Fix (kablo döşeme) | DIY | 4 |
+| 5 | Elektrik Altyapı (ekipman montajı + kablo döşeme) | DIY | 4 |
 | 6 | Su 1. Fix (boru döşeme) | DIY | 4 |
 | 7 | Banyo Altyapı (fiber zemin) | DIY | 5, 6 |
 | 8 | Su Depoları (şasi altı) | FİRMA | 2 |
 | 9 | İç Kaplama (duvar, tavan, zemin) | DIY/FİRMA | 5, 6, 7 |
-| 10 | Elektrik Pano + Batarya | DIY | 9 |
+| 10 | Elektrik Bağlantı Tamamlama | DIY | 5, 9 |
 | 11 | Su Tesisatı Tamamlama | DIY | 8, 9 |
 | 12 | Mobilya | FİRMA | 9 |
 | 13 | Elektrik 2. Fix (priz, ışık, buton) | DIY | 10, 12 |
