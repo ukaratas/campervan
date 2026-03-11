@@ -1,14 +1,13 @@
 # Ana Yatak Alanı (Main Bed)
 
-Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan kaplar. 150x200cm King size yatak, Flarespace modifikasyonu ile genişletilmiş iç alanda enine yerleştirilmiştir.
+Karavanın (Iveco Daily 18m³) arka bölümünde yer alan ana yatak alanı. Araç boyunca 200cm alan kaplar.
 
 ## 🛏️ Ana Yatak Özellikleri
 
 - **Konum:** Araç arkasında, giriş kapısı yanında
-- **Alan:** 150cm (araç uzunluğu boyunca)
-- **Yatak Boyutu:** 150x200cm 
-- **Yerleştirme:** Enine (150cm araç uzunluğu boyunca, 200cm araç genişliği boyunca)
-- **Flarespace:** İç genişlik 200-205cm'ye çıkarıldı (200cm yatak enine sığar)
+- **Alan:** 200cm (araç uzunluğu boyunca)
+- **Yatak Boyutu:** 200cm x araç iç genişliği
+- **Yerleştirme:** Boyuna (200cm araç uzunluğu boyunca)
 - **Malzeme:** Yüksek kaliteli yatak minderi ve özel çarşaf seti
 - **Depolama:** Yatak altında teknik ekipmanlar (batarya, otomasyon)
 
@@ -19,11 +18,11 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Soğutma Kapasitesi:** ~2700W
 - **Voltaj:** 220V AC
 - **Tüketim:** ~900-1100W (~4-5A @220V)
-- **Kontrol:** Finder 22.22.9.024.4000 kontaktör + Waveshare DI/DO ile Home Assistant üzerinden aç/kapa
+- **Kontrol:** NJMC1 16A 2P bistable röle + Waveshare DI/DO ile Home Assistant üzerinden aç/kapa
 - **Ağırlık:** ~28-31kg
 
 ### Montaj Konumu
-- **Konum:** Ana yatak üstüne konumlanacak şekilde, araç tavanında, popup tavanın bittiği noktada konumlanacak
+- **Konum:** Ana yatak üstüne konumlanacak şekilde, araç tavanında
 - **Tavan Montajı:** Araç tavanına güçlü montaj
 - **Havalandırma:** Ana yatak alanına doğrudan soğutma
 - **Erişim:** Bakım için kolay erişim imkanı
@@ -34,7 +33,7 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Enerji Verimliliği:** Eco mod ile uzun çalışma süresi, ~1000W tüketim inverter kapasitesinin 1/3'ü
 - **Sıcak/Soğuk:** Hem soğutma hem ısıtma fonksiyonu
 - **Otomatik Kontrol:** Dijital kontrol paneli ile sıcaklık kontrolü
-- **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu (Finder kontaktör ile aç/kapa)
+- **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu (NJMC1 16A 2P bistable röle ile aç/kapa)
 
 ## 🌟 Heki Roof Window - Yıldız İzleme
 
@@ -50,17 +49,6 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Panoramik Görüş:** Gece gökyüzü manzarası
 - **Taze Hava:** Doğal havalandırma
 - **Acil Çıkış:** Acil durum çıkış imkanı (büyük boyut)
-
-## 🔧 Flarespace Modifikasyonu
-
-- **Ürün:** [Flarespace Fiat Ducato Van Flares](https://flarespace.com/products/fiat-ducato-campervan-windows)
-- **Malzeme:** Dayanıklı fiberglass yapı
-- **Montaj:** Araç yan duvarlarına sabit montaj
-- **Genişlik Artışı:** 185cm'den 200-205cm'ye (15-20cm kazanç)
-- **Sabit Çıkıntılar:** Hem baş hem ayak tarafında
-- **Pencere Durumu:** Her iki extension da pencere olmayan model
-- **Yük Kapasitesi:** Güvenli ve test edilmiş yapı
-- **Estetik:** Araç tasarımı ile uyumlu görünüm
 
 ## Arka Kapı Üstü Pencereler
 - **Konum:** Her iki arka kapının üstüne simetrik yerleştirme
@@ -88,7 +76,7 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Home Assistant:** Tüm aydınlatma otomatik kontrol
 
 ### Konfor Kontrolleri
-- **Klima Kontrolü:** Evacool Eva RV 2700 Premium, 220V AC, Finder kontaktör ile Home Assistant üzerinden aç/kapa
+- **Klima Kontrolü:** Evacool Eva RV 2700 Premium, 220V AC, NJMC1 16A 2P bistable röle ile Home Assistant üzerinden aç/kapa
 - **Heki Havalandırma:** Heki açma/kapama durumu izleme
 - **Perde Sistemi:** Otomatik veya manuel perde kontrolü
 - **Güvenlik:** Hareket sensörü ve gece güvenlik sistemi
@@ -104,7 +92,7 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 ### Aydınlatma ve Priz Kurulumu
 1. **Yatak Başı Sol (Mutfak Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
 2. **Yatak Başı Sağ (Banyo Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
-3. **Yatak Ayak Ucu:** 220V+24V priz
+3. **Yatak Ayak Ucu:** 220V priz
 4. **Kablo Yönetimi:** Gizli kablo kanalları, düzenli bağlantılar
 
 ## 💡 Ek Özellikler ve Öneriler
@@ -116,7 +104,7 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 - **Teknik Ekipman Alanı:** Batarya, BMS, otomasyon paneli
 
 ### Konfor Aksesuarları
-- **Özel Çarşaf:** 150x200cm enine yerleştirme için
+- **Özel Çarşaf:** Yatak boyutuna uygun
 - **Yorgan Sistemi:** Kompakt ve sıcak tutan
 - **Yastık Seçenekleri:** Farklı sertlikte yastıklar
 - **Perde Sistemi:** Mahremiyet ve ışık kontrolü
@@ -131,30 +119,30 @@ Karavanın arka bölümünde yer alan ana yatak alanı. Araç boyunca 150cm alan
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **220V Klima:** Evacool Eva RV 2700 Premium, 220V AC, ~900-1100W, Finder kontaktör ile kontrol
+- **220V Klima:** Evacool Eva RV 2700 Premium, 220V AC, ~900-1100W, NJMC1 16A 2P bistable röle ile kontrol
 - **Aydınlatma:** 24V LED spot ve şerit aydınlatma sistemi
 
 ### Yatak Başı Elektrik (Mutfak Tarafı - Sol)
 - **Prizler:** 1x 220V
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
 - **Push Buttonlar:** Genel yatak aydınlatması, sol okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sol taraf)
 
 ### Yatak Başı Elektrik (Banyo Tarafı - Sağ)
 - **Prizler:** 1x 220V
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
 - **Push Buttonlar:** Genel yatak aydınlatması, sağ okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sağ taraf)
 
 ### Yatak Ayak Ucu Elektrik (Banyo Tarafı)
-- **Prizler:** 1x 220V, 1x 24V (aksesuarlar)
+- **Prizler:** 1x 220V
 
 ### Otomasyon ve Kontrol
-- **Home Assistant:** Tüm aydınlatma, perde, fan, klima (220V kontaktör) kontrolü
+- **Home Assistant:** Tüm aydınlatma, perde, fan, klima (NJMC1 bistable röle) kontrolü
 - **Güvenlik:** Hareket sensörü, gece zemin aydınlatması
 - **Kablo Yönetimi:** Düzenli kablo kanalları ve gizleme
 - **Su:** Doğrudan su bağlantısı yok
 
 ---
 
-*Bu sistem, Flarespace modifikasyonu sayesinde dar karavan alanında King size yatak konforu sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 
+*Bu sistem, Iveco Daily 18m³ geniş iç alanında konforlu yatak deneyimi sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 

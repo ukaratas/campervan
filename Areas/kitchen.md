@@ -17,9 +17,9 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 | **Evye** | Paslanmaz çelik, tek musluk | Sıcak/soğuk su, termostatik vana ile sabit ılık su |
 | **Bulaşık Makinesi** | Elektrolux ESF2400O | 220V, ankastre, tezgah altı |
 | **Prizler** | 2x220V, 1x12V | Tezgah üstü, portatif cihazlar için |
-| **USB Şarj** | 2x otomotiv USB-C soket | 24V giriş, 100W PD, ayrı hat, tezgah üstü |
-| **Aydınlatma** | 24V spot ve LED şerit | Dolap altı ve oturma grubu dahil |
-| **Push Button** | 2 adet, Waveshare DI | Aydınlatma otomasyonu için (spot, şerit) |
+| **USB Şarj** | 2x otomotiv USB-C soket | 24V giriş, 100W PD, tezgah üstü |
+| **Aydınlatma** | 24V mutfak aydınlatma | NJMC1 16A 2P bistable röle ile kontrol |
+| **Push Button** | 1 adet | Waveshare DI → HA → DO → bistable röle, mutfak aydınlatma |
 | **Üst Dolap** | Modüler, tezgah üstü | Ek depolama |
 
 ## 🗺️ Yerleşim ve Fonksiyonel Detaylar
@@ -27,7 +27,7 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 - Buzdolabı tezgah altında, kapısı hem içe hem dışa açılır (kayarlı kapı yanında)
 - Evye tek musluklu, sıcak/soğuk su termostatik vanadan sabitlenmiş
 - Bulaşık makinesi tezgah altında, ankastre
-- Üstte dokunmatik Raspberry Pi ekranı (Home Assistant arayüzü)
+- Üstte HDMI dokunmatik ekran (Home Assistant arayüzü, IPCBOX-CM5 HDMI çıkışı)
 - Üst dolap ve dolap altı spot aydınlatma
 
 ## ⚡ Elektrik ve Su Tesisatı
@@ -36,11 +36,12 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 - **Evye:** Temiz su girişi, gri su çıkışı
 - **Ocak:** 220V enerji (1800W Omake ankastre indüksiyon ocak)
 - **Prizler:** 2x220V, 1x12V (tezgah üstü)
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
-- **Aydınlatma:** 24V spot ve LED şerit, push button ile otomasyon
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
+- **Aydınlatma:** 24V mutfak aydınlatma, push button + NJMC1 bistable röle ile kontrol
 
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
-- Push button’lar Waveshare DI ile Home Assistant’a bağlı, aydınlatma röleleri üzerinden kontrol
+- Push button Waveshare DI'ya bağlı, HA algılar ve DO üzerinden bistable röleyi toggle eder
+- Röle durum feedback: Waveshare DI ile Home Assistant entegrasyonu
 - Tüm prizler, aydınlatma ve cihazlar merkezi olarak izlenebilir ve otomasyona açıktır
 - Enerji tüketimi ve su kullanımı izlenebilir
 
@@ -53,7 +54,7 @@ Karavanın konforlu, fonksiyonel ve otomasyona uygun mutfak alanı. Tüm cihazla
 ## 🔧 Kurulum ve Bakım
 1. **Modül Montajı:** Tezgah, dolap ve cihazların sabitlenmesi
 2. **Elektrik ve Su Bağlantıları:** Priz, cihaz ve aydınlatma hatlarının çekilmesi
-3. **Otomasyon Entegrasyonu:** Push button ve rölelerin Home Assistant’a tanımlanması
+3. **Otomasyon Entegrasyonu:** Bistable röle ve DI/DO modüllerinin Home Assistant’a tanımlanması
 4. **Test ve Devreye Alma:** Tüm fonksiyonların kontrolü
 
 ### Bakım Planı

@@ -46,9 +46,8 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 - **Kablo Yönetimi:** Düzenli kablo geçişleri
 
 ### Aydınlatma Sistemi
-- **Çalışma Aydınlatması:** Bilgisayar çalışması için optimize
-- **Ambient Aydınlatma:** Sosyal alan için yumuşak
-- **Dimmer Kontrolü:** Shelly Plus RGBW PM ile aydınlatma seviyesi ve renk ayarı (Wi-Fi üzerinden Home Assistant entegrasyonu)
+- **Çalışma Aydınlatması:** NJMC1 16A 2P bistable röle ile kontrol, push button ile tetikleme
+- **Ambient Aydınlatma:** Shelly Plus RGBW PM ile dimmer ve renk ayarı (Wi-Fi üzerinden Home Assistant entegrasyonu)
 
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
 
@@ -130,7 +129,7 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 - **220V AC:** 2x priz (bilgisayar, şarj cihazları)
 - **24V DC:** 2x priz (DC ekipmanlar, aydınlatma)
 - **12V DC:** 1x priz (küçük aksesuarlar)
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD, ayrı hat)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
 - **Aydınlatma:** 24V LED çalışma aydınlatma sistemi
 - **Otomasyon:** Tüm sistemler Home Assistant entegrasyonlu
 - **Su:** Doğrudan su bağlantısı yok

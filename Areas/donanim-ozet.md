@@ -1,6 +1,6 @@
 # Donanım Özet
 
-Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydınlatma) ve otomasyon donanımlarının (DI/DO, MOSFET, kontaktör, röle) konsolide özeti.
+Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydınlatma) ve otomasyon donanımlarının (DI/DO, NJMC1 bistable röle, Shelly) konsolide özeti.
 
 ---
 
@@ -10,26 +10,26 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 |-------|-------|------|-----|-----|------------------|--------------|
 | **Ana Yatak** | Yatak Başı Sol (Mutfak tarafı) | 1 | - | - | 2 | 3 |
 | **Ana Yatak** | Yatak Başı Sağ (Banyo tarafı) | 1 | - | - | 2 | 3 |
-| **Ana Yatak** | Yatak Ayak Ucu (Banyo tarafı) | 1 | 1 | - | - | 2 |
+| **Ana Yatak** | Yatak Ayak Ucu (Banyo tarafı) | 1 | - | - | - | 1 |
 | **Mutfak** | Tezgah üstü | 2 | - | 1 | 2 | 5 |
 | **Oturma/Çalışma** | Masa / duvar | 2 | 2 | 1 | 2 | 7 |
-| **Popup Yatak** | Popup roof içi | - | - | - | 1 | 1 |
+| **Pull-down Yatak** | Şoför kabini üstü | - | - | - | 1 | 1 |
 | **Banyo** | Lavabo / duvar | 1 | - | - | - | 1 |
-| **TOPLAM** | | **8** | **3** | **2** | **9** | **22** |
+| **TOPLAM** | | **8** | **2** | **2** | **9** | **21** |
 
 ---
 
-## 🔘 Push Buttonlar ve Anahtarlar
+## 🔘 Push Buttonlar
 
 | Bölge | Konum | Tip | Adet | İşlev | Bağlantı |
 |-------|-------|-----|------|-------|----------|
-| **Mutfak** | Tezgah üstü / dolap | Push button | 2 | Aydınlatma (spot, şerit) | Waveshare DI |
-| **Oturma/Çalışma** | Masa / duvar | Push button | 1 | Çalışma aydınlatması | Waveshare DI |
-| **Ana Yatak** | Yatak Başı Sol | Push button | 2 | Genel yatak aydınlatması, sol okuma lambası | Waveshare DI |
-| **Ana Yatak** | Yatak Başı Sağ | Push button | 2 | Genel yatak aydınlatması, sağ okuma lambası | Waveshare DI |
-| **Popup Yatak** | Popup roof içi | Push button | 1 | İç spot aydınlatma | Waveshare DI |
-| **Banyo** | Lavabo / duvar | Push button | 1 | Genel spot aydınlatma | Waveshare DI |
-| **TOPLAM** | | | **9** | | |
+| **Mutfak** | Tezgah üstü / dolap | Push button | 1 | Mutfak aydınlatma | Waveshare DI → HA → DO → bistable röle |
+| **Oturma/Çalışma** | Masa / duvar | Push button | 1 | Oturma aydınlatma | Waveshare DI → HA → DO → bistable röle |
+| **Ana Yatak** | Yatak Başı Sol | Push button | 2 | Tavan aydınlatma, sol okuma lambası | Waveshare DI → HA → DO → bistable röle |
+| **Ana Yatak** | Yatak Başı Sağ | Push button | 2 | Tavan aydınlatma, sağ okuma lambası | Waveshare DI → HA → DO → bistable röle |
+| **Pull-down Yatak** | Şoför kabini üstü | Push button | 1 | İç spot aydınlatma | Waveshare DI → HA → DO → bistable röle |
+| **Banyo** | Lavabo / duvar | Push button | 1 | Genel spot aydınlatma | Waveshare DI → HA → DO → bistable röle |
+| **TOPLAM** | | | **8** | | |
 
 ---
 
@@ -37,31 +37,35 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 
 | Bölge | Tip | Voltaj | Kontrol | Push Button |
 |-------|-----|--------|---------|-------------|
-| **Ana Yatak** | Tavan LED (genel) | 24V | Shelly Plus RGBW PM (dimmer + renk) | Yatak başı sol + sağ |
-| **Ana Yatak** | Okuma lambası sol | 24V | MOSFET | Yatak başı sol |
-| **Ana Yatak** | Okuma lambası sağ | 24V | MOSFET | Yatak başı sağ |
-| **Ana Yatak** | Gece zemin aydınlatması | 24V | MOSFET | Yatak başı sol + sağ |
-| **Mutfak** | Dolap altı spot | 24V | MOSFET | Mutfak push button |
-| **Mutfak** | LED şerit | 24V | MOSFET | Mutfak push button |
-| **Oturma/Çalışma** | Çalışma aydınlatması | 24V | MOSFET | Oturma push button |
-| **Oturma/Çalışma** | Ambient aydınlatma | 24V | Shelly Plus RGBW PM (dimmer + renk) | - |
-| **Popup Yatak** | İç spot aydınlatma | 24V | MOSFET | Popup push button |
-| **Banyo** | Genel spot | 24V | MOSFET | Push button |
+| **Ana Yatak** | Tavan LED (genel) | 24V | NJMC1 16A 2P + Shelly RGBW PM (dimmer + renk) | Yatak başı sol + sağ PB |
+| **Ana Yatak** | Okuma lambası sol | 24V | NJMC1 16A 2P bistable | Yatak başı sol PB |
+| **Ana Yatak** | Okuma lambası sağ | 24V | NJMC1 16A 2P bistable | Yatak başı sağ PB |
+| **Ana Yatak** | Gece zemin aydınlatması | 24V | NJMC1 16A 2P bistable | HA otomasyon |
+| **Mutfak** | Mutfak aydınlatma | 24V | NJMC1 16A 2P bistable | Mutfak PB |
+| **Oturma/Çalışma** | Oturma aydınlatma | 24V | NJMC1 16A 2P bistable | Oturma PB |
+| **Oturma/Çalışma** | Ambient aydınlatma | 24V | Shelly Plus RGBW PM (dimmer + renk) | HA / Shelly |
+| **Pull-down Yatak** | İç spot aydınlatma | 24V | NJMC1 16A 2P bistable | Pull-down PB |
+| **Banyo** | Genel spot | 24V | NJMC1 16A 2P bistable | Banyo PB |
+| **Dış** | Dış aydınlatma 1 | 24V | NJMC1 16A 2P bistable | HA otomasyon |
+| **Dış** | Dış aydınlatma 2 | 24V | NJMC1 16A 2P bistable | HA otomasyon |
 
 ---
 
-## 🔌 220V Kontrollü Çıkışlar (Sigorta + Finder Kontaktör)
+## 🔌 220V Kontrollü Çıkışlar (Sigorta + NJMC1 Bistable Röle)
+
+220V inverter çıkışı **AC OUT 1** (inverter + shore) → NJMC1 32A 4P master röle P1 ile etkinleşir. Her çıkış bireysel NJMC1 16A 2P bistable röle + sigorta ile kontrol edilir. HA yük yönetimi ile inverter modunda çakışma önlenir.
 
 | # | Çıkış | Bölge | Güç / Detay | Kontrol |
 |---|-------|-------|-------------|---------|
-| 1 | İndüksiyon ocak | Mutfak | 1800W | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 2 | Bulaşık makinesi | Mutfak | 1700W | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 3 | Klima (Evacool Eva RV 2700) | Ana Yatak | 900-1100W | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 4 | Çamaşır makinesi | Banyo | 160W | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 5 | Mutfak prizleri (2x) | Mutfak | 2x 220V priz | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 6 | Yatak + Banyo prizleri (4x) | Ana Yatak / Banyo | 3x yatak + 1x banyo | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 7 | Oturma prizleri (2x) | Oturma/Çalışma | 2x 220V priz | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
-| 8 | Rezerv | - | - | Sigorta + Finder 22.22.9.024.4000 + DI/DO |
+| 1 | Çamaşır makinesi | Banyo | 160W | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 2 | İndüksiyon ocak | Mutfak | 1800W | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 3 | Bulaşık makinesi | Mutfak | 1700W | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 4 | Klima (Evacool Eva RV 2700) | Ana Yatak | 900-1100W | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 5 | Yatak + Banyo prizleri (4x) | Ana Yatak / Banyo | 3x yatak + 1x banyo | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 6 | Mutfak prizleri (2x) | Mutfak | 2x 220V priz | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 7 | Oturma prizleri (2x) | Oturma/Çalışma | 2x 220V priz | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+
+**AC OUT 2** (sadece shore): Blue Smart IP65 12/5A araç aküsü float şarj (60W, doğrudan bağlı, röle gerektirmez)
 
 ---
 
@@ -70,112 +74,169 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 | Kategori | Adet |
 |----------|------|
 | 220V priz | 8 |
-| 24V priz | 3 |
+| 24V priz | 2 |
 | 12V priz | 2 |
-| Otomotiv USB-C soket (100W PD, ayrı hat) | 9 |
-| Push button | 9 |
-| Aydınlatma noktası | 10 |
-| 220V kontaktör kontrollü çıkış | 8 |
-| **Toplam elektrik noktası** | **49** |
+| Otomotiv USB-C soket (100W PD) | 9 |
+| Push button | 8 |
+| Aydınlatma noktası (iç + dış) | 11 |
+| 220V bistable röle kontrollü çıkış | 7 |
+| **Toplam elektrik noktası** | **47** |
 
 ---
 
-## 🤖 Otomasyon Donanım Bütçesi
+## 🤖 Otomasyon Donanım Özeti
 
 ### Donanım Listesi
 
 | # | Cihaz | Model | Adet | Yönettiği Grup |
 |---|-------|-------|------|----------------|
-| 1 | Ana Kontrolcü | Waveshare CM4 Industrial IoT | 1 | HA, Modbus master, RS485 hub |
-| 2 | DI/DO Modülü | Waveshare 8DI/8DO (RS485) | 3 | Kontaktör + MOSFET + push button |
-| 3 | MOSFET Kartı (8 kanal) | devremarketi modüler, 4A/kanal | 2 | DC yük anahtarlama (16 kanal) |
-| 4 | Finder Kontaktör | Finder 22.22.9.024.4000 (25A, 24V DC bobin) | 8 | 220V AC aç/kapa |
-| 5 | Shelly Plus RGBW PM | Shelly (Wi-Fi, HA entegre) | 2 | Dimmer + renk LED aydınlatma |
-| 6 | High Current Relay | Modbus RTU 4-ch 30A | 1 | Yüksek akım DC yükler |
-| 7 | Analog Modülü | Waveshare 8-ch Analog (RS485) | 1 | Su tankı seviye, sıcaklık sensörleri |
-| 8 | Gaz Dedektörü | Waveshare RS485 Gas Detector | 1 | Genel gaz algılama (mutfak bölgesi) |
-| 9 | Hava İstasyonu | Waveshare Environmental RS485 | 1 | Sıcaklık, nem, CO2, PM2.5 |
+| 1 | Ana Kontrolcü | Waveshare IPCBOX-CM5-A + RPi CM5 8GB Lite + 512GB NVMe SSD | 1 | HA, Modbus master, 4x RS485, CAN, 2DI/2DO, dual ETH, 7-36V DC |
+| 2 | DI/DO Modülü | Waveshare 8DI/8DO (RS485) | 3 | Bistable röle toggle (DO) + durum feedback (DI) |
+| 3 | Master Röle | CHINT NJMC1 32A 4P (Camper ON/OFF) | 1 | 220V + 24V + 12V rail anahtarlama, DI feedback |
+| 4 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 19 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
+| 5 | Shelly Plus RGBW PM | Shelly (Wi-Fi, HA entegre, 24V) | 2 | Dimmer + renk LED aydınlatma (Camper ON ile aktif) |
+| 6 | Analog Modülü | Waveshare 8-ch Analog (RS485) | 1 | Su tankı seviye, sıcaklık sensörleri |
 
-### DI/DO Kanal Dağılımı
+---
 
-**DI/DO #1 — 220V Kontaktör Kontrolü**
+### Camper ON/OFF Master Röle (CHINT NJMC1 32A 4P)
 
-| Yön | Kanal | Bağlantı |
-|-----|-------|----------|
-| DO1 | İndüksiyon ocak | Finder kontaktör |
-| DO2 | Bulaşık makinesi | Finder kontaktör |
-| DO3 | Klima | Finder kontaktör |
-| DO4 | Çamaşır makinesi | Finder kontaktör |
-| DO5 | Mutfak prizleri (2x) | Finder kontaktör |
-| DO6 | Yatak + Banyo prizleri (4x) | Finder kontaktör |
-| DO7 | Oturma prizleri (2x) | Finder kontaktör |
-| DO8 | Rezerv | Finder kontaktör |
-| DI1-8 | Rezerv | Kontaktör feedback / gelecek genişleme |
+Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 
-**DI/DO #2 — Aydınlatma MOSFET + Push Buttonlar**
+| Pol | Rail | Yükler | Koruma |
+|-----|------|--------|--------|
+| P1 | 220V | 220V ana rail → bireysel NJMC1 16A 2P röleler ile cihaz/priz kontrolü | Ana sigorta |
+| P2 | 12V | Clesana C1 tuvalet, Truma Combi 4D, Mutfak 12V priz | Blade fuse |
+| P3 | 24V | USB-C soketler (9x), su pompası, Shelly RGBW PM (2x), 24V prizler (2x oturma) | Blade fuse |
+| P4 | DI | Açık/kapalı durum geri bildirimi | Waveshare DI |
 
-| Yön | Kanal | Bağlantı |
-|-----|-------|----------|
-| DO1 | Okuma lambası sol | MOSFET Kartı #1 Ch1 |
-| DO2 | Okuma lambası sağ | MOSFET Kartı #1 Ch2 |
-| DO3 | Gece zemin aydınlatması | MOSFET Kartı #1 Ch3 |
-| DO4 | Dolap altı spot | MOSFET Kartı #1 Ch4 |
-| DO5 | LED şerit (mutfak) | MOSFET Kartı #1 Ch5 |
-| DO6 | Çalışma aydınlatması | MOSFET Kartı #1 Ch6 |
-| DO7 | Popup iç spot | MOSFET Kartı #1 Ch7 |
-| DO8 | Banyo genel spot | MOSFET Kartı #1 Ch8 |
-| DI1 | Mutfak PB #1 | Dolap altı spot |
-| DI2 | Mutfak PB #2 | LED şerit |
-| DI3 | Oturma PB | Çalışma aydınlatması |
-| DI4 | Yatak Sol PB #1 | Genel aydınlatma |
-| DI5 | Yatak Sol PB #2 | Sol okuma lambası |
-| DI6 | Yatak Sağ PB #1 | Genel aydınlatma |
-| DI7 | Yatak Sağ PB #2 | Sağ okuma lambası |
-| DI8 | Popup PB | İç spot aydınlatma |
+---
 
-**DI/DO #3 — USB-C MOSFET**
+### 220V Bireysel Bistable Röleler (NJMC1 16A 2P × 7)
 
-| Yön | Kanal | Bağlantı |
-|-----|-------|----------|
-| DO1 | Ana Yatak Sol USB-C #1 | MOSFET Kartı #2 Ch1 |
-| DO2 | Ana Yatak Sol USB-C #2 | MOSFET Kartı #2 Ch2 |
-| DO3 | Ana Yatak Sağ USB-C #1 | MOSFET Kartı #2 Ch3 |
-| DO4 | Ana Yatak Sağ USB-C #2 | MOSFET Kartı #2 Ch4 |
-| DO5 | Mutfak USB-C #1 | MOSFET Kartı #2 Ch5 |
-| DO6 | Mutfak USB-C #2 | MOSFET Kartı #2 Ch6 |
-| DO7 | Oturma USB-C #1 | MOSFET Kartı #2 Ch7 |
-| DO8 | Oturma USB-C #2 | MOSFET Kartı #2 Ch8 |
-| DI1 | Banyo PB | Genel spot aydınlatma |
-| DI2-8 | Rezerv | Gelecek genişleme |
+| # | Yük | 1P High-Side | 1P Feedback |
+|---|-----|-------------|-------------|
+| 1 | Çamaşır makinesi | 220V L hat | Waveshare DI |
+| 2 | İndüksiyon ocak | 220V L hat | Waveshare DI |
+| 3 | Bulaşık makinesi | 220V L hat | Waveshare DI |
+| 4 | Klima (Evacool Eva RV 2700) | 220V L hat | Waveshare DI |
+| 5 | Yatak + Banyo prizleri (4x) | 220V L hat | Waveshare DI |
+| 6 | Mutfak prizleri (2x) | 220V L hat | Waveshare DI |
+| 7 | Oturma prizleri (2x) | 220V L hat | Waveshare DI |
 
-> **Not:** Popup USB-C (1x) always-on olarak 24V hattan beslenir (popup kullanımdayken zaten enerji aktif). Bireysel kontrol istenirse 4. DI/DO modülü ile genişletilebilir.
+### DC Bireysel Bistable Röleler (NJMC1 16A 2P × 12)
 
-### High Current Relay Kanal Dağılımı (Modbus RTU, 4-ch 30A)
+**Blade Fuse Block #1 — Aydınlatma (8P, tümü dolu)**
 
-| Kanal | Cihaz | Akım |
-|-------|-------|------|
-| CH1 | Macerator pompa (SHURflo) | ~8A max |
-| CH2 | Hydrofor pompa | ~3-4A |
-| CH3 | Buzdolabı (EvaCool 24V) | ~2-3A |
-| CH4 | Rezerv | - |
+| # | Yük | Voltaj | Push Button |
+|---|-----|--------|-------------|
+| 1 | Okuma lambası sağ | 24V | Yatak sağ PB |
+| 2 | Tavan aydınlatma (Bed Light) | 24V | Yatak sol + sağ PB |
+| 3 | Banyo aydınlatma | 24V | Banyo PB |
+| 4 | Oturma aydınlatma (Saloon Light) | 24V | Oturma PB |
+| 5 | Okuma lambası sol | 24V | Yatak sol PB |
+| 6 | Gece zemin aydınlatması | 24V | HA otomasyon |
+| 7 | Mutfak aydınlatma | 24V | Mutfak PB |
+| 8 | Pull-down yatak aydınlatma | 24V | Pull-down PB |
+
+**Blade Fuse Block #2 — Diğer DC (8P, 4 dolu + 4 rezerv)**
+
+| # | Yük | Voltaj | Detay |
+|---|-----|--------|-------|
+| 1 | Buzdolabı (EvaCool 24V) | 24V | ~2-3A |
+| 2 | Dış aydınlatma 1 | 24V | HA otomasyon |
+| 3 | Dış aydınlatma 2 | 24V | HA otomasyon |
+| 4 | Macerator pompa (SHURflo) | 24V | ~8A max |
+| 5-8 | Rezerv | - | Gelecek genişleme |
+
+> Her DC bistable röle: 1P = 24V+ high-side switch, 1P = DI feedback. Push buttonlar Waveshare DI'ya bağlıdır; HA butona basışı algılar ve ilgili DO kanalı üzerinden bistable röleyi toggle eder.
+
+---
 
 ### Shelly Plus RGBW PM (Wi-Fi, 2 adet)
 
-| # | Konum | İşlev |
-|---|-------|-------|
-| 1 | Ana Yatak | Tavan LED — dimmer + renk kontrolü |
-| 2 | Oturma/Çalışma | Ambient aydınlatma — dimmer + renk kontrolü |
+24V master rail'den beslenir (Camper ON ile aktif). LED strip dimmer + renk kontrolü.
+
+| # | Konum | İşlev | Besleme |
+|---|-------|-------|---------|
+| 1 | Ana Yatak | Tavan LED — dimmer + renk (bistable röle downstream) | 24V via Blade Fuse #1 pos 2 |
+| 2 | Oturma/Çalışma | Ambient aydınlatma — dimmer + renk | 24V master rail (doğrudan) |
+
+---
+
+### DI/DO Kanal Dağılımı
+
+**DI/DO #1 — 220V Bistable + Master Röle**
+
+| Yön | Kanal | Bağlantı |
+|-----|-------|----------|
+| DO1 | Çamaşır makinesi | NJMC1 16A 2P toggle |
+| DO2 | İndüksiyon ocak | NJMC1 16A 2P toggle |
+| DO3 | Bulaşık makinesi | NJMC1 16A 2P toggle |
+| DO4 | Klima | NJMC1 16A 2P toggle |
+| DO5 | Yatak + Banyo prizleri | NJMC1 16A 2P toggle |
+| DO6 | Mutfak prizleri | NJMC1 16A 2P toggle |
+| DO7 | Oturma prizleri | NJMC1 16A 2P toggle |
+| DO8 | Camper ON/OFF master | NJMC1 32A 4P toggle |
+| DI1 | Çamaşır makinesi | Feedback (2. pol) |
+| DI2 | İndüksiyon ocak | Feedback (2. pol) |
+| DI3 | Bulaşık makinesi | Feedback (2. pol) |
+| DI4 | Klima | Feedback (2. pol) |
+| DI5 | Yatak + Banyo prizleri | Feedback (2. pol) |
+| DI6 | Mutfak prizleri | Feedback (2. pol) |
+| DI7 | Oturma prizleri | Feedback (2. pol) |
+| DI8 | Camper ON/OFF master | Feedback (4. pol) |
+
+**DI/DO #2 — Aydınlatma Bistable (Blade Fuse Block #1)**
+
+| Yön | Kanal | Bağlantı |
+|-----|-------|----------|
+| DO1 | Okuma lambası sağ | NJMC1 16A 2P toggle |
+| DO2 | Tavan aydınlatma | NJMC1 16A 2P toggle |
+| DO3 | Banyo aydınlatma | NJMC1 16A 2P toggle |
+| DO4 | Oturma aydınlatma | NJMC1 16A 2P toggle |
+| DO5 | Okuma lambası sol | NJMC1 16A 2P toggle |
+| DO6 | Gece zemin aydınlatması | NJMC1 16A 2P toggle |
+| DO7 | Mutfak aydınlatma | NJMC1 16A 2P toggle |
+| DO8 | Pull-down yatak aydınlatma | NJMC1 16A 2P toggle |
+| DI1 | Okuma lambası sağ | Feedback (2. pol) |
+| DI2 | Tavan aydınlatma | Feedback (2. pol) |
+| DI3 | Banyo aydınlatma | Feedback (2. pol) |
+| DI4 | Oturma aydınlatma | Feedback (2. pol) |
+| DI5 | Okuma lambası sol | Feedback (2. pol) |
+| DI6 | Gece zemin | Feedback (2. pol) |
+| DI7 | Mutfak aydınlatma | Feedback (2. pol) |
+| DI8 | Pull-down yatak | Feedback (2. pol) |
+
+**DI/DO #3 — Diğer DC Bistable (Blade Fuse Block #2)**
+
+| Yön | Kanal | Bağlantı |
+|-----|-------|----------|
+| DO1 | Buzdolabı | NJMC1 16A 2P toggle |
+| DO2 | Dış aydınlatma 1 | NJMC1 16A 2P toggle |
+| DO3 | Dış aydınlatma 2 | NJMC1 16A 2P toggle |
+| DO4 | Macerator pompa | NJMC1 16A 2P toggle |
+| DO5-8 | Rezerv | Gelecek genişleme |
+| DI1 | Buzdolabı | Feedback (2. pol) |
+| DI2 | Dış aydınlatma 1 | Feedback (2. pol) |
+| DI3 | Dış aydınlatma 2 | Feedback (2. pol) |
+| DI4 | Macerator pompa | Feedback (2. pol) |
+| DI5-8 | Rezerv | Gelecek genişleme |
+
+---
 
 ### Kanal Özeti
 
 | Kaynak | Toplam | Kullanılan | Rezerv |
 |--------|--------|------------|--------|
-| DO (3x DI/DO) | 24 | 24 | 0 |
-| DI (3x DI/DO) | 24 | 9 | 15 |
-| MOSFET kanal (2x 8ch) | 16 | 16 | 0 |
-| High Current Relay | 4 | 3 | 1 |
-| Finder Kontaktör | 8 | 7 | 1 |
+| DO (3× DI/DO) | 24 | 20 | 4 |
+| DI (3× DI/DO) | 24 | 20 | 4 |
+| IPCBOX-CM5 dahili DI/DO | 2+2 | 0 | 2+2 |
+| NJMC1 32A 4P (master) | 1 | 1 | 0 |
+| NJMC1 16A 2P (bireysel) | 19 | 19 | 0 |
+| Shelly RGBW PM | 2 | 2 | 0 |
+| Blade Fuse Block 8P slot | 16 | 12 | 4 |
 
 ---
 
-*Bu tablo, tüm Area dosyalarından derlenen elektrik noktalarının konsolide özetidir. Değişiklik yapıldığında ilgili Area dosyası ve bu tablo birlikte güncellenmelidir.*
+*Bu tablo, tüm Area dosyalarından derlenen elektrik noktalarının ve otomasyon donanımlarının konsolide özetidir. Değişiklik yapıldığında ilgili Area dosyası ve bu tablo birlikte güncellenmelidir.*

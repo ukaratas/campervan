@@ -1,6 +1,6 @@
 # Isıtma ve Sıcak Su Sistemi (Heating & Hot Water)
 
-Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şekilde ısıtılması ve sıcak su ihtiyacı için **Truma Combi D4 inet** kullanılacaktır. Bu sistem tek cihazla hem ortam ısıtması hem de sıcak su üretimi yapar.
+Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şekilde ısıtılması ve sıcak su ihtiyacı için **Truma Combi 4D** kullanılacaktır. Bu sistem tek cihazla hem ortam ısıtması hem de sıcak su üretimi yapar.
 
 ## 🎯 Amaç ve Kapsam
 
@@ -19,7 +19,7 @@ Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şek
 
 | Kategori | Ürün/Model | Özellikler | Fiyat Tahmini |
 |----------|------------|------------|---------------|
-| **Kombi Sistemi** | Truma Combi D4 inet | 4kW ısıtma, 10L sıcak su, 12V DC, dizel, internet bağlantısı | €1800-2200 |
+| **Kombi Sistemi** | Truma Combi 4D | 4kW ısıtma, 10L sıcak su, 12V DC, dizel, internet bağlantısı | €1800-2200 |
 | **Kontrol Sistemi** | Truma inet CP plus | Dijital kontrol paneli, programlanabilir, uzaktan erişim | €200-300 |
 | **Hava Dağıtım** | Truma hava dağıtım kiti | İzoleli hortum, menfezler, yaşam alanı dağıtımı | €150-200 |
 | **Sıcak Su Dağıtım** | Truma sıcak su kiti | Mikser vana, hortumlar, bağlantı elemanları | €150-200 |
@@ -202,7 +202,7 @@ Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şek
 ## 🔧 Kurulum ve Bakım
 
 ### Kurulum Aşamaları
-1. **Ana Ünite Montajı**: Truma Combi D4 inet'in koltuk içine montajı
+1. **Ana Ünite Montajı**: Truma Combi 4D'in koltuk içine montajı
 2. **Hava Dağıtım Sistemi**: İzoleli hortum ve menfezlerle yaşam alanına dağıtım
 3. **Sıcak Su Sistemi**: Mikser vana ve hortumlarla banyo/mutfak bağlantısı
 4. **Yakıt Sistemi**: Dizel tank ve pompa bağlantısı

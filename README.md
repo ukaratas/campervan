@@ -32,7 +32,7 @@ Aşağıda, modüllerin araç içindeki yaklaşık konumlarını gösteren genel
 - **Yatak Altı:** Akü, elektrik panosu, otomasyon
 - **Şasi Altı:** Temiz/Gri su tankları
 - **Mutfak:** Omake 1800W İndüksiyon Ocak, Buzdolabı, Bulaşık Makinesi
-- **İsıtıcı & Sıcak Su:** Sürücü koltuğu altı (Truma Combi D4 inet - entegre ısıtma+sıcak su)
+- **İsıtıcı & Sıcak Su:** Sürücü koltuğu altı (Truma Combi 4D - entegre ısıtma+sıcak su)
 - **Banyo:** Sol arka köşe (120cm)
 - **Popup Roof:** SCA 214, tavan üstü
 
@@ -47,13 +47,13 @@ Her sistem ayrı bir markdown dosyasında detaylandırılmıştır. Teknik büt�
 - 🔌 [**DC-DC Alternatör Şarj**](Areas/dc-charge-alternator.md): Victron Orion XS ile alternatörden yaşam aküsüne şarj, izleme ve otomasyon.
 - 🟦 [**Popup Roof & Güneş Paneli**](Areas/popup-roof.md): SCA 214 popup roof üzerine entegre esnek 400W güneş paneli ve montaj detayları.
 - 💧 [**Temiz Su Sistemi**](Areas/clean-water.md): 150L depo, RS485/analog seviye sensörü, otomatik drenaj, donma koruması, 24V pompa ve genleşme kabı, Home Assistant ile izleme ve otomasyon. **Depolar şasi altında.**
-- 🤖 [**Otomasyon & Kontrol**](Areas/automation.md): Raspberry Pi CM4, endüstriyel Waveshare IoT modülleri, Modbus röleler ve analog girişler ile Home Assistant tabanlı merkezi otomasyon ve izleme altyapısı. **Tüm otomasyon ve izleme arka yatak altındaki teknik alanda.**
-- 🔥 [**Isıtma ve Sıcak Su Sistemi**](Areas/heating.md): Truma Combi D4 inet 4kW dizel kombi sistemi, hem ısıtma hem sıcak su tek cihazda, 10L tank, inet kontrolü, otomasyon ve Home Assistant entegrasyonu, donma koruması. **Koltuk altı montaj.**
+- 🤖 [**Otomasyon & Kontrol**](Areas/automation.md): Waveshare IPCBOX-CM5-A + RPi CM5, DI/DO modülleri, NJMC1 bistable röleler ve analog girişler ile Home Assistant tabanlı merkezi otomasyon ve izleme altyapısı. **Tüm otomasyon ve izleme arka yatak altındaki teknik alanda.**
+- 🔥 [**Isıtma ve Sıcak Su Sistemi**](Areas/heating.md): Truma Combi 4D 4kW dizel kombi sistemi, hem ısıtma hem sıcak su tek cihazda, 10L tank, inet kontrolü, otomasyon ve Home Assistant entegrasyonu, donma koruması. **Koltuk altı montaj.**
 - 🍳 [**Mutfak Modülü**](Areas/kitchen.md): Omake 1800W ankastre indüksiyon ocak, EvaCool 90L 24V buzdolabı, tek musluklu evye (termostatik karışım), Electrolux bulaşık makinesi, 220V/24V/12V prizler, push button ile otomasyonlu aydınlatma, Home Assistant entegrasyonu, fonksiyonel ve modüler tezgah.
 - 💧 [**Gri Su Sistemi**](Areas/grey-water.md): 100-120L atık su depolama, 24V pompa, seviye sensörü, otomatik/manuel boşaltma, koku ve donma koruması, Home Assistant ile izleme ve otomasyon. **Şasi altında güvenli montaj.**
-- 🛏️ [**Ana Yatak Alanı**](Areas/main-bed.md): 150cm alan (araç boyunca), 150x200cm King size yatak (enine yerleştirilmiş), Flarespace ile genişletilmiş 200-205cm iç alan, yatak altı depolama ve teknik ekipman alanı, 24V klima ve heki roof window ile otomasyon entegrasyonu.
+- 🛏️ [**Ana Yatak Alanı**](Areas/main-bed.md): 150cm alan (araç boyunca), 150x200cm King size yatak (enine yerleştirilmiş), Flarespace ile genişletilmiş 200-205cm iç alan, yatak altı depolama ve teknik ekipman alanı, 220V klima (Evacool Eva RV 2700 Premium) ve heki roof window ile otomasyon entegrasyonu.
 - 🔝 [**Popup Yatak Alanı**](Areas/popup-bed.md): SCA 214 popup roof içinde 130x200cm yatak, 400W güneş paneli entegrasyonu, panoramik görüş, ek yaşam alanı ve enerji üretimi.
-- 🪑 [**Oturma Alanı**](Areas/seating.md): 2 kişilik emniyet kemerli koltuk, dönerli sürücü koltuğu, yükseklik ayarlı masa, Samsung 32" Smart Monitor M8 4K (bilgisayar + Android TV), çalışma/ofis modu, Home Assistant entegrasyonu.
+- 🪑 [**Oturma Alanı**](Areas/seating.md): 2 kişilik emniyet kemerli koltuk, dönerli sürücü koltuğu, yükseklik ayarlı masa, çalışma/ofis modu, Home Assistant entegrasyonu.
 - 🚿 [**Banyo**](Areas/banyo.md): 120cm kompakt banyo alanı, duş kabini, Clesana C1 susuz tuvalet (12V, 0.55Wh/flush), lavabo, pencere havalandırma, Home Assistant otomasyon, tam fonksiyonel banyo çözümü.
 
 ### Planlanacak Alanlar
