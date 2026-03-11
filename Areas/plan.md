@@ -212,6 +212,7 @@ Su tesisatının cihazlara bağlanması, pompa ve ısıtma sistemi montajı.
 | Sıcak su dağıtım kollektörü | Pirinç kollektör | 1 | TBD | E |
 | Soğuk su dağıtım kollektörü | Pirinç kollektör | 1 | TBD | E |
 | Actuator valf | 24V otomatik vana (donma koruması) | 1 | TBD | E |
+| Çamaşır Makinesi | FİX Mini 3kg (bagaj su servis alanı) | 1 | TBD | E |
 
 ---
 
@@ -262,7 +263,6 @@ Tüm beyaz eşya, mutfak cihazları, banyo donanımları ve güneş paneli monta
 | İndüksiyon Ocak | Omake ankastre 1800W | 1 | TBD | E |
 | Bulaşık Makinesi | Electrolux ESF2400O | 1 | TBD | E |
 | Buzdolabı | EvaCool Eva Berlin 90L (24V) | 1 | TBD | E |
-| Çamaşır Makinesi | FİX Mini 3kg | 1 | TBD | E |
 | Eviye | Paslanmaz çelik, tek gözlü | 1 | TBD | E |
 | Mutfak Musluk | Sıcak/soğuk termostatik | 1 | TBD | E |
 | Clesana C1 | Susuz tuvalet (12V) | 1 | TBD | E |
