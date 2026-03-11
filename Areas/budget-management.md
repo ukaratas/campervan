@@ -30,7 +30,7 @@ Karavan inşaatına başlamadan önce temin edilmesi gereken otomasyon ve kontro
 - **#1-3**: Waveshare IPCBOX-CM5-A endüstriyel kutu + RPi CM5 8GB + 512GB NVMe SSD = Home Assistant ana bilgisayar (4x RS485, CAN, 2DI/2DO, 7-36V DC direkt besleme, dual ETH)
 - **#4**: 3x 8DI/8DO → bistable röle toggle (DO) + durum feedback (DI)
 - **#5**: Su tankı seviye sensörleri, sıcaklık okumaları
-- **#6**: Victron Blue Smart IP65 12/5A (220V AC → 12V DC) — geliştirme sürecinde otomasyon cihazlarının güç kaynağı olarak kullanılır, karavanda EasySolar-II AC OUT 2'den araç aküsü float şarj
+- **#6**: Victron Blue Smart IP65 12/5A (220V AC → 12V DC) — geliştirme sürecinde otomasyon cihazlarının güç kaynağı olarak kullanılır, karavanda EasySolar-II AC OUT 1'den NJMC1 16A 2P bistable röle ile araç aküsü float şarj (shore yokken de inverter üzerinden çalışır)
 - **#7**: DC taraf sigorta dağıtımı
 - **#8**: Modüller arası RS485 haberleşme kablolaması
 - **#9**: Kontrol paneli ekranı — giriş kapısı üstü, HDMI + USB direkt IPCBOX-CM5-A bağlantısı, HA dashboard
@@ -44,20 +44,20 @@ Karavan montajı aşamasında alınacak, fiziksel kurulum gerektiren kalemler.
 | # | Ürün | Model | Adet | Birim Fiyat | Toplam | Kaynak |
 |---|------|-------|------|-------------|--------|--------|
 | 1 | Master Bistable Röle | CHINT NJMC1 32A 4P (Camper ON/OFF) | 1 | ~350 ₺ | ~350 ₺ | Elektrik market |
-| 2 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 19 | ~200 ₺ | ~3.800 ₺ | Elektrik market |
+| 2 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 20 | ~200 ₺ | ~4.000 ₺ | Elektrik market |
 | 3 | Shelly Plus RGBW PM | Shelly (Wi-Fi, dimmer + renk, 24V) | 2 | ~€24 (~1.225 ₺) | ~2.450 ₺ | Shelly / Bosteknik |
 | 4 | Blade Fuse Block 8P | 8 pozisyonlu blade sigorta dağıtım bloğu | 2 | ~250 ₺ | ~500 ₺ | karavanicin.com |
 | 5 | Panasonic Sigorta Kutusu | Sıva üstü modüler sigorta kutusu (220V panel) | 1 | ~500 ₺ | ~500 ₺ | Elektrik market |
-| 6 | MCB Sigortalar | CHNT C16 otomatik sigorta (220V devreler) | 7 | ~80 ₺ | ~560 ₺ | Elektrik market |
-| | | | | **T2 TOPLAM** | **~8.160 ₺** | |
+| 6 | MCB Sigortalar | CHNT C16 otomatik sigorta (220V devreler) | 8 | ~80 ₺ | ~640 ₺ | Elektrik market |
+| | | | | **T2 TOPLAM** | **~8.440 ₺** | |
 
 ### T2 Kapsamı Açıklama
 
 - **#1**: 1x master 32A 4P → Camper ON/OFF (220V + 24V + 12V rail anahtarlama)
-- **#2**: 19x bireysel 16A 2P → 7 AC çıkış + 8 aydınlatma + 4 DC yük (1P switch + 1P feedback)
+- **#2**: 20x bireysel 16A 2P → 8 AC çıkış + 8 aydınlatma + 4 DC yük (1P switch + 1P feedback)
 - **#3**: 2x Shelly → ana yatak tavan LED + oturma ambient (dimmer + renk)
 - **#4**: 2x blade fuse block → DC yük dağıtımı (aydınlatma + diğer)
-- **#5-6**: 220V panel koruma (modüler sigorta kutusu + 7x MCB sigorta)
+- **#5-6**: 220V panel koruma (modüler sigorta kutusu + 8x MCB sigorta)
 
 ---
 

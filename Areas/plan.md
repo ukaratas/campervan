@@ -169,10 +169,10 @@ Ana yatak altı teknik alana batarya, inverter, dağıtım panosu ve otomasyon d
 | İnverter/Şarj/MPPT | Victron EasySolar-II 3kVA MPPT 250/70 GX | 1 | TBD | E |
 | DC-DC Şarj | Victron Orion XS 1400 | 1 | TBD | E |
 | Master Bistable Röle | CHINT NJMC1 32A 4P | 1 | ~350 ₺ | E |
-| Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 19 | ~3.800 ₺ | E |
+| Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 20 | ~4.000 ₺ | E |
 | Blade Fuse Block | 8 pozisyonlu | 2 | ~500 ₺ | E |
 | 220V Sigorta Kutusu | Panasonic modüler sıva üstü | 1 | ~500 ₺ | E |
-| MCB Sigortalar | CHNT C16 otomatik | 7 | ~560 ₺ | E |
+| MCB Sigortalar | CHNT C16 otomatik | 8 | ~640 ₺ | E |
 | Kaçak Akım Rölesi | 30mA, 2P | 1 | TBD | E |
 | Ana Sigorta | MEGA/ANL 200A | 1 | TBD | E |
 | Ana Kontaktör | 24V DC, 200A | 1 | TBD | E |

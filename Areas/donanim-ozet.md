@@ -64,8 +64,9 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 | 5 | Yatak + Banyo prizleri (4x) | Ana Yatak / Banyo | 3x yatak + 1x banyo | Sigorta + NJMC1 16A 2P bistable + DI/DO |
 | 6 | Mutfak prizleri (2x) | Mutfak | 2x 220V priz | Sigorta + NJMC1 16A 2P bistable + DI/DO |
 | 7 | Oturma prizleri (2x) | Oturma/Çalışma | 2x 220V priz | Sigorta + NJMC1 16A 2P bistable + DI/DO |
+| 8 | Araç aküsü float şarj (Blue Smart IP65) | Teknik alan | 60W | Sigorta + NJMC1 16A 2P bistable + DI/DO |
 
-**AC OUT 2** (sadece shore): Blue Smart IP65 12/5A araç aküsü float şarj (60W, doğrudan bağlı, röle gerektirmez)
+> AC OUT 1 üzerinden beslenir. Shore yokken de HA otomasyonu ile açılabilir (inverter üzerinden). HA yük yönetimi ile gereksiz durumlarda kapatılır.
 
 ---
 
@@ -79,7 +80,7 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 | Otomotiv USB-C soket (100W PD) | 9 |
 | Push button | 8 |
 | Aydınlatma noktası (iç + dış) | 11 |
-| 220V bistable röle kontrollü çıkış | 7 |
+| 220V bistable röle kontrollü çıkış | 8 |
 | **Toplam elektrik noktası** | **47** |
 
 ---
@@ -93,7 +94,7 @@ Tüm bölgelerdeki elektrik noktaları (prizler, soketler, push buttonlar, aydı
 | 1 | Ana Kontrolcü | Waveshare IPCBOX-CM5-A + RPi CM5 8GB Lite + 512GB NVMe SSD | 1 | HA, Modbus master, 4x RS485, CAN, 2DI/2DO, dual ETH, 7-36V DC |
 | 2 | DI/DO Modülü | Waveshare 8DI/8DO (RS485) | 3 | Bistable röle toggle (DO) + durum feedback (DI) |
 | 3 | Master Röle | CHINT NJMC1 32A 4P (Camper ON/OFF) | 1 | 220V + 24V + 12V rail anahtarlama, DI feedback |
-| 4 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 19 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
+| 4 | Bireysel Bistable Röle | CHINT NJMC1 16A 2P | 20 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
 | 5 | Shelly Plus RGBW PM | Shelly (Wi-Fi, HA entegre, 24V) | 2 | Dimmer + renk LED aydınlatma (Camper ON ile aktif) |
 | 6 | Analog Modülü | Waveshare 8-ch Analog (RS485) | 1 | Su tankı seviye, sıcaklık sensörleri |
 | 7 | Kontrol Paneli | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | 1 | Giriş kapısı üstü, HDMI+USB direkt HA bağlantısı |
@@ -113,7 +114,7 @@ Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 
 ---
 
-### 220V Bireysel Bistable Röleler (NJMC1 16A 2P × 7)
+### 220V Bireysel Bistable Röleler (NJMC1 16A 2P × 8)
 
 | # | Yük | 1P High-Side | 1P Feedback |
 |---|-----|-------------|-------------|
@@ -124,6 +125,7 @@ Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 | 5 | Yatak + Banyo prizleri (4x) | 220V L hat | Waveshare DI |
 | 6 | Mutfak prizleri (2x) | 220V L hat | Waveshare DI |
 | 7 | Oturma prizleri (2x) | 220V L hat | Waveshare DI |
+| 8 | Blue Smart IP65 float şarj | 220V L hat | Waveshare DI |
 
 ### DC Bireysel Bistable Röleler (NJMC1 16A 2P × 12)
 
@@ -209,7 +211,7 @@ Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 | DI7 | Mutfak aydınlatma | Feedback (2. pol) |
 | DI8 | Pull-down yatak | Feedback (2. pol) |
 
-**DI/DO #3 — Diğer DC Bistable (Blade Fuse Block #2)**
+**DI/DO #3 — Diğer DC + AC Bistable**
 
 | Yön | Kanal | Bağlantı |
 |-----|-------|----------|
@@ -217,12 +219,14 @@ Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 | DO2 | Dış aydınlatma 1 | NJMC1 16A 2P toggle |
 | DO3 | Dış aydınlatma 2 | NJMC1 16A 2P toggle |
 | DO4 | Macerator pompa | NJMC1 16A 2P toggle |
-| DO5-8 | Rezerv | Gelecek genişleme |
+| DO5 | Blue Smart IP65 float şarj | NJMC1 16A 2P toggle (220V) |
+| DO6-8 | Rezerv | Gelecek genişleme |
 | DI1 | Buzdolabı | Feedback (2. pol) |
 | DI2 | Dış aydınlatma 1 | Feedback (2. pol) |
 | DI3 | Dış aydınlatma 2 | Feedback (2. pol) |
 | DI4 | Macerator pompa | Feedback (2. pol) |
-| DI5-8 | Rezerv | Gelecek genişleme |
+| DI5 | Blue Smart IP65 float şarj | Feedback (2. pol) |
+| DI6-8 | Rezerv | Gelecek genişleme |
 
 ---
 
@@ -230,11 +234,11 @@ Karavan modu açma/kapama. Tek darbe ile tüm enerji hatlarını etkinleştirir.
 
 | Kaynak | Toplam | Kullanılan | Rezerv |
 |--------|--------|------------|--------|
-| DO (3× DI/DO) | 24 | 20 | 4 |
-| DI (3× DI/DO) | 24 | 20 | 4 |
+| DO (3× DI/DO) | 24 | 21 | 3 |
+| DI (3× DI/DO) | 24 | 21 | 3 |
 | IPCBOX-CM5 dahili DI/DO | 2+2 | 0 | 2+2 |
 | NJMC1 32A 4P (master) | 1 | 1 | 0 |
-| NJMC1 16A 2P (bireysel) | 19 | 19 | 0 |
+| NJMC1 16A 2P (bireysel) | 20 | 20 | 0 |
 | Shelly RGBW PM | 2 | 2 | 0 |
 | Blade Fuse Block 8P slot | 16 | 12 | 4 |
 
