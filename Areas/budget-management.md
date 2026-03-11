@@ -69,7 +69,7 @@ Karavan inşaat sürecinde ihtiyaç duyuldukça temin edilecek kalemler:
 - LiFePO4 batarya paketi (8S 280Ah)
 - Victron Orion XS 1400 DC-DC şarj
 - Evacool Eva RV 2700 Premium Klima
-- Güneş paneli (400W, sabit çatıya montaj)
+- Güneş paneli (800W, 4x 200W rigid, sabit çatıya ray montaj)
 - Shore power girişi + kablolama
 - AC dağıtım panosu + sigortalar + kaçak akım rölesi
 - Cihazlar (indüksiyon ocak, bulaşık makinesi, çamaşır makinesi, buzdolabı)

@@ -58,7 +58,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 2. **BMS Montajı**: Tüm hücrelere balans kabloları ve ana akım bağlantısı
 3. **Sigorta ve Kontaktör**: Ana hatta sigorta ve kontaktör montajı
 4. **Sensör ve Haberleşme**: RS485/CanBus/MQTT entegrasyonu
-5. **Güneş Paneli Bağlantısı**: 400W panel (sabit çatıya montaj) doğrudan EasySolar-II MPPT girişine bağlanır
+5. **Güneş Paneli Bağlantısı**: 800W panel (4x 200W rigid, sabit çatıya ray montaj) doğrudan EasySolar-II MPPT girişine bağlanır
 6. **Home Assistant Konfigürasyonu**: Sensörlerin ve otomasyonların tanımlanması
 
 ### Bakım Planı

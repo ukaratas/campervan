@@ -33,7 +33,7 @@ Aşağıda, modüllerin araç içindeki yaklaşık konumlarını gösteren genel
 - **Mutfak:** Omake 1800W İndüksiyon Ocak, Buzdolabı, Bulaşık Makinesi
 - **İsıtıcı & Sıcak Su:** Sürücü koltuğu altı (Truma Combi 4D - entegre ısıtma+sıcak su)
 - **Banyo:** Sol arka köşe (120cm)
-- **Sabit Çatı:** 400W güneş paneli
+- **Sabit Çatı:** 800W güneş paneli (4x 200W rigid)
 
 ## 🏗️ Proje Alanları ve Modüller
 
@@ -168,7 +168,7 @@ campervan/
 - Temiz su, otomasyon ve ısıtma altyapısı, donma koruması ve uzaktan izleme ile tam entegredir.
 - Teknik detaylar ve ürün listeleri ilgili markdown dosyalarında bulunur.
 - **Her modülün kendi markdown dosyasında, o sisteme ait 'Elektrik ve Su Tesisatı' başlığı altında enerji, su, otomasyon ve sensör altyapısı özetlenmiştir. Böylece bakım, genişletme ve entegrasyon kolayca takip edilebilir.**
-- **Güneş paneli olarak 400W panel, sabit çatıya monte edilecektir.**
+- **Güneş paneli olarak 800W (4x 200W rigid monokristal), alüminyum ray sistemi ile sabit çatıya monte edilecektir.**
 - **Banyo için tavan havalandırması (heki) mümkün değildir, pencere ile doğal havalandırma sağlanacaktır.**
 
 ## 🚀 Başlarken

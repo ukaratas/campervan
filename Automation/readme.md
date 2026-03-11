@@ -182,7 +182,7 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
   - **Otomasyon:** Home Assistant sadece ocak + bulaşık makinesi eş zamanlı çalışmasını engeller
 
 ### Enerji Üretimi ve Şarj
-* **Güneş Paneli:** 400W esnek panel (popup roof üstü) → EasySolar-II MPPT
+* **Güneş Paneli:** 800W rigid panel (4x 200W, sabit çatıya ray montaj) → EasySolar-II MPPT
 * **Alternatör Şarj:** 50A @ 24V (1200W max) → Victron Orion XS
 * **Shore Power:** 16A @ 220V (3520W max) → EasySolar-II
 
@@ -399,7 +399,7 @@ Yüksek güç cihazları için.
 | R1 | Buzdolabı | 24V DC, 50-80W | Sürekli çalışma |
 | R2 | USB Kutusu #1 | 24V DC, ~200W | 8A, mutfak |
 | R3 | USB Kutusu #2 | 24V DC, ~200W | 8A, yatak |
-| R4 | USB Kutusu #3 | 24V DC, ~200W | 8A, popup |
+| R4 | USB Kutusu #3 | 24V DC, ~200W | 8A, pull-down yatak |
 | R5 | USB Kutusu #4 | 24V DC, ~200W | 8A, salon |
 | R6 | 24V genel çıkışlar | 24V DC, değişken | Portatif cihazlar |
 | R7 | 12V genel çıkışlar | 12V DC, 24-60W | Konvertör üzerinden |

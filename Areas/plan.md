@@ -48,7 +48,7 @@ Iveco Daily 18m³ aracın satın alımı.
 ## Adım 3 — Kabuk Hazırlık (Kesim ve Dış Montaj)
 > **FİRMA** | Bağımlılık: Adım 2
 
-Araç kaportasına yapılacak kesim, pencere montajı, tavan klima hazırlığı ve yapısal takviye işleri. Firma tarafından yapılmalı.
+Araç kaportasına yapılacak kesim, pencere montajı, tavan klima hazırlığı, güneş paneli ray sistemi ve panel montajı, yapısal takviye işleri. Firma tarafından yapılmalı.
 
 | Ürün | Model | Adet | Fiyat | Önden |
 |------|-------|------|-------|-------|
@@ -57,11 +57,14 @@ Araç kaportasına yapılacak kesim, pencere montajı, tavan klima hazırlığı
 | Yan pencere büyük | Karavan pencere 100x50cm | 1 | TBD | E |
 | Yan pencere orta | Karavan pencere 60x50cm | 4 | TBD | E |
 | Tavan Klima | Evacool Eva RV 2700 Premium | 1 | ~76.500 ₺ | E |
+| Güneş Paneli | 200W rigid monokristal | 4 | TBD | E |
+| Çatı Ray Sistemi | Alüminyum montaj rayı + bağlantı seti | 1 set | TBD | E |
+| MC4 Konnektör + Kablo | Solar kablo 4mm² + MC4 | 1 set | TBD | E |
 | Pull-down Yatak | Lippert San Diego (manuel/elektrikli) | 1 | TBD | E |
 | Yolcu Koltuğu | 2 kişilik emniyet kemerli | 1 | TBD | H |
 | Banyo Penceresi | Açılabilir buzlu cam ~30x40cm | 1 | TBD | E |
 
-> Not: Pencere ve heki kesim ölçüleri firma ile birlikte netleştirilecek.
+> Not: Pencere, heki ve güneş paneli yerleşimi firma ile birlikte netleştirilecek. Paneller klima ünitesi ve heki ile çakışmayacak şekilde konumlandırılacak. 2S2P konfigürasyon (kısmi gölge dayanıklılığı) önerilir.
 
 ---
 
@@ -257,7 +260,6 @@ Tüm beyaz eşya, mutfak cihazları, banyo donanımları ve güneş paneli monta
 | Lavabo | Kompakt köşe ~40x30cm | 1 | TBD | E |
 | Banyo Batarya | Sıcak/soğuk spiralli | 1 | TBD | E |
 | Duş Batarya | Termostatik duş bataryası | 1 | TBD | E |
-| Güneş Paneli | 400W esnek/rigid, sabit çatıya montaj | 1 | TBD | E |
 
 ---
 
