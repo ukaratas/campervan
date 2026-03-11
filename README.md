@@ -23,7 +23,7 @@ Aşağıda, modüllerin araç içindeki yaklaşık konumlarını gösteren genel
 
 ### Alan Dağılımı
 - **Ana Yatak Alanı:** 200cm (araç boyunca)
-- **Banyo:** 120cm (duş, tuvalet, lavabo)
+- **Banyo:** 60cm (duş, tuvalet, lavabo)
 - **Oturma/Çalışma Alanı:** Koltuk + masa + ofis modu
 - **Pull-down Yatak:** Şoför kabini üstü (Lippert San Diego)
 
