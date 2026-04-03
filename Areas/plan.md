@@ -3,129 +3,326 @@
 Iveco Daily / MAN TGE 18m³ karavan dönüşüm projesi için sıralı iş planı ve malzeme listeleri (BOM).
 
 Her adımda:
-- **Sorumlu**: DIY veya FİRMA
 - **Bağımlılık**: Hangi adım(lar)dan sonra başlayabilir
-- **BOM Tablosu**: Ürün, Model, Adet, Tahmini Fiyat, Önden Alınabilir (E/H)
+- **BOM Tablosu**: Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı
+
+## Outline
+
+| # | İş | Bağımlılık |
+|---|----|------------|
+| **1 — Hazırlık** | | |
+| [1.1](#11--otomasyon-geliştirme) | Otomasyon Geliştirme | — |
+| [1.2](#12--alet-ve-atölye-tedariği) | Alet ve Atölye Tedariği | — |
+| **2 — Araç** | | |
+| [2.1](#21--araç-alımı) | Araç Alımı | — |
+| **3 — Karkas İnşaat** | | |
+| [3.1](#31--sigma-profil-i̇skelet-mobilya) | Sigma Profil İskelet (mobilya) | 2.1 |
+| [3.2](#32--zemin-geliştirme) | Zemin Geliştirme | 2.1, 3.1 |
+| [3.3](#33--su-depoları-şasi-altı) | Su Depoları (şasi altı) | 2.1 |
+| **4 — Kabuk İşleri** | | |
+| [4.1](#41--pencere-kesim-ve-montaj) | Pencere Kesim ve Montaj | 3.1 |
+| [4.2](#42--tavan-klima-montajı) | Tavan Klima Montajı | 4.1 |
+| [4.3](#43--çatı-ray-sistemi) | Çatı Ray Sistemi (OEM kanal) | 4.2 |
+| [4.4](#44--güneş-paneli-montajı) | Güneş Paneli Montajı | 4.3 |
+| [4.5](#45--tente-montajı) | Tente Montajı | 4.3 |
+| [4.6](#46--kamera-montajı) | Kamera Montajı | 3.1 |
+| **5 — İç Hazırlık** | | |
+| [5.1](#51--yalıtım) | Yalıtım (duvar + tavan) | 4.1, 4.2 |
+| [5.2](#52--elektrik-altyapı-ekipman-montajı--kablo-döşeme) | Elektrik Altyapı (ekipman + kablo + pano şeması) | 5.1 |
+| [5.3](#53--su-1-fix-boru-döşeme) | Su 1. Fix (boru döşeme) | 5.1 |
+| [5.4](#54--banyo-altyapı-fiber-zemin) | Banyo Altyapı (fiber zemin) | 5.2, 5.3 |
+| [5.5](#55--cihaz-yerleştirme-kaplama-öncesi) | Cihaz Yerleştirme (kaplama öncesi) | 5.2, 5.3, 5.4 |
+| **6 — İç Kaplama** | | |
+| [6.1](#61--i̇ç-kaplama-duvar-tavan-zemin) | İç Kaplama (duvar, tavan, zemin) | 3.1, 3.2, 5.2, 5.3, 5.4, 5.5 |
+| **7 — Tamamlama** | | |
+| [7.1](#71--elektrik-bağlantı-tamamlama) | Elektrik Bağlantı Tamamlama (DI/DO terminasyon) | 5.2, 6.1 |
+| [7.2](#72--su-tesisatı-tamamlama) | Su Tesisatı Tamamlama | 3.3, 6.1 |
+| [7.3](#73--elektrik-2-fix-priz-aydınlatma-push-button) | Elektrik 2. Fix (priz, ışık, buton + yerleşim tabloları) | 6.1, 7.1 |
+| [7.4](#74--mutfak-tezgah-montajı) | Mutfak Tezgah Montajı | 7.2, 7.3 |
+| [7.5](#75--banyo-batarya-montajı) | Banyo Batarya Montajı | 7.2, 7.3 |
+| **8 — Tescil** | | |
+| [8.1](#81--tescil-ve-proje) | Tescil ve Proje | 7.5 |
 
 ---
 
-## Adım 0 — Otomasyon Geliştirme (Evde)
-> **DIY** | Bağımlılık: Yok
+## 1.1 — Otomasyon Geliştirme
+> Bağımlılık: Yok
 
 Otomasyon yazılımının ve donanımlarının tedariki. Home Assistant kurulumu, Modbus entegrasyonu, DI/DO testleri, kontrol paneli ekranı entegrasyonu. Araç olmadan evde masaüstünde yapılır.
 
-| # | Ürün | Model | Adet | Fiyat | Kaynak |
-|---|------|-------|------|-------|--------|
-| 1 | Ana Bilgisayar Kasası | Waveshare IPCBOX-CM5-A (4x RS485, CAN, 2DI/2DO, dual ETH, 7-36V) | 1 | ~4.400 ₺ | [Waveshare](https://www.waveshare.com/ipcbox-cm5-a.htm) |
-| 2 | CM5 Modül | Raspberry Pi CM5 8GB Lite (eMMC'siz, BCM2712 2.4GHz) | 1 | ~3.000 ₺ | SAMM Market |
-| 3 | NVMe SSD | 512GB M.2 2242 NVMe (Kioxia / WD) | 1 | ~1.000 ₺ | Genel |
-| 4 | DI/DO Modülü | Waveshare Modbus RTU IO 8CH (8DI/8DO, RS485) | 1 | ~1.428 ₺ | [SAMM Market](https://market.samm.com/endustriyel-8-kanalli-dijital-giris-ve-cikis-modulu) |
-| 5 | Analog Giriş Modülü | Waveshare 8-Ch Analog Acquisition (RS485) | 1 | ~1.555 ₺ | SAMM Market |
-| 6 | Araç Aküsü Float Şarj / Dev PSU | Victron Blue Smart IP65 12/5A (220V AC→12V DC, 60W) | 1 | ~5.000 ₺ | Tekmobil / MarinReyon |
-| 7 | Sigortalı Dağıtım Kutusu | 12'li İkaz Işıklı Negatif Barali Sigorta Kutusu | 1 | ~1.225 ₺ | karavanicin.com |
-| 8 | RS485 Kablo + Konnektör | CAT5e/shielded + terminal bloklar | 1 set | ~500 ₺ | Genel |
-| 9 | Kontrol Paneli Ekranı | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch (Capacitive, Toughened Glass) | 1 | ~4.538 ₺ | [Waveshare](https://www.waveshare.com/11.9inch-HDMI-LCD.htm) |
-| 10 | Mobile DVR | HK Vision DS-M5504HM (4 kanal, Ethernet) | 1 | TBD | TBD |
-| 11 | Network Switch | TBD | 1 | TBD | TBD |
-| 12 | Access Point | TBD (Wi-Fi) | 1 | TBD | TBD |
-| | | | | **~22.646 ₺ + TBD** | |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Ana Bilgisayar Kasası | Waveshare IPCBOX-CM5-A (4x RS485, CAN, 2DI/2DO, dual ETH, 7-36V) | 1 | ~4.400 ₺ | ~4.400 ₺ | [Waveshare](https://www.waveshare.com/ipcbox-cm5-a.htm) | |
+| CM5 Modül | Raspberry Pi CM5 8GB Lite (eMMC'siz, BCM2712 2.4GHz) | 1 | ~3.000 ₺ | ~3.000 ₺ | SAMM Market | |
+| NVMe SSD | 512GB M.2 2242 NVMe (Kioxia / WD) | 1 | ~1.000 ₺ | ~1.000 ₺ | | |
+| DI/DO Modülü | Waveshare Modbus RTU IO 8CH (8DI/8DO, RS485) | 1 | ~1.428 ₺ | ~1.428 ₺ | [SAMM Market](https://market.samm.com/endustriyel-8-kanalli-dijital-giris-ve-cikis-modulu) | |
+| Analog Giriş Modülü | Waveshare 8-Ch Analog Acquisition (RS485) | 1 | ~1.555 ₺ | ~1.555 ₺ | SAMM Market | |
+| Araç Aküsü Float Şarj / Dev PSU | Victron Blue Smart IP65 12/5A (220V AC→12V DC, 60W) | 1 | ~5.000 ₺ | ~5.000 ₺ | Tekmobil / MarinReyon | |
+| Sigortalı Dağıtım Kutusu | 12'li İkaz Işıklı Negatif Barali Sigorta Kutusu | 1 | ~1.225 ₺ | ~1.225 ₺ | karavanicin.com | |
+| RS485 Kablo + Konnektör | CAT5e/shielded + terminal bloklar | 1 set | ~500 ₺ | ~500 ₺ | | |
+| Kontrol Paneli Ekranı | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | 1 | ~4.538 ₺ | ~4.538 ₺ | [Waveshare](https://www.waveshare.com/11.9inch-HDMI-LCD.htm) | |
+| Network Switch | TP-Link TL-SG105 5-port Gigabit | 1 | ~1.500 ₺ | ~1.500 ₺ | | |
+| Access Point | TP-Link EAP225-Outdoor (Wi-Fi 5) | 1 | ~3.500 ₺ | ~3.500 ₺ | | |
+| | | | | **~27.646 ₺** | | |
 
 > **Kur:** 1 USD = 44,07 ₺, 1 EUR = 51,21 ₺ (17 Şubat 2026). Fiyatlar ±%15 sapabilir.
 
-### Adım 0 Kapsam Açıklama
+### 1.1 Kapsam Açıklama
 
-- **#1-3**: Waveshare IPCBOX-CM5-A endüstriyel kutu + RPi CM5 8GB + 512GB NVMe SSD = Home Assistant ana bilgisayar (4x RS485, CAN, 2DI/2DO, 7-36V DC direkt besleme, dual ETH)
-- **#4**: 1x 8DI/8DO → push button (DI), valf / kontaktör bobini (DO); yük anahtarlama Waveshare Modbus röle modülleri (RTU 8CH + POE ETH 16CH)
-- **#5**: Su tankı seviye sensörleri, sıcaklık okumaları
-- **#6**: Victron Blue Smart IP65 12/5A (220V AC → 12V DC) — geliştirme sürecinde otomasyon cihazlarının güç kaynağı olarak kullanılır, karavanda EasySolar-II AC OUT 1'den Waveshare relay ile araç aküsü float şarj (shore yokken de inverter üzerinden çalışır)
-- **#7**: DC taraf sigorta dağıtımı
-- **#8**: Modüller arası RS485 haberleşme kablolaması
-- **#9**: Kontrol paneli ekranı — giriş kapısı üstü, HDMI + USB direkt IPCBOX-CM5-A bağlantısı, HA dashboard
-
----
-
-## Adım 1 — Ön Hazırlık ve Malzeme Tedariği
-> **DIY** | Bağımlılık: Yok (Adım 0 ile paralel)
-
-Uzun tedarik süreli ve önden alınabilecek malzemelerin toplu siparişi. Tüm adımlardan "Önden = E" olanlar bu aşamada sipariş edilebilir.
+- **IPCBOX + CM5 + SSD**: Waveshare IPCBOX-CM5-A endüstriyel kutu + RPi CM5 8GB + 512GB NVMe SSD = Home Assistant ana bilgisayar (4x RS485, CAN, 2DI/2DO, 7-36V DC direkt besleme, dual ETH)
+- **DI/DO Modülü**: 1x 8DI/8DO → push button (DI), valf / kontaktör bobini (DO); yük anahtarlama Waveshare Modbus röle modülleri (RTU 8CH + POE ETH 16CH)
+- **Analog Giriş**: Su tankı seviye sensörleri, sıcaklık okumaları
+- **Float Şarj / Dev PSU**: Victron Blue Smart IP65 12/5A (220V AC → 12V DC) — geliştirme sürecinde otomasyon cihazlarının güç kaynağı olarak kullanılır, karavanda EasySolar-II AC OUT 1'den Waveshare relay ile araç aküsü float şarj (shore yokken de inverter üzerinden çalışır)
+- **Sigortalı Dağıtım Kutusu**: DC taraf sigorta dağıtımı
+- **RS485 Kablo**: Modüller arası RS485 haberleşme kablolaması
+- **Kontrol Paneli Ekranı**: Giriş kapısı üstü, HDMI + USB direkt IPCBOX-CM5-A bağlantısı, HA dashboard
 
 ---
 
-## Adım 2 — Araç Alımı
-> **DIY** | Bağımlılık: Yok
+## 1.2 — Alet ve Atölye Tedariği
+> Bağımlılık: Yok (1.1 ile paralel)
+
+Karavan DIY inşaat sürecinde kullanılacak el aletleri ve elektrik aletleri. Tüm akülü aletler Einhell 18V Power X-Change platformunda — tek akü ailesi.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| **Akülü Aletler (Einhell 18V PXC)** | | | | | | |
+| Darbeli Matkap | Einhell Te-Cd 18/50 Li-I Bi + 4 Ah Starter Kit | 1 | ~5.490 ₺ | ~5.490 ₺ | | |
+| Akü Twinpack | Einhell PXC Twinpack 5.2 Ah (2x 5.2Ah) | 1 | ~5.511 ₺ | ~5.511 ₺ | | |
+| Gönye Testere | Einhell TE-MS 18/210 Li (Solo) | 1 | ~6.500 ₺ | ~6.500 ₺ | | |
+| Avuç Taşlama | Einhell AXXIO 18/115 (Solo) | 1 | ~4.099 ₺ | ~4.099 ₺ | | |
+| Dekupaj Testere | Einhell TE-JS 18 Li (Solo) | 1 | ~2.560 ₺ | ~2.560 ₺ | | |
+| Eksantrik Zımpara | Einhell TP-RS 18/32 Li BL (Solo) | 1 | ~3.967 ₺ | ~3.967 ₺ | | |
+| Raspalama Makinesi | Einhell TE-MG 18/1 Li (Solo) | 1 | ~2.499 ₺ | ~2.499 ₺ | | |
+| Sıcak Hava Tabancası | Einhell TE-HA 18 Li (Solo) | 1 | ~3.960 ₺ | ~3.960 ₺ | | |
+| **Elektrik Tesisat Aletleri** | | | | | | |
+| Otomatik Kablo Sıyırıcı | Knipex 12 62 (180 mm) | 1 | ~3.352 ₺ | ~3.352 ₺ | | |
+| Yüksük Sıkma Pensi | Knipex 97 53 04 (dörtçene) | 1 | ~9.689 ₺ | ~9.689 ₺ | | |
+| Kablo Numaratörü | Mykablo Ec-2 "8" Numara (500 adet) | 1 | ~400 ₺ | ~400 ₺ | | |
+| **Montaj / Sac Aletleri** | | | | | | |
+| Step Drill (Kademeli Panç) | HSS 4-32 mm | 1 | ~999 ₺ | ~999 ₺ | | |
+| Perçin Tabancası | Ceta Form Katlanır Kollu (pop-somun perçin) | 1 | ~9.855 ₺ | ~9.855 ₺ | | |
+| **Sarf Malzeme** | | | | | | |
+| Isı ile Daralan Makaron | Greenbox yapışkanlı 6,4 mm | 1 | ~260 ₺ | ~260 ₺ | | |
+| Makaron Seti | Motorobit 150 parça kutulu siyah | 1 | ~389 ₺ | ~389 ₺ | | |
+| | | | | **~59.530 ₺** | | |
+
+---
+
+## 2.1 — Araç Alımı
+> Bağımlılık: Yok
 
 Iveco Daily veya MAN TGE 18m³ aracın satın alımı.
 
----
-
-## Adım 3 — Kabuk Hazırlık (Kesim ve Dış Montaj)
-> **FİRMA** | Bağımlılık: Adım 2
-
-Araç kaportasına yapılacak kesim, pencere montajı, tavan klima hazırlığı, güneş paneli ray sistemi ve panel montajı, tente montajı ve yapısal takviye işleri. Firma tarafından yapılmalı.
-
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Heki (tavan pencere) | Dometic Midi Heki Style 70x50cm | 1 | TBD | E |
-| Yan pencere büyük | Karavan pencere 100x50cm | 1 | TBD | E |
-| Yan pencere orta | Karavan pencere 60x50cm | 4 | TBD | E |
-| Tavan Klima | Evacool Eva RV 2700 Premium | 1 | ~76.500 ₺ | E |
-| Güneş Paneli | 200W rigid monokristal | 4 | TBD | E |
-| Çatı Ray Sistemi | Alüminyum montaj rayı + bağlantı seti | 1 set | TBD | E |
-| MC4 Konnektör + Kablo | Solar kablo 4mm² + MC4 | 1 set | TBD | E |
-| Tente | Thule Omnistor 6300 (4.0m, L4) | 1 | TBD | E |
-| Banyo Penceresi | Açılabilir buzlu cam ~30x40cm | 1 | TBD | E |
-
-> Not: Pencere, heki ve güneş paneli yerleşimi firma ile birlikte netleştirilecek. Paneller klima ünitesi ve heki ile çakışmayacak şekilde konumlandırılacak. 2S2P konfigürasyon (kısmi gölge dayanıklılığı) önerilir.
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Araç | Iveco Daily / MAN TGE 18m³ | 1 | ~1.800.000 ₺ | ~1.800.000 ₺ | | |
+| | | | | **~1.800.000 ₺** | | |
 
 ---
 
-## Adım 4 — Yalıtım
-> **DIY** | Bağımlılık: Adım 3
+## 3.1 — Sigma Profil İskelet (Mobilya)
+> Bağımlılık: 2.1
 
-Ses ve ısı yalıtımının tamamlanması. Kabuk hazırlıktan sonra, kablo döşemeden önce.
+Araç alımından sonra ilk iş — tüm mobilya iskeletlerinin 20x20 sigma profille yapımı. Karkas, pencere/klima/kablo kesimlerinin referans noktalarını belirler; her şey plana göre oturmalı — 10cm sapma bile pencere yerleşimini bozar.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Ses yalıtım plakası | CTP/Dinamat ses yalıtım | TBD m² | TBD | E |
-| Isı yalıtımı | Folyolu yapışkanlı elastomerik kauçuk | TBD m² | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Sigma Profil | 20x20 alüminyum ekstrüzyon (6 kanal) | 40 m | ~200 ₺/m | ~8.000 ₺ | [cnc-marketi](https://www.cnc-marketi.com/urun/sigma-profil-20x20-6-kanal-sigma-profil) | |
+| Köşe bağlantı elemanları | L/T braketi + M6 somun seti (50 adet) | 1 set | ~1.250 ₺ | ~1.250 ₺ | [cnc-marketi](https://www.cnc-marketi.com/kategori/kose-baglanti-fiyatlari) | |
+| Ana yatak çerçevesi | 200x180cm — yukarıdaki profillerden imalat | 1 | — | — | | |
+| Kanepe-yatak çerçevesi | 200x70cm — yukarıdaki profillerden imalat | 1 | — | — | | |
+| Mutfak dolabı iskeleti | Tezgah + alt/üst dolap — profillerden imalat | 1 set | — | — | | |
+| Yatak altı çekmeceler | Alray teleskopik ray 50cm | 6 çift | ~170 ₺ | ~1.020 ₺ | [aliakdas](https://aliakdas.myideasoft.com/urun/alray-50cm-teleskopik-cekmece-rayi) | |
+| Lagun Masa | 40x80cm, 360° döner mekanizma + tabla | 2 | ~3.700 ₺ | ~7.400 ₺ | [izmirkaravanekipmanlari](https://www.izmirkaravanekipmanlari.com/kategori/karavan-masa-ayaklari) | |
+| | | | | **~17.670 ₺** | | |
 
 ---
 
-## Adım 5 — Elektrik Altyapı: Ekipman Montajı + Kablo Döşeme
-> **DIY** | Bağımlılık: Adım 4
+## 3.2 — Zemin Geliştirme
+> Bağımlılık: 2.1, 3.1
 
-Ana yatak altı teknik alana batarya, inverter (EasySolar-II), otomasyon panosu, Orion XS ve dağıtım donanımlarının fiziksel montajı. Ardından tüm elektrik kablolarının duvar/tavan/zemin altına döşenmesi. Güneş paneli kabloları (Adım 3) bu aşamada EasySolar-II MPPT'ye bağlanır. **İç kaplama yapılmadan ÖNCE tamamlanmalı.**
+Zemin katman yapısının oluşturulması — elastomer pad, sigma mesh, XPS dolgu. Mobilya iskelet pozisyonları (3.1) baz alınarak zemin karkas planlanır.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Elastomer pad | Yapışkanlı elastomerik kauçuk 6mm | ~8 m² | ~325 ₺/m² | ~2.600 ₺ | [karavanicin](https://karavanicin.com/product/6-mm-kendinden-yapiskanli-ve-folyolu-elastomerik-kaucuk-kopugu-karavan-isi-izolasyonu/) | |
+| Zemin sigma mesh | 20x20 sigma profil zemin karkas | 20 m | ~200 ₺/m | ~4.000 ₺ | [cnc-marketi](https://www.cnc-marketi.com/urun/sigma-profil-20x20-6-kanal-sigma-profil) | |
+| XPS levha (zemin) | Bonuspan 20mm | ~8 m² | ~105 ₺/m² | ~840 ₺ | [flextab](https://www.flextab.com.tr/urun/xps-isi-yalitim-levhasi-20mm-20-adet-14-40-m2-0-288m3) | |
+| | | | | **~7.440 ₺** | | |
+
+### Zemin Katman Yapısı (alttan üste)
+
+| Katman | Malzeme | Kalınlık | Adım | İşlev |
+|--------|---------|----------|------|-------|
+| 1 | Sac (mevcut araç tabanı) | — | — | Taşıyıcı referans yüzey |
+| 2 | Elastomer pad | ~3-5mm | 3.2 | Titreşim ve ses yalıtımı |
+| 3 | Sigma profil mesh (20x20) | 20mm | 3.2 | Ana yük dağıtıcı karkas |
+| 4 | XPS (sigma arası dolgu) | 20mm | 3.2 | Boşluk dolgusu + ısı yalıtımı, sigma ile flush yüzey |
+| 5 | Plywood (lip kesimli) | ~12-18mm | 6.1 | Sigma + XPS'i tamamen kapatır, yürünebilir yüzey |
+
+> Sigma 20x20 profiller ve 20mm XPS aynı yükseklikte — zemin düz/flush kalır. Plywood paneller sigma profillerini kapatacak şekilde lip (rabbet) kesimle yerleştirilir; bitmiş zeminde sigma görünmez.
+
+---
+
+## 3.3 — Su Depoları (Şasi Altı)
+> Bağımlılık: 2.1
+
+Şasi altına temiz ve gri su depolarının montajı. 3.2 ile koordineli yapılmalı — zemin sigma mesh rivnut pozisyonları depo montaj noktalarıyla çakışmamalı.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Temiz su deposu | Polietilen gıda uyumlu ~180L | 1 | ~3.500 ₺ | ~3.500 ₺ | [plastiksudepolari](https://plastiksudepolari.com.tr/urun/150-litre-kare-plastik-su-deposu/) | |
+| Gri su deposu | PSA Polietilen 90L | 1 | ~2.050 ₺ | ~2.050 ₺ | [methuskaravan](https://methuskaravan.com.tr/psa-90lt-atik-su-deposu/) | |
+| Temiz su şamandıra | KUS Yakıt/Su Şamandırası 25cm (Ohm 0-190, IP67) | 1 | ~920 ₺ | ~920 ₺ | [agus](https://www.agus.com.tr/karavan--tekne-yakit-ve-su-samandirasi-25-cm) | |
+| Gri su şamandıra | KUS Atık Su Şamandırası 25cm (Ohm 0-190, IP67) | 1 | ~1.262 ₺ | ~1.262 ₺ | [agus](https://www.agus.com.tr/karavan--tekne-atik-samandirasi-25-cm) | |
+| Temiz su boşaltma vanası | Manuel depo vanası 3/8" | 1 | ~120 ₺ | ~120 ₺ | [roteknik](https://roteknik.com.tr/su-aritma/su-aritma-yedek-parcalari/vana/depo-vanasi-3-8/) | |
+| Gri su boşaltma vanası | Manuel depo vanası 3/8" | 1 | ~120 ₺ | ~120 ₺ | [roteknik](https://roteknik.com.tr/su-aritma/su-aritma-yedek-parcalari/vana/depo-vanasi-3-8/) | |
+| | | | | **~7.972 ₺** | | |
+
+> Not: Depo boyutları aracın şasi ölçülerine göre belirlenecek. Sigma zemin iskeletiyle birlikte planlanır.
+
+---
+
+## 4.1 — Pencere Kesim ve Montaj
+> Bağımlılık: 3.1
+
+Karkas referans noktalarına göre yan panel ve tavan kesimi, pencere ve heki montajı. Kesim pozisyonları iç mobilya iskeletine göre belirlenir.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Heki (tavan pencere) | Dometic Midi Heki Style 70x50cm çevirme kollu | 1 | ~30.800 ₺ | ~30.800 ₺ | [karavanaksesuar](https://www.karavanaksesuar.com/urun/dometic-midi-heki-style-50x70-beyaz-karavan-tavan-havalandirma-heki-cevirme-kollu-kopya) | |
+| Yan pencere büyük | Jarup JR50120FW 50x120cm beyaz pervazlı | 2 | ~11.050 ₺ | ~22.100 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/beyaz-pervazli-karavan-penceresi-50x120) | |
+| Yan pencere yatak yanı | Jarup JR45110FW 45x110cm beyaz pervazlı | 2 | ~14.692 ₺ | ~29.384 ₺ | [karavanmarket](https://karavanmarket.com.tr/arama-sayfasi?limit=25&order=ASC&page=5&sort=rating&tag=) | |
+| Banyo Penceresi | Jarup JR3050FW 30x50cm beyaz pervazlı | 1 | ~6.106 ₺ | ~6.106 ₺ | [karavanmarket](https://karavanmarket.com.tr/kapilar-pencereler/pistonlu-karavan-pencereleri/beyaz-pervazli-karavan-penceresi-30x50-jr3050fw) | |
+| | | | | **~88.390 ₺** | | |
+
+> Not: Pencere ve heki yerleşimi karkas referans noktalarına göre netleştirilir. 10cm bile sapma iç mobilya ile hizalamayı bozar.
+
+---
+
+## 4.2 — Tavan Klima Montajı
+> Bağımlılık: 4.1
+
+Tavan klima ünitesinin kesim ve montajı. Heki ve güneş panelleri ile çakışmayacak pozisyonda.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Tavan Klima | Evacool Eva RV 2700 Premium | 1 | ~76.500 ₺ | ~76.500 ₺ | [evacool](https://evacool.com.tr) | |
+| | | | | **~76.500 ₺** | | |
+
+---
+
+## 4.3 — Çatı Ray Sistemi
+> Bağımlılık: 4.2
+
+OEM çatı ray kanallarına montaj rayı kurulumu. Tavana delik açılmaz — fabrika kanalları kullanılır. Ray sistemi güneş paneli ve tente montaj noktalarını birlikte içerecek şekilde planlanır. Klima ve heki pozisyonlarına göre konumlandırılır.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Çatı Ray Sistemi | OEM kanal uyumlu alüminyum montaj rayı 4m (güneş paneli + tente ortak) | 1 set | ~2.000 ₺ | ~2.000 ₺ | [ekomobilsolar](https://www.ekomobilsolar.com/urun/aluminyum-montaj-rayi-1-metre) | |
+| | | | | **~2.000 ₺** | | |
+
+> Not: Ray sistemi güneş panelleri (4.4) ve tente (4.5) için ortak altyapıdır.
+
+---
+
+## 4.4 — Güneş Paneli Montajı
+> Bağımlılık: 4.3
+
+4.3'te kurulan çatı ray sistemine güneş panellerinin montajı.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Güneş Paneli | Pantec PNT-205M 200W rigid monokristal | 4 | ~4.410 ₺ | ~17.640 ₺ | [solarkutu](https://www.solarkutu.com/urun/200w-monokristal-gunes-paneli) | |
+| MC4 Konnektör + Kablo | Multi-Contact MC4 + solar kablo 4mm² set | 1 set | ~500 ₺ | ~500 ₺ | [solarstok](https://www.solarstok.com/urun/multi-contact-mc4-konnektor-seti-4-6mm-by-staubli/) | |
+| | | | | **~18.140 ₺** | | |
+
+> Not: 2S2P konfigürasyon (kısmi gölge dayanıklılığı) önerilir. Solar kablolar 5.2'de EasySolar-II MPPT'ye bağlanır.
+
+---
+
+## 4.5 — Tente Montajı
+> Bağımlılık: 4.3
+
+4.3'te kurulan OEM çatı ray sistemine tente montajı. Giriş kapısı tarafı.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Tente | Thule Omnistor 6300 4.0x2.5m kasetli | 1 | ~58.565 ₺ | ~58.565 ₺ | [2kkaravan](https://2kkaravan.com/thule-omnistor-6300-400-x-250-siyah-cati-tipi-karavan-tentesi) | |
+| Tente montaj braketi | Thule tavan montaj braketi seti | 1 set | ~15.312 ₺ | ~15.312 ₺ | [2kkaravan](https://2kkaravan.com/thule-omnistor-9200-6300-6200-serisi-tavan-montaj-braketi-) | |
+| | | | | **~73.877 ₺** | | |
+
+---
+
+## 4.6 — Kamera Montajı
+> Bağımlılık: 3.1
+
+4 kameranın araç üzerine montajı ve aviation kabloların teknik alana indirilmesi. DVR montajı 5.5'te, bağlantı 7.1'de yapılır.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Analog TVI Kamera | Navistar NVS-340-4PIN AHD 1080P, IR, IP67, 4-pin aviation | 4 | ~1.296 ₺ | ~5.184 ₺ | [prostar](https://www.prostarteknoloji.com/u3116/tum-arac-kameralari/ahd-1080p-ve-analog-cvbs-pal-donusturulebilir-gece-goruslu-4-pin-mini-metal-dome-arac-kamerasi.html) | |
+| Kamera montaj braketi | Alüminyum vibrasyon dayanıklı | 4 | ~250 ₺ | ~1.000 ₺ | prostar | |
+| Kamera aviation kablosu | 4-pin shielded 7m (kamera-teknik alan arası) | 4 | ~410 ₺ | ~1.640 ₺ | [prostar](https://www.prostarteknoloji.com/u3095/arac-kamera-kablolari/4-pin-aviation-hazir-arac-kamera-kablosu-7-metre.html) | |
+| Mobile DVR + HDD | HK Vision DS-M5504HM + Seagate 1TB 2.5" | 1 | ~16.807 ₺ | ~16.807 ₺ | [hikvisiontr](https://hikvisiontr.net/ds-m5504hm-t) | |
+| | | | | **~24.631 ₺** | | |
+
+> Not: Kamera pozisyonları — ön üst, arka kapı üstü, sol/sağ ayna altı. Ayna altı kablolar A sütunu içinden geçirilir.
+
+---
+
+## 5.1 — Yalıtım
+> Bağımlılık: 4.1, 4.2
+
+Kabuk kesimlerden sonra duvar ve tavan ses/ısı yalıtımının tamamlanması. Zemin yalıtımı (elastomer pad) 3.2 zemin adımında yapılır.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Ses yalıtım plakası | Mastercare 2,5mm butil/alüminyum | ~15 m² | ~350 ₺/m² | ~5.250 ₺ | [koctas](https://www.koctas.com.tr/mastercare-25-mm-1-m2-ses-yalitim-levhasi/p/1000169211) | |
+| Isı yalıtımı | Folyolu yapışkanlı elastomerik kauçuk 6mm | ~20 m² | ~325 ₺/m² | ~6.500 ₺ | [karavanicin](https://karavanicin.com/product/6-mm-kendinden-yapiskanli-ve-folyolu-elastomerik-kaucuk-kopugu-karavan-isi-izolasyonu/) | |
+| | | | | **~11.750 ₺** | | |
+
+---
+
+## 5.2 — Elektrik Altyapı: Ekipman Montajı + Kablo Döşeme
+> Bağımlılık: 5.1
+
+Ana yatak altı teknik alana batarya, inverter (EasySolar-II), otomasyon panosu, Orion XS ve dağıtım donanımlarının fiziksel montajı. Ardından tüm elektrik kablolarının duvar/tavan/zemin altına döşenmesi. Güneş paneli kabloları (4.4) bu aşamada EasySolar-II MPPT'ye bağlanır. **İç kaplama yapılmadan ÖNCE tamamlanmalı.**
 
 **Merkezi Ekipman (Teknik Alan)**
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| LiFePO4 Hücre | EVE 3.2V 280Ah prizmatik | 8 | TBD | E |
-| BMS | JBD/Overkill 8S 200A RS485/CAN | 1 | TBD | E |
-| İnverter/Şarj/MPPT | Victron EasySolar-II 3kVA MPPT 250/70 GX | 1 | TBD | E |
-| DC-DC Şarj | Victron Orion XS 1400 | 1 | TBD | E |
-| Relay Modülü (8CH) | Waveshare Modbus RTU Relay (RS485, master + dağıtılmış kanallar) | 1 | ~2.500 ₺ | E |
-| Relay Modülü (16CH) | Waveshare POE ETH 16CH Relay | 1 | ~4.500 ₺ | E |
-| Blade Fuse Block | 8 pozisyonlu blade sigorta dağıtım bloğu | 2 | ~500 ₺ | E |
-| 220V Sigorta Kutusu | Panasonic sıva üstü modüler sigorta kutusu | 1 | ~500 ₺ | E |
-| MCB Sigortalar | CHNT C16 otomatik sigorta | 9 | ~720 ₺ | E |
-| Kaçak Akım Rölesi | 30mA, 2P | 1 | TBD | E |
-| Ana Sigorta | MEGA/ANL 200A | 1 | TBD | E |
-| Ana Kontaktör | 24V DC, 200A | 1 | TBD | E |
-| Shore Power Girişi | Marin tip priz IP67, 16A | 1 | TBD | E |
-| Ana akım kablosu | 16mm² (batarya-inverter) | ~5m | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| LiFePO4 Hücre | EVE LF280 3.2V 280Ah prizmatik | 8 | ~5.350 ₺ | ~42.800 ₺ | [dekarenergy](https://www.thedekarenergy.com/urun/eve-lifepo4-3-2v-lfp-280ah-prizmatik-pil-hucresi) | |
+| BMS | Daly 8S 25.6V 200A K serisi (BT+RS485+CAN) | 1 | ~13.641 ₺ | ~13.641 ₺ | [elektrodepo](https://www.elektrodepo.com/urun/daly-8s-25-6v-200a-lifepo4-smart-bms-bt-uart-485-canbus-k-series) | |
+| İnverter/Şarj/MPPT | Victron EasySolar-II 24/3000/70-32 MPPT 250/70 GX | 1 | ~70.002 ₺ | ~70.002 ₺ | [marinreyon](https://www.marinreyon.com/urun/victron-energy-easysolar-ii-24-3000-70-32-mppt-250-70-gx-pmp242307010) | |
+| DC-DC Şarj | Victron Orion XS 12\|12-50A | 1 | ~21.217 ₺ | ~21.217 ₺ | [denizmar](https://www.denizmar.net/urun/victron-energy-orion-xs-12-12-50a-dc-dc-battery-charger) | |
+| Relay Modülü (8CH) | Waveshare Modbus RTU Relay (RS485) | 1 | ~2.500 ₺ | ~2.500 ₺ | [SAMM Market](https://market.samm.com) | |
+| Relay Modülü (16CH) | Waveshare POE ETH 16CH Relay | 1 | ~4.500 ₺ | ~4.500 ₺ | [SAMM Market](https://market.samm.com) | |
+| Blade Fuse Block | 8 pozisyonlu blade sigorta dağıtım bloğu | 2 | ~500 ₺ | ~1.000 ₺ | karavanicin.com | |
+| 220V Sigorta Kutusu | Panasonic sıva üstü modüler sigorta kutusu | 1 | ~500 ₺ | ~500 ₺ | | |
+| MCB Sigortalar | CHNT C16 otomatik sigorta | 9 | ~80 ₺ | ~720 ₺ | | |
+| Kaçak Akım Rölesi | Chint 2P 25A 30mA | 1 | ~720 ₺ | ~720 ₺ | [elektrodijital](https://www.elektrodijital.com/urun/2x25a-30ma-kacak-akim-rolesi) | |
+| Ana Sigorta | MTA Megaval 200A | 1 | ~135 ₺ | ~135 ₺ | [adamoto](https://www.adamoto.com.tr/urun/megaval-sigorta-200a-mavi-200-amper-mta) | |
+| Ana Kontaktör | Albright SW200-281 24V DC 200A | 1 | ~11.041 ₺ | ~11.041 ₺ | [kartalotomasyon](https://www.kartalotomasyon.com.tr/urun/sw200-281-24dc-kontaktor) | |
+| Acil Durdurma Butonu | Chint 40mm mantar NC panel montaj | 1 | ~108 ₺ | ~108 ₺ | [elektrodijital](https://www.elektrodijital.com/urun/acil-stop-butonu) | |
+| Shore Power Girişi | MeteCEE IP67 16A marin tip | 1 | ~728 ₺ | ~728 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/ip67-16-amp-32-amp-sahil-besleme-prizi-duz) | |
+| Ana akım kablosu | Fly 16mm² bakır (batarya-inverter) | ~5m | ~242 ₺/m | ~1.210 ₺ | [adamoto](https://www.adamoto.com.tr/urun/1-metre-16mm-kirmizi-bakir-aku-kablosu-fly) | |
+| | | | | **~170.822 ₺** | | |
 
 **Kablolama**
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| AC Kablo | NYAF 4mm² (220V hatlar) | ~100m | TBD | E |
-| DC Kablo (sinyal/aydınlatma) | NYAF 2.5mm² (24V/12V) | ~150m | TBD | E |
-| DC Kablo (yüksek akım) | NYAF 4mm² (24V yüksek akım) | ~50m | TBD | E |
-| Kablo koruyucu | Yanmaz spiral kablo koruyucu | TBD m | TBD | E |
-| Buat/Junction box | Elektrik buatları | ~20 | TBD | E |
-| RS485 Haberleşme kablosu | CAT5e shielded | ~30m | TBD | E |
-| Kablo bağı + klips | Montaj malzemesi | 1 set | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| AC Kablo | Pamukkale NYAF 4mm² (220V hatlar) | ~100m | ~28 ₺/m | ~2.800 ₺ | [kablocu](https://www.kablocu.com.tr/4-mm-nyaf-pamukkale) | |
+| DC Kablo (sinyal/aydınlatma) | Pamukkale NYAF 2.5mm² (24V/12V) | ~150m | ~18 ₺/m | ~2.700 ₺ | [kablocu](https://www.kablocu.com.tr/25-mm-nyaf-pamukkale) | |
+| DC Kablo (yüksek akım) | Pamukkale NYAF 4mm² (24V yüksek akım) | ~50m | ~28 ₺/m | ~1.400 ₺ | [kablocu](https://www.kablocu.com.tr/4-mm-nyaf-pamukkale) | |
+| Kablo koruyucu | CETEX spiral 25mm yanmaz | ~30m | ~51 ₺/m | ~1.530 ₺ | [hufferelektrik](https://www.hufferelektrik.com/urun/25-lik-kablo-toplama-spirali-gri-1311) | |
+| Buat/Junction box | Çetinkaya IP65 ABS sıva üstü | ~20 | ~100 ₺ | ~2.000 ₺ | [elektrikpiyasa](https://www.elektrikpiyasa.com) | |
+| RS485 Haberleşme kablosu | CAT5e shielded | ~30m | ~15 ₺/m | ~450 ₺ | | |
+| Kablo bağı + klips | Montaj malzemesi seti | 1 set | ~200 ₺ | ~200 ₺ | | |
+| | | | | **~11.080 ₺** | | |
 
 > Not: Kablo güzergahları aşağıdaki pano şeması ve kanal haritalarına göre planlanır.
 
@@ -237,88 +434,74 @@ Aydınlatma, DC cihazlar ve ek 220V cihaz kontrolü. POE Ethernet üzerinden Mod
 
 ---
 
-## Adım 6 — Su 1. Fix: Boru Döşeme
-> **DIY** | Bağımlılık: Adım 4
+## 5.3 — Su 1. Fix: Boru Döşeme
+> Bağımlılık: 5.1
 
 PEX boruların duvar/zemin altına döşenmesi. **İç kaplama yapılmadan ÖNCE tamamlanmalı.**
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| PEX Boru (soğuk su) | 16mm PEX-A | ~20m | TBD | E |
-| PEX Boru (sıcak su) | 16mm PEX-A (izoleli) | ~15m | TBD | E |
-| Gri su borusu | 28-32mm esnek hortum | ~10m | TBD | E |
-| Bağlantı elemanları | Press fitting / push-fit set | 1 set | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| PEX Boru (soğuk su) | Vesbo PEX-A 16x2mm | ~20m | ~28 ₺/m | ~560 ₺ | [yerdenisitma](https://www.yerdenisitma.com.tr/urun/vesbo-yerden-isitma-borusu-pex-a-16x2-600-metre) | |
+| PEX Boru (sıcak su) | Vesbo PEX-A 16x2mm (izoleli) | ~15m | ~35 ₺/m | ~525 ₺ | yerdenisitma.com | |
+| Gri su borusu | Esnek hortum 32mm | ~10m | ~46 ₺/m | ~460 ₺ | [edukkanim](https://www.edukkanim.com.tr/gri-toz-emis-hortumu-1-1-4-inch-32-mm-50-metre) | |
+| Bağlantı elemanları | PEX press fitting set (~20 adet) | 1 set | ~600 ₺ | ~600 ₺ | vipiri.com | |
+| | | | | **~2.145 ₺** | | |
 
 ---
 
-## Adım 7 — Banyo Altyapı: Fiber Zemin
-> **DIY** | Bağımlılık: Adım 5, Adım 6
+## 5.4 — Banyo Altyapı: Fiber Zemin
+> Bağımlılık: 5.2, 5.3
 
 Banyo (70x180cm dik tam genişlik) ve su alanı için fiber kompozit zemin yapımı.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Fiber elyaf | Cam elyaf kumaş | TBD m² | TBD | E |
-| Epoksi reçine | Laminasyon epoksi + sertleştirici | TBD kg | TBD | E |
-| XPS levha | Yoğun XPS köpük | TBD m² | TBD | E |
-| Son kat boya | PU beyaz boya (su geçirmez) | TBD lt | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Fiber elyaf | HITEX cam elyaf dokuma 100g/m² | ~5 m² | ~115 ₺/m² | ~575 ₺ | [kompozitpazari](https://kompozitpazari.com/urun/cam-elyaf-dokuma-kumas-100-g-m2-plain/) | |
+| Epoksi reçine | EpoXs laminasyon epoksi set (reçine + sertleştirici) | ~3 kg | ~467 ₺/1.5kg | ~934 ₺ | [kalipsilikonu](https://www.kalipsilikonu.com/urun/laminasyon-epoksi-set-1-5-kg) | |
+| XPS levha | Bonuspan yoğun XPS köpük 20mm | ~3 m² | ~105 ₺/m² | ~315 ₺ | [flextab](https://www.flextab.com.tr/urun/xps-isi-yalitim-levhasi-20mm-20-adet-14-40-m2-0-288m3) | |
+| Son kat boya | Polchem PU beyaz mat (su geçirmez) | ~2 lt | ~230 ₺/lt | ~460 ₺ | [alizemarinmarket](https://www.alizemarinmarket.com/urun/polchem-poliuretan-beyaz-mat-son-kat-boya) | |
+| | | | | **~2.284 ₺** | | |
 
 ---
 
-## Adım 8 — Sigma Profil İskelet (Mobilya Altyapısı)
-> **DIY** | Bağımlılık: Adım 4
+## 5.5 — Cihaz Yerleştirme (Kaplama Öncesi)
+> Bağımlılık: 5.2, 5.3, 5.4
 
-Tüm mobilya iskeletlerinin sigma (aluminyum ekstrüzyon) profilden yapımı. İç kaplama bu iskeletlerin etrafına uygulanacağı için **kaplamadan ÖNCE** tamamlanmalı.
+Kaplama firmasından ÖNCE yerleştirilmesi gereken büyük cihazlar. Bunların fiziksel boyutları ve pozisyonları kaplama ölçülerini belirler — mm hassasiyetinde flush noktaları için cihazlar yerinde olmalı.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Sigma Profil | 30x30 ve 30x60 alüminyum ekstrüzyon | TBD m | TBD | E |
-| Köşe bağlantı elemanları | L/T braketi, cıvata seti | 1 set | TBD | E |
-| Ana yatak çerçevesi | 200x180cm sigma iskelet (yatak altı teknik alan erişimli) | 1 | TBD | H |
-| Kanepe-yatak çerçevesi | 200x70cm sigma iskelet (tek kişilik yatak dönüşümlü, kanepe altı çekmeceli buzdolabı alanı) | 1 | TBD | H |
-| Mutfak dolabı iskeleti | Tezgah + alt dolap + üst dolap sigma çerçeve | 1 set | TBD | H |
-| Yatak altı çekmeceler | Teknik alan erişimli çekmece rayları | TBD | TBD | H |
-| Lagun Masa | 40x80cm, 360° döner, sökülebilir | 2 | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Buzdolabı 1 | Evacool Marin Berlin 90L 12/24V | 1 | ~27.020 ₺ | ~27.020 ₺ | [denizmar](https://www.denizmar.net/urun/evacool-marin-buzdolabi-90-lt-12-24-v-berlin) | |
+| Buzdolabı 2 | Evacool EVA D31 R Çekmeceli 24V | 1 | ~14.500 ₺ | ~14.500 ₺ | [evacool](https://evacool.com.tr/eva-d31-r-cekmeceli-buzdolabi) | |
+| Bulaşık Makinesi | Electrolux ESF2400OS kompakt | 1 | ~17.229 ₺ | ~17.229 ₺ | [idefix](https://www.idefix.com/electrolux-esf2400os-kompakt-6-programli-gri-tezgah-ustu-bulasik-makinesi-p-690536) | |
+| Clesana C1 | Susuz tuvalet (12V) | 1 | ~73.750 ₺ | ~73.750 ₺ | [reimo](https://www.reimo.com/tr/kamp-malzemeleri/su-tesisati-sanitasyon-karavan-tuvaleti/thetford-dometic-kaset-tuvaleti/42003/clesana-c1-yuvarlak-tabanli-susuz-tuvalet) | |
+| | | | | **~132.499 ₺** | | |
 
----
-
-## Adım 9 — Su Depoları (Şasi Altı)
-> **FİRMA** | Bağımlılık: Adım 2
-
-Şasi altına temiz ve gri su depolarının montajı. Adım 3 ile paralel yapılabilir.
-
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Temiz su deposu | Polietilen, gıda uyumlu | 1 (180L) | TBD | H |
-| Gri su deposu | Polietilen | 1 (90L) | TBD | H |
-| Temiz su şamandıra | Seviye sensörü | 1 | TBD | E |
-| Gri su şamandıra | Seviye sensörü | 1 | TBD | E |
-| Temiz su boşaltma vanası | Manuel vana | 1 | TBD | E |
-| Gri su boşaltma vanası | Manuel vana | 1 | TBD | E |
-
-> Not: Depo boyutları aracın şasi ölçülerine göre belirlenecek.
+> Not: Bu cihazlar sigma iskelet içindeki yerlerine monte edilir. Kaplama firması kapak/panel ölçülerini bu cihazların fiziksel pozisyonlarına göre alır.
 
 ---
 
-## Adım 10 — İç Kaplama (Duvar, Tavan, Zemin)
-> **DIY / FİRMA** | Bağımlılık: Adım 5, Adım 6, Adım 7, Adım 8
+## 6.1 — İç Kaplama (Duvar, Tavan, Zemin)
+> Bağımlılık: 3.1, 3.2, 5.2, 5.3, 5.4, 5.5
 
 Elektrik ve su 1. fix tamamlandıktan sonra duvar, tavan ve zemin kaplaması.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Duvar kaplama | TBD (ahşap panel / lamine) | TBD m² | TBD | H |
-| Tavan kaplama | TBD (hafif panel) | TBD m² | TBD | H |
-| Zemin döşeme | TBD (vinil / lamine parke) | TBD m² | TBD | H |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Duvar kaplama | TBD (ahşap panel / lamine) | ~20 m² | TBD | TBD | | |
+| Tavan kaplama | TBD (hafif panel) | ~10 m² | TBD | TBD | | |
+| Plywood (zemin) | Lip kesimli, sigma + XPS'i kapatır | ~8 m² | TBD | TBD | | |
+| Zemin son kat | TBD (vinil / lamine parke) — plywood üzerine | ~8 m² | TBD | TBD | | |
+| | | | | **TBD (firma teklifi)** | | |
 
-> Not: Malzeme seçimleri iç tasarım kararlarına bağlı, araç ölçüldükten sonra netleştirilecek.
+> Not: Malzeme seçimleri iç tasarım kararlarına bağlı, araç ölçüldükten sonra netleştirilecek. Zemin katman yapısı bkz. 3.2.
 
 ---
 
-## Adım 11 — Elektrik Bağlantı Tamamlama
-> **DIY** | Bağımlılık: Adım 5, Adım 10
+## 7.1 — Elektrik Bağlantı Tamamlama
+> Bağımlılık: 5.2, 6.1
 
-Adım 5'te yerleştirilen merkezi ekipman ve döşenen kabloların, iç kaplama (Adım 10) sonrası uç noktalarına sonlandırılması. Pano içi kablo bağlantıları, sigorta atamaları ve RS485 bus terminasyonlarının tamamlanması.
+5.2'de yerleştirilen merkezi ekipman ve döşenen kabloların, iç kaplama (6.1) sonrası uç noktalarına sonlandırılması. Pano içi kablo bağlantıları, sigorta atamaları ve RS485 bus terminasyonlarının tamamlanması.
 
 - [ ] Tüm kablo uçlarının panoya terminasyonu
 - [ ] Waveshare relay modüllerinin Modbus konfigürasyonu
@@ -357,42 +540,44 @@ Adım 5'te yerleştirilen merkezi ekipman ve döşenen kabloların, iç kaplama 
 
 ---
 
-## Adım 12 — Su Tesisatı Tamamlama
-> **DIY** | Bağımlılık: Adım 9, Adım 10
+## 7.2 — Su Tesisatı Tamamlama
+> Bağımlılık: 3.3, 6.1
 
 Su tesisatının cihazlara bağlanması, pompa ve ısıtma sistemi montajı.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| Hidrofor (su pompası) | 24V DC basınçlı pompa | 1 | TBD | E |
-| Genleşme kabı | 24V balonlu tip | 1 | TBD | E |
-| Macerator pompa | SHURflo 24V | 1 | TBD | E |
-| Isıtma + Sıcak Su | Truma Combi 4D (12V, dizel) | 1 | TBD | E |
-| Truma Kontrol | Truma iNet CP plus | 1 | TBD | E |
-| Truma Hava Dağıtım | İzoleli hortum + menfez kiti | 1 set | TBD | E |
-| Truma Yakıt Kiti | Yakıt pompası, filtre, dizel hat | 1 set | TBD | E |
-| Sıcak su dağıtım kollektörü | Pirinç kollektör | 1 | TBD | E |
-| Soğuk su dağıtım kollektörü | Pirinç kollektör | 1 | TBD | E |
-| Actuator valf | 24V otomatik vana (donma koruması) | 1 | TBD | E |
-| Çamaşır Makinesi | FİX Mini 3kg (bagaj su servis alanı) | 1 | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Hidrofor (su pompası) | SHURflo 24V 30psi 11L/dk | 1 | ~6.391 ₺ | ~6.391 ₺ | [eckmarine](https://www.eckmarine.com/urun/shurflo-hidrofor-11-lt-dk-30-psi-24-v) | |
+| Genleşme kabı | Seaflo 1L basınç tankı | 1 | ~1.445 ₺ | ~1.445 ₺ | [karavanyapimarket](https://karavanyapimarket.com/urun/seaflo-genlesme-tanki-1l) | |
+| Macerator pompa | SHURflo 24V Macerator | 1 | ~8.069 ₺ | ~8.069 ₺ | [marinreyon](https://www.marinreyon.com/urun/shurflo-24-v-macerator) | |
+| Isıtma + Sıcak Su | Truma Combi D4 (dizel, 12V kontrol) | 1 | ~149.168 ₺ | ~149.168 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/truma-combi-d4-dizel) | |
+| Truma Kontrol | Truma iNet CP plus | 1 | ~17.000 ₺ | ~17.000 ₺ | (tahmini ~330 EUR) | |
+| Truma Hava Dağıtım | İzoleli hortum 65mm + menfez + T parça kiti | 1 set | ~5.000 ₺ | ~5.000 ₺ | [karavanaksesuar](https://www.karavanaksesuar.com) | |
+| Truma Yakıt Kiti | Yakıt pompası, filtre, dizel hat seti | 1 set | ~6.930 ₺ | ~6.930 ₺ | (tahmini ~135 EUR) | |
+| Sıcak su dağıtım kollektörü | Pirinç 4 çıkışlı | 1 | ~1.500 ₺ | ~1.500 ₺ | | |
+| Soğuk su dağıtım kollektörü | Pirinç 4 çıkışlı | 1 | ~1.500 ₺ | ~1.500 ₺ | | |
+| Actuator valf | 24V motorlu küresel vana DN15 (donma koruması) | 1 | ~2.500 ₺ | ~2.500 ₺ | | |
+| Çamaşır Makinesi | FIX Mini Me 3kg | 1 | ~45.999 ₺ | ~45.999 ₺ | [yavuzerkaravan](https://www.yavuzerkaravan.com/fix-mini-me-camasir-makinesi-karavan-ve-tekne-camasir-makinesi) | |
+| | | | | **~245.502 ₺** | | |
 
 ---
 
-## Adım 13 — Elektrik 2. Fix: Priz, Aydınlatma, Push Button
-> **DIY** | Bağımlılık: Adım 10, Adım 11
+## 7.3 — Elektrik 2. Fix: Priz, Aydınlatma, Push Button
+> Bağımlılık: 6.1, 7.1
 
-Kabloları daha önce döşedik (Adım 5). Şimdi uç cihazların montajı.
+Kabloları daha önce döşedik (5.2). Şimdi uç cihazların montajı.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| 220V Priz | Sıva üstü karavan tipi | 8 | TBD | E |
-| 12V Priz | DC priz | 1 | TBD | E |
-| USB-C Soket | Otomotiv 100W PD (24V giriş) | 8 | TBD | E |
-| Push Button | Anlık buton (NO) | 7 | TBD | E |
-| LED Spot | 24V LED spot armatür | TBD | TBD | E |
-| LED Şerit | 24V RGB LED şerit (Ana yatak tavan) | TBD m | TBD | E |
-| LED Şerit | 24V RGB LED şerit (Oturma ambient) | TBD m | TBD | E |
-| Shelly Plus RGBW PM | Wi-Fi dimmer + renk, 24V | 2 | ~2.450 ₺ | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| 220V Priz | Westacc kapaklı sıva üstü karavan tipi | 8 | ~278 ₺ | ~2.224 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/220v-priz-kopya) | |
+| 12V Priz | TYA çakmak tipi panel montaj | 1 | ~70 ₺ | ~70 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/cakmak-12v) | |
+| USB-C Soket | Powerway Bullet 100W PD panel montaj (12-24V) | 8 | ~641 ₺ | ~5.128 ₺ | [erdenteknoloji](https://www.erdenteknoloji.com.tr/urun/powerway-bullet-100w-arac-cakmaklik-sarj-cihazi-type-c-ve-usb-cikisli-profesyonel-turbo-hizli-sarj) | |
+| Push Button | 22mm LED'li anlık buton NO | 7 | ~187 ₺ | ~1.309 ₺ | [elektronikaled](https://elektronikaled.com/urun/22-mm-yayli-ve-ledli-buton-power-simge/) | |
+| LED Spot | 24V LED downlight karavan armatür | 10 | ~250 ₺ | ~2.500 ₺ | | |
+| LED Şerit | 24V RGB LED şerit IP65 (Ana yatak tavan) | 5 m | ~135 ₺/m | ~675 ₺ | [ledurunleri](https://www.ledurunleri.com/24v-rgb-serit-led-dis-mekan-silikonlu-ip65-5-metre) | |
+| LED Şerit | 24V RGB LED şerit IP65 (Oturma ambient) | 5 m | ~135 ₺/m | ~675 ₺ | [ledurunleri](https://www.ledurunleri.com/24v-rgb-serit-led-dis-mekan-silikonlu-ip65-5-metre) | |
+| Shelly Plus RGBW PM | Wi-Fi dimmer + renk, 24V | 2 | ~2.450 ₺ | ~4.900 ₺ | | |
+| | | | | **~17.481 ₺** | | |
 
 ### Priz ve Soket Yerleşimi
 
@@ -458,65 +643,88 @@ Kabloları daha önce döşedik (Adım 5). Şimdi uç cihazların montajı.
 
 ---
 
-## Adım 14 — Cihaz Montajı
-> **DIY** | Bağımlılık: Adım 12, Adım 13
+## 7.4 — Mutfak Tezgah Montajı
+> Bağımlılık: 7.2, 7.3
 
-Tüm beyaz eşya, mutfak cihazları, banyo donanımları ve güneş paneli montajı.
+Bitmiş tezgah yüzeyine kesim ve montaj.
 
-| Ürün | Model | Adet | Fiyat | Önden |
-|------|-------|------|-------|-------|
-| İndüksiyon Ocak | Thetford Induction Hob | 1 | TBD | E |
-| Bulaşık Makinesi | Electrolux ESF2400O | 1 | TBD | E |
-| Buzdolabı 1 | Evacool Eva Berlin 90L (24V, tezgah içi) | 1 | TBD | E |
-| Buzdolabı 2 | Evacool D31 R Çekmeceli (24V, kanepe altı) | 1 | TBD | E |
-| Eviye | Thetford Argent Sink 63x47cm | 1 | TBD | E |
-| Mutfak Musluk | Sıcak/soğuk termostatik | 1 | TBD | E |
-| Clesana C1 | Susuz tuvalet (12V) | 1 | TBD | E |
-| Lavabo | Kompakt köşe ~40x30cm | 1 | TBD | E |
-| Banyo Batarya | Sıcak/soğuk spiralli | 1 | TBD | E |
-| Duş Batarya | Termostatik duş bataryası | 1 | TBD | E |
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| İndüksiyon Ocak | Thetford Induction Hob (tezgah kesimi) | 1 | ~12.000 ₺ | ~12.000 ₺ | thetford.com (tahmini ~230 EUR) | |
+| Eviye | Thetford Argent Sink 63x47cm TFSSK1055-SP | 1 | ~15.048 ₺ | ~15.048 ₺ | [marinreyon](https://www.marinreyon.com/urun/dikdortgen-eviye) | |
+| Mutfak Musluk | Karavan termostatik eviye bataryası | 1 | ~4.000 ₺ | ~4.000 ₺ | | |
+| | | | | **~31.048 ₺** | | |
 
 ---
 
-## Adım 15 — Test ve Devreye Alma
-> **DIY** | Bağımlılık: Tüm adımlar
+## 7.5 — Banyo Batarya Montajı
+> Bağımlılık: 7.2, 7.3
 
-Tüm sistemlerin entegre testi ve Home Assistant konfigürasyonunun finalize edilmesi.
+Bitmiş banyo duvar/zemin yüzeyine montaj.
 
-- [ ] Elektrik: Tüm devre testleri, kaçak akım testi
-- [ ] 220V: Shore power, inverter, yük yönetimi testi
-- [ ] 24V/12V DC: Batarya, DC-DC şarj, güneş paneli testi
-- [ ] Su: Basınç testi, sıcak su, drenaj, kaçak kontrolü
-- [ ] Otomasyon: DI/DO, Waveshare relay toggle, Modbus doğrulama
-- [ ] Aydınlatma: Tüm LED, Shelly RGBW PM, push button testi
-- [ ] Klima: Soğutma/ısıtma performans testi
-- [ ] Truma: Isıtma + sıcak su, dizel yakıt sistemi testi
-- [ ] Güvenlik: Sigorta, kaçak akım, aşırı yük senaryoları
-- [ ] Home Assistant: Tüm otomasyon senaryolarının çalıştırılması
-- [ ] İlk seyahat öncesi genel kontrol
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Lavabo | Cerastyle Sharp 40x30cm etajerli | 1 | ~2.031 ₺ | ~2.031 ₺ | [banyocu](https://banyocu.com.tr/magaza/cerastyle-sharp-etajerli-lavabo-40x30-cm/) | |
+| Banyo Batarya | Comet spiralli karavan banyo musluğu | 1 | ~7.020 ₺ | ~7.020 ₺ | [agus](https://www.agus.com.tr/comet-spiralli-karavan-banyo-muslugu) | |
+| Duş Batarya | Fause termostatik duş bataryası KTB102 | 1 | ~3.100 ₺ | ~3.100 ₺ | [yapimanya](https://www.yapimanya.com/urun/fause-termostatik-dus-bataryasi-ktb102) | |
+| | | | | **~12.151 ₺** | | |
 
 ---
 
-## Özet Tablo
+## 8.1 — Tescil ve Proje
+> Bağımlılık: 7.5
 
-| Adım | İş | Sorumlu | Bağımlılık |
-|------|----|---------|------------|
-| 0 | Otomasyon Geliştirme | DIY | - |
-| 1 | Ön Hazırlık / Malzeme Tedariği | DIY | - |
-| 2 | Araç Alımı | DIY | - |
-| 3 | Kabuk Hazırlık (kesim, pencere, klima, tente) | FİRMA | 2 |
-| 4 | Yalıtım (ses + ısı) | DIY | 3 |
-| 5 | Elektrik Altyapı (ekipman montajı + kablo döşeme) | DIY | 4 |
-| 6 | Su 1. Fix (boru döşeme) | DIY | 4 |
-| 7 | Banyo Altyapı (fiber zemin) | DIY | 5, 6 |
-| 8 | Sigma Profil İskelet (mobilya altyapısı) | DIY | 4 |
-| 9 | Su Depoları (şasi altı) | FİRMA | 2 |
-| 10 | İç Kaplama (duvar, tavan, zemin) | DIY/FİRMA | 5, 6, 7, 8 |
-| 11 | Elektrik Bağlantı Tamamlama | DIY | 5, 10 |
-| 12 | Su Tesisatı Tamamlama | DIY | 9, 10 |
-| 13 | Elektrik 2. Fix (priz, ışık, buton) | DIY | 10, 11 |
-| 14 | Cihaz Montajı | DIY | 12, 13 |
-| 15 | Test ve Devreye Alma | DIY | Tüm |
+Karavan dönüşüm sonrası resmi tescil, proje onayı ve vergi işlemleri.
+
+| Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
+|------|-------|------|-------|--------|--------|--------|
+| Dönüşüm Vergisi | Motorlu Taşıtlar Dönüşüm Vergisi | 1 | ~600.000 ₺ | ~600.000 ₺ | | |
+| Tescil ve Proje Hizmeti | Mühendislik proje + tescil işlemleri | 1 | ~30.000 ₺ | ~30.000 ₺ | | |
+| | | | | **~630.000 ₺** | | |
+
+---
+
+## Proje Bütçe Özeti
+
+| Faz | Adım | Toplam |
+|-----|------|--------|
+| **1 — Hazırlık** | | |
+| | 1.1 Otomasyon Geliştirme | ~27.646 ₺ |
+| | 1.2 Alet ve Atölye Tedariği | ~59.530 ₺ |
+| **2 — Araç** | | |
+| | 2.1 Araç Alımı | ~1.800.000 ₺ |
+| **3 — Karkas İnşaat** | | |
+| | 3.1 Sigma Profil İskelet (mobilya) | ~17.670 ₺ |
+| | 3.2 Zemin Geliştirme | ~7.440 ₺ |
+| | 3.3 Su Depoları (şasi altı) | ~7.972 ₺ |
+| **4 — Kabuk İşleri** | | |
+| | 4.1 Pencere (Jarup + Dometic) | ~88.390 ₺ |
+| | 4.2 Tavan Klima (Evacool) | ~76.500 ₺ |
+| | 4.3 Çatı Ray Sistemi | ~2.000 ₺ |
+| | 4.4 Güneş Paneli (Pantec) | ~18.140 ₺ |
+| | 4.5 Tente (Thule 6300) | ~73.877 ₺ |
+| | 4.6 Kamera Montajı | ~24.631 ₺ |
+| **5 — İç Hazırlık** | | |
+| | 5.1 Yalıtım | ~11.750 ₺ |
+| | 5.2 Elektrik Altyapı (ekipman) | ~170.822 ₺ |
+| | 5.2 Elektrik Altyapı (kablolama) | ~11.080 ₺ |
+| | 5.3 Su 1. Fix (boru döşeme) | ~2.145 ₺ |
+| | 5.4 Banyo Altyapı | ~2.284 ₺ |
+| | 5.5 Cihaz Yerleştirme | ~132.499 ₺ |
+| **6 — İç Kaplama** | | |
+| | 6.1 İç Kaplama | TBD (firma teklifi) |
+| **7 — Tamamlama** | | |
+| | 7.1 Elektrik Bağlantı Tamamlama | — |
+| | 7.2 Su Tesisatı Tamamlama | ~245.502 ₺ |
+| | 7.3 Elektrik 2. Fix | ~17.481 ₺ |
+| | 7.4 Mutfak Tezgah Montajı | ~31.048 ₺ |
+| | 7.5 Banyo Batarya Montajı | ~12.151 ₺ |
+| **8 — Tescil** | | |
+| | 8.1 Tescil ve Proje | ~630.000 ₺ |
+| | | |
+| **GENEL TOPLAM** | **(iç kaplama hariç)** | **~3.470.558 ₺** |
+
+> **Kur:** 1 USD ≈ 44 ₺, 1 EUR ≈ 51 ₺ (Şubat 2026). Fiyatlar ±%15 sapabilir. İç kaplama (6.1) firma teklifine bağlı, toplama dahil değil.
 
 ---
 
