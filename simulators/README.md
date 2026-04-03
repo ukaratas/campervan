@@ -104,10 +104,10 @@ echo "Latching Relay 03 started (PID: $RELAY03_PID)"
 
 | Modül | Port | Açıklama | Folder |
 |-------|------|----------|--------|
-| **Latching Relay 01** | 5023 | 8-kanal bistable röle<br/>Aydınlatma kontrolü | `waveshare-latching-relay-01/` |
+| **Latching Relay 01** | 5023 | 8-kanal Waveshare relay (Modbus simülasyonu)<br/>Aydınlatma kontrolü | `waveshare-latching-relay-01/` |
 | **DI/DO 01** | 5024 | 8 Digital Input (push buttons)<br/>8 Digital Output (switches) | `waveshare-di-do-01/` |
-| **Latching Relay 02** | 5025 | 8-kanal bistable röle<br/>Banyo + Su sistemi | `waveshare-latching-relay-02/` |
-| **Latching Relay 03** | 5026 | 8-kanal bistable röle<br/>Yüksek tüketim cihazları | `waveshare-latching-relay-03/` |
+| **Latching Relay 02** | 5025 | 8-kanal Waveshare relay (Modbus simülasyonu)<br/>Banyo + Su sistemi | `waveshare-latching-relay-02/` |
+| **Latching Relay 03** | 5026 | 8-kanal Waveshare relay (Modbus simülasyonu)<br/>Yüksek tüketim cihazları | `waveshare-latching-relay-03/` |
 
 ## 🎮 Kullanım
 

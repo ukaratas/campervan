@@ -13,9 +13,9 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 | Kategori | Ürün/Modül | Özellikler |
 |----------|------------|------------|
 | **Ana Kontrolcü** | Waveshare IPCBOX-CM5-A + RPi CM5 8GB Lite + 512GB NVMe SSD | 4x RS485, CAN, 2DI/2DO, dual ETH (1G+2.5G), 7-36V DC, M.2 4G/5G slot, DIN rail, alüminyum kasa |
-| **DI/DO Modülleri** | Waveshare 8DI/8DO (RS485) × 3 | Bistable röle toggle (DO) + durum feedback (DI) |
-| **Master Röle** | CHINT NJMC1 32A 4P (Camper ON/OFF) | 220V + 24V + 12V rail anahtarlama |
-| **Bireysel Röleler** | CHINT NJMC1 16A 2P bistable × 19 | AC + DC yükler (1P high-side switch, 1P DI feedback) |
+| **DI/DO Modülü** | Waveshare 8DI/8DO (RS485) × 1 | Push button (DI), valf / kontaktör bobini tetik (DO); yük anahtarlama Waveshare Modbus röle modülleri |
+| **Master / camper enable** | Waveshare 8CH RTU Relay (master startup) | Camper ON/OFF — 220V + 24V + 12V rail anahtarlama (Modbus RTU) |
+| **Yük röleleri** | Waveshare Modbus relay (RTU 8CH + POE ETH 16CH) | AC + DC yükler; doğrudan Modbus ile HA kontrolü |
 | **Analog Giriş** | Industrial 8-Ch Analog Acquisition Module | 12-bit hassasiyet, voltaj/akım okuma, RS485 |
 | **Kontrol Paneli** | Waveshare 11.9" HDMI LCD 320×1480 IPS Touch | Giriş kapısı üstü, HDMI + USB direkt bağlantı, HA dashboard |
 
@@ -49,7 +49,7 @@ Karavanın tüm sistemlerinin merkezi ve akıllı şekilde izlenmesi, kontrolü 
 
 ### Harici Aydınlatma Sistemi (2 devre)
 - **Dış Aydınlatma 1 + 2:** 24V LED dış aydınlatma
-- **Kontrol:** NJMC1 16A 2P bistable röle + DI/DO (HA otomasyon)
+- **Kontrol:** DI → HA → Waveshare relay (Modbus)
 - **Senaryo:** Kapı açıldığında otomatik aydınlatma, uzaktan kontrol
 
 ## ⚡ Elektrik ve Su Tesisatı

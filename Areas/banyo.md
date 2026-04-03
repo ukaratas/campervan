@@ -1,31 +1,32 @@
 # Banyo (Bathroom)
 
-Araç sol arka köşesinde konumlandırılan kompakt ama fonksiyonel banyo alanı. Duş, Clesana C1 susuz tuvalet ve lavabo ile tam donanımlı.
+Araç ortasında, dik yerleşimli (yatak ile ön yaşam alanı arasında), araç tam genişliğince yayılan kompakt ama fonksiyonel banyo alanı. Ortada duş kabini, dışında Clesana C1 susuz tuvalet ve lavabo ile tam donanımlı.
 
 ## 🚿 Banyo Alanı Özellikleri
 
 ### Genel Boyutlar
-- **Konum:** Sol arka köşe (araç arkasında)
-- **Uzunluk:** 120cm (araç boyunca)
-- **Genişlik:** ~110-120cm (standart karavan banyosu)
+- **Konum:** Araç ortası, dik yerleşim (yatak ile ön yaşam alanı arasında)
+- **Derinlik:** ~70cm (araç boyunca)
+- **Genişlik:** ~180cm (araç tam genişliği)
 - **Yükseklik:** ~200cm (tavan yüksekliği)
-- **Toplam Alan:** ~1.3-1.4 m²
+- **Toplam Alan:** ~1.26 m²
+- **Kapı:** Sürgülü kapılar (her iki taraftan erişim)
 
 ### Banyo Bileşenleri
-- **Duş Kabini:** Katlanabilir duş bölmesi
-- **Susuz Tuvalet:** Clesana C1 (12V, 0.55Wh/flush)
-- **Lavabo:** Kompakt el yıkama lavabosı
+- **Duş Kabini:** Banyo ortasında, 100x70cm kapalı duş alanı
+- **Susuz Tuvalet:** Clesana C1 (12V, 0.55Wh/flush) — duş kabini dışında
+- **Lavabo:** Kompakt el yıkama lavabosı — duş kabini dışında
 - **Ayna:** Duvar montajlı, depolama bölmeli
 - **Ventilasyon:** Pencere ile doğal havalandırma
 
 ## 🚿 Duş Sistemi
 
 ### Duş Kabini
-- **Tip:** Katlanabilir duş bölmesi (alan tasarrufu)
-- **Boyut:** ~80x80cm duş alanı
+- **Tip:** Kapalı duş kabini (banyo ortasında, tuvalet ve lavabo dışarıda kalır)
+- **Boyut:** 100x70cm duş alanı (banyo tam derinliği kullanılır)
 - **Zemin:** Kaymaz duş tabanı, sifon ile drenaj
 - **Duvarlar:** Su geçirmez paneller, kolay temizlik
-- **Kapı:** Katlanabilir veya sürgülü cam kapı
+- **Kapı:** Sürgülü ahşap kapı veya katlanır panel
 
 ### Duş Sistemi
 - **Su Kaynağı:** Ana temiz su sistemi bağlantısı

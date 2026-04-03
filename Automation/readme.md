@@ -55,7 +55,7 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 #### 4. DI/DO Module
 * **Model:** Industrial 8-Ch Digital Input & Output Module
 * **Özellikler:** DC 7~36V, Modbus RTU
-* **Kullanım:** Push button girişleri, bistable röle tetikleme
+* **Kullanım:** Push button girişleri, valf ve kontaktör bobini tetikleme; yük anahtarlama Waveshare relay (Modbus) modülleri üzerinden
 
 #### 5. Analog Acquisition Module
 * **Model:** Industrial 8-Ch Analog Acquisition Module
@@ -91,7 +91,7 @@ Karavanın tüm elektrik ve elektronik sistemleri **Raspberry Pi CM4** üzerinde
 #### Orta Güç (10-100W)
 | Cihaz | Güç | Akım | Kontrol | Notlar |
 |-------|-----|------|---------|--------|
-| Buzdolabı (EvaCool Eva Berlin 90L) | 50-80W | 2-3A | High Latching Relay | Sürekli çalışma |
+| Buzdolabı (Evacool Eva Berlin 90L) | 50-80W | 2-3A | High Latching Relay | Sürekli çalışma |
 | USB Şarj Kutusu #1 (Mutfak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | USB Şarj Kutusu #2 (Yatak) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
 | USB Şarj Kutusu #3 (Popup) | ~200W | 8A | High Latching Relay | Bağımsız kutu |
@@ -336,7 +336,7 @@ Finder 22.22.9.024.4000 Kontaktör (25A, 2NO, 24V DC bobin)
 - Maksimum Devir: 600 RPM
 - **Avantaj:** Çok düşük güç tüketimi (160W), karavan için ideal
 
-**Not:** Impulse/bistable röle kullanılmaz! Finder 22.22.9.024.4000 modüler kontaktör + DI/DO sistemi kullanılır. DO durumu = cihaz durumu, DI ile donanım seviyesinde doğrulama yapılır.
+**Not:** Darbe tipi bistable röle ile yük anahtarlama kullanılmaz; 220V Finder hattı modüler kontaktör + DI/DO ile sürülür. DO durumu = cihaz durumu, DI ile donanım seviyesinde doğrulama yapılır.
 
 ---
 
@@ -502,8 +502,8 @@ Analog sensör okumaları (12-bit hassasiyet).
 
 | Kanal | Sensör | Tip | Aralık | Notlar |
 |-------|--------|-----|--------|--------|
-| AI1 | Temiz su tank seviyesi | Şamandıra/basınç | 0-100% | 150L tank |
-| AI2 | Gri su tank seviyesi | Şamandıra/basınç | 0-100% | 100-120L tank |
+| AI1 | Temiz su tank seviyesi | Şamandıra/basınç | 0-100% | 180L tank |
+| AI2 | Gri su tank seviyesi | Şamandıra/basınç | 0-100% | 90L tank |
 | AI3 | Rezerv | - | - | Genişleme için |
 | AI4 | Rezerv | - | - | Genişleme için |
 | AI5 | Rezerv | - | - | Genişleme için |
@@ -710,7 +710,7 @@ Analog sensör okumaları (12-bit hassasiyet).
 2. **Ethernet Switch:** Elektrik panosuna DIN rail montaj
 3. **RS485 to Ethernet:** Pano içi, RS485 cihazlara merkezi konum
 4. **Modbus Modüller:** DIN rail montaj, yeterli havalandırma
-5. **Bistable Röleler:** Elektrik panosuna montaj, yüksek akım bağlantıları
+5. **Waveshare Modbus röle modülleri:** Elektrik panosuna DIN ray montaj, yüksek akım bağlantıları
 
 ### Kablolama
 * **24V DC Ana Hat:** 6-10mm² kablo, yüksek akım hatları

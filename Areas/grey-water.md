@@ -18,7 +18,7 @@ Karavanın mutfak evyesi, duş ve lavabo gibi kaynaklardan gelen atık suyu topl
 ## 🔄 Sistem Kavramsal Yapısı
 
 - **Toplama**: Evye, duş, lavabo gri suyu tek bir ana hatta toplanır
-- **Depolama**: 100-120L gri su tankı (temiz su tankından daha küçük)
+- **Depolama**: 90L gri su tankı (temiz su tankından daha küçük)
 - **Seviye İzleme**: Analog veya dijital seviye sensörü
 - **Boşaltma**: Elektrikli pompa ile kontrollü boşaltma
 - **Havalandırma**: Tank havalandırma vanası ile koku ve basınç kontrolü
@@ -27,7 +27,7 @@ Karavanın mutfak evyesi, duş ve lavabo gibi kaynaklardan gelen atık suyu topl
 
 | Kategori | Ürün | Model/Özellik | Kapasite/Güç | Fiyat Tahmini |
 |----------|------|---------------|--------------|---------------|
-| **Gri Su Tankı** | Polietilen Atık Su Tankı | 100-120L, koku dirençli | 100-120L | €150-200 |
+| **Gri Su Tankı** | Polietilen Atık Su Tankı | 90L, koku dirençli | 90L | €150-200 |
 | **Macerator Pompa** | [SHURflo 24V Macerator Pompası](https://www.marinmalzeme.com/urun/shurflo-24v-macerator-pompasi) | Paslanmaz çelik kesici bıçaklar, 38mm giriş / 25mm çıkış, 3m dikey / 30m yatay tahliye | 24V DC, ~8A max | ~8.500 TL |
 | **Seviye Sensörü** | Analog/Digital Seviye Sensörü | Korozyona dayanıklı, Home Assistant uyumlu | - | €30-60 |
 | **Boşaltma Vanası** | Elektrikli/Manuel Vana | Acil boşaltma için, 24V aktüatör | 24V | €50-100 |
@@ -69,7 +69,7 @@ Karavanın mutfak evyesi, duş ve lavabo gibi kaynaklardan gelen atık suyu topl
 
 ## 📈 Sistem Performansı
 
-* **Tank Kapasitesi**: 100-120L
+* **Tank Kapasitesi**: 90L
 * **Pompa Debisi**: 20-30L/dk
 * **Boşaltma Süresi**: 4-6 dakika (tam tank)
 * **Enerji Tüketimi**: 24V DC, ~8A max (SHURflo macerator)

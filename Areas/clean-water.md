@@ -12,14 +12,14 @@ Karavanın tüm temiz su ihtiyacını karşılayan, güvenli, otomasyona uygun v
 
 | Kategori | Ürün/Modül | Özellikler |
 |----------|------------|------------|
-| **Su Deposu** | Polietilen Temiz Su Tankı | 150L, gıda uyumlu, kolay temizlik |
+| **Su Deposu** | Polietilen Temiz Su Tankı | 180L, gıda uyumlu, kolay temizlik |
 | **Seviye Sensörü** | RS485 veya analog şamandıra | Hassas seviye ölçümü, Home Assistant entegrasyonu |
 | **Pompa** | 24V DC Basınçlı Pompa | Sessiz, yüksek debili, araç içine montaj |
 | **Genleşme Kabı** | 24V, balonlu tip | Pompa darbelerini sönümleme, sistem ömrü |
 | **Actuator Valf** | 24V otomatik vana | Donma koruması ve otomatik drenaj |
 
 ## 🔄 Sistem Kavramsal Yapısı
-- 150L temiz su deposu, araç içinde veya izole bölmede
+- 180L temiz su deposu, araç içinde veya izole bölmede
 - Seviye sensörü ile anlık su miktarı izlenir
 - 24V pompa ve genleşme kabı ile tüm musluklara basınçlı su dağıtımı
 - Donma riski durumunda actuator valf ile otomatik drenaj

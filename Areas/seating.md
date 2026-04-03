@@ -1,52 +1,51 @@
-# Oturma Alanı (Seating Area)
+# Oturma ve Yatak Alanı (Seating & Bed Area)
 
-Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma alanı. Hem güvenli yolcu taşıma hem de mobil ofis ortamı sağlar.
+Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma, uyku ve çalışma alanı. Gündüz koltuk, gece tek kişilik yatak, iki adet Lagun masa ile yemek ve çalışma alanı sağlar.
 
-## 🪑 Oturma Sistemi
+## 🛋️ Koltuk / Yatak Sistemi
 
-### Ana Yolcu Koltuğu
-- **Kapasite:** 2 kişilik oturma
-- **Güvenlik:** Emniyet kemerli (seyahat güvenliği)
-- **Konum:** Mutfak karşısı (araç orta bölümü)
+### Kanepe-Yatak Özellikleri
+- **Boyut:** 200 x 70 cm
+- **Konum:** Ön yaşam alanı (mutfak karşısı)
+- **Gündüz Modu:** Oturma koltuğu (sırt minderleri takılı)
+- **Gece Modu:** Tek kişilik sabit yatak (sırt minderleri kaldırılır, 70x200cm düz yatış)
 - **Malzeme:** Dayanıklı ve konforlu kumaş/deri
-- **Saklama:** Koltuk altı depolama bölmesi
+- **Koltuk Altı:** Evacool D31 R çekmeceli buzdolabı + depolama alanı
 
-### Dönerli Sürücü Koltuğu Entegrasyonu
-- **Sürücü Koltuğu:** 180° döner mekanizma
-- **Çalışma Pozisyonu:** Masaya doğru dönebilir
-- **Ofis Modu:** Sürücü koltuğu + masa = tam ofis ortamı
-- **Esneklik:** Sürüş/çalışma modu arası geçiş
+### Çalışma Sırtlıkları (Ofis Modu)
+Kanepe sırt derinliği (~70cm) oturarak çalışmak için fazla olduğundan, ofis modunda oturma derinliğini ~45cm'e düşüren ek çalışma sırtlıkları kullanılır.
+- **Adet:** 2
+- **Malzeme:** Sert, bel destekli (çalışma koltuğu hissini simüle eder)
+- **Yerleşim:** Normal sırt minderlerinin önüne konur, minderlere dayanır
+- **Amaç:** Ergonomik oturma derinliği (~45cm) sağlayarak uzun süreli bilgisayar çalışmasını konforlu kılar
 
-## 📋 Çalışma Masası Sistemi
+## 📋 Masa Sistemi
 
-### Masa Özellikleri
-- **Tip:** Yükseklik ayarlı masa
-- **Boyut:** Bilgisayar çalışmaya uygun (yaklaşık 80x60cm)
-- **Yükseklik:** 65-85cm arası ayarlanabilir
-- **Hareket:** Sürücü koltuğuna doğru kayabilir
-- **Yüzey:** Laptop/bilgisayar için optimize edilmiş
+### Lagun Masa Özellikleri
+- **Adet:** 2
+- **Tip:** Lagun 360° döner, sökülebilir masa
+- **Boyut:** 40 x 80 cm (her biri)
+- **Montaj:** Kanepe karkasına monte
+- **Hareket:** 360° serbest dönüş
+- **Söküm:** Kolay sökülebilir (seyahat veya yatak modu için)
 
-### Çalışma Alanı Konfigürasyonları
-- **Çift Koltuk Modu:** Normal yemek/sosyalleşme masası
-- **Ofis Modu:** Sürücü koltuğu + masa = tam çalışma ortamı
-- **Bilgisayar Çalışması:** Ergonomik pozisyon
-- **Toplantı Modu:** Video konferans için optimal
+### Kullanım Konfigürasyonları
+- **Yemek Modu:** İki masa açık, kanepede oturma
+- **Ofis Modu:** Çalışma sırtlıkları takılı + Lagun masa = ergonomik çalışma ortamı
+- **Yatak Modu:** Masalar sökülür, sırt minderleri kaldırılır
+- **Seyahat Modu:** Masalar sabitlenmiş veya sökülmüş
 
 ## ⚡ Elektrik Altyapısı
 
-### Priz Konfigürasyonu
-- **2x 220V AC:** Bilgisayar, şarj cihazları
-- **2x 24V DC:** DC ekipmanlar, aydınlatma
-- **1x 12V DC:** Küçük aksesuarlar, araç aksesuarları
+### Priz Konfigürasyonu ve Yerleşimi
+Prizler kanepe karkasının altında (oturma yeri altı), sağlı sollu simetrik yerleşim:
 
-### Priz Yerleşimi
-- **Masa Üstü:** Kolay erişim, kablo düzeni
-- **Duvar Montajı:** Çalışma alanı optimize
-- **Güvenlik:** Kapalı/açık switch sistemi
-- **Kablo Yönetimi:** Düzenli kablo geçişleri
+- **Sol taraf:** 1x 220V AC + 1x otomotiv USB-C soket (24V giriş, 100W PD)
+- **Sağ taraf:** 1x 220V AC + 1x otomotiv USB-C soket (24V giriş, 100W PD)
+- **Toplam:** 2x 220V AC, 2x USB-C
 
 ### Aydınlatma Sistemi
-- **Çalışma Aydınlatması:** NJMC1 16A 2P bistable röle ile kontrol, push button ile tetikleme
+- **Oturma Aydınlatması:** Waveshare relay (Modbus) ile kontrol, push button ile tetikleme
 - **Ambient Aydınlatma:** Shelly Plus RGBW PM ile dimmer ve renk ayarı (Wi-Fi üzerinden Home Assistant entegrasyonu)
 
 ## 🏠 Otomasyon ve Home Assistant Entegrasyonu
@@ -56,84 +55,77 @@ Mutfağın karşısında konumlandırılan çok fonksiyonlu oturma ve çalışma
 - **Priz Kontrolü:** Uzaktan açma/kapama
 - **Sıcaklık:** Çalışma alanı için optimal ısı
 
-### Çalışma Modu Senaryoları
+### Otomasyon Senaryoları
 - **Ofis Modu:** Aydınlatma + çalışma pozisyonu
 - **Dinlenme Modu:** Ambient aydınlatma
-- **Toplantı Modu:** Optimal aydınlatma + ses ayarı
+- **Yatak Modu:** Tüm ışıklar kısılır, gece modu
 - **Gece Modu:** Minimum aydınlatma + güç tasarrufu
 
 ### Sensörler ve İzleme
-- **Oturma Sensörü:** Koltuğa oturma algılama
 - **Hareket Sensörü:** Otomatik aydınlatma
 - **Sıcaklık Sensörü:** Çalışma alanı konforu
 - **Işık Sensörü:** Aydınlatma otomatik ayarı
 
 ## 🔧 Kurulum ve Montaj
 
-### Koltuk Sistemi Kurulumu
-1. **Zemin Hazırlığı:** Koltuk montaj noktaları güçlendirme
-2. **Emniyet Kemeri:** Güvenli emniyet kemeri montajı
-3. **Sürücü Koltuğu:** Döner mekanizma kurulumu
-4. **Test:** Güvenlik ve işlevsellik testleri
-
-### Masa Sistemi Kurulumu
-1. **Zemin Montajı:** Masa ayağı sabit/hareketli sistem
-2. **Yükseklik Mekanizması:** Ayarlı yükseklik sistemi
-3. **Kayma Sistemi:** Sürücü koltuğuna doğru hareket
-4. **Güvenlik:** Seyahat sırasında sabitleme
+### Kanepe Sistemi Kurulumu
+1. **Zemin Hazırlığı:** Kanepe montaj noktaları güçlendirme
+2. **Kanepe Karkası:** 200x70 kanepe yapısı ve yatak tabanı
+3. **Lagun Montajı:** 2x masa ayağı kanepe karkasına sabitleme
+4. **Buzdolabı Yuvası:** Kanepe altı Evacool D31 R boşluğu
+5. **Test:** İşlevsellik testleri (dönüş, söküm, yatak dönüşümü)
 
 ### Teknoloji Kurulumu
 1. **Elektrik Altyapısı:** Priz ve kablo altyapısı
 2. **Kablo Yönetimi:** Düzenli kablo geçişleri
-3. **Aydınlatma:** Çalışma alanı aydınlatma sistemi
+3. **Aydınlatma:** Oturma alanı aydınlatma sistemi
 
 ## 💡 Ek Özellikler ve Öneriler
 
 ### Konfor Geliştirmeleri
-- **Ergonomik Yastık:** Uzun çalışma konforu
-- **Ayak Desteği:** Çalışma pozisyonu için
-- **Kol Desteği:** Bilgisayar çalışması için
+- **Yatak Minderi:** 70x200cm, sırt minderleri kaldırıldığında düz yüzey
+- **Çalışma Sırtlıkları:** 2 adet sert, bel destekli (oturma derinliği 45cm)
 - **Klima:** Çalışma alanı için optimal sıcaklık
 
 ### Depolama Çözümleri
-- **Koltuk Altı:** Ofis malzemeleri, kablolar
-- **Masa Çekmecesi:** Küçük ofis aksesuarları
+- **Kanepe Altı:** Evacool D31 R çekmeceli buzdolabı + ek depolama
 - **Duvar Rafları:** Kitap, dokümanlar
-- **Gizli Bölmeler:** Değerli ekipmanlar
 
 ### Güvenlik Önlemleri
-- **Emniyet Kemeri:** Seyahat güvenliği
-- **Masa Sabitleme:** Hareket sırasında güvenli
+- **Masa Sabitleme:** Hareket sırasında güvenli (Lagun kilit mekanizması)
 - **Elektrik Güvenliği:** Kaçak akım koruması
 - **Acil Çıkış:** Kolay erişim imkanı
 
 ## 🌟 Kullanım Senaryoları
 
 ### Ofis Modu
-- **Sürücü koltuğu döner** → masaya doğru
+- **Çalışma sırtlıkları** takılır → oturma derinliği ~45cm'e düşer
+- **Lagun masa** çalışma pozisyonuna döner
 - **Aydınlatma çalışma moduna** geçer
-- **Tam ofis ortamı** hazır
+- **Ergonomik ofis ortamı** hazır
 
 ### Sosyal Mod
-- **Çift koltuk** normal pozisyonda
-- **Masa orta** konumda
+- **Kanepe** oturma pozisyonunda, sırt minderleri takılı
+- **İki masa** açık (yemek / sohbet)
 - **Ambient aydınlatma** aktif
 
+### Yatak Modu
+- **Masalar sökülür** veya katlanır
+- **Sırt minderleri kaldırılır** → 70x200cm düz yüzey
+- **Yatak minderi** serilir → tek kişilik uyku
+
 ### Seyahat Modu
-- **Emniyet kemerleri** bağlı
-- **Masa sabitlenmiş** pozisyonda
+- **Masalar sabitlenmiş** veya sökülmüş
 - **Tüm gevşek eşyalar** sabitlenmiş
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **220V AC:** 2x priz (bilgisayar, şarj cihazları)
-- **24V DC:** 2x priz (DC ekipmanlar, aydınlatma)
-- **12V DC:** 1x priz (küçük aksesuarlar)
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
-- **Aydınlatma:** 24V LED çalışma aydınlatma sistemi
+- **220V AC:** 2x priz — kanepe karkası altı (1x sol, 1x sağ)
+- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD) — kanepe karkası altı (1x sol, 1x sağ)
+- **Aydınlatma:** 24V LED oturma aydınlatma sistemi
 - **Otomasyon:** Tüm sistemler Home Assistant entegrasyonlu
 - **Su:** Doğrudan su bağlantısı yok
 
 ---
 
-*Bu sistem, hem güvenli yolcu taşıma hem de profesyonel çalışma ortamı sağlayan çok fonksiyonlu bir çözümdür.* 
+*Bu sistem, gündüz oturma ve çalışma, gece tek kişilik yatak olarak kullanılabilen çok fonksiyonlu bir çözümdür. Lagun masalar sökülebilir, kanepe altında çekmeceli buzdolabı yer alır.*
