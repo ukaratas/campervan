@@ -33,7 +33,7 @@ Her adımda:
 | [5.4](#54--banyo-altyapı-fiber-zemin) | Banyo Altyapı (fiber zemin) | 5.2, 5.3 |
 | [5.5](#55--cihaz-yerleştirme-kaplama-öncesi) | Cihaz Yerleştirme (kaplama öncesi) | 5.2, 5.3, 5.4 |
 | **6 — İç Kaplama** | | |
-| [6.1](#61--i̇ç-kaplama-duvar-tavan-zemin) | İç Kaplama (duvar, tavan, zemin) | 3.1, 3.2, 5.2, 5.3, 5.4, 5.5 |
+| [6.1](#61--i̇ç-kaplama-duvar-tavan-zemin-tavan-dolapları) | İç Kaplama (duvar, tavan, zemin, tavan dolapları) | 3.1, 3.2, 5.2, 5.3, 5.4, 5.5 |
 | **7 — Tamamlama** | | |
 | [7.1](#71--elektrik-bağlantı-tamamlama) | Elektrik Bağlantı Tamamlama (DI/DO terminasyon) | 5.2, 6.1 |
 | [7.2](#72--su-tesisatı-tamamlama) | Su Tesisatı Tamamlama | 3.3, 6.1 |
@@ -305,11 +305,11 @@ Ana yatak altı teknik alana batarya, inverter (EasySolar-II), otomasyon panosu,
 | MCB Sigortalar | CHNT C16 otomatik sigorta | 9 | ~80 ₺ | ~720 ₺ | | |
 | Kaçak Akım Rölesi | Chint 2P 25A 30mA | 1 | ~720 ₺ | ~720 ₺ | [elektrodijital](https://www.elektrodijital.com/urun/2x25a-30ma-kacak-akim-rolesi) | |
 | Ana Sigorta | MTA Megaval 200A | 1 | ~135 ₺ | ~135 ₺ | [adamoto](https://www.adamoto.com.tr/urun/megaval-sigorta-200a-mavi-200-amper-mta) | |
-| Ana Kontaktör | Albright SW200-281 24V DC 200A | 1 | ~11.041 ₺ | ~11.041 ₺ | [kartalotomasyon](https://www.kartalotomasyon.com.tr/urun/sw200-281-24dc-kontaktor) | |
+| Akü izleme şantı | Victron SmartShunt 300A (SHU050130050, Bluetooth + VE.Direct, GX uyumlu) | 1 | ~4.607 ₺ | ~4.607 ₺ | [denizmar](https://www.denizmar.net/urun/smartshunt-300a) | |
 | Acil Durdurma Butonu | Chint 40mm mantar NC panel montaj | 1 | ~108 ₺ | ~108 ₺ | [elektrodijital](https://www.elektrodijital.com/urun/acil-stop-butonu) | |
-| Shore Power Girişi | MeteCEE IP67 16A marin tip | 1 | ~728 ₺ | ~728 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/ip67-16-amp-32-amp-sahil-besleme-prizi-duz) | |
+| Shore Power Girişi | DEFA MiniPlug besleme kablosu 1m (460901, kompakt gömme — büyük CEE kutusuna göre minik montaj) | 1 | ~2.200 ₺ | ~2.200 ₺ | [Termosa](https://www.termosa.com/urunlerimiz/elektrik-elektronik-enerji-sistemleri/baglanti-kablolari/defa-miniplug-besleme-kablosu-460901) | |
 | Ana akım kablosu | Fly 16mm² bakır (batarya-inverter) | ~5m | ~242 ₺/m | ~1.210 ₺ | [adamoto](https://www.adamoto.com.tr/urun/1-metre-16mm-kirmizi-bakir-aku-kablosu-fly) | |
-| | | | | **~170.822 ₺** | | |
+| | | | | **~165.860 ₺** | | |
 
 **Kablolama**
 
@@ -481,20 +481,21 @@ Kaplama firmasından ÖNCE yerleştirilmesi gereken büyük cihazlar. Bunların 
 
 ---
 
-## 6.1 — İç Kaplama (Duvar, Tavan, Zemin)
+## 6.1 — İç Kaplama (Duvar, Tavan, Zemin, Tavan Dolapları)
 > Bağımlılık: 3.1, 3.2, 5.2, 5.3, 5.4, 5.5
 
-Elektrik ve su 1. fix tamamlandıktan sonra duvar, tavan ve zemin kaplaması.
+Elektrik ve su 1. fix tamamlandıktan sonra duvar, tavan ve zemin kaplaması; **tavan dolapları** (mutfak/salon üstü depolama, kapak, menteşe, amortisör) aynı mobilya/kaplama işi kapsamında firmaya yaptırılır — bu kalem bütçenin en büyük dilimini oluşturur.
 
 | Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
 |------|-------|------|-------|--------|--------|--------|
-| Duvar kaplama | TBD (ahşap panel / lamine) | ~20 m² | TBD | TBD | | |
-| Tavan kaplama | TBD (hafif panel) | ~10 m² | TBD | TBD | | |
-| Plywood (zemin) | Lip kesimli, sigma + XPS'i kapatır | ~8 m² | TBD | TBD | | |
-| Zemin son kat | TBD (vinil / lamine parke) — plywood üzerine | ~8 m² | TBD | TBD | | |
-| | | | | **TBD (firma teklifi)** | | |
+| Tavan dolapları | Üst dolap gövdeleri + kapak (lamine/ahşap), mutfak/salon bandı | 1 set | — | ~130.000 ₺ | Firma teklifi (tahmini) | |
+| Duvar kaplama | Ahşap panel / lamine, duvar yüzeyleri | ~20 m² | — | ~55.000 ₺ | Firma teklifi (tahmini) | |
+| Tavan kaplama | Hafif panel / döşeme (dolap dışı tavan yüzeyi) | ~10 m² | — | ~30.000 ₺ | Firma teklifi (tahmini) | |
+| Plywood (zemin) | Lip kesimli, sigma + XPS'i kapatır | ~8 m² | — | ~45.000 ₺ | Firma teklifi (tahmini) | |
+| Zemin son kat | Vinil / lamine parke — plywood üzerine | ~8 m² | — | ~40.000 ₺ | Firma teklifi (tahmini) | |
+| | | | | **~300.000 ₺** | | |
 
-> Not: Malzeme seçimleri iç tasarım kararlarına bağlı, araç ölçüldükten sonra netleştirilecek. Zemin katman yapısı bkz. 3.2.
+> Not: Toplam **~300.000 ₺** planlama bütçesidir; özellikle **tavan dolapları** işçilik + malzeme ile tabanı taşır, kesin rakam firma metrajı ve malzeme sınıfına göre değişir. Malzeme seçimleri iç tasarım kararlarına bağlı, araç ölçüldükten sonra netleştirilecek. Zemin katman yapısı bkz. 3.2.
 
 ---
 
@@ -706,13 +707,13 @@ Karavan dönüşüm sonrası resmi tescil, proje onayı ve vergi işlemleri.
 | | 4.6 Kamera Montajı | ~24.631 ₺ |
 | **5 — İç Hazırlık** | | |
 | | 5.1 Yalıtım | ~11.750 ₺ |
-| | 5.2 Elektrik Altyapı (ekipman) | ~170.822 ₺ |
+| | 5.2 Elektrik Altyapı (ekipman) | ~165.860 ₺ |
 | | 5.2 Elektrik Altyapı (kablolama) | ~11.080 ₺ |
 | | 5.3 Su 1. Fix (boru döşeme) | ~2.145 ₺ |
 | | 5.4 Banyo Altyapı | ~2.284 ₺ |
 | | 5.5 Cihaz Yerleştirme | ~132.499 ₺ |
 | **6 — İç Kaplama** | | |
-| | 6.1 İç Kaplama | TBD (firma teklifi) |
+| | 6.1 İç Kaplama (tavan dolapları dahil) | ~300.000 ₺ |
 | **7 — Tamamlama** | | |
 | | 7.1 Elektrik Bağlantı Tamamlama | — |
 | | 7.2 Su Tesisatı Tamamlama | ~245.502 ₺ |
@@ -722,9 +723,9 @@ Karavan dönüşüm sonrası resmi tescil, proje onayı ve vergi işlemleri.
 | **8 — Tescil** | | |
 | | 8.1 Tescil ve Proje | ~630.000 ₺ |
 | | | |
-| **GENEL TOPLAM** | **(iç kaplama hariç)** | **~3.470.558 ₺** |
+| **GENEL TOPLAM** | **(tahmini, 6.1 ~300k dahil)** | **~3.765.596 ₺** |
 
-> **Kur:** 1 USD ≈ 44 ₺, 1 EUR ≈ 51 ₺ (Şubat 2026). Fiyatlar ±%15 sapabilir. İç kaplama (6.1) firma teklifine bağlı, toplama dahil değil.
+> **Kur:** 1 USD ≈ 44 ₺, 1 EUR ≈ 51 ₺ (Şubat 2026). Fiyatlar ±%15 sapabilir. 6.1 iç kaplama **~300.000 ₺** plan bütçesiyle dağıtılmıştır; kesin tutar firmadan teklif alındıkça güncellenir.
 
 ---
 
