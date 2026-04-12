@@ -1,0 +1,66 @@
+# Victron Blue Smart BLE — sayısal gauge için (Lovelace); cihaz yeniden eşlenirse BSC önekini güncelleyin
+- sensor:
+    - name: "Victron gauge temp"
+      unique_id: victron_gauge_temp
+      unit_of_measurement: "°C"
+      state_class: measurement
+      device_class: temperature
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_temperature' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge AC current"
+      unique_id: victron_gauge_ac_current
+      unit_of_measurement: "A"
+      state_class: measurement
+      device_class: current
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_ac_current' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L1 voltage"
+      unique_id: victron_gauge_l1_voltage
+      unit_of_measurement: "V"
+      state_class: measurement
+      device_class: voltage
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_1_voltage' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L1 current"
+      unique_id: victron_gauge_l1_current
+      unit_of_measurement: "A"
+      state_class: measurement
+      device_class: current
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_1_current' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L2 voltage"
+      unique_id: victron_gauge_l2_voltage
+      unit_of_measurement: "V"
+      state_class: measurement
+      device_class: voltage
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_2_voltage' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L2 current"
+      unique_id: victron_gauge_l2_current
+      unit_of_measurement: "A"
+      state_class: measurement
+      device_class: current
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_2_current' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L3 voltage"
+      unique_id: victron_gauge_l3_voltage
+      unit_of_measurement: "V"
+      state_class: measurement
+      device_class: voltage
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_3_voltage' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}
+    - name: "Victron gauge L3 current"
+      unique_id: victron_gauge_l3_current
+      unit_of_measurement: "A"
+      state_class: measurement
+      device_class: current
+      state: >-
+        {% set e = 'sensor.bsc_ip65_12_15_hq2349fuajv_output_phase_3_current' %}
+        {{ iif(states(e) | is_number, states(e) | float(0), 0) }}

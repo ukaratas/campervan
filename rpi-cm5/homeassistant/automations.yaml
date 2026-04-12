@@ -1,0 +1,6 @@
+# Analog input_select → Modbus holding otomasyonları: HA 2026.4.x ortamında `ha core check`
+# bazı kurulumlarda state tetikleyicisi doğrulanırken KeyError verebiliyor.
+# Çözüm: Ayarlar → Otomasyonlar ve senaryolar → Otomasyon oluştur (UI) veya güvenli sürüme yükseltin.
+#
+# Boş liste — yapılandırma geçerliliği için:
+[]

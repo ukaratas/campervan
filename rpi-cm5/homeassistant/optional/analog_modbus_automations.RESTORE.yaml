@@ -1,0 +1,126 @@
+# Bu dosya configuration.yaml tarafından YÜKLENMEZ.
+# HA 2026.4.x "ha core check" tetikleyici doğrulama hatası giderildiğinde içeriği
+# automations.yaml ile birleştirin veya Ayarlar → Otomasyonlar → YAML modundan yapıştırın.
+#
+# 8 ayrı otomasyon (kanal başına tek entity_id)
+
+- id: analog_modbus_mode_ch1
+  alias: Analog CH1 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch1_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4096
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch2
+  alias: Analog CH2 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch2_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4097
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch3
+  alias: Analog CH3 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch3_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4098
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch4
+  alias: Analog CH4 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch4_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4099
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch5
+  alias: Analog CH5 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch5_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4100
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch6
+  alias: Analog CH6 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch6_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4101
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch7
+  alias: Analog CH7 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch7_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4102
+        value: "{{ trigger.to_state.state[0] | int }}"
+- id: analog_modbus_mode_ch8
+  alias: Analog CH8 mode — write Modbus holding
+  trigger:
+    - platform: state
+      entity_id: input_select.ai_ch8_modbus_mode
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state not in ['unavailable', 'unknown', none] and trigger.to_state.state | length > 0 }}"
+  action:
+    - service: modbus.write_register
+      data:
+        hub: rs485_bus
+        slave: 3
+        address: 4103
+        value: "{{ trigger.to_state.state[0] | int }}"

@@ -135,26 +135,6 @@ campervan/
 │       ├── deploy.py          # 🚀 Otomatik deployment script
 │       ├── README.md          # Konfigürasyon dokümantasyonu ve troubleshooting
 │       └── KURULUM.md         # Adım adım kurulum rehberi
-├── simulators/                # Waveshare modül simülatörleri (geliştirme/test için)
-│   ├── venv/                  # Python virtual environment (pymodbus)
-│   ├── waveshare-latching-relay-01/ # Relay 01: Aydınlatma (Port 5023)
-│   │   ├── simulator.py       # Modbus TCP simülatör
-│   │   ├── config.py          # Merkezi konfigürasyon
-│   │   ├── kontrol.py         # Röle kontrol utility
-│   │   ├── izle.py            # Real-time monitoring
-│   │   ├── ha-config.yaml     # Home Assistant entegrasyonu
-│   │   └── README.md          # Dokümantasyon
-│   ├── waveshare-latching-relay-02/ # Relay 02: Banyo + Su Sistemi (Port 5025)
-│   │   └── ... (aynı dosya yapısı)
-│   ├── waveshare-latching-relay-03/ # Relay 03: Yüksek Tüketim (Port 5026)
-│   │   └── ... (aynı dosya yapısı)
-│   └── waveshare-di-do-01/    # 8DI/8DO modül simülatörü (Port 5024)
-│       ├── simulator.py       # Push button simülasyonu dahil
-│       ├── config.py          # Merkezi konfigürasyon
-│       ├── kontrol.py         # DI/DO kontrol utility
-│       ├── izle.py            # Real-time monitoring
-│       ├── ha-config.yaml     # Home Assistant entegrasyonu
-│       └── README.md          # Dokümantasyon
 ├── Assets/                    # Görseller, çizimler
 │   └── Images/
 │       └── layout.png         # Fiziksel yerleşim planı
@@ -181,54 +161,6 @@ campervan/
 2. Teknik çizimler ve planlar için `Plans/` klasörünü kullanın
 3. Bütçe takibi için `Budget/` klasörünü kullanın
 4. Her değişiklik için git commit'leri yapın
-
-## 🧪 Geliştirme ve Test
-
-### Waveshare Modül Simülatörleri
-
-Gerçek donanım olmadan geliştirme ve test için Modbus TCP simülatörleri mevcuttur:
-
-**1. Simülatörleri Başlat:**
-```bash
-# Python venv'i aktif et
-cd simulators
-source venv/bin/activate
-
-# 4 ayrı terminal'de simülatörleri başlat:
-# Terminal 1: Relay 01 - Aydınlatma (Port 5023)
-cd waveshare-latching-relay-01 && python3 simulator.py
-
-# Terminal 2: DI/DO - Push Buttons (Port 5024)
-cd waveshare-di-do-01 && python3 simulator.py
-
-# Terminal 3: Relay 02 - Banyo + Su (Port 5025)
-cd waveshare-latching-relay-02 && python3 simulator.py
-
-# Terminal 4: Relay 03 - Yüksek Tüketim (Port 5026)
-cd waveshare-latching-relay-03 && python3 simulator.py
-```
-
-**2. Home Assistant Konfigürasyonlarını Deploy Et:**
-```bash
-cd Automation/ha-configs
-python3 deploy.py --auto  # Otomatik dosya transfer + reload
-```
-
-**3. Test Et:**
-- Home Assistant → Developer Tools → States
-- Binary sensor'lar otomatik değişir (push button simülasyonu)
-- Light'ları toggle/on/off ile test et
-- Event trace'lerini incele
-
-**Özellikler:**
-- ✅ **Dinamik IP desteği** (mDNS .local hostname)
-- ✅ **Gerçekçi push button simülasyonu** (short/long/double press)
-- ✅ **Real-time monitoring** (`izle.py`)
-- ✅ **Manuel kontrol** (`kontrol.py`)
-- ✅ **Otomatik deployment** (`deploy.py`)
-- ✅ **Centralized config** (`config.py`)
-
-Detaylı bilgi: `simulators/*/README.md` ve `Automation/ha-configs/README.md`
 
 ---
 

@@ -1,0 +1,12 @@
+# CH1–2 mod özet metni (Admin / tank bağlamı)
+- sensor:
+    - name: "Clean Water — mode (text)"
+      unique_id: clean_water_mod_metin
+      state: >-
+        {% set m = states('sensor.ai_ch1_mode_holding') | int(-1) %}
+        {% if m == 0 %}0–5 V{% elif m == 1 %}1–5 V{% elif m == 2 %}0–20 mA{% elif m == 3 %}4–20 mA{% elif m == 4 %}Raw code{% else %}—{% endif %}
+    - name: "Gray water — mode (text)"
+      unique_id: gray_water_mod_metin
+      state: >-
+        {% set m = states('sensor.ai_ch2_mode_holding') | int(-1) %}
+        {% if m == 0 %}0–5 V{% elif m == 1 %}1–5 V{% elif m == 2 %}0–20 mA{% elif m == 3 %}4–20 mA{% elif m == 4 %}Raw code{% else %}—{% endif %}

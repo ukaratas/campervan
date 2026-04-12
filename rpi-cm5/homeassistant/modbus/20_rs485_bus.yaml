@@ -1,0 +1,18 @@
+# Tek seri port: IO8 (DI/DO) + Relay (E) + Analog 8CH — alt klasörlerde cihaz başına YAML
+- name: rs485_bus
+  type: serial
+  port: !secret rs485_serial_port
+  baudrate: 9600
+  bytesize: 8
+  parity: "N"
+  stopbits: 1
+  method: rtu
+  delay: 0
+  message_wait_milliseconds: 120
+  timeout: 15
+  retries: 8
+  # !include_dir_merge_list yolu, bu dosyanın bulunduğu dizine göre çözülür (modbus/).
+  # rs485_bus_devices/ /config/ altında olduğu için ../ ile çıkılmalı — aksi halde liste BOŞ kalır.
+  switches: !include_dir_merge_list ../rs485_bus_devices/switches/
+  binary_sensors: !include_dir_merge_list ../rs485_bus_devices/binary_sensors/
+  sensors: !include_dir_merge_list ../rs485_bus_devices/sensors/

@@ -1,0 +1,73 @@
+# Analog 8CH — ölçüm modu (holding yazımı automations/analog_modbus.yaml ile)
+ai_ch1_modbus_mode:
+  name: "CH1 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch2_modbus_mode:
+  name: "CH2 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch3_modbus_mode:
+  name: "CH3 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch4_modbus_mode:
+  name: "CH4 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch5_modbus_mode:
+  name: "CH5 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch6_modbus_mode:
+  name: "CH6 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch7_modbus_mode:
+  name: "CH7 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"
+ai_ch8_modbus_mode:
+  name: "CH8 — measurement mode (Modbus write)"
+  icon: mdi:tune
+  options:
+    - "0 · 0–5 V"
+    - "1 · 1–5 V"
+    - "2 · 0–20 mA"
+    - "3 · 4–20 mA"
+    - "4 · Raw code (4096 scale)"

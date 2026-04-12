@@ -1,0 +1,66 @@
+# Waveshare Modbus RTU IO 8CH — open-drain outputs (coils)
+# FC05: Waveshare 0xFF00=ON, 0x0000=OFF (1/0 bazı cihazlarda isError verir)
+- name: "DO1 — Warning Light"
+  unique_id: rs485_io8_do1
+  address: 0
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "DO2 — Error Buzzer"
+  unique_id: rs485_io8_do2
+  address: 1
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO3"
+  unique_id: rs485_io8_do3
+  address: 2
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO4"
+  unique_id: rs485_io8_do4
+  address: 3
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO5"
+  unique_id: rs485_io8_do5
+  address: 4
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO6"
+  unique_id: rs485_io8_do6
+  address: 5
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO7"
+  unique_id: rs485_io8_do7
+  address: 6
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25
+- name: "WS-IO8 DO8"
+  unique_id: rs485_io8_do8
+  address: 7
+  slave: 1
+  write_type: coil
+  command_on: 0xFF00
+  command_off: 0x0000
+  scan_interval: 25

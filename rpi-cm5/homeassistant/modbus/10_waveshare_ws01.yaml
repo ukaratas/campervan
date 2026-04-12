@@ -1,0 +1,104 @@
+# Waveshare Modbus PoE Ethernet Relay 16CH — RTU over TCP
+- name: waveshare_ws01
+  type: rtuovertcp
+  host: !secret waveshare_ws01_host
+  port: !secret waveshare_ws01_port
+  retry_on_empty: true
+  retries: 3
+  switches:
+    - name: "CH1 — Macerator pump"
+      unique_id: modbus_ws01_ch1
+      address: 0
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH2 — Refrigerator"
+      unique_id: modbus_ws01_ch2
+      address: 1
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH3 — Bed Left Reading Light"
+      unique_id: modbus_ws01_ch3
+      address: 2
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH4 — Bed Right Reading Light"
+      unique_id: modbus_ws01_ch4
+      address: 3
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH5 — Bed Light"
+      unique_id: modbus_ws01_ch5
+      address: 4
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH6 — Kitchen Light"
+      unique_id: modbus_ws01_ch6
+      address: 5
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH7 — Saloon Light"
+      unique_id: modbus_ws01_ch7
+      address: 6
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH8 — Outdoor Light"
+      unique_id: modbus_ws01_ch8
+      address: 7
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH9 — Victron Blue Smart"
+      unique_id: modbus_ws01_ch9
+      address: 8
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH10 — Dishwasher"
+      unique_id: modbus_ws01_ch10
+      address: 9
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH11 — Washing Machine"
+      unique_id: modbus_ws01_ch11
+      address: 10
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH12 — Future use"
+      unique_id: modbus_ws01_ch12
+      address: 11
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH13 — Future use"
+      unique_id: modbus_ws01_ch13
+      address: 12
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH14 — Future use"
+      unique_id: modbus_ws01_ch14
+      address: 13
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH15 — Future use"
+      unique_id: modbus_ws01_ch15
+      address: 14
+      slave: 1
+      write_type: coil
+      scan_interval: 5
+    - name: "CH16 — Future use"
+      unique_id: modbus_ws01_ch16
+      address: 15
+      slave: 1
+      write_type: coil
+      scan_interval: 5

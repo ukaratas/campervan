@@ -1,0 +1,16 @@
+# CamperVan — modular config (repo: rpi-cm5/homeassistant/).
+# Taşınabilir değerler: secrets.yaml (örnek: secrets.yaml.example).
+#
+# Dağıtım: ../scripts/deploy/sync_ha_config.sh  (veya scripts/sync_ha_config.sh)
+
+default_config:
+
+automation: !include automations.yaml
+
+# Modbus hub'ları: modbus/*.yaml — her dosya tek hub (- name: ...)
+modbus: !include_dir_merge_list modbus/
+
+input_select: !include input_select/ai_modbus_modes.yaml
+
+# Template platform blokları: templates/*.yaml (her dosya - sensor: listesi)
+template: !include_dir_merge_list templates/

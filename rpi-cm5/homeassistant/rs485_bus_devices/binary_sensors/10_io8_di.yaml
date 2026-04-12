@@ -1,0 +1,49 @@
+# Waveshare Modbus RTU IO 8CH — discrete inputs
+- name: "DI1 — Bed Left Reading Light"
+  unique_id: rs485_io8_di1
+  address: 0
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI2 — Bed Left Light"
+  unique_id: rs485_io8_di2
+  address: 1
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI3 — Bed Right Reading Light"
+  unique_id: rs485_io8_di3
+  address: 2
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI4 — Bed Right Light"
+  unique_id: rs485_io8_di4
+  address: 3
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI5 — Kitchen Light"
+  unique_id: rs485_io8_di5
+  address: 4
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI6 — Saloon Light"
+  unique_id: rs485_io8_di6
+  address: 5
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI7 — Outdoor Light"
+  unique_id: rs485_io8_di7
+  address: 6
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15
+- name: "DI8 — Future use"
+  unique_id: rs485_io8_di8
+  address: 7
+  slave: 1
+  input_type: discrete_input
+  scan_interval: 15

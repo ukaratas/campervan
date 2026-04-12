@@ -1,0 +1,116 @@
+# DEPRECATED — Kaynak: ../homeassistant/modbus/rs485/sensors/10_analog_8ch.yaml
+# LEGACY_ANALOG_YAML_MERGE=1 ile tek configuration.yaml birleştirmesi için tam blok (slave sayıları elle).
+
+    sensors:
+      - name: "WS AI CH1"
+        unique_id: rs485_ai_ch1
+        slave: 3
+        address: 0
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH2"
+        unique_id: rs485_ai_ch2
+        slave: 3
+        address: 1
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH3"
+        unique_id: rs485_ai_ch3
+        slave: 3
+        address: 2
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH4"
+        unique_id: rs485_ai_ch4
+        slave: 3
+        address: 3
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH5"
+        unique_id: rs485_ai_ch5
+        slave: 3
+        address: 4
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH6"
+        unique_id: rs485_ai_ch6
+        slave: 3
+        address: 5
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH7"
+        unique_id: rs485_ai_ch7
+        slave: 3
+        address: 6
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "WS AI CH8"
+        unique_id: rs485_ai_ch8
+        slave: 3
+        address: 7
+        input_type: input
+        data_type: uint16
+        scan_interval: 30
+      - name: "AI CH1 mode (holding)"
+        unique_id: rs485_ai_mode_ch1
+        slave: 3
+        address: 4096
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH2 mode (holding)"
+        unique_id: rs485_ai_mode_ch2
+        slave: 3
+        address: 4097
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH3 mode (holding)"
+        unique_id: rs485_ai_mode_ch3
+        slave: 3
+        address: 4098
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH4 mode (holding)"
+        unique_id: rs485_ai_mode_ch4
+        slave: 3
+        address: 4099
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH5 mode (holding)"
+        unique_id: rs485_ai_mode_ch5
+        slave: 3
+        address: 4100
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH6 mode (holding)"
+        unique_id: rs485_ai_mode_ch6
+        slave: 3
+        address: 4101
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH7 mode (holding)"
+        unique_id: rs485_ai_mode_ch7
+        slave: 3
+        address: 4102
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
+      - name: "AI CH8 mode (holding)"
+        unique_id: rs485_ai_mode_ch8
+        slave: 3
+        address: 4103
+        input_type: holding
+        data_type: uint16
+        scan_interval: 60
