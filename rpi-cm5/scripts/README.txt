@@ -3,6 +3,8 @@ rpi-cm5/scripts — düzen (özet)
 
 ha_helpers.sh          Ortak .env yükleme, HA API, SSH (tüm betikler ../ha_helpers.sh ile yükler)
 
+check_ha_connectivity.sh   LAN (HA_URL) vs Tailscale (HA_URL_REMOTE) API + route özeti — görev başında çalıştır
+
 deploy/                HAOS /config senkronu
   sync_ha_config.sh    homeassistant/ → tar+ssh (rsync uzak tarafta yok), yedek, secret birleştir, check, restart
 

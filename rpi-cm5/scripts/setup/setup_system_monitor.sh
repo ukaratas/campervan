@@ -6,6 +6,7 @@
 
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 source "$SCRIPT_DIR/../ha_helpers.sh"
 
 echo "=== System Monitor Setup ==="
@@ -27,7 +28,7 @@ ha_set_options "$entry_id" "{\"process\": $MONITORED_PROCESSES}"
 
 echo ""
 echo "Step 4: Enable all sensor entities"
-python3 "$SCRIPT_DIR/../tools/ha_enable_entities.py" systemmonitor
+python3 "$REPO_ROOT/scripts/tools/ha_enable_entities.py" systemmonitor
 
 echo ""
 echo "Step 5: Reload integration"
@@ -44,5 +45,5 @@ echo "  sensor.system_monitor_disk_usage             - Disk Usage %"
 echo "  sensor.system_monitor_load_1_min             - Load Average 1m"
 echo "  sensor.system_monitor_swap_usage             - Swap Usage %"
 echo "  sensor.system_monitor_ipv4_address_wlan0     - WiFi IP"
-echo "  sensor.system_monitor_pwmfan_fan_speed       - Fan RPM"
+echo "  (PWM fan entity only on some boards — omit if missing)"
 echo "  sensor.system_monitor_last_boot              - Last Boot Time"

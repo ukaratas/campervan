@@ -13,6 +13,7 @@
 
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 source "$SCRIPT_DIR/../ha_helpers.sh"
 
 YAML_ONLY=false
@@ -125,9 +126,9 @@ ssh_ha "ha core restart"
 
 echo ""
 echo "=== Admin Bench Lovelace (WS-AI-01 sekmesi) ==="
-export RELAY_IP="${RELAY_IP:-10.0.0.200}"
+export RELAY_IP="${RELAY_IP:-192.168.50.20}"
 export RELAY_PORT="${RELAY_PORT:-4196}"
-python3 "$SCRIPT_DIR/../lovelace/lovelace_push_admin_bench.py" || echo "  [WARN] Lovelace API başarısız; HA_TOKEN ile yerelde: python3 scripts/lovelace/lovelace_push_admin_bench.py"
+python3 "$REPO_ROOT/scripts/lovelace/lovelace_push_admin_bench.py" || echo "  [WARN] Lovelace API başarısız; HA_TOKEN ile yerelde: python3 scripts/lovelace/lovelace_push_admin_bench.py"
 
 echo ""
 echo "Bitti. Developer Tools → States: sensor.ws_ai_ch1 … ws_ai_ch8"

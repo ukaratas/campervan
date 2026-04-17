@@ -72,8 +72,8 @@
       slave: 1
       write_type: coil
       scan_interval: 5
-    - name: "CH12 — Future use"
-      unique_id: modbus_ws01_ch12
+    - name: "CH12 — Truma Combi D4"
+      unique_id: modbus_ws01_ch12_truma_combi_d4
       address: 11
       slave: 1
       write_type: coil

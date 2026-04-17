@@ -1,14 +1,17 @@
 # RPi CM5 - Home Assistant Production Setup
 
-Raspberry Pi Compute Module 5 üzerinde çalışan Home Assistant kurulumu.
+Raspberry Pi Compute Module 5 (veya mevcut HA donanımı) üzerinde çalışan Home Assistant kurulumu. **IP ve Modbus uçları** için kaynak: `.env` ve HA `/config/secrets.yaml` (`secrets.yaml.example`).
 
-- **Host**: `192.168.1.91` (WiFi - wlan0)
-- **Control Bus**: `10.0.0.1` (Ethernet - end0)
-- **HA URL**: `http://192.168.1.91:8123`
-- **HA Version**: 2026.4.1
-- **OS**: Home Assistant OS 17.2 (Supervisor 2026.03.3)
-- **RAM**: ~8 GB
-- **Disk**: 13.6 GB (6.3 GB free)
+**Teltonika LAN (örnek production):**
+
+- **Subnet:** `192.168.50.0/24` (gateway çoğu kurulumda `192.168.50.1`)
+- **Home Assistant:** `192.168.50.10` — örnek: `http://192.168.50.10:8123`
+- **Waveshare 16CH PoE Ethernet relay (Modbus):** `192.168.50.20:4196` (RTU over TCP, Unit ID 1)
+
+Eski mimarideki ayrı kontrol bus (`10.0.0.x` / ikinci Ethernet) bu repoda **hedeflenmiyor**; MQTT, Modbus TCP ve HA aynı LAN içindedir.
+
+- **HA Version**: ör. `2026.4.x` — `GET /api/config` ile doğrulayın
+- **OS**: Home Assistant OS (Supervisor)
 
 ## UI language (Admin vs user)
 
@@ -60,7 +63,7 @@ cd scripts/setup && bash setup_ha.sh
 | # | Script | Ne yapar | Bağımlılık |
 |---|--------|----------|------------|
 | 1 | `setup/setup_ssh.sh` | Terminal & SSH addon (port 22) | WebSocket API |
-| 2 | `setup/setup_network.sh` | end0 kontrol bus (10.0.0.1/24) + relay testi | SSH (step 1) |
+| 2 | `setup/setup_network.sh` | LAN + Ethernet relay doğrulama (ping / TCP / Modbus) | SSH (step 1) |
 | 3 | `setup/setup_system_monitor.sh` | CPU, RAM, disk, sıcaklık sensörleri | REST API |
 | 4 | `setup/setup_mqtt.sh` | Mosquitto broker + MQTT integration | SSH (step 1) |
 | 5 | `setup/setup_sensors.sh` | Tank + sistem MQTT sensörleri | MQTT (step 4) |
@@ -132,26 +135,26 @@ rpi-cm5/
 ## Mimari
 
 ```
-                     10.0.0.x / end0 (Control Bus)
-                    ┌──────────────────────────────────────┐
-                    │                                       │
-Waveshare 16CH Relay (10.0.0.200:4196) ── HA Modbus ──────┤
-RS485 cihazlar (analog input) ── HA Modbus ────────────────┤
-Victron EasySolar GX ─── (native) ────────────────────────┤──→ Home Assistant
-M5Dial ──── (WiFi MQTT) ─────────────────────────────────┘       │
-                                                                  │
-                    192.168.1.x / wlan0 (WiFi)                    │
-                    RPi CM5 (192.168.1.91) ←──── Mosquitto (MQTT :1883)
+  Teltonika LAN (örn. 192.168.50.0/24)
+        │
+        ├── Gateway 192.168.50.1
+        ├── Home Assistant (192.168.50.10) ←── Mosquitto (MQTT :1883)
+        ├── Waveshare 16CH relay (192.168.50.20:4196) ── HA Modbus (rtuovertcp)
+        │
+        └── RS485 cihazlar (analog input, IO, Relay E) ── HA Modbus ─┐
+                                                                      ├──→ HA
+        Victron EasySolar GX / BLE / M5Dial (MQTT) ───────────────────┘
 ```
 
 ## Network Topolojisi
 
-| Interface | Subnet | Kullanım |
-|-----------|--------|----------|
-| `wlan0` | `192.168.1.91/24` (GW: `.1`) | WiFi, internet, HA UI erişimi |
-| `end0` | `10.0.0.1/24` (GW: yok) | Kontrol bus: relay, sensör, Modbus cihazlar |
+| Bileşen | Örnek adres | Not |
+|---------|-------------|-----|
+| Router (Teltonika) | `192.168.50.1` | LAN gateway |
+| Home Assistant | `192.168.50.10` | `.env` → `HA_URL` |
+| Waveshare 16CH Ethernet relay | `192.168.50.20:4196` | Modbus RTU over TCP; `secrets.yaml` → `waveshare_ws01_*` |
 
-Kontrol bus ayrı subnet (`10.0.0.x`) kullanır - WiFi routing'le çakışma olmaz.
+HAOS arayüz isimleri (`wlan0`, `end0`, …) System Monitor’da görülebilir; **tek LAN** kurulumunda asıl adresler yukarıdaki rezervasyonlarla uyumlu olmalıdır.
 
 ## RS485 USB hattı — Master / Slave ve devreye alma sırası
 
@@ -198,13 +201,13 @@ Broadcast ile adres yazarken **aynı komuta cevap veren başka modül** kalması
 
 | Tip | Örnek entity |
 |-----|----------------|
-| IO 8CH DO | `switch.ws_io8_do1` … `do8` |
-| IO 8CH DI | `binary_sensor.ws_io8_di1` … `di8` |
-| Relay (E) | `switch.ws_rtu_relay_ch1` … `ch8` (YAML’daki `name` / `unique_id` ile uyumlu olmalı) |
+| IO 8CH DO | `switch.do1_warning_light`, `do2_error_buzzer`, `ws_io8_do3` … `do8` (`name` alanından slug) |
+| IO 8CH DI | `binary_sensor.di1_bed_left_reading_light`, … `di8_future_use` |
+| Relay (E) | `switch.ch1_220v_outlets`, `ch2_clesana_c1`, `ch3_usb_outlets`, `ch4_air_condition`, … (slave **2**) |
 
 **Kontrol paneli:** Lovelace **Admin Bench** → **`WS-Relay-02`** sekmesi Relay (E) için 8 kanal anahtarı gösterir (`scripts/setup/setup_relay.sh` ile güncellenir). **WS-Relay-01** = Ethernet 16CH (`waveshare_ws01`). Aynı panoda **`rpi-cm5`** (RPi / System Monitor) ve **`victron-bluesmart`** (BLE şarj) sekmeleri `scripts/lovelace/lovelace_push_admin_bench.py` içindedir; Victron entity ID’leri cihaz yeniden eşlenirse scriptteki listeyi güncelle.
 
-Ethernet üzerindeki 16CH röle (`waveshare_ws01`) bu tabloda değildir; o **ayrı** Modbus TCP (`10.0.0.200:4196`).
+Ethernet üzerindeki 16CH röle (`waveshare_ws01`) bu tabloda değildir; o **ayrı** Modbus TCP (`192.168.50.20:4196` — `.env` / `secrets.yaml`).
 
 ### RS485 kararsız / UI ile röle uyuşmuyor
 
@@ -235,17 +238,17 @@ campervan/
 ```
 
 **Not:** Relay kontrol artık MQTT üzerinden değil, HA native Modbus entegrasyonu ile yapılıyor.
-Relay switch entity'leri: `switch.ch1_maserator_pompa`, `switch.ch2` .. `switch.ch16`
+Relay switch entity'leri: `switch.ch1_macerator_pump`, `switch.ch2_refrigerator`, … (isimler `modbus/10_waveshare_ws01.yaml` içindeki `name` alanından slug üretilir)
 
 ## Bağlantı Bilgileri
 
 | Servis | Adres | Kullanıcı |
 |--------|-------|-----------|
-| HA UI | `http://192.168.1.91:8123` | - |
-| SSH | `ssh root@192.168.1.91` | `.env` → SSH_PASS |
-| MQTT | `192.168.1.91:1883` | `.env` → MQTT_USER/MQTT_PASS |
-| Relay Web | `http://10.0.0.200` (RPi üzerinden) | password: `admin` |
-| Relay Modbus | `10.0.0.200:4196` | Modbus RTU over TCP, Unit ID: 1 |
+| HA UI | `http://192.168.50.10:8123` (örnek) | - |
+| SSH | `ssh root@192.168.50.10` — port **22** (Terminal & SSH addon) | `.env` → SSH_PASS |
+| MQTT | `192.168.50.10:1883` | `.env` → MQTT_USER/MQTT_PASS |
+| Relay Web | `http://192.168.50.20` / `https://…` (cihaz) | fabrika / cihaz şifresi |
+| Relay Modbus | `192.168.50.20:4196` | Modbus RTU over TCP, Unit ID: 1 |
 
 ## Önemli Entity'ler
 
@@ -256,7 +259,7 @@ Relay switch entity'leri: `switch.ch1_maserator_pompa`, `switch.ch2` .. `switch.
 | `sensor.system_monitor_memory_usage` | RAM kullanımı (%) |
 | `sensor.system_monitor_disk_usage` | Disk kullanımı (%) |
 | `sensor.system_monitor_load_1_min` | Load average (1dk) |
-| `sensor.system_monitor_pwmfan_fan_speed` | Fan hızı (RPM) |
+| `sensor.system_monitor_pwmfan_fan_speed` | Fan RPM (yalnızca bazı RPi donanımlarında oluşur; yoksa yok sayın) |
 | `sensor.system_monitor_ipv4_address_wlan0` | WiFi IP adresi |
 | `binary_sensor.rpi_power_status` | Güç durumu (undervoltage) |
 | **MQTT Sensörler** | |
@@ -266,15 +269,15 @@ Relay switch entity'leri: `switch.ch1_maserator_pompa`, `switch.ch2` .. `switch.
 | `sensor.campervan_rpi_cm5_rpi_cpu_sicaklik` | RPi CPU sıcaklık via MQTT (°C) |
 | `sensor.campervan_rpi_cm5_rpi_uptime` | RPi uptime via MQTT (h) |
 | **Modbus Relay (native)** | |
-| `switch.ch1_maserator_pompa` | Macerator pump (WS-01 CH1, coil 0) |
-| `switch.ch2` .. `switch.ch16` | Relay kanalları (coil 1-15) |
+| `switch.ch1_macerator_pump` | Macerator pump (WS-01 CH1, coil 0) |
+| `switch.ch2_refrigerator` … `switch.ch16_future_use` | Diğer kanallar (coil 1–15) |
 | **RS485 Relay (E)** | |
-| `switch.ws_rtu_relay_ch1` .. `ch8` | USB `rs485_bus`, slave **2** (IO 8CH ile çakışmaması için) |
+| `switch.ch1_220v_outlets` … `ch8_future_use` | USB `rs485_bus`, slave **2** |
 
 ## Donanım
 
 | Cihaz | Bağlantı | IP / Adres | Notlar |
 |-------|----------|------------|--------|
-| RPi CM5 | WiFi + Ethernet | wlan0: `192.168.1.91`, end0: `10.0.0.1` | Host |
-| Waveshare Modbus POE ETH Relay 16CH | Ethernet (end0) | `10.0.0.200:4196` | 16 röle, Modbus RTU/TCP, FW V1.486, MAC `04-EE-E8-17-54-18` |
+| HA host (HAOS) | Teltonika LAN | örn. `192.168.50.10` | `.env` `HA_URL` ile uyumlu |
+| Waveshare Modbus POE ETH Relay 16CH | Ethernet (aynı LAN) | `192.168.50.20:4196` | 16 röle, Modbus RTU/TCP; MAC ör. `04-EE-E8-17-54-18` |
 | Waveshare 8-Ch Analog Acquisition | RS485 USB hattı (daisy chain) | Modbus RTU, slave 3 (plan) | 0-20mA analog input; ETH röle üzerinden değil, aynı RS485 bus |

@@ -7,27 +7,83 @@ import asyncio
 import json
 import os
 import sys
+from pathlib import Path
 
 import websockets
 
 WS_URI = os.environ["HA_URL"].replace("http://", "ws://") + "/api/websocket"
 WS_TOKEN = os.environ["HA_TOKEN"]
 
+# Ethernet 16CH — entity_id = slugified `name` from modbus/10_waveshare_ws01.yaml (not switch.ch2).
+ETH_WS01_SWITCHES = [
+    "switch.ch1_macerator_pump",
+    "switch.ch2_refrigerator",
+    "switch.ch3_bed_left_reading_light",
+    "switch.ch4_bed_right_reading_light",
+    "switch.ch5_bed_light",
+    "switch.ch6_kitchen_light",
+    "switch.ch7_saloon_light",
+    "switch.ch8_outdoor_light",
+    "switch.ch9_victron_blue_smart",
+    "switch.ch10_dishwasher",
+    "switch.ch11_washing_machine",
+    "switch.ch12_truma_combi_d4",
+    "switch.ch13_future_use",
+    "switch.ch14_future_use",
+    "switch.ch15_future_use",
+    "switch.ch16_future_use",
+]
+
+# RS485 RTU Relay (E) slave 2 — slugified names from rs485_bus_devices/switches/20_relay_e.yaml
+RTU_RELAY_E_SWITCHES = [
+    "switch.ch1_220v_outlets",
+    "switch.ch2_clesana_c1",
+    "switch.ch3_usb_outlets",
+    "switch.ch4_air_condition",
+    "switch.ch5_future_use",
+    "switch.ch6_future_use",
+    "switch.ch7_future_use",
+    "switch.ch8_future_use",
+]
+
+# IO8 DO — DO1/2 use "DO1 — …" names; DO3–8 use "WS-IO8 DOx" in YAML (see 10_io8_do.yaml)
+IO8_DO_SWITCHES = [
+    "switch.do1_warning_light",
+    "switch.do2_error_buzzer",
+    "switch.ws_io8_do3",
+    "switch.ws_io8_do4",
+    "switch.ws_io8_do5",
+    "switch.ws_io8_do6",
+    "switch.ws_io8_do7",
+    "switch.ws_io8_do8",
+]
+
+# IO8 DI — slugified from rs485_bus_devices/binary_sensors/10_io8_di.yaml
+IO8_DI_BINARY_SENSORS = [
+    "binary_sensor.di1_bed_left_reading_light",
+    "binary_sensor.di2_bed_left_light",
+    "binary_sensor.di3_bed_right_reading_light",
+    "binary_sensor.di4_bed_right_light",
+    "binary_sensor.di5_kitchen_light",
+    "binary_sensor.di6_saloon_light",
+    "binary_sensor.di7_outdoor_light",
+    "binary_sensor.di8_future_use",
+]
+
 # Victron Blue Smart Charger (BLE). If HA re-discovers the device, update these entity IDs.
 # All Victron BLE sensors share this prefix (update if HA re-discovers the charger).
 BSC = "sensor.bsc_ip65_12_15_hq2349fuajv"
-# Template sensors (insert_victron_gauge_templates.py) — always numeric so gauge cards never error.
-# Eski registry kayıtları (kısa unique_id: victron_gauge_l1_v vb.) canonical slug'ı işgal edip
-# unavailable kalabiliyor; güncel şablonlar *_2 entity_id ile oluşuyor — panele onları bağlıyoruz.
+# Template sensors from homeassistant/templates/30_victron_gauges.yaml — slug = unique_id (no _2 suffix).
+# Cihaz yeniden eşlenirse BSC + templates içindeki BLE entity ID'lerini güncelleyin.
 VG = {
     "temp": "sensor.victron_gauge_temp",
-    "ac_a": "sensor.victron_gauge_ac_current_2",
-    "l1_v": "sensor.victron_gauge_l1_voltage_2",
-    "l1_a": "sensor.victron_gauge_l1_current_2",
-    "l2_v": "sensor.victron_gauge_l2_voltage_2",
-    "l2_a": "sensor.victron_gauge_l2_current_2",
-    "l3_v": "sensor.victron_gauge_l3_voltage_2",
-    "l3_a": "sensor.victron_gauge_l3_current_2",
+    "ac_a": "sensor.victron_gauge_ac_current",
+    "l1_v": "sensor.victron_gauge_l1_voltage",
+    "l1_a": "sensor.victron_gauge_l1_current",
+    "l2_v": "sensor.victron_gauge_l2_voltage",
+    "l2_a": "sensor.victron_gauge_l2_current",
+    "l3_v": "sensor.victron_gauge_l3_voltage",
+    "l3_a": "sensor.victron_gauge_l3_current",
 }
 
 # RPi CM5 / HA host — grouped System Monitor entities (expand if your HA exposes more).
@@ -68,8 +124,9 @@ RPI_CM5_GROUPS = [
     (
         "Network — IPv4 addresses",
         [
-            "sensor.system_monitor_ipv4_address_wlan0",
+            # Teltonika LAN is usually end0; wlan0 stays unknown if Wi‑Fi unused
             "sensor.system_monitor_ipv4_address_end0",
+            "sensor.system_monitor_ipv4_address_wlan0",
             "sensor.system_monitor_ipv4_address_hassio",
             "sensor.system_monitor_ipv4_address_docker0",
         ],
@@ -77,20 +134,13 @@ RPI_CM5_GROUPS = [
     (
         "Network — throughput (B/s)",
         [
-            "sensor.system_monitor_network_throughput_in_wlan0",
-            "sensor.system_monitor_network_throughput_out_wlan0",
             "sensor.system_monitor_network_throughput_in_end0",
             "sensor.system_monitor_network_throughput_out_end0",
+            "sensor.system_monitor_network_throughput_in_wlan0",
+            "sensor.system_monitor_network_throughput_out_wlan0",
         ],
     ),
-    (
-        "Kernel pressure (60 s average)",
-        [
-            "sensor.system_monitor_cpu_pressure_some_60s_average",
-            "sensor.system_monitor_memory_pressure_some_60s_average",
-            "sensor.system_monitor_io_pressure_some_60s_average",
-        ],
-    ),
+    # PSI / kernel pressure: often "unknown" on HA OS — omitted to avoid empty cards
     (
         "Processes & add-ons",
         [
@@ -109,23 +159,59 @@ RPI_CM5_GROUPS = [
         ],
     ),
     (
-        "Fan & power",
+        "Power (RPi)",
         [
-            "sensor.system_monitor_pwmfan_fan_speed",
             "binary_sensor.rpi_power_status",
         ],
     ),
-    (
-        "MQTT — CamperVan RPi (setup_sensors.sh)",
-        [
-            {
-                "entity": "sensor.campervan_rpi_cm5_rpi_cpu_sicaklik",
-                "name": "CPU temperature (MQTT)",
-            },
-            {"entity": "sensor.campervan_rpi_cm5_rpi_uptime", "name": "Uptime (MQTT)"},
-        ],
-    ),
 ]
+
+
+def build_refresh_entity_ids() -> list[str]:
+    """Tek kaynak: Status sekmesi + scripts.yaml (sıralı update_entity)."""
+    out: list[str] = []
+    out.extend(ETH_WS01_SWITCHES)
+    out.extend(IO8_DO_SWITCHES)
+    out.extend(IO8_DI_BINARY_SENSORS)
+    out.extend(RTU_RELAY_E_SWITCHES)
+    for i in range(1, 9):
+        out.append(f"sensor.ws_ai_ch{i}")
+        out.append(f"sensor.ai_ch{i}_mode_holding")
+    for i in range(1, 9):
+        out.append(f"input_select.ai_ch{i}_modbus_mode")
+    out.extend(["sensor.clean_water_mode_text", "sensor.gray_water_mode_text"])
+    return out
+
+
+def write_admin_bench_sync_script() -> None:
+    """homeassistant/scripts.yaml — tek tek update + RS485 için kısa gecikme."""
+    root = Path(__file__).resolve().parent.parent.parent
+    out = root / "homeassistant" / "scripts.yaml"
+    ids = build_refresh_entity_ids()
+    lines = [
+        "# Admin Bench: Modbus/RS485 entity yenileme (Check states).",
+        "# Bu dosya lovelace_push_admin_bench.py tarafından güncellenir.",
+        "admin_bench_sync_modbus:",
+        '  alias: "Admin Bench — sync Modbus entity states"',
+        "  icon: mdi:sync",
+        "  mode: restart",
+        "  sequence:",
+        "    - repeat:",
+        "        for_each:",
+    ]
+    for eid in ids:
+        lines.append(f"          - {eid}")
+    lines.extend(
+        [
+            "        sequence:",
+            "          - service: homeassistant.update_entity",
+            "            target:",
+            '              entity_id: "{{ repeat.item }}"',
+            "          - delay:",
+            "              milliseconds: 45",
+        ]
+    )
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def _entities_card(title, rows):
@@ -198,6 +284,9 @@ async def main() -> None:
         else:
             print("  [OK] Dashboard 'Admin Bench' exists")
 
+        write_admin_bench_sync_script()
+        print("  [OK] Regenerated homeassistant/scripts.yaml (admin_bench_sync_modbus)")
+
         eth_labels = [
             "CH1 — Macerator pump",
             "CH2 — Refrigerator",
@@ -210,24 +299,22 @@ async def main() -> None:
             "CH9 — Victron Blue Smart",
             "CH10 — Dishwasher",
             "CH11 — Washing Machine",
-            "CH12 — Future use",
+            "CH12 — Truma Combi D4",
             "CH13 — Future use",
             "CH14 — Future use",
             "CH15 — Future use",
             "CH16 — Future use",
         ]
-        entity_list = [{"entity": "switch.ch1_maserator_pompa", "name": eth_labels[0]}]
-        for i in range(2, 17):
-            entity_list.append({"entity": f"switch.ch{i}", "name": eth_labels[i - 1]})
+        ws01_entities = [{"entity": ETH_WS01_SWITCHES[i], "name": eth_labels[i]} for i in range(16)]
 
         relay_info = (
             "## Waveshare Modbus PoE Ethernet Relay 16CH\n"
             "| | |\n|---|---|\n"
             "| **Module** | WS-01 |\n"
-            f"| **IP** | {os.environ.get('RELAY_IP', '10.0.0.200')}:{os.environ.get('RELAY_PORT', '4196')} |\n"
+            f"| **IP** | {os.environ.get('RELAY_IP', '192.168.50.20')}:{os.environ.get('RELAY_PORT', '4196')} |\n"
             "| **Protocol** | Modbus RTU over TCP (native HA) |\n"
             "| **Slave** | 1 |\n"
-            "| **Channels** | 16 (CH1–11 assigned loads; CH12–16 reserved) |"
+            "| **Channels** | 16 (CH1–11 + CH12 Truma; CH13–16 reserved) |"
         )
 
         relay_view_01 = {
@@ -238,25 +325,28 @@ async def main() -> None:
                 {"type": "markdown", "content": relay_info},
                 {
                     "type": "entities",
-                    "title": "Relay control",
+                    "title": "Relay control — CH1–CH8",
                     "show_header_toggle": False,
-                    "entities": entity_list,
+                    "entities": ws01_entities[:8],
+                },
+                {
+                    "type": "entities",
+                    "title": "Relay control — CH9–CH16",
+                    "show_header_toggle": False,
+                    "entities": ws01_entities[8:],
                 },
             ],
         }
 
         rtu_labels = [
-            "CH1 — 24V Camp Mode",
-            "CH2 — 12V Camp Mode",
-            "CH3 — 12V Camp Mode",
+            "CH1 — 220V Outlets",
+            "CH2 — Clesana C1",
+            "CH3 — USB Outlets",
             "CH4 — Air Condition",
             "CH5 — Future use",
             "CH6 — Future use",
             "CH7 — Future use",
             "CH8 — Future use",
-        ]
-        rtu_entity_list = [
-            {"entity": f"switch.ws_rtu_relay_ch{i}", "name": rtu_labels[i - 1]} for i in range(1, 9)
         ]
         rtu_info = (
             "## Waveshare Modbus RTU Relay (E) — RS485\n"
@@ -265,10 +355,12 @@ async def main() -> None:
             "| **Bus** | USB–RS485 → `rs485_bus` (single serial port) |\n"
             "| **Slave** | **2** (same line as IO8=1, Analog=3) |\n"
             "| **Wiki** | [Relay (E)](https://www.waveshare.com/wiki/Modbus_RTU_Relay_(E)) |\n"
-            "| **Coils** | 0–7 → CH1–CH4 loads; CH5–8 reserved |\n"
+            "| **Coils** | CH1 220V outlets, CH2 Clesana C1, CH3 USB outlets, CH4 AC; CH5–8 reserved |\n"
             "\n"
             "`configuration.yaml`: **`slave: 2`** under `rs485_bus`."
         )
+
+        rtu_entities = [{"entity": RTU_RELAY_E_SWITCHES[i], "name": rtu_labels[i]} for i in range(8)]
 
         relay_view_02 = {
             "title": "WS-Relay-02",
@@ -278,9 +370,15 @@ async def main() -> None:
                 {"type": "markdown", "content": rtu_info},
                 {
                     "type": "entities",
-                    "title": "RTU Relay (E) — 32 A, 8 ch",
+                    "title": "RTU Relay (E) — CH1–CH4",
                     "show_header_toggle": False,
-                    "entities": rtu_entity_list,
+                    "entities": rtu_entities[:4],
+                },
+                {
+                    "type": "entities",
+                    "title": "RTU Relay (E) — CH5–CH8",
+                    "show_header_toggle": False,
+                    "entities": rtu_entities[4:],
                 },
             ],
         }
@@ -289,7 +387,6 @@ async def main() -> None:
             "DO1 — Warning Light",
             "DO2 — Error Buzzer",
         ] + [f"DO{i}" for i in range(3, 9)]
-        do_entities = [{"entity": f"switch.ws_io8_do{i}", "name": do_labels[i - 1]} for i in range(1, 9)]
         di_labels = [
             "DI1 — Bed Left Reading Light",
             "DI2 — Bed Left Light",
@@ -299,9 +396,6 @@ async def main() -> None:
             "DI6 — Saloon Light",
             "DI7 — Outdoor Light",
             "DI8 — Future use",
-        ]
-        di_entities = [
-            {"entity": f"binary_sensor.ws_io8_di{i}", "name": di_labels[i - 1]} for i in range(1, 9)
         ]
         io8_info = (
             "## Waveshare Modbus RTU IO 8CH\n"
@@ -313,6 +407,9 @@ async def main() -> None:
             "| **Wiki** | [Modbus RTU IO 8CH](https://www.waveshare.com/wiki/Modbus_RTU_IO_8CH) |\n"
             "| **Power** | 7–36 V DC (module needs its own supply) |"
         )
+
+        do_entities = [{"entity": IO8_DO_SWITCHES[i], "name": do_labels[i]} for i in range(8)]
+        di_entities = [{"entity": IO8_DI_BINARY_SENSORS[i], "name": di_labels[i]} for i in range(8)]
 
         di_do_view = {
             "title": "WS-DI/DO-01",
@@ -339,9 +436,7 @@ async def main() -> None:
             "Clean Water",
             "Gray water",
         ] + [f"AI CH{i}" for i in range(3, 9)]
-        ai_entities = [
-            {"entity": f"sensor.ws_ai_ch{i}", "name": ai_value_labels[i - 1]} for i in range(1, 9)
-        ]
+        ai_entities = [{"entity": f"sensor.ws_ai_ch{i}", "name": ai_value_labels[i - 1]} for i in range(1, 9)]
         ai_mode_raw = [
             {"entity": f"sensor.ai_ch{i}_mode_holding", "name": f"CH{i} mode (raw code)"} for i in range(1, 9)
         ]
@@ -349,9 +444,9 @@ async def main() -> None:
             {"entity": f"input_select.ai_ch{i}_modbus_mode", "name": f"CH{i} mode (write)"} for i in range(1, 9)
         ]
         ai_mode_text = [
-            # Entity IDs follow registry (unique_id); friendly names in YAML are English.
-            {"entity": "sensor.clean_water_mod_metin", "name": "Clean Water — mode (text)"},
-            {"entity": "sensor.gray_water_mod_metin", "name": "Gray water — mode (text)"},
+            # Slug from template `name:` in templates/10_ai_modes_text.yaml
+            {"entity": "sensor.clean_water_mode_text", "name": "Clean Water — mode (text)"},
+            {"entity": "sensor.gray_water_mode_text", "name": "Gray water — mode (text)"},
         ]
         ai_info = (
             "## Waveshare Modbus RTU Analog Input 8CH\n"
@@ -396,29 +491,29 @@ async def main() -> None:
             ],
         }
 
-        refresh_entity_ids = ["switch.ch1_maserator_pompa"]
-        refresh_entity_ids += [f"switch.ch{i}" for i in range(2, 17)]
-        for i in range(1, 9):
-            refresh_entity_ids.append(f"switch.ws_io8_do{i}")
-            refresh_entity_ids.append(f"binary_sensor.ws_io8_di{i}")
-            refresh_entity_ids.append(f"switch.ws_rtu_relay_ch{i}")
-        for i in range(1, 9):
-            refresh_entity_ids.append(f"sensor.ws_ai_ch{i}")
-            refresh_entity_ids.append(f"sensor.ai_ch{i}_mode_holding")
-        for i in range(1, 9):
-            refresh_entity_ids.append(f"input_select.ai_ch{i}_modbus_mode")
-        refresh_entity_ids += ["sensor.clean_water_mod_metin", "sensor.gray_water_mod_metin"]
-
         rpi_cm5_info = (
             "## Raspberry Pi CM5 (Home Assistant host)\n"
-            "Grouped **System Monitor** metrics below. MQTT RPi topics appear in the last card when the broker is online.\n\n"
+            "Grouped **System Monitor** metrics below.\n\n"
             "| | |\n|---|---|\n"
             "| **Docs** | [System Monitor](https://www.home-assistant.io/integrations/systemmonitor/) |\n"
-            "| **MQTT** | `sensor.campervan_rpi_cm5_*` from `setup_sensors.sh` |"
+            "| **LAN** | Primary IPv4 is often **`end0`** (Ethernet); **`wlan0`** is unknown if Wi‑Fi is off. |\n"
+            "| **MQTT RPi** | Run `scripts/setup/setup_sensors.sh` after Mosquitto; discovery entity IDs "
+            "are typically `sensor.rpi_cpu_sicaklik` / `sensor.rpi_uptime` — confirm under **Developer Tools → States**. |"
         )
         rpi_cm5_cards = [{"type": "markdown", "content": rpi_cm5_info}]
         for title, rows in RPI_CM5_GROUPS:
             rpi_cm5_cards.append(_entities_card(title, rows))
+        rpi_cm5_cards.append(
+            {
+                "type": "markdown",
+                "content": (
+                    "### MQTT — CamperVan RPi (optional)\n"
+                    "No MQTT rows here until discovery runs. From the repo machine (with `mosquitto_pub`): "
+                    "`bash scripts/setup/setup_sensors.sh` — then search states for **`rpi`** / **`campervan`**.\n\n"
+                    "Host CPU/temp are already covered by **System Monitor** above."
+                ),
+            }
+        )
 
         rpi_cm5_view = {
             "title": "RPi CM5",
@@ -433,7 +528,7 @@ async def main() -> None:
             "values (e.g. power supply mode, unused phases) show as **0** instead of breaking the card.\n\n"
             "| | |\n|---|---|\n"
             "| **Product** | [Blue Smart IP65 (Bluetooth)](https://www.victronenergy.com/chargers/bluesmart-ip65-charger) |\n"
-            "| **YAML** | Run `insert_victron_gauge_templates.py` on `configuration.yaml` if gauges are missing |"
+            "| **YAML** | `homeassistant/templates/30_victron_gauges.yaml` → `sync_ha_config.sh` |"
         )
         victron_gauges_top = {
             "type": "horizontal-stack",
@@ -484,12 +579,15 @@ async def main() -> None:
 
         status_info = (
             "## State sync\n"
-            "After startup or RS485 delays, switches can lag. **Check states** calls "
-            "`homeassistant.update_entity` on all bench Modbus entities to force one poll cycle.\n\n"
+            "After startup or RS485 delays, switches can lag. **Check states** runs the script "
+            "`script.admin_bench_sync_modbus`: each entity gets `homeassistant.update_entity` **one at a time** "
+            "with a short delay (RS485 bus spacing). Same entity list as `build_refresh_entity_ids()` in "
+            "`lovelace_push_admin_bench.py`.\n\n"
             "| Area | Example entity IDs |\n|---|---|\n"
-            "| Ethernet 16CH | `switch.ch1_maserator_pompa`, `switch.ch2` … `ch16` |\n"
-            "| IO 8CH | `switch.ws_io8_do*`, `binary_sensor.ws_io8_di*` |\n"
-            "| RTU Relay (E) | `switch.ws_rtu_relay_ch1` … `ch8` |\n"
+            "| Ethernet 16CH | `switch.ch1_macerator_pump`, … (`ETH_WS01_SWITCHES`) |\n"
+            "| IO 8CH DO | `switch.do1_warning_light`, `do2_error_buzzer`, `ws_io8_do3`… (`IO8_DO_SWITCHES`) |\n"
+            "| IO 8CH DI | `binary_sensor.di1_bed_left_reading_light`, … (`IO8_DI_BINARY_SENSORS`) |\n"
+            "| RTU Relay (E) | `switch.ch1_220v_outlets`, … (`RTU_RELAY_E_SWITCHES`) |\n"
             "| Analog 8CH | `sensor.ws_ai_ch1` … `ch8`, `sensor.ai_ch*_mode_holding`, `input_select.ai_ch*_modbus_mode` |"
         )
 
@@ -501,15 +599,12 @@ async def main() -> None:
                 {"type": "markdown", "content": status_info},
                 {
                     "type": "button",
+                    "entity": "script.admin_bench_sync_modbus",
                     "name": "Check states",
                     "icon": "mdi:sync",
                     "show_name": True,
                     "show_icon": True,
-                    "tap_action": {
-                        "action": "call-service",
-                        "service": "homeassistant.update_entity",
-                        "target": {"entity_id": refresh_entity_ids},
-                    },
+                    "show_state": False,
                 },
             ],
         }

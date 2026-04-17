@@ -4,7 +4,7 @@
 #
 # Order matters:
 #   1. SSH   - enables direct host access for subsequent steps
-#   2. Network - end0 control bus (10.0.0.x) for relays/sensors
+#   2. Network - LAN connectivity + Ethernet relay (Modbus) checks
 #   3. System Monitor - host metrics (CPU, RAM, temp, disk)
 #   4. MQTT  - Mosquitto broker (requires SSH for addon install)
 #   5. Sensors - MQTT sensors/actuators (tanks, macerator, RPi stats)
@@ -38,7 +38,7 @@ echo ""
 
 # ── 2. Network (control bus) ────────────────────────────────────
 echo "--------------------------------------------"
-echo "  2/7  Network (end0 control bus)"
+echo "  2/7  Network (LAN + relay)"
 echo "--------------------------------------------"
 bash "$SCRIPT_DIR/setup_network.sh"
 echo ""
@@ -85,7 +85,7 @@ echo "============================================"
 echo ""
 echo "  SSH:      ssh root@${HA_HOST}"
 echo "  MQTT:     ${HA_HOST}:${MQTT_PORT:-1883} (user: ${MQTT_USER:-campervan})"
-echo "  Relay:    ${RELAY_IP:-10.0.0.200}:${RELAY_PORT:-4196} (Modbus RTU/TCP)"
+echo "  Relay:    ${RELAY_IP:-192.168.50.20}:${RELAY_PORT:-4196} (Modbus RTU/TCP)"
 echo "  HA UI:    ${HA_URL}"
 echo "  Sensors:  3 tank + 2 system + 1 switch"
 echo ""

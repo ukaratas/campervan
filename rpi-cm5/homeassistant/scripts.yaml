@@ -1,0 +1,81 @@
+# Admin Bench: Modbus/RS485 entity yenileme (Check states).
+# Bu dosya lovelace_push_admin_bench.py tarafından güncellenir.
+admin_bench_sync_modbus:
+  alias: "Admin Bench — sync Modbus entity states"
+  icon: mdi:sync
+  mode: restart
+  sequence:
+    - repeat:
+        for_each:
+          - switch.ch1_macerator_pump
+          - switch.ch2_refrigerator
+          - switch.ch3_bed_left_reading_light
+          - switch.ch4_bed_right_reading_light
+          - switch.ch5_bed_light
+          - switch.ch6_kitchen_light
+          - switch.ch7_saloon_light
+          - switch.ch8_outdoor_light
+          - switch.ch9_victron_blue_smart
+          - switch.ch10_dishwasher
+          - switch.ch11_washing_machine
+          - switch.ch12_truma_combi_d4
+          - switch.ch13_future_use
+          - switch.ch14_future_use
+          - switch.ch15_future_use
+          - switch.ch16_future_use
+          - switch.do1_warning_light
+          - switch.do2_error_buzzer
+          - switch.ws_io8_do3
+          - switch.ws_io8_do4
+          - switch.ws_io8_do5
+          - switch.ws_io8_do6
+          - switch.ws_io8_do7
+          - switch.ws_io8_do8
+          - binary_sensor.di1_bed_left_reading_light
+          - binary_sensor.di2_bed_left_light
+          - binary_sensor.di3_bed_right_reading_light
+          - binary_sensor.di4_bed_right_light
+          - binary_sensor.di5_kitchen_light
+          - binary_sensor.di6_saloon_light
+          - binary_sensor.di7_outdoor_light
+          - binary_sensor.di8_future_use
+          - switch.ch1_220v_outlets
+          - switch.ch2_clesana_c1
+          - switch.ch3_usb_outlets
+          - switch.ch4_air_condition
+          - switch.ch5_future_use
+          - switch.ch6_future_use
+          - switch.ch7_future_use
+          - switch.ch8_future_use
+          - sensor.ws_ai_ch1
+          - sensor.ai_ch1_mode_holding
+          - sensor.ws_ai_ch2
+          - sensor.ai_ch2_mode_holding
+          - sensor.ws_ai_ch3
+          - sensor.ai_ch3_mode_holding
+          - sensor.ws_ai_ch4
+          - sensor.ai_ch4_mode_holding
+          - sensor.ws_ai_ch5
+          - sensor.ai_ch5_mode_holding
+          - sensor.ws_ai_ch6
+          - sensor.ai_ch6_mode_holding
+          - sensor.ws_ai_ch7
+          - sensor.ai_ch7_mode_holding
+          - sensor.ws_ai_ch8
+          - sensor.ai_ch8_mode_holding
+          - input_select.ai_ch1_modbus_mode
+          - input_select.ai_ch2_modbus_mode
+          - input_select.ai_ch3_modbus_mode
+          - input_select.ai_ch4_modbus_mode
+          - input_select.ai_ch5_modbus_mode
+          - input_select.ai_ch6_modbus_mode
+          - input_select.ai_ch7_modbus_mode
+          - input_select.ai_ch8_modbus_mode
+          - sensor.clean_water_mode_text
+          - sensor.gray_water_mode_text
+        sequence:
+          - service: homeassistant.update_entity
+            target:
+              entity_id: "{{ repeat.item }}"
+          - delay:
+              milliseconds: 45

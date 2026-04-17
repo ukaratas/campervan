@@ -20,6 +20,36 @@ async def main() -> None:
             print("  [ERROR] Auth failed")
             sys.exit(1)
 
+        await ws.send(json.dumps({"id": 1, "type": "lovelace/dashboards/list"}))
+        msg = json.loads(await ws.recv())
+        exists = False
+        for d in msg.get("result", []):
+            if d.get("url_path") == "tank-levels":
+                exists = True
+                break
+
+        if not exists:
+            await ws.send(
+                json.dumps(
+                    {
+                        "id": 2,
+                        "type": "lovelace/dashboards/create",
+                        "url_path": "tank-levels",
+                        "title": "Tank Levels",
+                        "icon": "mdi:water",
+                        "require_admin": False,
+                        "show_in_sidebar": True,
+                    }
+                )
+            )
+            msg = json.loads(await ws.recv())
+            if not msg.get("success"):
+                print(f"  [ERROR] {msg.get('error')}")
+                return
+            print("  [OK] Dashboard 'tank-levels' created")
+        else:
+            print("  [OK] Dashboard 'tank-levels' exists")
+
         fuel_note = (
             "## Yakıt (90 L)\n"
             "Seviye **ileride araç CAN bus** üzerinden okunacak. "
@@ -93,7 +123,7 @@ async def main() -> None:
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "switch.ch1_maserator_pompa",
+                                    "entity": "switch.ch1_macerator_pump",
                                     "name": "Maceratör pompa",
                                     "icon": "mdi:pump",
                                     "color": "red",

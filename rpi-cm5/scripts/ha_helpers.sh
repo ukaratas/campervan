@@ -17,7 +17,7 @@ set -a
 source "$ENV_FILE"
 set +a
 
-# Derived constants
+# Derived constants (LAN). Uzaktan: .env içinde HA_URL_REMOTE; script öncesi export HA_URL="$HA_URL_REMOTE"
 HA_HOST="${HA_URL#http://}"
 HA_HOST="${HA_HOST%:*}"
 

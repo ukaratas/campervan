@@ -11,9 +11,10 @@
 
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 source "$SCRIPT_DIR/../ha_helpers.sh"
 
-RELAY_IP="${RELAY_IP:-10.0.0.200}"
+RELAY_IP="${RELAY_IP:-192.168.50.20}"
 RELAY_PORT="${RELAY_PORT:-4196}"
 
 require_sshpass
@@ -99,7 +100,7 @@ echo "Step 3: Create 'Admin Bench' dashboard (WS-Relay-01 + WS-Relay-02 tabs)"
 
 ensure_websockets
 
-python3 "$SCRIPT_DIR/../lovelace/lovelace_push_admin_bench.py"
+python3 "$REPO_ROOT/scripts/lovelace/lovelace_push_admin_bench.py"
 
 echo ""
 echo "=== Relay Setup Complete ==="
@@ -113,11 +114,11 @@ echo "               ${HA_URL}/admin-bench/rpi-cm5         (RPi CM5 / host metri
 echo "               ${HA_URL}/admin-bench/victron-bluesmart (Victron Blue Smart)"
 echo "               ${HA_URL}/admin-bench/bench-status  (Check states)"
 echo "  Module:      Waveshare 16CH @ ${RELAY_IP}:${RELAY_PORT}"
-echo "  Entities:    switch.ch1_maserator_pompa, switch.ch2 .. switch.ch16"
-echo "               switch.ws_io8_do1..do8, binary_sensor.ws_io8_di1..di8"
-echo "               switch.ws_rtu_relay_ch1..ch8 (Relay E @ rs485_bus slave 2)"
+echo "  Entities:    switch.ch1_macerator_pump, switch.ch2_refrigerator, … (slugified names in modbus/10_waveshare_ws01.yaml)"
+echo "               switch.do1_warning_light … ws_io8_do8; binary_sensor.di1_* … di8_*"
+echo "               switch.ch1_220v_outlets … ch8_future_use (Relay E @ rs485_bus slave 2)"
 echo "               sensor.ws_ai_ch1..ch8 (Analog 8CH @ rs485_bus slave 3)"
 echo ""
 echo "  Test: curl -X POST -H 'Authorization: Bearer ...' \\"
 echo "        ${HA_URL}/api/services/switch/toggle \\"
-echo "        -d '{\"entity_id\": \"switch.ch2\"}'"
+echo "        -d '{\"entity_id\": \"switch.ch2_refrigerator\"}'"
