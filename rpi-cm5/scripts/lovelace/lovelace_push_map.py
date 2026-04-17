@@ -79,10 +79,12 @@ async def main() -> None:
         await ws.send(json.dumps({"id": 1, "type": "lovelace/dashboards/list"}))
         msg = json.loads(await ws.recv())
         exists = False
+        tank_dashboard_id = None
         for d in msg.get("result", []):
             if d.get("url_path") == "map":
                 exists = True
-                break
+            if d.get("url_path") == "tank-levels":
+                tank_dashboard_id = d.get("id")
 
         if not exists:
             await ws.send(
@@ -142,7 +144,6 @@ async def main() -> None:
             _area_button("Saloon", "mdi:sofa-outline", "/map/saloon"),
             _area_button("Utility", "mdi:tools", "/map/utility"),
             _area_button("Systems", "mdi:car-coolant-level", "/map/systems"),
-            _area_button("Tank Levels", "mdi:water", "/tank-levels/default_view"),
         ]
 
         kitchen_view = _area_view(
@@ -154,8 +155,6 @@ async def main() -> None:
                 _toggle_tile("switch.ch6_kitchen_light", "Kitchen light"),
                 _toggle_tile("switch.ch2_refrigerator", "Refrigerator"),
                 _toggle_tile("switch.ch10_dishwasher", "Dishwasher"),
-                {"type": "heading", "heading": "Kitchen status"},
-                _info_tile("binary_sensor.di5_kitchen_light", "Wall switch (DI5)"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
             ],
         )
@@ -169,11 +168,6 @@ async def main() -> None:
                 _toggle_tile("switch.ch3_bed_left_reading_light", "Left reading light"),
                 _toggle_tile("switch.ch4_bed_right_reading_light", "Right reading light"),
                 _toggle_tile("switch.ch5_bed_light", "Bed light"),
-                {"type": "heading", "heading": "Bedroom status"},
-                _info_tile("binary_sensor.di1_bed_left_reading_light", "DI1 Left reading"),
-                _info_tile("binary_sensor.di2_bed_left_light", "DI2 Left bed light"),
-                _info_tile("binary_sensor.di3_bed_right_reading_light", "DI3 Right reading"),
-                _info_tile("binary_sensor.di4_bed_right_light", "DI4 Right bed light"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
             ],
         )
@@ -201,8 +195,6 @@ async def main() -> None:
                 {"type": "heading", "heading": "Saloon controls"},
                 _toggle_tile("switch.ch7_saloon_light", "Saloon light"),
                 _toggle_tile("switch.ch11_washing_machine", "Washing machine"),
-                {"type": "heading", "heading": "Saloon status"},
-                _info_tile("binary_sensor.di6_saloon_light", "Wall switch (DI6)"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
             ],
         )
@@ -218,8 +210,6 @@ async def main() -> None:
                 _toggle_tile("switch.ch4_air_condition", "Air condition"),
                 _toggle_tile("switch.ch9_victron_blue_smart", "Victron Blue Smart power"),
                 _toggle_tile("switch.ch8_outdoor_light", "Outdoor light"),
-                {"type": "heading", "heading": "Utility status"},
-                _info_tile("binary_sensor.di7_outdoor_light", "Outdoor switch (DI7)"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
             ],
         )
@@ -230,10 +220,32 @@ async def main() -> None:
             "mdi:car-coolant-level",
             [
                 {"type": "heading", "heading": "Water levels"},
+                {
+                    "type": "gauge",
+                    "entity": "sensor.tank_temiz_su_seviye",
+                    "name": "Clean water",
+                    "unit": "%",
+                    "min": 0,
+                    "max": 100,
+                    "needle": True,
+                    "severity": {"green": 50, "yellow": 20, "red": 0},
+                },
+                {
+                    "type": "gauge",
+                    "entity": "sensor.tank_kirli_su_seviye",
+                    "name": "Gray water",
+                    "unit": "%",
+                    "min": 0,
+                    "max": 100,
+                    "needle": True,
+                    "severity": {"green": 0, "yellow": 60, "red": 80},
+                },
                 _info_tile("sensor.tank_temiz_su_seviye", "Clean water (%)"),
                 _info_tile("sensor.tank_temiz_su_hacim", "Clean water (L)"),
                 _info_tile("sensor.tank_kirli_su_seviye", "Gray water (%)"),
                 _info_tile("sensor.tank_kirli_su_hacim", "Gray water (L)"),
+                {"type": "heading", "heading": "Tank controls"},
+                _toggle_tile("switch.ch1_macerator_pump", "Macerator pump"),
                 {"type": "heading", "heading": "Power / weather"},
                 _info_tile("weather.forecast_home", "Weather"),
                 _info_tile("binary_sensor.rpi_power_status", "RPi power"),
@@ -303,6 +315,16 @@ async def main() -> None:
             print("  [OK] map: overview sections saved")
         else:
             print(f"  [ERROR] {msg.get('error')}")
+
+        if tank_dashboard_id:
+            await ws.send(
+                json.dumps({"id": 21, "type": "lovelace/dashboards/delete", "dashboard_id": tank_dashboard_id})
+            )
+            msg = json.loads(await ws.recv())
+            if msg.get("success"):
+                print("  [OK] Removed legacy 'tank-levels' dashboard")
+            else:
+                print(f"  [WARN] Could not remove 'tank-levels': {msg.get('error')}")
 
 
 if __name__ == "__main__":
