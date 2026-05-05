@@ -14,7 +14,7 @@
 # Prerequisites:
 #   - Home Assistant running at HA_URL (see ../.env)
 #   - Long-Lived Access Token in HA_TOKEN
-#   - python3, sshpass, mosquitto (brew install sshpass mosquitto)
+#   - python3, mosquitto (brew install mosquitto). SSH key tabanlı; sshpass opsiyonel.
 #
 # Usage: ./setup_ha.sh
 

@@ -33,15 +33,13 @@ if ! $DRY_RUN; then
   done"
 fi
 
-echo "=== homeassistant/ → /config/ (tar — HAOS’ta uzak rsync olmayabilir) ==="
+echo "=== homeassistant/ → /config/ (tar — HAOS'ta uzak rsync olmayabilir) ==="
 if $DRY_RUN; then
   echo "  [dry-run] dosya listesi:"
   (cd "$SRC" && find . -name .git -prune -o -print) | head -50
 else
   (cd "$SRC" && tar --exclude=".git" --exclude="secrets.yaml" \
-    --exclude="._*" --exclude=".DS_Store" -cf - .) | sshpass -p "${SSH_PASS}" ssh \
-    -o StrictHostKeyChecking=no -o PreferredAuthentications=password \
-    "root@${HA_HOST}" "cd /config && tar xf -"
+    --exclude="._*" --exclude=".DS_Store" -cf - .) | ssh_ha_pipe "cd /config && tar xf -"
 fi
 
 # Eski yapı: modbus/rs485/ artık kullanılmıyor; merge_list yanlışlıkla hub olarak okur
@@ -50,8 +48,8 @@ if ! $DRY_RUN; then
 fi
 
 if ! $DRY_RUN; then
-  echo "=== secrets.yaml birleştirme (example’daki eksik anahtarlar eklenir) ==="
-  sshpass -p "${SSH_PASS}" ssh -o PreferredAuthentications=password "root@${HA_HOST}" bash -s << 'REMOTE'
+  echo "=== secrets.yaml birleştirme (example'daki eksik anahtarlar eklenir) ==="
+  ssh_ha bash -s << 'REMOTE'
 set -e
 if [[ ! -f /config/secrets.yaml ]]; then
   if [[ -f /config/secrets.yaml.example ]]; then

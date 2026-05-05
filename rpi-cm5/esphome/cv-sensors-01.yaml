@@ -1,0 +1,140 @@
+# cv-sensors-01 — ESP32 WROOM-32 (rev 3.x), ESP-IDF framework
+# Şu an sadece donanımsız (lehim gerektirmeyen) sensörler aktif.
+# DS18B20 / BME280 / ACS712 / MPU6050 / YF-S201 → lehim sonrası eklenecek.
+
+esphome:
+  name: cv-sensors-01
+  friendly_name: cv-sensors-01
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+    advanced:
+      sram1_as_iram: true   # +40KB RAM (ESP32 rev 3.x destekli)
+
+logger:
+
+api:
+  encryption:
+    key: !secret cv_sensors_01_api_key
+
+ota:
+  - platform: esphome
+    password: !secret cv_sensors_01_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Cihaz wifi'ye bağlanamazsa kendi AP'sini açar (ilk kurulum / kurtarma)
+  ap:
+    ssid: "Cv-Sensors-01 Fallback Hotspot"
+    password: !secret cv_sensors_01_ap_password
+
+captive_portal:
+
+# Cihazın kendi IP'sinden direkt UI/debug
+web_server:
+  port: 80
+  version: 3
+
+# NTP (log/sensör timestamp tutarlılığı için)
+time:
+  - platform: sntp
+    id: sntp_time
+    timezone: Europe/Istanbul
+    servers:
+      - 0.pool.ntp.org
+      - 1.pool.ntp.org
+      - time.cloudflare.com
+
+# ── Diagnostic sensörler (donanımsız) ───────────────────────────
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: diagnostic
+
+  - platform: copy
+    source_id: wifi_signal_db
+    name: "WiFi Signal %"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: diagnostic
+    device_class: ""
+
+  - platform: uptime
+    name: "Uptime"
+    id: uptime_sec
+    update_interval: 60s
+    entity_category: diagnostic
+
+  - platform: internal_temperature
+    name: "ESP32 Internal Temperature"
+    update_interval: 30s
+    entity_category: diagnostic
+    # Klasik ESP32'de ara sıra invalid okuma olur; geçersiz değerleri at
+    filters:
+      - filter_out: nan
+
+  - platform: template
+    name: "Free Heap"
+    id: free_heap
+    unit_of_measurement: "B"
+    accuracy_decimals: 0
+    update_interval: 60s
+    entity_category: diagnostic
+    lambda: return esp_get_free_heap_size();
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+      entity_category: diagnostic
+    ssid:
+      name: "Connected SSID"
+      entity_category: diagnostic
+    bssid:
+      name: "Connected BSSID"
+      entity_category: diagnostic
+    mac_address:
+      name: "MAC Address"
+      entity_category: diagnostic
+
+  - platform: version
+    name: "ESPHome Version"
+    entity_category: diagnostic
+
+  - platform: template
+    name: "Uptime (human)"
+    id: uptime_human
+    icon: mdi:clock-outline
+    entity_category: diagnostic
+    update_interval: 60s
+    lambda: |-
+      uint32_t s = (uint32_t) id(uptime_sec).state;
+      uint32_t d = s / 86400; s %= 86400;
+      uint32_t h = s / 3600;  s %= 3600;
+      uint32_t m = s / 60;
+      char buf[32];
+      snprintf(buf, sizeof(buf), "%ud %uh %um", d, h, m);
+      return std::string(buf);
+
+binary_sensor:
+  - platform: status
+    name: "Status"
+    entity_category: diagnostic
+
+button:
+  - platform: restart
+    name: "Restart"
+    entity_category: config
+    icon: mdi:restart
+
+  - platform: safe_mode
+    name: "Restart (Safe Mode)"
+    entity_category: config
+    icon: mdi:restart-alert

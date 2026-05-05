@@ -66,28 +66,59 @@ async def main():
 
 echo ""
 
-# ── Step 2: Configure SSH addon ─────────────────────────────────
+# ── Step 2: Configure SSH addon (key-based auth) ────────────────
 echo "Step 2: Configure SSH addon"
+
+# Mac'te key yoksa otomatik üret. Public key add-on'a authorized_keys olarak gönderilir.
+SSH_KEY_PATH="${SSH_KEY:-$HOME/.ssh/id_ed25519_haos}"
+if [[ ! -f "$SSH_KEY_PATH" ]]; then
+    echo "  [GEN] SSH key yok, üretiliyor: $SSH_KEY_PATH"
+    mkdir -p "$(dirname "$SSH_KEY_PATH")"
+    ssh-keygen -t ed25519 -f "$SSH_KEY_PATH" -N "" -C "$(whoami)@$(hostname -s) → haos-cv $(date +%Y%m%d)"
+fi
+PUB_KEY="$(cat "${SSH_KEY_PATH}.pub")"
+export PUB_KEY
+
+# ~/.ssh/config'e haos-cv host bloğu ekle (yoksa)
+SSH_CFG="$HOME/.ssh/config"
+mkdir -p "$HOME/.ssh"
+touch "$SSH_CFG"
+chmod 600 "$SSH_CFG"
+if ! grep -q "^Host haos-cv" "$SSH_CFG"; then
+    cat >> "$SSH_CFG" <<EOF
+
+# HAOS — Camper-Neo (LAN); setup_ssh.sh tarafından eklendi
+Host haos-cv ${HA_HOST}
+    HostName ${HA_HOST}
+    User root
+    IdentityFile ${SSH_KEY_PATH}
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ServerAliveInterval 15
+    ServerAliveCountMax 4
+EOF
+    echo "  [OK] ~/.ssh/config'e Host haos-cv eklendi"
+fi
 
 ha_ws "
 async def main():
     async with websockets.connect(WS_URI, max_size=2**22, ping_interval=20, ping_timeout=60, open_timeout=30) as ws:
         await _ws_auth(ws)
 
-        # Set password + options
+        # Authorized key + password disable (key-only login)
         await ws.send(json.dumps({
             'id': 1, 'type': 'supervisor/api',
             'endpoint': '/addons/${ADDON_SLUG}/options',
             'method': 'post',
             'data': {'options': {
-                'authorized_keys': [],
-                'password': '${SSH_PASS}',
-                'sftp': False
+                'authorized_keys': ['${PUB_KEY}'],
+                'password': '',
+                'sftp': True
             }}
         }))
         msg = json.loads(await ws.recv())
         if msg.get('success'):
-            print('  [OK] Password configured')
+            print('  [OK] authorized_keys configured (password disabled)')
         else:
             print(f'  [ERROR] Config failed: {msg.get(\"error\", {})}')
             sys.exit(1)
@@ -160,5 +191,6 @@ fi
 echo ""
 echo "=== SSH Setup complete ==="
 echo ""
-echo "  Connect: ssh root@${HA_HOST}"
-echo "  Password: (see SSH_PASS in .env)"
+echo "  Connect: ssh haos-cv    (or: ssh root@${HA_HOST})"
+echo "  Auth:    key-based (${SSH_KEY_PATH})"
+echo "  Note:    password login disabled — only this Mac's key is accepted"

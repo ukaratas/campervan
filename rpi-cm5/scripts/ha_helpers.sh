@@ -21,11 +21,17 @@ set +a
 HA_HOST="${HA_URL#http://}"
 HA_HOST="${HA_HOST%:*}"
 
+# SSH: key-based default; .env'de SSH_PASS varsa fallback olarak password kullanılır.
+SSH_KEY_DEFAULT="$HOME/.ssh/id_ed25519_haos"
+SSH_KEY="${SSH_KEY:-$SSH_KEY_DEFAULT}"
+
 # ── Prerequisites ────────────────────────────────────────────────
 
 require_sshpass() {
+    # Eğer key var ise sshpass aranmaz; sadece password fallback için gerekli.
+    if [[ -f "$SSH_KEY" ]]; then return 0; fi
     if ! command -v sshpass &>/dev/null; then
-        echo "[ERROR] sshpass required. Install: brew install sshpass"
+        echo "[ERROR] sshpass required (or SSH key at $SSH_KEY). Install: brew install sshpass"
         exit 1
     fi
 }
@@ -63,16 +69,84 @@ ha_check_connection() {
 
 # ── SSH helpers ──────────────────────────────────────────────────
 
+# Key-based SSH önceliklidir. Anahtar yoksa SSH_PASS ile sshpass kullanır.
 ssh_ha() {
-    sshpass -p "${SSH_PASS}" ssh \
-        -o StrictHostKeyChecking=no \
-        -o ConnectTimeout=10 \
-        -o ServerAliveInterval=15 \
-        "root@${HA_HOST}" "$@"
+    if [[ -f "$SSH_KEY" ]]; then
+        ssh -i "$SSH_KEY" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            "root@${HA_HOST}" "$@"
+    else
+        sshpass -p "${SSH_PASS:?SSH_PASS not set and no key at $SSH_KEY}" ssh \
+            -o StrictHostKeyChecking=no \
+            -o PreferredAuthentications=password \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            "root@${HA_HOST}" "$@"
+    fi
+}
+
+# stdin'i uzak komuta pipe etmek için (örn: tar | ssh_ha_pipe "tar xf -")
+ssh_ha_pipe() {
+    if [[ -f "$SSH_KEY" ]]; then
+        ssh -i "$SSH_KEY" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            "root@${HA_HOST}" "$@"
+    else
+        sshpass -p "${SSH_PASS:?SSH_PASS not set and no key at $SSH_KEY}" ssh \
+            -o StrictHostKeyChecking=no \
+            -o PreferredAuthentications=password \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            "root@${HA_HOST}" "$@"
+    fi
 }
 
 ssh_ha_check() {
     ssh_ha "echo ok" &>/dev/null
+}
+
+# scp_ha <local_path> <remote_path>  — local'dan HAOS'a kopyala
+scp_ha() {
+    local src="$1"
+    local dst="$2"
+    if [[ -f "$SSH_KEY" ]]; then
+        scp -i "$SSH_KEY" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=10 \
+            "$src" "root@${HA_HOST}:${dst}"
+    else
+        sshpass -p "${SSH_PASS:?SSH_PASS not set and no key at $SSH_KEY}" scp \
+            -o StrictHostKeyChecking=no \
+            -o PreferredAuthentications=password \
+            -o ConnectTimeout=10 \
+            "$src" "root@${HA_HOST}:${dst}"
+    fi
+}
+
+# scp_ha_from <remote_path> <local_path>  — HAOS'tan local'e indir
+scp_ha_from() {
+    local src="$1"
+    local dst="$2"
+    if [[ -f "$SSH_KEY" ]]; then
+        scp -i "$SSH_KEY" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=10 \
+            "root@${HA_HOST}:${src}" "$dst"
+    else
+        sshpass -p "${SSH_PASS:?SSH_PASS not set and no key at $SSH_KEY}" scp \
+            -o StrictHostKeyChecking=no \
+            -o PreferredAuthentications=password \
+            -o ConnectTimeout=10 \
+            "root@${HA_HOST}:${src}" "$dst"
+    fi
 }
 
 # Poll until an addon reaches target state (default: started)

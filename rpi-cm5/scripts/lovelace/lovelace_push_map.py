@@ -249,6 +249,11 @@ async def main() -> None:
                 {"type": "heading", "heading": "Power / weather"},
                 _info_tile("weather.forecast_home", "Weather"),
                 _info_tile("binary_sensor.rpi_power_status", "RPi power"),
+                {"type": "heading", "heading": "Sensors (ESP32)"},
+                _info_tile("sensor.cv_sensors_01_wifi_signal_2", "cv-sensors-01 WiFi"),
+                _info_tile("sensor.cv_sensors_01_uptime_human", "cv-sensors-01 Uptime"),
+                _info_tile("sensor.cv_sensors_01_esp32_internal_temperature", "cv-sensors-01 Chip temp"),
+                _info_tile("binary_sensor.cv_sensors_01_status", "cv-sensors-01 Online"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
             ],
         )

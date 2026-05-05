@@ -242,6 +242,37 @@ def _gauge(entity, *, min_v, max_v, name=None):
     return g
 
 
+async def _get_esphome_ingress_url(ws, msg_id):
+    """ESPHome add-on'unun ingress URL'ini supervisor API üzerinden çek."""
+    await ws.send(
+        json.dumps(
+            {
+                "id": msg_id,
+                "type": "supervisor/api",
+                "endpoint": "/store/addons",
+                "method": "get",
+            }
+        )
+    )
+    d = json.loads(await ws.recv())
+    for a in d.get("result", {}).get("addons", []):
+        if "esphome" in a.get("slug", "").lower() and a.get("installed"):
+            slug = a["slug"]
+            await ws.send(
+                json.dumps(
+                    {
+                        "id": msg_id + 1,
+                        "type": "supervisor/api",
+                        "endpoint": f"/addons/{slug}/info",
+                        "method": "get",
+                    }
+                )
+            )
+            d2 = json.loads(await ws.recv())
+            return d2.get("result", {}).get("ingress_url", "")
+    return ""
+
+
 async def main() -> None:
     async with websockets.connect(WS_URI, max_size=2**22, ping_interval=20, open_timeout=15) as ws:
         await ws.recv()
@@ -577,6 +608,62 @@ async def main() -> None:
             ],
         }
 
+        # ── ESPHome (ESP32) view ──────────────────────────────────────
+        esphome_ingress = await _get_esphome_ingress_url(ws, msg_id=18)
+        esphome_info_lines = [
+            "## ESPHome devices",
+            "ESP32 / ESP8266 firmware lives under **`rpi-cm5/esphome/`** in the repo and "
+            "`/config/esphome/` on HAOS. Deploy + OTA upload is one command:",
+            "",
+            "```bash",
+            "bash scripts/deploy/sync_esphome.sh --device cv-sensors-01 --ota",
+            "```",
+            "",
+            "| | |",
+            "|---|---|",
+            "| **Repo** | `rpi-cm5/esphome/cv-sensors-01.yaml` (+ `secrets.yaml.example`) |",
+            "| **Helper** | `scripts/deploy/sync_esphome.sh` — validate / build / OTA |",
+            "| **Web UI (device)** | `http://<device-ip>/` — direct sensor values + restart |",
+        ]
+        if esphome_ingress:
+            esphome_info_lines.append(
+                f"| **ESPHome dashboard** | [Open ESPHome Device Builder]({esphome_ingress}) |"
+            )
+        esphome_info = "\n".join(esphome_info_lines)
+
+        # cv-sensors-01 entity'leri — friendly_name'ler `cv-sensors-01 …` prefix'i ile
+        cv_sensors_01_diagnostic = [
+            "binary_sensor.cv_sensors_01_status",
+            "sensor.cv_sensors_01_wifi_signal",
+            "sensor.cv_sensors_01_wifi_signal_2",
+            "sensor.cv_sensors_01_uptime_human",
+            "sensor.cv_sensors_01_free_heap",
+            "sensor.cv_sensors_01_esp32_internal_temperature",
+        ]
+        cv_sensors_01_network = [
+            "sensor.cv_sensors_01_ip_address",
+            "sensor.cv_sensors_01_mac_address",
+            "sensor.cv_sensors_01_connected_ssid",
+            "sensor.cv_sensors_01_connected_bssid",
+            "sensor.cv_sensors_01_esphome_version",
+        ]
+        cv_sensors_01_actions = [
+            "button.cv_sensors_01_restart",
+            "button.cv_sensors_01_restart_safe_mode",
+        ]
+
+        esphome_view = {
+            "title": "ESPHome",
+            "path": "esphome",
+            "icon": "mdi:chip",
+            "cards": [
+                {"type": "markdown", "content": esphome_info},
+                _entities_card("cv-sensors-01 — diagnostics", cv_sensors_01_diagnostic),
+                _entities_card("cv-sensors-01 — network", cv_sensors_01_network),
+                _entities_card("cv-sensors-01 — actions", cv_sensors_01_actions),
+            ],
+        }
+
         status_info = (
             "## State sync\n"
             "After startup or RS485 delays, switches can lag. **Check states** runs the script "
@@ -617,6 +704,7 @@ async def main() -> None:
                 ai_view,
                 rpi_cm5_view,
                 victron_view,
+                esphome_view,
                 status_view,
             ]
         }
@@ -628,7 +716,7 @@ async def main() -> None:
         if msg.get("success"):
             print(
                 "  [OK] Tabs WS-Relay-01, WS-Relay-02, WS-DI/DO-01, WS-AI-01, "
-                "RPi CM5, Victron Blue Smart, Status saved"
+                "RPi CM5, Victron Blue Smart, ESPHome, Status saved"
             )
         else:
             print(f"  [ERROR] {msg.get('error')}")

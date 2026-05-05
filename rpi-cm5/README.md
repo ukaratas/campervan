@@ -46,8 +46,8 @@ python3 scripts/tools/cleanup_areas.py
 ## Hızlı Başlangıç
 
 ```bash
-# Bağımlılıklar
-brew install sshpass mosquitto
+# Bağımlılıklar (sshpass artık opsiyonel — SSH key-based; sadece password fallback için gerek)
+brew install mosquitto
 pip3 install websockets
 
 # .env dosyasını oluştur
@@ -69,6 +69,7 @@ cd scripts/setup && bash setup_ha.sh
 | 5 | `setup/setup_sensors.sh` | Tank + sistem MQTT sensörleri | MQTT (step 4) |
 | 6 | `setup/setup_relay.sh` | Modbus doğrulama + Admin Bench Lovelace (önce `deploy/sync_ha_config.sh` önerilir) | SSH (step 1), Network (step 2) |
 | — | `deploy/sync_ha_config.sh` (veya `sync_ha_config.sh`) | Repodaki `homeassistant/` → HA `/config/` | SSH, `.env` |
+| — | `deploy/sync_esphome.sh` | Repodaki `esphome/` → HA `/config/esphome/` + opsiyonel build / OTA upload | SSH, `.env`, ESPHome add-on |
 | 7 | `setup/setup_areas.py` | Alanlar: Bedroom, Bathroom, Kitchen, Saloon, Utility | WebSocket API |
 
 `setup_ha.sh` hepsini sırayla çalıştırır. Her script idempotent - tekrar çalıştırmak güvenli.
@@ -93,6 +94,32 @@ HA tarafında **tek dev `configuration.yaml` yerine** `!include` / `!include_dir
 
 Eski **fragment** dosyaları `scripts/legacy/` altında yönlendirme notudur; gerçek içerik `homeassistant/` altında. Ayrıntı: `scripts/README.txt`.
 
+## ESPHome (ESP32 / ESP8266)
+
+Karavan içi ekstra sensörler için ESPHome cihazları. Konfigürasyon `rpi-cm5/esphome/` altında, deploy + OTA upload tek script ile:
+
+```bash
+# Yalnızca YAML'ı yükle + validate et
+bash scripts/deploy/sync_esphome.sh --device cv-sensors-01
+
+# YAML yükle + compile (OTA göndermez)
+bash scripts/deploy/sync_esphome.sh --device cv-sensors-01 --build
+
+# YAML yükle + compile + OTA upload + canlı log
+bash scripts/deploy/sync_esphome.sh --device cv-sensors-01 --ota
+```
+
+Script HA WebSocket API üzerinden ESPHome dashboard'un internal `/run` endpoint'ine bağlanır; ESPHome dashboard'u UI'dan açmaya gerek yok. Cihaz ekleme:
+
+1. ESPHome dashboard UI'dan **+ NEW DEVICE** ile başlangıç YAML üret (api/ota anahtarları otomatik oluşur).
+2. Üretilen YAML'ı `rpi-cm5/esphome/<device-name>.yaml` olarak kopyala; api/ota şifrelerini `secrets.yaml` referansına çevir (`!secret <device>_api_key` vs.).
+3. Yeni anahtarları `esphome/secrets.yaml.example`'a ekle (gerçek değerler HAOS'taki `/config/esphome/secrets.yaml`'da).
+4. `bash scripts/deploy/sync_esphome.sh --device <name> --ota` ile yükle.
+
+| Cihaz | Donanım | Aktif sensörler |
+|---|---|---|
+| `cv-sensors-01` | ESP32 WROOM-32 (rev 3.x) | WiFi sinyal, uptime, internal temp, free heap, IP/MAC/SSID, restart butonları |
+
 ## Klasör Yapısı
 
 ```
@@ -109,6 +136,9 @@ rpi-cm5/
 │   ├── input_select/
 │   ├── templates/
 │   └── automations.yaml
+├── esphome/                        # ESPHome cihaz YAML'ları (sync_esphome.sh → /config/esphome/)
+│   ├── cv-sensors-01.yaml         # ESP32 WROOM-32 — diagnostic + (lehim sonrası) sensörler
+│   └── secrets.yaml.example
 └── scripts/
     ├── README.txt                    # Klasör düzeni özeti
     ├── ha_helpers.sh                 # REST, WebSocket, SSH
@@ -245,7 +275,7 @@ Relay switch entity'leri: `switch.ch1_macerator_pump`, `switch.ch2_refrigerator`
 | Servis | Adres | Kullanıcı |
 |--------|-------|-----------|
 | HA UI | `http://192.168.50.10:8123` (örnek) | - |
-| SSH | `ssh root@192.168.50.10` — port **22** (Terminal & SSH addon) | `.env` → SSH_PASS |
+| SSH | `ssh haos-cv` — port **22** (Terminal & SSH addon) | key-based, `~/.ssh/id_ed25519_haos` |
 | MQTT | `192.168.50.10:1883` | `.env` → MQTT_USER/MQTT_PASS |
 | Relay Web | `http://192.168.50.20` / `https://…` (cihaz) | fabrika / cihaz şifresi |
 | Relay Modbus | `192.168.50.20:4196` | Modbus RTU over TCP, Unit ID: 1 |

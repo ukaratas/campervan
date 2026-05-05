@@ -58,8 +58,7 @@ if [[ "$YAML_ONLY" != "true" ]]; then
   ssh_ha "ha core stop" || true
   sleep 4
 
-  sshpass -p "${SSH_PASS}" scp -o PreferredAuthentications=password \
-    "$SCRIPT_DIR/_ha_remote_set_analog_slave3.py" "root@${HA_HOST}:/tmp/_ha_remote_set_analog_slave3.py"
+  scp_ha "$SCRIPT_DIR/_ha_remote_set_analog_slave3.py" "/tmp/_ha_remote_set_analog_slave3.py"
   ssh_ha "python3 /tmp/_ha_remote_set_analog_slave3.py"
 
   echo "=== HA core start ==="
@@ -83,8 +82,7 @@ if ssh_ha "grep -rqs 'rs485_ai_ch1' /config/modbus/ /config/configuration.yaml 2
   echo "  [SKIP] rs485_ai_ch1 zaten tanımlı (modbus/ veya configuration.yaml)"
 elif [[ "${LEGACY_ANALOG_YAML_MERGE:-}" == "1" ]]; then
   echo "  [LEGACY] configuration.yaml içine fragment ekleniyor (LEGACY_ANALOG_YAML_MERGE=1)"
-  sshpass -p "${SSH_PASS}" scp -o PreferredAuthentications=password \
-    "root@${HA_HOST}:${REMOTE_CFG}" "$LOCAL_MERGE"
+  scp_ha_from "${REMOTE_CFG}" "$LOCAL_MERGE"
   CFG_MERGE="$LOCAL_MERGE" FRAG_MERGE="$FRAGMENT" python3 << 'PY'
 import pathlib, os, sys
 cfg_path = pathlib.Path(os.environ["CFG_MERGE"])
@@ -110,8 +108,7 @@ else:
 cfg_path.write_text(text, encoding="utf-8")
 print("  [OK] Analog sensör bloğu eklendi")
 PY
-  sshpass -p "${SSH_PASS}" scp -o PreferredAuthentications=password \
-    "$LOCAL_MERGE" "root@${HA_HOST}:${REMOTE_CFG}"
+  scp_ha "$LOCAL_MERGE" "${REMOTE_CFG}"
   rm -f "$LOCAL_MERGE"
 else
   echo "  [INFO] Analog tanım yok. Modüler kurulum: bash $SCRIPT_DIR/../deploy/sync_ha_config.sh"
