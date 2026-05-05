@@ -7,6 +7,8 @@ default_config:
 
 script: !include scripts.yaml
 
+recorder: !include recorder.yaml
+
 automation: !include automations.yaml
 
 # Modbus hub'ları: modbus/*.yaml — her dosya tek hub (- name: ...)

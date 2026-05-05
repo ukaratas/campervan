@@ -1,0 +1,30 @@
+# Recorder — DB büyümesini kontrol altına al + yüksek frekanslı sensörleri historyden çıkar.
+# CamperNeo UI'sını etkilemez (UI o anki state'i okur), sadece geçmiş/grafikler etkilenir.
+purge_keep_days: 7
+auto_purge: true
+auto_repack: true
+
+exclude:
+  domains:
+    - update
+    - device_tracker
+    - sun
+  entity_globs:
+    # Sistem monitor: ağ/CPU/disk/IP gibi sürekli değişen metrikler
+    - sensor.system_monitor_network_throughput_*
+    - sensor.system_monitor_load_*
+    - sensor.system_monitor_processor_*
+    - sensor.system_monitor_memory_*
+    - sensor.system_monitor_swap_*
+    - sensor.system_monitor_disk_*
+    - sensor.system_monitor_ipv*
+    - sensor.system_monitor_ipv6_address_*
+    - sensor.system_monitor_open_file_descriptors_*
+    - sensor.system_monitor_battery*
+    - sensor.system_monitor_last_boot
+    # Victron BLE — sık güncellenir, anlık state UI'da yeterli
+    - sensor.bsc_ip65_*
+    - sensor.victron_gauge_*
+    # Analog modbus ham + mode (çok sık polling)
+    - sensor.ws_ai_ch*
+    - sensor.ai_ch*_mode_holding
