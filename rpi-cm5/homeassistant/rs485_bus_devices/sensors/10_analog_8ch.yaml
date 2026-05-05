@@ -1,26 +1,50 @@
-# Waveshare Modbus RTU Analog Input 8CH — FC04 + holding 4096–4103 (mode)
-# İsimler entity_id ile uyumlu: sensor.ws_ai_ch1 … (Lovelace’de "Clean Water" vb. name ile gösterilir)
+# Waveshare Modbus RTU Analog Input 8CH — slave 3
+# - FC04 input registers 0..7 → kanal ham değerler
+# - FC03 holding registers 4096..4103 → kanal ölçüm modu
+#
+# Cihaz raporlama formatı (deneysel olarak doğrulandı 2026-05-05):
+#   * 4-20 mA modu (mode=3): raw / 1000 = mA  → scale: 0.001, unit: mA
+#   * 0-20 mA modu (mode=4): aynı  →           scale: 0.001, unit: mA  (varsayım, simulator ile doğrulanacak)
+#   * Voltage modları (mode=0/1/2): raw / 1000 = V (varsayım, simulator ile doğrulanacak)
+#
+# CH1-3 şu an 4-20 mA modunda (mode_holding 4096-4098 = 3).
+# CH4-8 şu an 0-10 V modunda  (mode_holding 4099-4103 = 2). Voltage scale'i ileride
+# voltaj simülatörüyle doğrulanınca scale: 0.001 + unit: "V" eklenecek.
+
+# CH1-3: 4-20 mA tank sensörleri → 5 sn polling.
+#   * HA validator uyarısı sınırının (>= 5 sn) tam üzerinde
+#   * Tipik macerator (30-60 L/dk) için yeterli (5sn'de ~%2.5-5 değişim → 1-2 L overrun)
+#   * UI tarafında WebSocket push ile değişim anında yansır, kullanıcı 5sn gecikmeyi hissetmez
 - name: "WS AI CH1"
   unique_id: rs485_ai_ch1
   slave: 3
   address: 0
   input_type: input
   data_type: uint16
-  scan_interval: 30
+  scale: 0.001
+  precision: 3
+  unit_of_measurement: "mA"
+  scan_interval: 5
 - name: "WS AI CH2"
   unique_id: rs485_ai_ch2
   slave: 3
   address: 1
   input_type: input
   data_type: uint16
-  scan_interval: 30
+  scale: 0.001
+  precision: 3
+  unit_of_measurement: "mA"
+  scan_interval: 5
 - name: "WS AI CH3"
   unique_id: rs485_ai_ch3
   slave: 3
   address: 2
   input_type: input
   data_type: uint16
-  scan_interval: 30
+  scale: 0.001
+  precision: 3
+  unit_of_measurement: "mA"
+  scan_interval: 5
 - name: "WS AI CH4"
   unique_id: rs485_ai_ch4
   slave: 3
@@ -56,6 +80,7 @@
   input_type: input
   data_type: uint16
   scan_interval: 30
+
 - name: "AI CH1 mode (holding)"
   unique_id: rs485_ai_mode_ch1
   slave: 3

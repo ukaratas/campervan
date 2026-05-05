@@ -1,36 +1,68 @@
-# Ham Modbus (sensor.ws_ai_ch1/2) → % ve L
+# Tank seviye sensörleri:
+#   Modbus AI 8CH (4-20 mA loop) → % ve L
+#
+# Cihaz raporu (10_analog_8ch.yaml içinde scale: 0.001 ile mA cinsinden geliyor):
+#   * 4 mA  → tank %0 (boş)
+#   * 20 mA → tank %100 (dolu)
+#   * Linear: percent = (mA - 4) / 16 * 100, [0,100] aralığına clamp
+#
+# Tank atamaları (Waveshare AI 8CH üzerinde):
+#   * CH1  → Temiz Su (180 L)
+#   * CH2  → Kirli Su (100 L)
 - sensor:
+    # NOT: availability filter kaldırıldı.
+    #   Loop kopuk / 0 mA durumunda tank "0%" olarak gösterilir.
+    #   Sebep: macerator vb. otomasyonların tank=0 koşulunu görebilmesi gerekli.
+    #   Loop sağlığı için ayrı `tank_*_loop_saglik` sensörü kullanılır.
     - name: "Tank Temiz Su seviye"
       unique_id: tank_temiz_su_seviye_pct
       unit_of_measurement: "%"
       state_class: measurement
       icon: mdi:water
       state: >-
-        {% set raw = states('sensor.ws_ai_ch1') | float(0) %}
-        {{ ([0, (raw / 65535 * 100), 100] | sort)[1] | round(1) }}
+        {% set ma = states('sensor.ws_ai_ch1') | float(0) %}
+        {{ ([0, ((ma - 4) / 16 * 100), 100] | sort)[1] | round(1) }}
+
     - name: "Tank Kirli Su seviye"
       unique_id: tank_kirli_su_seviye_pct
       unit_of_measurement: "%"
       state_class: measurement
       icon: mdi:water-off
       state: >-
-        {% set raw = states('sensor.ws_ai_ch2') | float(0) %}
-        {{ ([0, (raw / 65535 * 100), 100] | sort)[1] | round(1) }}
+        {% set ma = states('sensor.ws_ai_ch2') | float(0) %}
+        {{ ([0, ((ma - 4) / 16 * 100), 100] | sort)[1] | round(1) }}
+
     - name: "Tank Temiz Su hacim"
       unique_id: tank_temiz_su_hacim_l
       unit_of_measurement: "L"
       state_class: measurement
       icon: mdi:water
       state: >-
-        {% set raw = states('sensor.ws_ai_ch1') | float(0) %}
-        {% set p = ([0, (raw / 65535 * 100), 100] | sort)[1] %}
+        {% set ma = states('sensor.ws_ai_ch1') | float(0) %}
+        {% set p = ([0, ((ma - 4) / 16 * 100), 100] | sort)[1] %}
         {{ (p / 100 * 180) | round(1) }}
+
     - name: "Tank Kirli Su hacim"
       unique_id: tank_kirli_su_hacim_l
       unit_of_measurement: "L"
       state_class: measurement
       icon: mdi:water-off
       state: >-
-        {% set raw = states('sensor.ws_ai_ch2') | float(0) %}
-        {% set p = ([0, (raw / 65535 * 100), 100] | sort)[1] %}
+        {% set ma = states('sensor.ws_ai_ch2') | float(0) %}
+        {% set p = ([0, ((ma - 4) / 16 * 100), 100] | sort)[1] %}
         {{ (p / 100 * 100) | round(1) }}
+
+    # Hat/sensör sağlık göstergesi: 4-20 mA loop sağlamsa "ok", < 3.5 mA ise "loop kopuk".
+    - name: "Tank Temiz Su loop saglik"
+      unique_id: tank_temiz_su_loop_ok
+      icon: mdi:check-network-outline
+      state: >-
+        {% set ma = states('sensor.ws_ai_ch1') | float(0) %}
+        {% if ma < 3.5 %}fault{% elif ma > 21 %}over{% else %}ok{% endif %}
+
+    - name: "Tank Kirli Su loop saglik"
+      unique_id: tank_kirli_su_loop_ok
+      icon: mdi:check-network-outline
+      state: >-
+        {% set ma = states('sensor.ws_ai_ch2') | float(0) %}
+        {% if ma < 3.5 %}fault{% elif ma > 21 %}over{% else %}ok{% endif %}

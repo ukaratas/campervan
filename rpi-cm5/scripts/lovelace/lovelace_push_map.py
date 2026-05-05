@@ -51,6 +51,23 @@ def _area_button(name: str, icon: str, path: str) -> dict:
     }
 
 
+def _loop_warning(entity: str, name: str) -> dict:
+    """Conditional alert tile — only visible when 4-20 mA loop is fault/over."""
+    return {
+        "type": "conditional",
+        "conditions": [
+            {"condition": "state", "entity": entity, "state_not": "ok"},
+        ],
+        "card": {
+            "type": "tile",
+            "entity": entity,
+            "name": name,
+            "icon": "mdi:alert-circle",
+            "color": "red",
+        },
+    }
+
+
 def _area_view(title: str, path: str, icon: str, cards: list[dict]) -> dict:
     return {
         "title": title,
@@ -181,6 +198,7 @@ async def main() -> None:
                 _toggle_tile("switch.ch1_macerator_pump", "Macerator pump"),
                 _toggle_tile("switch.ch2_clesana_c1", "Clesana C1"),
                 {"type": "heading", "heading": "Tank quick status"},
+                _loop_warning("sensor.tank_kirli_su_loop_saglik", "Gray water sensor fault"),
                 _info_tile("sensor.tank_temiz_su_seviye", "Clean water (%)"),
                 _info_tile("sensor.tank_kirli_su_seviye", "Gray water (%)"),
                 _area_button("Back to overview", "mdi:arrow-left", "/map/default_view"),
@@ -220,6 +238,8 @@ async def main() -> None:
             "mdi:car-coolant-level",
             [
                 {"type": "heading", "heading": "Water levels"},
+                _loop_warning("sensor.tank_temiz_su_loop_saglik", "Clean water sensor fault"),
+                _loop_warning("sensor.tank_kirli_su_loop_saglik", "Gray water sensor fault"),
                 {
                     "type": "gauge",
                     "entity": "sensor.tank_temiz_su_seviye",
