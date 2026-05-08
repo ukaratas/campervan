@@ -1,6 +1,11 @@
 # cv-sensors-01 — ESP32 WROOM-32 (rev 3.x), ESP-IDF framework
-# Şu an sadece donanımsız (lehim gerektirmeyen) sensörler aktif.
-# DS18B20 / BME280 / ACS712 / MPU6050 / YF-S201 → lehim sonrası eklenecek.
+#
+# Aktif donanım:
+#   * BME280 (I2C 0x76 @ SDA=GPIO21/SCL=GPIO22): sıcaklık + nem + basınç
+#
+# Bekleyen / sonra:
+#   * MPU6050: ilk modül arızalı çıktı, yeni modül gelince eklenecek
+#   * DS18B20 / ACS712 / YF-S201: lehim sonrası eklenecek
 
 esphome:
   name: cv-sensors-01
@@ -14,6 +19,20 @@ esp32:
       sram1_as_iram: true   # +40KB RAM (ESP32 rev 3.x destekli)
 
 logger:
+  level: INFO
+  # i2c scan boot çıktısı INFO seviyesinde otomatik basılır.
+  # Sorun ararken global level: DEBUG yapıp i2c/mpu6050 trafiğini takip et.
+
+# ── I2C bus ─────────────────────────────────────────────────────
+# scan: true → boot'ta tüm I2C cihazları taranır, adresleri INFO log'a basılır.
+# 100kHz: dupont jumper'larda en kararlı hız (BME280 fast mode 400kHz destekler
+# ama tüm bus modülleri kararlı çalışana kadar 100kHz'de kalalım).
+i2c:
+  - id: i2c_bus
+    sda: GPIO21
+    scl: GPIO22
+    scan: true
+    frequency: 100kHz
 
 api:
   encryption:
@@ -88,6 +107,94 @@ sensor:
     update_interval: 60s
     entity_category: diagnostic
     lambda: return esp_get_free_heap_size();
+
+  # ── BME280: sıcaklık + nem + basınç (I2C 0x76) ─────────────────
+  # Address notu: SDO pin GND'ye bağlı/floating → 0x76; SDO=VCC → 0x77.
+  # BME280 vs BMP280 ayrımı: BME = sıcaklık+nem+basınç, BMP = sıcaklık+basınç (nem yok).
+  # Aldığımız modül BME280 (paket etiketi onaylıyor); BMP280 çıkarsa humidity NaN olur.
+  - platform: bme280_i2c
+    address: 0x76
+    i2c_id: i2c_bus
+    update_interval: 10s
+    temperature:
+      name: "Indoor Temperature"
+      id: indoor_temp
+      filters:
+        - filter_out: nan
+    humidity:
+      name: "Indoor Humidity"
+      id: indoor_hum
+      filters:
+        - filter_out: nan
+    pressure:
+      name: "Pressure"
+      id: pressure
+      filters:
+        - filter_out: nan
+
+  # ── MPU6050 + Tilt sensörleri (devre dışı) ─────────────────────
+  # Yeni modül takılınca yukarıdaki i2c bloğunu ve aşağıyı uncomment et.
+  # Adres: GY-521 klonlarında AD0=LOW → 0x68, AD0=HIGH → 0x69.
+  # Karavan eğim toleransı: |pitch|, |roll| < 1.5° → düz park.
+  #
+  # - platform: mpu6050
+  #   address: 0x68
+  #   i2c_id: i2c_bus
+  #   update_interval: 2s
+  #   accel_x:
+  #     name: "Accel X"
+  #     id: accel_x
+  #     filters: [filter_out: nan]
+  #   accel_y:
+  #     name: "Accel Y"
+  #     id: accel_y
+  #     filters: [filter_out: nan]
+  #   accel_z:
+  #     name: "Accel Z"
+  #     id: accel_z
+  #     filters: [filter_out: nan]
+  #   gyro_x:
+  #     name: "Gyro X"
+  #     filters: [filter_out: nan]
+  #   gyro_y:
+  #     name: "Gyro Y"
+  #     filters: [filter_out: nan]
+  #   gyro_z:
+  #     name: "Gyro Z"
+  #     filters: [filter_out: nan]
+  #   temperature:
+  #     name: "MPU6050 Temperature"
+  #     entity_category: diagnostic
+  #     filters: [filter_out: nan]
+  #
+  # - platform: template
+  #   name: "Tilt Pitch"
+  #   id: tilt_pitch
+  #   unit_of_measurement: "°"
+  #   accuracy_decimals: 2
+  #   update_interval: 2s
+  #   icon: mdi:angle-acute
+  #   lambda: |-
+  #     float ax = id(accel_x).state;
+  #     float ay = id(accel_y).state;
+  #     float az = id(accel_z).state;
+  #     if (isnan(ax) || isnan(ay) || isnan(az)) return NAN;
+  #     return atan2(-ax, sqrt(ay*ay + az*az)) * 180.0 / 3.14159265f;
+  #   filters: [filter_out: nan]
+  #
+  # - platform: template
+  #   name: "Tilt Roll"
+  #   id: tilt_roll
+  #   unit_of_measurement: "°"
+  #   accuracy_decimals: 2
+  #   update_interval: 2s
+  #   icon: mdi:angle-acute
+  #   lambda: |-
+  #     float ay = id(accel_y).state;
+  #     float az = id(accel_z).state;
+  #     if (isnan(ay) || isnan(az)) return NAN;
+  #     return atan2(ay, az) * 180.0 / 3.14159265f;
+  #   filters: [filter_out: nan]
 
 text_sensor:
   - platform: wifi_info
