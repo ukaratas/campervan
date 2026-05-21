@@ -1,6 +1,6 @@
 # Ana Yatak Alanı (Main Bed)
 
-Karavanın (Iveco Daily / MAN TGE 18m³) arka bölümünde yer alan ana yatak alanı. 200x180cm alan kaplar.
+Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 200x180cm alan kaplar.
 
 ## 🛏️ Ana Yatak Özellikleri
 
@@ -135,4 +135,4 @@ Karavanın (Iveco Daily / MAN TGE 18m³) arka bölümünde yer alan ana yatak al
 
 ---
 
-*Bu sistem, Iveco Daily / MAN TGE 18m³ geniş iç alanında konforlu yatak deneyimi sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 
+*Bu sistem, MAN TGE L5H4 18.4m³ geniş iç alanında konforlu yatak deneyimi sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 

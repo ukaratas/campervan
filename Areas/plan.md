@@ -1,6 +1,6 @@
 # Karavan Geliştirme Planı
 
-Iveco Daily / MAN TGE 18m³ karavan dönüşüm projesi için sıralı iş planı ve malzeme listeleri (BOM).
+MAN TGE L5H4 18.4m³ karavan dönüşüm projesi için sıralı iş planı ve malzeme listeleri (BOM).
 
 Her adımda:
 - **Bağımlılık**: Hangi adım(lar)dan sonra başlayabilir
@@ -14,7 +14,7 @@ Her adımda:
 | [1.1](#11--otomasyon-geliştirme) | Otomasyon Geliştirme | — |
 | [1.2](#12--alet-ve-atölye-tedariği) | Alet ve Atölye Tedariği | — |
 | **2 — Araç** | | |
-| [2.1](#21--araç-alımı) | Araç Alımı | — |
+| [2.1](#21--araç-alımı) | Araç Alımı ✅ | — |
 | **3 — Karkas İnşaat** | | |
 | [3.1](#31--sigma-profil-i̇skelet-mobilya) | Sigma Profil İskelet (mobilya) | 2.1 |
 | [3.2](#32--zemin-geliştirme) | Zemin Geliştirme | 2.1, 3.1 |
@@ -111,13 +111,12 @@ Karavan DIY inşaat sürecinde kullanılacak el aletleri ve elektrik aletleri. T
 
 ## 2.1 — Araç Alımı
 > Bağımlılık: Yok
-
-Iveco Daily veya MAN TGE 18m³ aracın satın alımı.
+> **Durum: ✅ Alındı** (MAN TGE L5H4 18.4m³, 2.0 TDI 177 HP, 8AT, FWD — 2.175.000 ₺)
 
 | Ürün | Model | Adet | Fiyat | Toplam | Kaynak | Alındı |
 |------|-------|------|-------|--------|--------|--------|
-| Araç | Iveco Daily / MAN TGE 18m³ | 1 | ~1.800.000 ₺ | ~1.800.000 ₺ | | |
-| | | | | **~1.800.000 ₺** | | |
+| Araç | MAN TGE L5H4 18.4m³ (2.0 TDI 177 HP, 8AT, FWD) | 1 | 2.175.000 ₺ | 2.175.000 ₺ | | ✅ |
+| | | | | **2.175.000 ₺** | | |
 
 ---
 

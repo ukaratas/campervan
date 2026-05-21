@@ -1,17 +1,30 @@
-# 🚐 Karavan Projesi - Iveco Daily / MAN TGE 18m³ Dönüşüm
+# 🚐 Karavan Projesi - MAN TGE L5H4 18.4m³ Dönüşüm
 
-Bu proje, Iveco Daily veya MAN TGE 18m³ tabanlı bir karavanın tüm sistemlerinin profesyonel, modüler ve otomasyona uygun şekilde tasarlanıp uygulanmasını dokümante eder.
+Bu proje, MAN TGE L5H4 18.4m³ tabanlı bir karavanın tüm sistemlerinin profesyonel, modüler ve otomasyona uygun şekilde tasarlanıp uygulanmasını dokümante eder.
 
 ## 🚗 Araç Bilgileri
 
 ### Temel Özellikler
-- **Marka/Model**: Iveco Daily veya MAN TGE
-- **Hacim**: 18m³
+- **Marka/Model**: MAN TGE L5H4 (en uzun gövde + en yüksek "süper yüksek tavan")
+- **Yük Hacmi**: 18.4 m³
+- **Durum**: 🟢 Alındı — 2.175.000 ₺
 
 ### Teknik Detaylar
-- **Motor**: (detaylar eklenecek)
-- **Yakıt**: (detaylar eklenecek)
-- **Yük Kapasitesi**: (detaylar eklenecek)
+- **Motor**: 2.0 TDI 177 HP (BiTDI)
+- **Şanzıman**: 8 ileri otomatik (Tiptronic / ZF 8HP)
+- **Çekiş**: Önden çekiş (FWD)
+- **Yakıt**: Dizel (75 L standart depo)
+
+### Dış Ölçüler
+- **Toplam Uzunluk**: ~7.391 mm
+- **Aks Aralığı**: ~4.490 mm
+- **Toplam Yükseklik (H4)**: ~2.798 mm
+- **Genişlik**: ~2.040 mm (gövde) / ~2.427 mm (aynalarla)
+
+### İç Yük Alanı (UxGxY)
+- **Uzunluk**: ~4.855 mm
+- **Genişlik**: ~1.832 mm (paneller arası ~1.380 mm)
+- **Yükseklik**: ~2.189 mm
 
 ## 🗺️ Genel Yerleşim ve Sistem Konseptleri
 
