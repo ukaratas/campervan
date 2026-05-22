@@ -11,7 +11,7 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 - 2M: 220V kapaklı/topraklı priz
 - 2M: Boş kapak — USB soket (24V)
 - 2M: Boş kapak — 24V çakmak soketi
-- 1M: Push button — Garaj aydınlatma
+- 1M: Boş (otomasyon gerekçesi ile hazır tutulur)
 
 **2M Kasa (Truma Combi / Wave 40):**
 - 2M: 220V topraklı priz
@@ -24,7 +24,7 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 - 2M: 220V topraklı priz
 - 2M: 220V topraklı priz
 - 2M: Boş kapak — 24V çakmak soketi
-- 1M: Push button — Oto/Manuel (aydinlatma kontrol)
+- 1M: Boş (otomasyon gerekçesi ile hazır tutulur)
 
 **4M Kasa:**
 - 2M: Boş kapak — USB soket (24V)
@@ -86,8 +86,9 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 | **220V Kapaklı Priz** | 1 | Garaj (ağır cihaz alanı) |
 | **USB Soket (24V)** | 7 | Garaj 1, Yatak başı sol 1, Yatak başı sağ 1, Mutfak tezgah üstü 1, Giriş üstü 1, Kanepe sol 1, Kanepe sağ 1 |
 | **24V Çakmak Soketi** | 2 | Garaj 1, Mutfak tezgah üstü 1 |
-| **Push Button — Aydınlatma** | 9 | Garaj 1, Yatak sol 1, Yatak sağ 1, Mutfak üstü tezgah 1, Mutfak üstü buton oto/manuel 1, Banyo 1, Giriş sol 1, Giriş sağ 1 — **toplam 9** |
+| **Push Button — Aydınlatma** | 6 | Yatak sol 1, Yatak sağ 1, Mutfak tezgah 1, Banyo 1, Giriş salon 1, Giriş dış 1 — **toplam 6** |
 | **Push Button — Okuma Lambası** | 2 | Yatak sol 1, Yatak sağ 1 |
+| **Spare DI** | 1 | Boş — gelecek genişleme için |
 | **Viko Thea Modüler Kasa** | | 7M (7 adet), 4M (4 adet), 2M (10 adet) — **toplam ~21 modül** |
 | **Viko Thea Boş Kapak (2M)** | ~8 | USB ve çakmak soketleri için ön kapak |
 
