@@ -16,8 +16,7 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 **2M Kasa (Truma Combi / Wave 40):**
 - 2M: 220V topraklı priz
 
-### Mutfak — Çamaşır Makinesi
-**2M Kasa:**
+**2M Kasa (Çamaşır Makinesi):**
 - 2M: 220V topraklı priz
 
 ### Mutfak — Tezgah Üstü (Ön Alan)
@@ -83,7 +82,7 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 
 | Kategorı | Adet | Konum/Not |
 |----------|------|-----------|
-| **220V Topraklı Priz** | 12 | Garaj 2 (Truma Combi + kapaklı), Mutfak çamaşır 1, Yatak başı sol 1, Yatak başı sağ 1, Yatak ayak ucu 1, Mutfak tezgah üstü 2, Mutfak tezgah altı 2, Kanepe sol 1, Kanepe sağ 1, Banyo 1 |
+| **220V Topraklı Priz** | 11 | Garaj 3 (kapaklı + Truma + çamaşır), Yatak başı sol 1, Yatak başı sağ 1, Yatak ayak ucu 1, Mutfak tezgah üstü 2, Mutfak tezgah altı 2, Kanepe sol 1, Kanepe sağ 1, Banyo 1 |
 | **220V Kapaklı Priz** | 1 | Garaj (ağır cihaz alanı) |
 | **USB Soket (24V)** | 7 | Garaj 1, Yatak başı sol 1, Yatak başı sağ 1, Mutfak tezgah üstü 1, Giriş üstü 1, Kanepe sol 1, Kanepe sağ 1 |
 | **24V Çakmak Soketi** | 2 | Garaj 1, Mutfak tezgah üstü 1 |
