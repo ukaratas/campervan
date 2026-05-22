@@ -80,9 +80,9 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 
 
 ### Aydınlatma ve Priz Kurulumu
-1. **Yatak Başı Sol (Mutfak Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
-2. **Yatak Başı Sağ (Banyo Tarafı):** 220V priz, 2x otomotiv USB-C soket, push buttonlar, okuma lambası
-3. **Yatak Ayak Ucu:** 220V priz
+1. **Yatak Başı Sol (Mutfak Tarafı):** 220V priz, 1x otomotiv USB-C soket, push buttonlar, okuma lambası
+2. **Yatak Başı Sağ (Banyo Tarafı):** 220V priz, 1x otomotiv USB-C soket, push buttonlar, okuma lambası
+3. **Yatak Ayak Ucu:** 220V priz (ayakkabı/çanta alanı)
 4. **Kablo Yönetimi:** Gizli kablo kanalları, düzenli bağlantılar
 
 ## 💡 Ek Özellikler ve Öneriler
@@ -114,17 +114,17 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 
 ### Yatak Başı Elektrik (Mutfak Tarafı - Sol)
 - **Prizler:** 1x 220V
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
+- **USB Şarj:** 1x otomotiv USB-C soket (24V giriş, 100W PD)
 - **Push Buttonlar:** Genel yatak aydınlatması, sol okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sol taraf)
 
 ### Yatak Başı Elektrik (Banyo Tarafı - Sağ)
 - **Prizler:** 1x 220V
-- **USB Şarj:** 2x otomotiv USB-C soket (24V giriş, 100W PD)
+- **USB Şarj:** 1x otomotiv USB-C soket (24V giriş, 100W PD)
 - **Push Buttonlar:** Genel yatak aydınlatması, sağ okuma lambası, Shelly Plus RGBW PM dimmer
 - **Okuma Lambası:** 24V LED okuma lambası (sağ taraf)
 
-### Yatak Ayak Ucu Elektrik (Banyo Tarafı)
+### Yatak Ayak Ucu Elektrik (Ayakkabı/Çanta Alanı)
 - **Prizler:** 1x 220V
 
 ### Otomasyon ve Kontrol

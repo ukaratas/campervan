@@ -571,7 +571,7 @@ Kabloları daha önce döşedik (5.2). Şimdi uç cihazların montajı.
 |------|-------|------|-------|--------|--------|--------|
 | 220V Priz | Westacc kapaklı sıva üstü karavan tipi | 8 | ~278 ₺ | ~2.224 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/220v-priz-kopya) | |
 | 12V Priz | TYA çakmak tipi panel montaj | 1 | ~70 ₺ | ~70 ₺ | [tekneyat](https://www.tekneyataksesuarlari.com/urun/cakmak-12v) | |
-| USB-C Soket | Powerway Bullet 100W PD panel montaj (12-24V) | 8 | ~641 ₺ | ~5.128 ₺ | [erdenteknoloji](https://www.erdenteknoloji.com.tr/urun/powerway-bullet-100w-arac-cakmaklik-sarj-cihazi-type-c-ve-usb-cikisli-profesyonel-turbo-hizli-sarj) | |
+| USB-C Soket | Powerway Bullet 100W PD panel montaj (12-24V) | 7 | ~641 ₺ | ~4.487 ₺ | [erdenteknoloji](https://www.erdenteknoloji.com.tr/urun/powerway-bullet-100w-arac-cakmaklik-sarj-cihazi-type-c-ve-usb-cikisli-profesyonel-turbo-hizli-sarj) | |
 | Push Button | 22mm LED'li anlık buton NO | 7 | ~187 ₺ | ~1.309 ₺ | [elektronikaled](https://elektronikaled.com/urun/22-mm-yayli-ve-ledli-buton-power-simge/) | |
 | LED Spot | 24V LED downlight karavan armatür | 10 | ~250 ₺ | ~2.500 ₺ | | |
 | LED Şerit | 24V RGB LED şerit IP65 (Ana yatak tavan) | 5 m | ~135 ₺/m | ~675 ₺ | [ledurunleri](https://www.ledurunleri.com/24v-rgb-serit-led-dis-mekan-silikonlu-ip65-5-metre) | |
@@ -583,12 +583,15 @@ Kabloları daha önce döşedik (5.2). Şimdi uç cihazların montajı.
 
 | Bölge | Konum | 220V | 12V | USB-C (100W PD) | Toplam |
 |-------|-------|------|-----|------------------|--------|
-| **Ana Yatak** | Yatak Başı Sol (Mutfak tarafı) | 1 | - | 2 | 3 |
-| **Ana Yatak** | Yatak Başı Sağ (Banyo tarafı) | 1 | - | 2 | 3 |
-| **Ana Yatak** | Yatak Ayak Ucu (Banyo tarafı) | 1 | - | - | 1 |
-| **Mutfak** | Tezgah üstü | 2 | 1 | 2 | 5 |
-| **Oturma/Yatak** | Kanepe karkası altı (sol+sağ) | 2 | - | 2 | 4 |
+| **Ana Yatak** | Yatak Başı Sol (Mutfak tarafı) | 1 | - | 1 | 2 |
+| **Ana Yatak** | Yatak Başı Sağ (Banyo tarafı) | 1 | - | 1 | 2 |
+| **Ana Yatak** | Yatak Ayak Ucu | 1 | - | - | 1 |
+| **Garaj** | Ağır cihazlar alanı | 1 | - | 1 | 2 |
+| **Mutfak** | Tezgah üstü | 2 | 1 | 1 | 4 |
+| **Oturma/Yatak** | Kanepe sol + sağ | 2 | - | 2 | 4 |
+| **Giriş** | Surgu kapı üstü | - | - | 1 | 1 |
 | **Banyo** | Lavabo / duvar | 1 | - | - | 1 |
+| | | **11** | **1** | **7** | **19** |
 | **TOPLAM** | | **8** | **1** | **8** | **17** |
 
 ### Push Button Yerleşimi
