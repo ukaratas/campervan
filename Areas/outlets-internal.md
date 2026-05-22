@@ -88,7 +88,7 @@ Tüm düğme ve prizler **Viko Thea Modüler** serisi üzerinden geliştirilecek
 | **24V Çakmak Soketi** | 2 | Garaj 1, Mutfak tezgah üstü 1 |
 | **Push Button — Aydınlatma** | 6 | Yatak sol 1, Yatak sağ 1, Mutfak tezgah 1, Banyo 1, Giriş salon 1, Giriş dış 1 — **toplam 6** |
 | **Push Button — Okuma Lambası** | 2 | Yatak sol 1, Yatak sağ 1 |
-| **TOPLAM DI Kullanım** | 8/8 | 6 aydınlatma + 2 okuma lambası = 8 DI (max kapasite) |
+| **TOPLAM DI Kullanım** | 8/8 | 6 aydınlatma + 2 okuma lambası = 8 DI (tam kapasite, boş DI yok) |
 | **Viko Thea Modüler Kasa** | | 7M (7 adet), 4M (4 adet), 2M (10 adet) — **toplam ~21 modül** |
 | **Viko Thea Boş Kapak (2M)** | ~8 | USB ve çakmak soketleri için ön kapak |
 
