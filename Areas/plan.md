@@ -586,7 +586,7 @@ Kabloları daha önce döşedik (5.2). Şimdi uç cihazların montajı.
 | **Ana Yatak** | Yatak Başı Sol (Mutfak tarafı) | 1 | - | 1 | 2 |
 | **Ana Yatak** | Yatak Başı Sağ (Banyo tarafı) | 1 | - | 1 | 2 |
 | **Ana Yatak** | Yatak Ayak Ucu | 1 | - | - | 1 |
-| **Garaj** | Ağır cihazlar alanı | 1 | - | 1 | 2 |
+| **Garaj** | Ağır cihazlar / Truma Combi | 2 | - | 1 | 3 |
 | **Mutfak** | Tezgah üstü | 2 | 1 | 1 | 4 |
 | **Oturma/Yatak** | Kanepe sol + sağ | 2 | - | 2 | 4 |
 | **Giriş** | Surgu kapı üstü | - | - | 1 | 1 |
