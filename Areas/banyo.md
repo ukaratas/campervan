@@ -121,10 +121,11 @@ Araç ortasında, dik yerleşimli (yatak ile ön yaşam alanı arasında), araç
 4. **Tuvalet Bağlantısı:** Clesana C1 12V enerji bağlantısı
 
 ### Elektrik Kurulumu
-1. **Aydınlatma:** 24V LED spot aydınlatma
-2. **Prizler:** 220V priz (traş makinesi, şarj vb.)
-3. **Tuvalet Sistemi:** Clesana C1 12V besleme (0.55Wh/flush)
-4. **Home Assistant:** Sensör ve kontrol bağlantıları
+1. **Aydınlatma:** 24V LED spot aydınlatma (push button mutfak tezgah üstünde)
+2. **Tuvalet Sistemi:** Clesana C1 12V besleme (0.55Wh/flush)
+3. **Home Assistant:** Sensör ve kontrol bağlantıları
+
+> **220V priz yok:** Banyoda ayrı priz açılmamıştır. Karavan içinde her bölgede prizler mevcut — traş makinesi/şarj için yatak başı veya mutfak prizleri kullanılır.
 
 ### Mekanik Kurulum
 1. **Duş Kabini:** Su geçirmez duş bölmesi montajı
@@ -158,7 +159,7 @@ Araç ortasında, dik yerleşimli (yatak ile ön yaşam alanı arasında), araç
 - **Sıcak Su:** Truma Combi 4D'den gelen hat
 - **Gri Su:** Duş ve lavabo drenajı gri su sistemine
 - **24V Elektrik:** Aydınlatma, pompa, sensörler
-- **220V Elektrik:** 1x priz (traş makinesi, küçük cihazlar)
+- **220V Elektrik:** Yok — banyoda ayrı priz açılmamıştır (yatak başı veya mutfak prizleri kullanılır)
 - **Tuvalet:** Clesana C1 susuz tuvalet (12V, 0.55Wh/flush, 0.28Wh standby)
 - **Otomasyon:** Home Assistant ile nem sensörü entegrasyonu
 - **Havalandırma:** Pencere ile doğal havalandırma
