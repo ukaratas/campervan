@@ -89,9 +89,17 @@ VG = {
 # RPi CM5 / HA host — grouped System Monitor entities (expand if your HA exposes more).
 RPI_CM5_GROUPS = [
     (
+        "Thermals — CM5 & SSD",
+        [
+            # CM5 SoC (System Monitor) + NVMe SSD (command_line sysfs sensor, see
+            # homeassistant/command_line/10_system_thermals.yaml). Alarms in automations.yaml.
+            {"entity": "sensor.system_monitor_processor_temperature", "name": "CM5 CPU temperature"},
+            {"entity": "sensor.nvme_temperature", "name": "NVMe SSD temperature"},
+        ],
+    ),
+    (
         "Compute & load",
         [
-            "sensor.system_monitor_processor_temperature",
             "sensor.system_monitor_processor_use",
             "sensor.system_monitor_load_1_min",
             "sensor.system_monitor_load_5_min",
@@ -528,6 +536,8 @@ async def main() -> None:
             "| | |\n|---|---|\n"
             "| **Docs** | [System Monitor](https://www.home-assistant.io/integrations/systemmonitor/) |\n"
             "| **LAN** | Primary IPv4 is often **`end0`** (Ethernet); **`wlan0`** is unknown if Wi‑Fi is off. |\n"
+            "| **Thermals** | CM5 CPU (System Monitor) + NVMe SSD (`sensor.nvme_temperature`, sysfs). "
+            "Alarms → phone push: NVMe >72/78°C, CPU >80°C (see `automations.yaml`). |\n"
             "| **MQTT RPi** | Run `scripts/setup/setup_sensors.sh` after Mosquitto; discovery entity IDs "
             "are typically `sensor.rpi_cpu_sicaklik` / `sensor.rpi_uptime` — confirm under **Developer Tools → States**. |"
         )

@@ -1,0 +1,13 @@
+# Sistem termal sensörleri (sysfs üzerinden).
+# NVMe sıcaklığı HAOS'ta default'ta entity olarak yok; buradan okunur.
+# hwmon numarası reboot'ta değişebildiği için cihazı 'name == nvme' ile buluruz;
+# bulamazsa /sys/block yolu fallback. Çıktı millidereceyse 1000'e böleriz.
+- sensor:
+    name: "NVMe Temperature"
+    unique_id: nvme_composite_temperature
+    command: 'for h in /sys/class/hwmon/hwmon*; do [ "$(cat "$h/name" 2>/dev/null)" = nvme ] && { cat "$h/temp1_input"; exit; }; done; cat /sys/block/nvme0n1/device/hwmon*/temp1_input 2>/dev/null'
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    value_template: "{% set v = value | float(0) %}{{ (v / 1000) | round(1) if v > 0 else none }}"
+    scan_interval: 60

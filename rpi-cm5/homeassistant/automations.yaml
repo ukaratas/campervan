@@ -1,6 +1,67 @@
-# Analog input_select → Modbus holding otomasyonları: HA 2026.4.x ortamında `ha core check`
-# bazı kurulumlarda state tetikleyicisi doğrulanırken KeyError verebiliyor.
-# Çözüm: Ayarlar → Otomasyonlar ve senaryolar → Otomasyon oluştur (UI) veya güvenli sürüme yükseltin.
-#
-# Boş liste — yapılandırma geçerliliği için:
-[]
+# Sistem termal alarmları — CM5 CPU ve NVMe SSD aşırı ısınma bildirimi.
+# Bildirim: notify.mobile_app_poco (telefon push) + HA kalıcı bildirim.
+# Eşikler: stres testi (2026-06-28) baz alındı. CPU throttle 80°C, NVMe uyarı 75.8 / kritik 84.8°C.
+# 'for' ile sürdürülen sıcaklık aranır → anlık tepe değerlerde yanlış alarm olmaz.
+
+- id: thermal_nvme_warning
+  alias: "Termal: NVMe SSD sıcaklık uyarısı (>72°C)"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nvme_temperature
+      above: 72
+      for: "00:10:00"
+  action:
+    - service: notify.mobile_app_poco
+      data:
+        title: "⚠️ NVMe SSD ısınıyor"
+        message: >-
+          SSD sıcaklığı {{ states('sensor.nvme_temperature') }}°C (uyarı eşiği 75.8°C).
+          Kabin havalandırmasını ve yükü kontrol et.
+    - service: persistent_notification.create
+      data:
+        notification_id: thermal_nvme_warning
+        title: "NVMe SSD sıcaklık uyarısı"
+        message: "{{ states('sensor.nvme_temperature') }}°C — {{ now().strftime('%d.%m %H:%M') }}"
+
+- id: thermal_nvme_critical
+  alias: "Termal: NVMe SSD KRİTİK (>78°C)"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nvme_temperature
+      above: 78
+      for: "00:02:00"
+  action:
+    - service: notify.mobile_app_poco
+      data:
+        title: "🔥 NVMe SSD KRİTİK sıcaklık"
+        message: >-
+          SSD {{ states('sensor.nvme_temperature') }}°C — kritik eşik (84.8°C) yaklaşıyor.
+          Yükü azalt / soğutmayı artır.
+    - service: persistent_notification.create
+      data:
+        notification_id: thermal_nvme_critical
+        title: "NVMe SSD KRİTİK sıcaklık"
+        message: "{{ states('sensor.nvme_temperature') }}°C — {{ now().strftime('%d.%m %H:%M') }}"
+
+- id: thermal_cpu_warning
+  alias: "Termal: CM5 CPU sıcaklık uyarısı (>80°C)"
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.system_monitor_processor_temperature
+      above: 80
+      for: "00:05:00"
+  action:
+    - service: notify.mobile_app_poco
+      data:
+        title: "⚠️ CM5 CPU ısınıyor"
+        message: >-
+          CPU {{ states('sensor.system_monitor_processor_temperature') }}°C —
+          throttle eşiğine (80°C) ulaştı. Kabin sıcaklığını/yükü kontrol et.
+    - service: persistent_notification.create
+      data:
+        notification_id: thermal_cpu_warning
+        title: "CM5 CPU sıcaklık uyarısı"
+        message: "{{ states('sensor.system_monitor_processor_temperature') }}°C — {{ now().strftime('%d.%m %H:%M') }}"
