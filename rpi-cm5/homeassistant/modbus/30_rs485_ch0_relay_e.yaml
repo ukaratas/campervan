@@ -1,0 +1,85 @@
+# Waveshare Modbus RTU Relay (E) — 8× 32 A — IPCBOX-CM5-A onboard RS485 **CH0**
+# ----------------------------------------------------------------------------
+# Bu röle USB-RS485'ten onboard CH0'a TAŞINDI (2026-06-29). Aynı ünite, aynı
+# Modbus adresi (slave 2, 9600 8N1). unique_id'ler eski rs485_bus tanımıyla AYNI
+# → entity ID'leri (switch.ch1_220v_outlets …) korunur, dashboard/otomasyon bozulmaz.
+# Bağlantı: röle A → IPCBOX "R/A0", röle B → IPCBOX "T/B0".  CH0 = uart2-pi5 → /dev/ttyAMA2.
+# Ham RTU tarama ile slave 2'de doğrulandı (2026-06-29). Ayrı seri port — rs485_bus ile karışmaz.
+# FC05: Waveshare coil ON=0xFF00, OFF=0x0000.
+- name: rs485_ch0
+  type: serial
+  port: !secret rs485_ch0_port
+  baudrate: 9600
+  bytesize: 8
+  parity: "N"
+  stopbits: 1
+  method: rtu
+  delay: 0
+  message_wait_milliseconds: 120
+  timeout: 15
+  retries: 8
+  switches:
+    - name: "CH1 — 220V Outlets"
+      unique_id: rs485_rtu_e_ch1_220v_outlets
+      address: 0
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH2 — Clesana C1"
+      unique_id: rs485_rtu_e_ch2_clesana_c1
+      address: 1
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH3 — USB Outlets"
+      unique_id: rs485_rtu_e_ch3_usb_outlets
+      address: 2
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH4 — Air Condition"
+      unique_id: rs485_rtu_e_ch4
+      address: 3
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH5 — Future use"
+      unique_id: rs485_rtu_e_ch5
+      address: 4
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH6 — Future use"
+      unique_id: rs485_rtu_e_ch6
+      address: 5
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH7 — Future use"
+      unique_id: rs485_rtu_e_ch7
+      address: 6
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15
+    - name: "CH8 — Future use"
+      unique_id: rs485_rtu_e_ch8
+      address: 7
+      slave: 2
+      write_type: coil
+      command_on: 0xFF00
+      command_off: 0x0000
+      scan_interval: 15

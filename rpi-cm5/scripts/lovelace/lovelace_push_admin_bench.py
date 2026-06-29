@@ -391,12 +391,13 @@ async def main() -> None:
             "## Waveshare Modbus RTU Relay (E) — RS485\n"
             "| | |\n|---|---|\n"
             "| **Contact** | **32 A** (8-channel module) |\n"
-            "| **Bus** | USB–RS485 → `rs485_bus` (single serial port) |\n"
-            "| **Slave** | **2** (same line as IO8=1, Analog=3) |\n"
+            "| **Bus** | Onboard RS485 **CH0** → `rs485_ch0` (`/dev/ttyAMA2`, uart2-pi5) |\n"
+            "| **Slave** | **2** (9600 8N1, dedicated CH0 line) |\n"
             "| **Wiki** | [Relay (E)](https://www.waveshare.com/wiki/Modbus_RTU_Relay_(E)) |\n"
             "| **Coils** | CH1 220V outlets, CH2 Clesana C1, CH3 USB outlets, CH4 AC; CH5–8 reserved |\n"
             "\n"
-            "`configuration.yaml`: **`slave: 2`** under `rs485_bus`."
+            "`modbus/30_rs485_ch0_relay_e.yaml`: **`slave: 2`** under hub `rs485_ch0` "
+            "(USB-RS485'ten onboard CH0'a taşındı)."
         )
 
         rtu_entities = [{"entity": RTU_RELAY_E_SWITCHES[i], "name": rtu_labels[i]} for i in range(8)]
@@ -490,8 +491,8 @@ async def main() -> None:
         ai_info = (
             "## Waveshare Modbus RTU Analog Input 8CH\n"
             "| | |\n|---|---|\n"
-            "| **Bus** | USB–RS485 → `rs485_bus` |\n"
-            "| **Slave** | **3** (with IO8=1, Relay=2) |\n"
+            "| **Bus** | USB–RS485 → `rs485_bus` (IO8=1; Relay E onboard CH0'a taşındı) |\n"
+            "| **Slave** | **3** (with IO8=1 on rs485_bus) |\n"
             "| **Read** | FC04 input registers 0–7, raw `uint16` |\n"
             "| **Mode** | Holding **4096–4103** (wiki 4x1000–); **3** = 4–20 mA |\n"
             "| **Wiki** | [Analog Input 8CH](https://www.waveshare.com/wiki/Modbus_RTU_Analog_Input_8CH) |\n"
