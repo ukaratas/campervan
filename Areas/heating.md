@@ -37,7 +37,7 @@ Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şek
 - **Hava Dağıtım Hatları**: Yaşam alanı ve sürücü kabinine yönlendirme
 - **Sıcak Su Hatları**: Mutfak ve banyo sıcak su bağlantıları
 - **Yakıt Hattı**: Harici dizel tank veya ana araç deposu bağlantısı
-- **Elektrik Bağlantısı**: 12V DC (24V sistemden konvertör ile)
+- **Elektrik Bağlantısı**: 12V DC kontrol/fan → Orion 24/12-70'ten (Kamp Modu'nda açılan 12V rail). Varsa 220V elektrikli rezistans → 8CH AC rölesi (load-shed). Detay: `Areas/automation.md`
 
 ## 💧 Sıcak Su Sistem Detayları
 
@@ -239,10 +239,11 @@ Karavanın tüm yaşam alanının kış koşullarında konforlu ve güvenli şek
 ## ⚡ Elektrik ve Su Tesisatı
 
 ### Elektrik Sistemi
-- **Ana Besleme**: 12V DC (24V sistemden konvertör ile)
-- **Güç Tüketimi**: 2-8A (çalışma moduna göre)
+- **Ana Besleme (12V kontrol/fan)**: Orion 24/12-70 DC-DC'den; 12V rail **Kamp Modu**'nda (Orion remote on/off DO) açılır → Combi standby'a gelir
+- **220V Elektrikli Rezistans** (Combi E varyantı): 8CH AC rölesi (kanal 4), HA **load-shed**'e dahil — 3000W inverter limitinde önceliklendirilir
+- **Güç Tüketimi (12V)**: 2-8A (çalışma moduna göre)
 - **Koruma**: Sigorta ve aşırı akım koruması
-- **Kontrol**: inet sistemi wifi bağlantısı
+- **Kontrol**: Truma inet (wifi) → Home Assistant; güç açma 12V rail (Kamp Modu) üzerinden
 
 ### Su Tesisatı
 - **Temiz Su**: Ana su tankından besleme

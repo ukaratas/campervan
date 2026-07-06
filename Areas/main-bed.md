@@ -18,7 +18,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Soğutma Kapasitesi:** 2800W max / 800W nominal (9550 BTU), COP ≥ 3.5
 - **Voltaj:** **24V DC** (doğrudan bataryadan — 220V/inverter değil)
 - **Tüketim:** ~800W nominal, 14–26A @24V (kalkış 43A)
-- **Kontrol:** Waveshare relay (Modbus) ile Home Assistant üzerinden aç/kapa
+- **Kontrol:** Doğrudan 24V baraya bağlı; kendi on/off'u (ünite paneli + kumanda) ile çalışır. **Otomasyon dışı** — röle/DO yok, standby tüketimi yok.
 - **Ağırlık:** 34kg (çift fanlı, fırçasız, 24V hermetik kompresör)
 
 ### Montaj Konumu
@@ -33,7 +33,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Enerji Verimliliği:** 800W nominal tüketim; 24V baradan düşük kayıpla
 - **Soğutma:** Park kliması (soğutma); ısıtma Truma Combi ile sağlanır (bkz. `heating.md`)
 - **Otomatik Kontrol:** Dijital kontrol paneli ile sıcaklık kontrolü
-- **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu (Waveshare relay (Modbus) ile aç/kapa)
+- **Kontrol:** Kendi kumandası + ünite paneli (otomasyona bağlı değil)
 
 ## 🌟 Heki Roof Window - Yıldız İzleme
 
@@ -66,7 +66,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Home Assistant:** Tüm aydınlatma otomatik kontrol
 
 ### Konfor Kontrolleri
-- **Klima Kontrolü:** Haier 24V 6. Nesil (24V DC), Waveshare relay (Modbus) ile Home Assistant üzerinden aç/kapa
+- **Klima Kontrolü:** Haier 24V 6. Nesil (24V DC), doğrudan 24V bara + kendi kumandası (otomasyon dışı)
 - **Heki Havalandırma:** Heki açma/kapama durumu izleme
 - **Perde Sistemi:** Otomatik veya manuel perde kontrolü
 - **Güvenlik:** Hareket sensörü ve gece güvenlik sistemi
@@ -109,7 +109,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **24V Klima:** Haier 24V 6. Nesil, 24V DC, ~800W nominal (14–26A), Waveshare relay (Modbus) ile kontrol
+- **24V Klima:** Haier 24V 6. Nesil, 24V DC, ~800W nominal (14–26A), **doğrudan 24V bara** + kendi kumandası (otomasyon dışı)
 - **Aydınlatma:** 24V LED spot ve şerit aydınlatma sistemi
 
 ### Yatak Başı Elektrik (Mutfak Tarafı - Sol)

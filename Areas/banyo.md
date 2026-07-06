@@ -122,7 +122,7 @@ Araç ortasında, dik yerleşimli (yatak ile ön yaşam alanı arasında), araç
 
 ### Elektrik Kurulumu
 1. **Aydınlatma:** 24V LED spot aydınlatma (push button mutfak tezgah üstünde)
-2. **Tuvalet Sistemi:** Clesana C1 12V besleme (0.55Wh/flush)
+2. **Tuvalet Sistemi:** Clesana C1 12V besleme (0.55Wh/flush) — 12V rail (Kamp Modu / Orion 24/12-70)
 3. **Home Assistant:** Sensör ve kontrol bağlantıları
 
 > **220V priz yok:** Banyoda ayrı priz açılmamıştır. Karavan içinde her bölgede prizler mevcut — traş makinesi/şarj için yatak başı veya mutfak prizleri kullanılır.
@@ -158,9 +158,9 @@ Araç ortasında, dik yerleşimli (yatak ile ön yaşam alanı arasında), araç
 - **Temiz Su:** Ana temiz su sisteminden dal hattı
 - **Sıcak Su:** Truma Combi 4D'den gelen hat
 - **Gri Su:** Duş ve lavabo drenajı gri su sistemine
-- **24V Elektrik:** Aydınlatma, pompa, sensörler
+- **24V Elektrik:** Aydınlatma (16CH DC röle zonu), su pompası (24V), sensörler
 - **220V Elektrik:** Yok — banyoda ayrı priz açılmamıştır (yatak başı veya mutfak prizleri kullanılır)
-- **Tuvalet:** Clesana C1 susuz tuvalet (12V, 0.55Wh/flush, 0.28Wh standby)
+- **Tuvalet:** Clesana C1 susuz tuvalet (12V, 0.55Wh/flush, 0.28Wh standby) — 12V rail'den, **Kamp Modu**'nda standby'a gelir
 - **Otomasyon:** Home Assistant ile nem sensörü entegrasyonu
 - **Havalandırma:** Pencere ile doğal havalandırma
 
