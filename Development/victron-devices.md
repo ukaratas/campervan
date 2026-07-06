@@ -1,8 +1,6 @@
-# Victron Cihazları — Teklif Listesi
+# Victron Cihazları
 
-> **✅ SİPARİŞ VERİLDİ** — ELTESAN Mobil Teknoloji A.Ş. (Teklif No **T260000723**, 03.07.2026). Aşağıdaki 6 kalemin tamamı teyit edildi; PN'ler birebir eşleşti.
-
-Kalemler part numarası (PN) ile belirtilmiştir.
+Sistemde kullanılan Victron cihazları, part numarası (PN) ile:
 
 | # | Ürün | PN | Adet | Not |
 |---|------|-----|:----:|-----|
@@ -11,6 +9,6 @@ Kalemler part numarası (PN) ile belirtilmiştir.
 | 3 | Victron Orion XS 1400 DC-DC Battery Charger | **ORI242417040** | 1 | Alternatörden 24 V akü şarjı. 1400 W, çıkış 1–50 A, VE.Direct + Bluetooth, IP65. |
 | 4 | Victron Orion 24/12-70 — izolesiz | **ORI241270030** | 1 | 24 V → 12 V, 70 A / 840 W, çıkış 10–15 V ayarlanabilir. |
 | 5 | VE.Direct kablo 0.9 m | **ASS030530209** | 1 | MPPT ↔ MultiPlus-II GX bağlantısı. |
-| 6 | VE.Direct → USB arabirim | **ASS030530010** | 1 | Orion XS ↔ MultiPlus-II GX bağlantısı. (Standart PN ASS030530000; ELTESAN teklifinde ASS030530010 kodu ile geçti — aynı ürün.) |
+| 6 | VE.Direct → USB arabirim | **ASS030530010** | 1 | Orion XS ↔ MultiPlus-II GX bağlantısı. (ASS030530000 ile aynı ürün.) |
 
 **Bağlantı:** MPPT (Kalem 2) → GX'in VE.Direct portu (Kalem 5 kablo); Orion XS (Kalem 3) → GX USB portu (Kalem 6 arabirim).

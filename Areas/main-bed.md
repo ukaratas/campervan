@@ -14,7 +14,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 ## ❄️ 24V Klima Sistemi
 
 ### Klima Özellikleri
-- **Model:** Haier 24V Elektrikli Park Kliması — 6. Nesil (Coolman) — ✅ alındı/takıldı
+- **Model:** Haier 24V Elektrikli Park Kliması — 6. Nesil (Coolman)
 - **Soğutma Kapasitesi:** 2800W max / 800W nominal (9550 BTU), COP ≥ 3.5
 - **Voltaj:** **24V DC** (doğrudan bataryadan — 220V/inverter değil)
 - **Tüketim:** ~800W nominal, 14–26A @24V (kalkış 43A)
