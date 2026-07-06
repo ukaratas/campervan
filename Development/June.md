@@ -17,8 +17,8 @@
 | 1 | **Pervazlı pistonlu karavan penceresi — 60×35 cm** (çift katlı akrilik, EPDM contalı sıkıştırma montaj) | 2 | Arka yatak sağ + sol yan duvar. Marka: Jarup / Berhimi / SUGA / Carbest veya eşdeğer. |
 | 2 | **Pervazlı pistonlu karavan penceresi — 50×30 cm** (çift katlı akrilik, EPDM contalı sıkıştırma montaj) | 1 | WC / banyo. Mahremiyet için koyu / buzlu cam tercih edilebilir. Marka: Jarup / Berhimi / SUGA / Carbest veya eşdeğer. |
 | 3 | **Pervazlı pistonlu karavan penceresi — 50×120 cm veya 45×110 cm** (çift katlı akrilik, EPDM contalı sıkıştırma montaj) | 2 | Kanepe alanı + giriş kapısı üst bölgesi. Salon yerleşimine uygun olan ölçüyü firmanın seçmesi rica edilir (her iki boy da uygun aralıkta). Marka: Jarup / Berhimi / SUGA / Carbest veya eşdeğer. |
-| 4 | **24V DC Tavan Kliması — son nesil model** (çift fanlı + fırçasız (brushless) DC motor) | 1 | MAN TGE L5H4 (18.4 m³) için **2.5–3.0 kW soğutma kapasitesi**, R134a refrigerant, hermetik kompresör tercih ediliyor. Önerilen modeller (TR pazar, son nesil çift fanlı fırçasız): **Haier 24V Elektrikli Park Kliması 5.Nesil** (Coolman dağıtım — çift fanlı, fırçasız, hermetik 24V, **2800 W max / 9550 BTU**, COP ≥ 3.5, kalkış 43 A, nominal 14-26 A, 48 dB, 34 kg), **Coolman Haier 12V-24V Elektrikli Tavan Park Kliması** (çift fanlı, fırçasız, hermetik 24V, **3000 W max / 10230 BTU**, COP ≥ 3.7, kalkış 42 A, nominal 14-26 A, 48 dB, 34 kg), **Evacool EVA RV 2700 Premium** |
-| 5 | **800 W ETFE Esnek Güneş Paneli Seti — son nesil** (hücre verimi ≥ %23, IBC veya Maxeon arka temas hücreli) | 1 set | Tavana yapıştırma ile monte edilmesi, panel çıkışlarının seri bağlanarak Tablo 2 / Kalem #1 EasySolar-II MPPT 250/70 girişine inmesi planlanıyor. Önerilen ürünler (son nesil ETFE laminasyonlu): **TommaTech 170 Wp Esnek Panel** (TR üretimi, IBC + ETFE, 2 yıl garanti — 5 adet seri ≈ 850 W) veya **SunPower Maxeon hücreli ETFE 200 W** modeller (≥%23 verim, 4 adet seri = 800 W). **Tercih edilmeyen ürünler:** PET/PVF arka kaplamalı eski nesil esnek paneller, hücre verimi %20 altı modeller, ETFE laminasyonsuz "semi-flex" panel klonları. |
+| 4 | **24V DC Tavan Kliması — ✅ ALINDI & TAKILDI** (çift fanlı + fırçasız DC motor) | 1 | **Haier Elektrikli Park Kliması 24V — 6. Nesil** (Coolman dağıtım). Onaylı spec: çift fanlı, fırçasız, **24V hermetik** kompresör, bakır petek evaporatör, **800 W nominal / 2800 W max soğutma / 9550 BTU**, soğutma aralığı 1000–2800 W, **COP ≥ 3.5**, nominal 14–26 A, **kalkış 43 A**, hava debisi 360/480 m³/h, 48 dB, gaz HFC-134a 450 g, **34 kg**, dış ölçü 840×880×220 mm, montaj kesimi 450×400 – 650×550 mm, performans limiti 45 °C. **24V DC — 220V/inverter sistemine bağlı değildir.** |
+| 5 | **800 W ETFE Esnek Güneş Paneli Seti — son nesil** (hücre verimi ≥ %23, IBC veya Maxeon arka temas hücreli) | 1 set | Tavana yapıştırma ile monte edilmesi, panel çıkışlarının seri bağlanarak harici **SmartSolar MPPT 150/45** (Victron Cihazlar RFP — Kalem #2; MultiPlus-II GX'e VE.Direct ile) girişine inmesi planlanıyor. **Dikkat:** 150/45 Voc tavanı 145 V → string voltajı 145 V altında kalmalı (bkz. aşağıda MPPT uyumu). Önerilen ürünler (son nesil ETFE laminasyonlu): **TommaTech 170 Wp Esnek Panel** (TR üretimi, IBC + ETFE, 2 yıl garanti — 5 adet seri ≈ 850 W) veya **SunPower Maxeon hücreli ETFE 200 W** modeller (≥%23 verim, 4 adet seri = 800 W). **Tercih edilmeyen ürünler:** PET/PVF arka kaplamalı eski nesil esnek paneller, hücre verimi %20 altı modeller, ETFE laminasyonsuz "semi-flex" panel klonları. |
 | 6 | **Şasi altı (underslung) su depoları — özel imalat** (1× 180 L temiz su + 1× 90 L gri su) | 2 | TR pazarında MAN TGE L5 (LWB/XLWB) için hazır underslung su deposu bulunmuyor; depoların özel olarak yaptırılması gerekiyor. Referans olarak UK üreticisinin (onlinetankstore.co.uk) MAN Crafter / VW Crafter LWB+XLWB için 180 L ve 90 L underslung tankları kullanılabilir. |
 | 7 | **Roof-mount (tavan üstü) kasetli kollu tente — 4.5 m** | 1 | MAN TGE L5H4 (~7.4 m gövde) için 4.5 m tavan üstü montajlı kasetli tente.  **Fiamma F80s 450** (yeni nesil aerodinamik alüminyum kasa, F65s'e göre %20 ince kesit) veya **Dometic PerfectRoof PR2500 4500 mm**. Manuel kollu , beyaz kasa, koyu kumaş (UV + leke). Ayrıca tente altı aydınlatma için dış mekan led şerit kullanımı hedefleniyor. Serit montajı için tente ile uyumlu aydınlatma profilininde montajı gerekiyor.|
 
@@ -59,22 +59,25 @@ Bu yaklaşım GRP tavanın uzun vadeli yorulmasını ve klima oturma yüzeyinin 
 
 ### Güneş paneli — Inverter (MPPT) uyumu (Kalem #5)
 
-800 W ETFE panel seti, **Tablo 2 / Kalem #1 olan EasySolar-II 24/3000/70-32 MPPT 250/70 GX** ünitesinin dahili **SmartSolar MPPT 250/70** girişine bağlanacak.
+800 W ETFE panel seti, **harici Victron SmartSolar MPPT 150/45-Tr (VE.Direct)** üzerinden 24 V bataryayı besleyecek; MPPT, **MultiPlus-II GX 24/3000**'e VE.Direct ile bağlanır (mimari değişikliği: EasySolar-II TR'ye vergi/ithalat nedeniyle gelmiyor → MultiPlus-II GX + harici MPPT).
 
-**MPPT giriş limitleri:**
+**MPPT giriş limitleri (150/45):**
 
-- Maks PV açık devre voltajı (Voc): **250 V mutlak / 245 V çalışma start-up**
-- Maks şarj akımı: **70 A** (24 V tarafında)
-- 24 V batarya için maks PV array gücü: **~2000 W** (28 V × 70 A nominal)
+- Maks PV açık devre voltajı (Voc): **145 V** (mutlak tavan — VE.Direct MPPT'lerde en yüksek Voc sınıfı budur)
+- Maks şarj akımı: **45 A** (24 V tarafında)
+- Maks PV Isc: **50 A**
+- 24 V batarya için maks PV array gücü: **1300 W** (800 W rahatça altında, clipping yok)
 
-**Önerilen seri konfigürasyonlar (800 W için):**
+**Panel:** 4 × **ANTFEA 200 W ETFE esnek** (mono, MC4) — panel başına **Voc 25 V, Vmp 20 V, Isc 10.6 A, Imp 10 A** (1570×700×2 mm, 3.7 kg). Toplam 800 W.
 
-| Konfigürasyon | Toplam Güç | Voc (seri) | MPPT uyumu |
-|---|---|---|---|
-| **4 × SunPower ETFE 200 W (4S — tümü seri)** | 800 W | 4 × ~39.7 V = **~159 V** | ✅ Voc OK (250 V altı), güç %40 kapasitede |
-| **5 × TommaTech 170 Wp (5S — tümü seri)** | 850 W | 5 × ~22 V = **~110 V** | ✅ Voc OK, güç %42 kapasitede |
+**Uygun seri konfigürasyonlar (ikisi de 150/45 limitleri içinde):**
 
-Tercih edilen yaklaşım: tümü seri bağlantı (4S veya 5S) — yüksek voltage düşük akım, MC4 konnektör + 6 mm² UV dayanımlı solar kablo yeterli, kayıp az.
+| Konfigürasyon | Toplam Güç | Voc (STC → soğuk ~−15 °C) | Isc | Değerlendirme |
+|---|---|---|---|---|
+| **4S — 4 seri** | 800 W | 4 × 25 = **100 V** → ~113 V | 10.6 A | ✅ Voc'a bol pay (145 V). İnce kablo, düşük kayıp, loş ışıkta erken başlar. Tek panel gölgelenince **tüm string düşer**. |
+| **2S2P — 2 seri 2 paralel** | 800 W | 2 × 25 = **50 V** → ~57 V | 2 × 10.6 = **21.2 A** | ✅ **Kısmi gölgeye dayanıklı** (bir string gölgede kalsa diğeri üretir). ~21 A → biraz kalın kablo + Y-konektör; 2 paralelde sigorta genelde gerekmez. |
+
+Her ikisi de sınırların rahat içinde (Voc < 145 V, Isc < 50 A, güç < 1300 W; çıkış ~28 A < 45 A). 150/45 **tek-tracker** olduğundan seçim gölgeye göre yapılır: karavan tavanında kısmi gölge muhtemelse **2S2P**, gölge minimal/homojense **4S** (en verimli ve en basit). Montajda tavandaki gerçek gölge paternine göre karar verilir. MC4 konnektör; 4S için 4–6 mm², 2S2P için 6 mm² UV dayanımlı solar kablo.
 
 ### Güneş paneli — Tavana yapıştırma (Kalem #5 — montaj)
 
@@ -91,7 +94,7 @@ Tam kapama yapıştırma uygulanırsa panel altında ısı birikiyor → verim %
 
 ### Güneş paneli — Kablo sonlandırma (Kalem #5 — kritik güvenlik)
 
-Solar panel kabloları tavandan araç içine indirildikten sonra **uçlarının açık / boşta bırakılmaması** önem taşıyor. Paneller gün ışığında sürekli üretim yapıyor; 4S konfigürasyonda kablo ucunda **daima ~150 V Voc bulunuyor** — açık uç montaj sırasında elektrik şok ve boşta sallanan iletkenlerle kısa devre / yangın riski yaratabiliyor.
+Solar panel kabloları tavandan araç içine indirildikten sonra **uçlarının açık / boşta bırakılmaması** önem taşıyor. Paneller gün ışığında sürekli üretim yapıyor; string ucunda **daima yüksek Voc bulunuyor** (4S ~100 V / soğukta ~113 V, 2S2P ~50 V) — açık uç montaj sırasında elektrik şok ve boşta sallanan iletkenlerle kısa devre / yangın riski yaratabiliyor.
 
 **Önerilen çözüm:**
 

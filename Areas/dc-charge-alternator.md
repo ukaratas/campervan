@@ -18,7 +18,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 
 - **DC-DC Şarj Cihazı**: Alternatör çıkışından alınan 12V DC, Victron Orion XS 1400 DC-DC şarj cihazı ile 24V LiFePO4 aküye uygun voltaj ve akımda şarj edilir.
 - **Akü Tipi Uyumluluğu**: Araç aküsü 12V kurşun, yaşam aküsü 24V LiFePO4’tur. DC-DC şarj cihazı bu dönüşümü güvenli şekilde sağlar.
-- **Araç Aküsü Float Şarj**: Kampta park halindeyken Victron Blue Smart IP65 12/5A şarj aleti, EasySolar-II **AC OUT 1** çıkışından Waveshare relay ile beslenir. HA otomasyonu ile açılıp kapatılır — shore yokken de inverter üzerinden çalıştırılabilir. Parasitik yüklerden (ECU, alarm, merkezi kilit) kaynaklanan boşalmayı önler.
+- **Araç Aküsü Float Şarj**: Kampta park halindeyken Victron Blue Smart IP65 12/5A şarj aleti, MultiPlus-II GX **AC OUT 1** çıkışından Waveshare relay ile beslenir. HA otomasyonu ile açılıp kapatılır — shore yokken de inverter üzerinden çalıştırılabilir. Parasitik yüklerden (ECU, alarm, merkezi kilit) kaynaklanan boşalmayı önler.
 - **Otomasyon**: Home Assistant ile şarj işlemi, voltaj eşikleri ve hata durumları izlenebilir ve otomasyon tetiklenebilir.
 
 ## 🛠️ Ürün Listesi
@@ -70,7 +70,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 * **Güvenlik**: Aşırı akım, aşırı sıcaklık, ters akım korumaları, akıllı alternatör desteği (engine shutdown detection)
 
 ## 💡 Ek Görüşler ve Öneriler
-- **Araç Aküsü Float Şarj**: Victron Blue Smart IP65 12/5A, EasySolar-II AC OUT 1 üzerinden Waveshare relay ile kontrol edilir. HA otomasyonu ile shore veya inverter modunda çalıştırılabilir. Kampta birkaç gün park halinde araç aküsü boşalmaz.
+- **Araç Aküsü Float Şarj**: Victron Blue Smart IP65 12/5A, MultiPlus-II GX AC OUT 1 üzerinden Waveshare relay ile kontrol edilir. HA otomasyonu ile shore veya inverter modunda çalıştırılabilir. Kampta birkaç gün park halinde araç aküsü boşalmaz.
 - **D+ Sinyali**: Şarj işlemini sadece motor çalışırken başlatmak için D+ sinyali veya voltaj algılayıcı kullanılabilir.
 - **Akü Tipi Uyumu**: Lityum ve kurşun akü kombinasyonlarında şarj voltajı ve akım limitlerine dikkat edilmeli
 - **Kablo Kesiti**: Yüksek akım hatlarında uygun kalınlıkta kablo ve kaliteli bağlantı elemanları kullanılmalı
@@ -79,7 +79,7 @@ Araç çalışırken alternatörden yaşam aküsüne (24V LiFePO4) güvenli ve k
 ## ⚡ Elektrik ve Su Tesisatı
 
 - **Enerji:** 12V DC (araç aküsü/alternatör), 24V DC (yaşam aküsü), DC-DC şarj cihazı
-- **Araç Aküsü Float:** EasySolar-II AC OUT 1 → Waveshare relay → Blue Smart IP65 12/5A → araç 12V aküsü (HA otomasyonu ile aç/kapa)
+- **Araç Aküsü Float:** MultiPlus-II GX AC OUT 1 → Waveshare relay → Blue Smart IP65 12/5A → araç 12V aküsü (HA otomasyonu ile aç/kapa)
 - **Kablo ve Sigorta:** Yüksek akım kablosu, ANL sigorta, bağlantı noktaları
 - **Araç Aküsü Float:** Victron Blue Smart IP65 12/5A + DC connector, 220V AC → 12V araç aküsü float şarj
 - **Otomasyon:** Şarj durumu, voltaj/akım sensörleri, Home Assistant entegrasyonu

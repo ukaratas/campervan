@@ -58,6 +58,19 @@ web_server:
   port: 80
   version: 3
 
+# ── Bluetooth Proxy ─────────────────────────────────────────────
+# CM5 onboard BT donanım seviyesinde ölü (bkz. haos BT teşhisi). Bu ESP32,
+# Victron Blue Smart vb. BLE cihazlarını yakalayıp WiFi üzerinden HA'ya iletir.
+# Klasik ESP32'de WiFi+BLE bir arada RAM'i zorlar; sorun olursa web_server/captive_portal kısılır.
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+bluetooth_proxy:
+  active: true
+
 # NTP (log/sensör timestamp tutarlılığı için)
 time:
   - platform: sntp

@@ -1,16 +1,16 @@
+# Victron Cihazları — Teklif Listesi
 
-# Victron Cihazlar (RFP)
+> **✅ SİPARİŞ VERİLDİ** — ELTESAN Mobil Teknoloji A.Ş. (Teklif No **T260000723**, 03.07.2026). Aşağıdaki 6 kalemin tamamı teyit edildi; PN'ler birebir eşleşti.
 
+Kalemler part numarası (PN) ile belirtilmiştir.
 
-| # | Ürün / Malzeme | Adet | Not |
-|---|----------------|:----:|-----|
-| 1 | **Victron EasySolar-II 24/3000/70-32 MPPT 250/70 GX** — PN: **PMP242307010** | 1 | Ana inverter + dahili MPPT 250/70 + GX. (3000 VA ≈ ~2400 W sürekli güç) |
-| 2 | **Victron Orion XS 1400 DC-DC Battery Charger** — PN: **ORI242417040** | 1 | 12V alternatörden 24V akü şarjı. Çıkış akımı 1–50 A ayarlanabilir, sürekli güç 1400 W (40°C). Giriş 9–35 V / çıkış 10–35 V (12→12, 12→24, 24→12, 24→24 konfigürasyonları). Bluetooth + VictronConnect, IP65, 520 g. |
-| 3 | **Victron Orion 24/12-80 — izolesiz** — PN: **ORI241280030** (M6 binding post versiyonu, tercih edilen) | 1 | 24V → 12V buck, **80 A / ~960 W**. Output 10–15 V ayarlanabilir potansiyometre ile (F-set 13.2 V). Worst-case eşzamanlı 12V peak ~57 A (Clesana C1 seal 22 A + Dizel Combi glow plug ~15 A + 2× çakmak prizi 10 A) — 80 A makul pay sağlar. Stokta yoksa eşdeğer kapasiteli **Orion 24/12-70 — PN: ORI241270020** (70 A / 840 W, output 10–15 V ayarlanabilir, M8 vidalı terminal) kabul edilir. |
+| # | Ürün | PN | Adet | Not |
+|---|------|-----|:----:|-----|
+| 1 | Victron MultiPlus-II GX 24/3000/70-32 | **PMP242306000** | 1 | Inverter/şarj cihazı + entegre GX. 3000 VA, 70 A şarj. |
+| 2 | Victron SmartSolar MPPT 150/45-Tr (VE.Direct) | **SCC115045212** | 1 | Harici güneş şarj regülatörü (800 W panel). Vidalı (Tr) terminal. |
+| 3 | Victron Orion XS 1400 DC-DC Battery Charger | **ORI242417040** | 1 | Alternatörden 24 V akü şarjı. 1400 W, çıkış 1–50 A, VE.Direct + Bluetooth, IP65. |
+| 4 | Victron Orion 24/12-70 — izolesiz | **ORI241270030** | 1 | 24 V → 12 V, 70 A / 840 W, çıkış 10–15 V ayarlanabilir. |
+| 5 | VE.Direct kablo 0.9 m | **ASS030530209** | 1 | MPPT ↔ MultiPlus-II GX bağlantısı. |
+| 6 | VE.Direct → USB arabirim | **ASS030530010** | 1 | Orion XS ↔ MultiPlus-II GX bağlantısı. (Standart PN ASS030530000; ELTESAN teklifinde ASS030530010 kodu ile geçti — aynı ürün.) |
 
- 
-## Genel Notlar
-
-- Tüm Victron ürünlerinin part numarası (PN) yazıldı; alımda model karmaşası olmaması adına PN üzerinden teyit alınması faydalı olur.
-- Tablo 2 / Kalem #3 için tercih M6 binding postlu **24/12-80** (PN: ORI241280030); stokta yoksa eşdeğer kapasiteli **24/12-70** (PN: ORI241270020) kabul edilir.
-- Sipariş öncesi tüm PN'lerin Victron resmi datasheet'inden son kez kontrol edilmesi öneriliyor (özellikle 80 A binding-post / standart varyant farkı).
+**Bağlantı:** MPPT (Kalem 2) → GX'in VE.Direct portu (Kalem 5 kablo); Orion XS (Kalem 3) → GX USB portu (Kalem 6 arabirim).

@@ -21,7 +21,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 - **24V altyapı** ile karavanın tüm DC yükleri ve enerji yönetimi doğrudan beslenir. 12V gerektiren cihazlar için 24V to 12V DC konvertör ile ayrı bir 12V hat oluşturulur (Truma Combi 4D: 2-8A; Clesana C1: 0.05A standby, 0.5A flush; mutfak 12V priz: 2-5A; toplam 12V yük: ~10A max).
 - **Ana sigorta ve kontaktör** ile acil durumda tüm sistemi izole etmek mümkündür.
 - **BMS üzerinden RS485/CanBus ile Home Assistant’a veri aktarımı ve otomasyon tetikleme** mümkündür. 12V hattın enerji tüketimi ve durumu da izlenebilir.
-- **Güneş paneli çıkışı doğrudan EasySolar-II'nin entegre MPPT girişine bağlanır.**
+- **Güneş paneli çıkışı harici SmartSolar MPPT 150/45'e bağlanır; MPPT, MultiPlus-II GX'e VE.Direct ile bağlıdır.**
 
 ## 🛠️ Ürün Listesi
 
@@ -39,7 +39,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 ### İzleme Noktaları
 - **BMS RS485/CanBus**: Hücre voltajları, toplam voltaj, akım, sıcaklık, SOC, hata durumları
 - **Ana Sigorta/Kontaktör**: Açık/kapalı durumu, otomatik izole
-- **EasySolar-II GX**: Tüm AC ve güneş enerjisi akışı tek cihazdan izlenir
+- **MultiPlus-II GX**: Tüm AC ve (harici MPPT üzerinden) güneş enerjisi akışı GX'ten izlenir
 
 ### Otomasyon Senaryoları
 - **Düşük SOC Otomasyonu**: Batarya %5 altına inerse kritik yükleri kapat, kullanıcıya uyarı gönder
@@ -58,7 +58,7 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 2. **BMS Montajı**: Tüm hücrelere balans kabloları ve ana akım bağlantısı
 3. **Sigorta ve Kontaktör**: Ana hatta sigorta ve kontaktör montajı
 4. **Sensör ve Haberleşme**: RS485/CanBus/MQTT entegrasyonu
-5. **Güneş Paneli Bağlantısı**: 800W panel (4x 200W rigid, sabit çatıya ray montaj) doğrudan EasySolar-II MPPT girişine bağlanır
+5. **Güneş Paneli Bağlantısı**: Esnek ETFE panel seti (tavana yapıştırma montaj) harici SmartSolar MPPT 150/45 girişine bağlanır
 6. **Home Assistant Konfigürasyonu**: Sensörlerin ve otomasyonların tanımlanması
 
 ### Bakım Planı
@@ -92,4 +92,4 @@ Karavanın tüm elektrik ihtiyacını karşılayacak ana enerji kaynağıdır. Y
 
 ---
 
-*Bu sistem, EasySolar-II ile tüm AC ve güneş enerjisi altyapısını tek cihazda birleştirerek, güvenli, akıllı ve ölçeklenebilir bir batarya çözümü sunar.*
+*Bu sistem, MultiPlus-II GX + harici MPPT ile AC ve güneş enerjisi altyapısını GX üzerinden izlenebilir kılarak, güvenli, akıllı ve ölçeklenebilir bir batarya çözümü sunar.*

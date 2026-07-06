@@ -1,10 +1,10 @@
 # Batarya Paketi
 
-> Bu belge, akü paketi için farklı üreticilerden teklif alınması amacıyla hazırlanmıştır. Aşağıdaki spesifikasyon, tedarik şartları ve teslim testleri bağlayıcıdır.
+> Bu belge, akü paketinin **kendi yapımı (DIY)** için spesifikasyon ve montaj/test referansıdır. Hücreler + **JK BMS 300 A active balance** sipariş edildi (MSK Global, fatura ARS2026000000477, 02.07.2026, ~79.806 TL KDV dahil). Aşağıdaki hücre kabul şartları ve top-balance/teslim testleri bağlayıcıdır.
 
 | # | Ürün / Malzeme | Adet | Not |
 |---|----------------|:----:|-----|
-| 1 | **24 V / 314 Ah LiFePO4 Akü Paketi** — akücüye yaptırılacak (detay aşağıda § _Akü Paketi Spesifikasyonu_) | 1 | **Hücreler:** 8× prismatik 3.2 V / 314 Ah A-Class — tercih EVE MB31, alt seçenek Gotion LF314 (her ikisi de aynı batch'ten). **BMS:** Daly Smart Active Balance 8S 24V **400 A** (BT + RS485 + CAN, 1 A active balance). Toplam nominal: **24 V / 314 Ah / ~7.5 kWh**. |
+| 1 | **24 V / 314 Ah LiFePO4 Akü Paketi** — **kendi yapımı (DIY)**; hücreler + BMS + kabin sipariş edildi (MSK Global, 02.07.2026) | 1 | **Hücreler:** 8× prismatik **3.2 V / 314 Ah** LiFePO4 (56.400 TL). **BMS:** **JK BMS 300 A active balance** (BT + RS485/CAN, active balance) + **2.3" LCD ekran**. **Kabin:** akü kabini dahil. Toplam nominal: **24 V / 314 Ah / ~7.5 kWh**. |
 
 ---
 
@@ -41,15 +41,17 @@ Testlerden herhangi birinde uyumsuzluk görülen hücre kabul edilmeyecek; deği
 
 8 hücre paralel bağlanır (paketin nominal voltajında değil), CC-CV ile 3.65 V'a kadar şarj edilir (≤ 0.1C akım). Tüm hücreler 3.65 V'a ulaştığında akım düşmeye başlar; bu, top-balance'ın tamamlandığını gösterir. İşlem 12-24 saat sürebilir. Aktif dengeleyici devreye girmeden önce tüm hücrelerin aynı SoC seviyesinde olması beklenmektedir.
 
-### BMS Boyutlandırma Hesabı (Neden 400 A?)
+### BMS Boyutlandırma — JK BMS 300 A (seçilen)
 
 24 V tarafındaki yük analizi:
 
 | Yük | Sürekli akım | Peak akım (kısa süre) |
 |---|---|---|
-| EasySolar-II inverter (3000 VA) | ~100 A (3000 W / 24 V) | **~250 A** (6000 W overload, 5 sn datasheet) |
-| Klima Evacool RV 2700 (AC tarafta ~1100 W) | ~48 A (inverter girişi) | +~50–80 A (kompresör LRA startup geçici overlap) |
-| Orion 24/12-80 DC-DC (12V çıkışta peak yüklerde) | ~40 A (960 W) | ~45 A |
+| MultiPlus-II 24/3000 inverter (3000 VA) | ~100 A (3000 W / 24 V) | **~250 A** (6000 W overload, 5 sn datasheet) |
+| Klima Haier 24V (24V DC — doğrudan bara, inverter değil) | ~14–26 A (nominal) | **43 A** (kompresör kalkış) |
+| Orion 24/12-70 DC-DC (24V giriş tarafı) | ~35 A (840 W) | ~40 A |
 | Buzdolapları (Evacool Berlin 90 L + D31 R) | ~8–10 A | — |
 | Aydınlatma + kontrol + diğer küçük yükler | ~5–10 A | — |
 | **TOPLAM (gerçekçi worst-case eşzamanlı)** | **~110 A sürekli** | **~300–330 A peak** |
+
+**Sonuç — JK BMS 300 A:** Sürekli yük (~110–150 A, tam inverter yükünde bile) 300 A'in rahat altında. ~300–330 A'lik teorik peak yalnızca inverter surge'ü (250 A, ~5 sn) + klima kalkışı (43 A) + DC-DC'nin **tam aynı anda** çakışmasıyla oluşur — düşük olasılık ve çok kısa. JK BMS'in ayarlanabilir aşırı-akım gecikmesi (OCP delay) bu kısa surge'leri koruyucu şekilde tolere eder; nadir tam-çakışmada tripleyip resetlenir (tehlike değil). Yani **300 A pratikte yeterli**; önceki 400 A hedefi daha konservatifti. İleride daha fazla pay istenirse 400 A'e geçilebilir.

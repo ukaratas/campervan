@@ -11,15 +11,15 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Malzeme:** Yüksek kaliteli yatak minderi ve özel çarşaf seti
 - **Depolama:** Yatak altında teknik ekipmanlar (batarya, otomasyon)
 
-## ❄️ 220V Klima Sistemi
+## ❄️ 24V Klima Sistemi
 
 ### Klima Özellikleri
-- **Model:** Evacool Eva RV 2700 Premium Klima
-- **Soğutma Kapasitesi:** ~2700W
-- **Voltaj:** 220V AC
-- **Tüketim:** ~900-1100W (~4-5A @220V)
+- **Model:** Haier 24V Elektrikli Park Kliması — 6. Nesil (Coolman) — ✅ alındı/takıldı
+- **Soğutma Kapasitesi:** 2800W max / 800W nominal (9550 BTU), COP ≥ 3.5
+- **Voltaj:** **24V DC** (doğrudan bataryadan — 220V/inverter değil)
+- **Tüketim:** ~800W nominal, 14–26A @24V (kalkış 43A)
 - **Kontrol:** Waveshare relay (Modbus) ile Home Assistant üzerinden aç/kapa
-- **Ağırlık:** ~28-31kg
+- **Ağırlık:** 34kg (çift fanlı, fırçasız, 24V hermetik kompresör)
 
 ### Montaj Konumu
 - **Konum:** Ana yatak üstüne konumlanacak şekilde, araç tavanında
@@ -28,10 +28,10 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Erişim:** Bakım için kolay erişim imkanı
 
 ### Teknik Avantajlar
-- **220V AC:** Shore power veya inverter (3000W) ile çalışır
-- **Sessiz Çalışma:** Inverter compressor teknolojisi
-- **Enerji Verimliliği:** Eco mod ile uzun çalışma süresi, ~1000W tüketim inverter kapasitesinin 1/3'ü
-- **Sıcak/Soğuk:** Hem soğutma hem ısıtma fonksiyonu
+- **24V DC:** Doğrudan bataryadan beslenir; inverter/220V gerektirmez (AC yükünü artırmaz)
+- **Sessiz / Verimli:** Fırçasız DC çift fan + hermetik kompresör, COP ≥ 3.5
+- **Enerji Verimliliği:** 800W nominal tüketim; 24V baradan düşük kayıpla
+- **Soğutma:** Park kliması (soğutma); ısıtma Truma Combi ile sağlanır (bkz. `heating.md`)
 - **Otomatik Kontrol:** Dijital kontrol paneli ile sıcaklık kontrolü
 - **Uzaktan Kontrol:** Kumanda ve Home Assistant entegrasyonu (Waveshare relay (Modbus) ile aç/kapa)
 
@@ -66,7 +66,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 - **Home Assistant:** Tüm aydınlatma otomatik kontrol
 
 ### Konfor Kontrolleri
-- **Klima Kontrolü:** Evacool Eva RV 2700 Premium, 220V AC, Waveshare relay (Modbus) ile Home Assistant üzerinden aç/kapa
+- **Klima Kontrolü:** Haier 24V 6. Nesil (24V DC), Waveshare relay (Modbus) ile Home Assistant üzerinden aç/kapa
 - **Heki Havalandırma:** Heki açma/kapama durumu izleme
 - **Perde Sistemi:** Otomatik veya manuel perde kontrolü
 - **Güvenlik:** Hareket sensörü ve gece güvenlik sistemi
@@ -109,7 +109,7 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 
 ## ⚡ Elektrik ve Su Tesisatı
 
-- **220V Klima:** Evacool Eva RV 2700 Premium, 220V AC, ~900-1100W, Waveshare relay (Modbus) ile kontrol
+- **24V Klima:** Haier 24V 6. Nesil, 24V DC, ~800W nominal (14–26A), Waveshare relay (Modbus) ile kontrol
 - **Aydınlatma:** 24V LED spot ve şerit aydınlatma sistemi
 
 ### Yatak Başı Elektrik (Mutfak Tarafı - Sol)
@@ -135,4 +135,4 @@ Karavanın (MAN TGE L5H4 18.4m³) arka bölümünde yer alan ana yatak alanı. 2
 
 ---
 
-*Bu sistem, MAN TGE L5H4 18.4m³ geniş iç alanında konforlu yatak deneyimi sunar, 220V klima ile soğutma/ısıtma ve büyük heki ile yıldız izleme imkanı sağlar.* 
+*Bu sistem, MAN TGE L5H4 18.4m³ geniş iç alanında konforlu yatak deneyimi sunar, 24V klima ile soğutma ve büyük heki ile yıldız izleme imkanı sağlar.* 
