@@ -212,7 +212,35 @@ Ayrıca `dtoverlay=disable-bt` (aşağı bak). Terminal etiketleri: IPCBOX `R/A`
 
 ### Onboard Bluetooth disable (restart hızlandırma)
 
-Onboard BT (hci0 / BCM43438) donanım seviyesinde ölü. HA'nın `bluetooth_auto_recovery`'si her core restart'ta onu power-cycle etmeye çalışıp **5 sn × N timeout** veriyordu → restart yavaşlıyordu. Çözüm: config.txt'ye **`dtoverlay=disable-bt`** + reboot → `/sys/class/bluetooth/` boş, hci0 tamamen yok, restart hızlı. **BLE artık ESP32 BLE proxy üzerinden** (`cv-sensors-01`, `bluetooth_proxy`) — Victron Blue Smart oradan okunuyor. (HA'da ayrıca ölü `brcm bcm43438-bt` config entry'si disable edildi.)
+Onboard BT (hci0 / BCM43438) donanım seviyesinde ölü. HA'nın `bluetooth_auto_recovery`'si her core restart'ta onu power-cycle etmeye çalışıp **5 sn × N timeout** veriyordu → restart yavaşlıyordu. Çözüm: config.txt'ye **`dtoverlay=disable-bt`** + reboot → `/sys/class/bluetooth/` boş, hci0 tamamen yok, restart hızlı. **BLE artık ESP32 BLE proxy üzerinden** (`cv-sensors-01`, `bluetooth_proxy`) — Victron Blue Smart ve JK BMS oradan okunuyor. (HA'da ayrıca ölü `brcm bcm43438-bt` config entry'si disable edildi.)
+
+### JK BMS (BLE — custom integration `bms_ble`)
+
+24 V DIY LiFePO4 paketinin **JK BMS 300 A** ünitesi HA'ya **BLE üzerinden** bağlandı (ESP32 proxy `cv-sensors-01`; onboard BT ölü olduğundan tek yol bu). RS485/CAN gerçek zamanlı hattı devreye girene kadar (`Development/battery-pack.md` → "KRİTİK — Haberleşme Çıkışları") izleme yolu budur.
+
+**Cihaz:** JK-B2A24S30P (Jikong), FW **19.28**, HW 19U, S/N 51226245, BT MAC **`C8:47:80:52:18:E0`**, entity prefix `neocamperbat` (BLE ad'ı "NeoCamperBat").
+
+**Entegrasyon:** [patman15/BMS_BLE-HA](https://github.com/patman15/BMS_BLE-HA) **v2.14.0**, **elle** kuruldu (`/config/custom_components/bms_ble/`; HACS yok). Protokol paketi `aiobmsble==0.25.0` HA ilk yüklemede PyPI'dan otomatik kuruldu (HAOS'un internet erişimi şart). **`custom_components/` `sync_ha_config.sh` kapsamında DEĞİL** → HA sıfırlanırsa elle geri kopyalanmalı:
+
+```bash
+git clone --depth 1 --branch 2.14.0 https://github.com/patman15/BMS_BLE-HA /tmp/bmsble
+scp -r /tmp/bmsble/custom_components/bms_ble haos-cv:/config/custom_components/
+ssh haos-cv 'ha core restart'
+```
+
+**Keşif:** cihaz `ffe0`+`fee7` servisleriyle reklam yapıyor → `bms_ble` **otomatik keşfediyor**, onayla eklenir. **BT PIN 651651 okuma için gerekmedi** (yalnız `accept_secret` olan BMS'lerde Options akışında sorulur).
+
+⚠️ **Tek BLE bağlantısı:** JK BMS aynı anda **tek** bağlantı kabul eder. **Telefondaki JK app bağlıyken proxy cihazı ne görür ne bağlanır** — app'i tamamen kapat (kurulum sırasında telefonun BT'sini kapatmak en garanti yol).
+
+⚠️ **Pairing duvarı:** FW **≥ 19.30** BLE bonding şart koşuyor; bunu ne proxy ne de (BT'si ölü) CM5 host başlatabiliyor. Ünite **19.28** olduğu için sorun çıkmadı → **firmware'i 19.30+'a güncelleme**, yoksa BLE erişimi gider (o durumda RS485'e geç).
+
+**Sinyal:** link quality ~%66, RSSI ~**−85 dBm** (sınırda). Aktif poll bağlantısı koparsa BMS'i proxy'ye yaklaştır ya da ikinci bir BLE proxy ekle.
+
+**Entity'ler** (`sensor.neocamperbat_*` / `binary_sensor.neocamperbat_*`): `battery` (SoC %), `voltage`, `current`, `power`, `temperature`, `stored_energy`, `cycles`, `battery_health`, `runtime`, `delta_cell_voltage`, `highest_cell_voltage`, `lowest_cell_voltage`, `link_quality`, `signal_strength`; binary: `charging`, `problem`, `balancer`, `charge_mosfet`, `discharge_mosfet`. **Son 7'si default kapalı** gelir (highest/lowest cell, balancer, charge/discharge mosfet, link_quality, signal_strength) → entity registry'den açıldı.
+
+**Hücre voltajları (8S):** `bms_ble` ayrı 8 entity üretmez; değerler `sensor.neocamperbat_delta_cell_voltage` üzerindeki **`cell_voltages`** attribute'unda liste halinde. Ayrıca `temperature`'da `temperature_sensors`, `current`'ta `balance_current` attribute'ları var. Grafik/alarm/karşılaştırma için bunları **`homeassistant/templates/40_jk_bms_cells.yaml`** ile ayrı sensörlere açtık: `sensor.jk_cell_1…8`, `sensor.jk_balance_current`, ve sorunlu hücreyi işaretleyen `sensor.jk_lowest_cell_no` / `sensor.jk_highest_cell_no` (1-indeksli). aiobmsble "hangi hücre balanslanıyor"u ayrı vermediği için: pratikte en yüksek hücre balanslanır → highest-cell-no + `balance_current` (aktifken ≠0) birlikte bunu gösterir.
+
+**Dashboard:** Admin Bench → **"JK BMS"** sekmesi (`scripts/lovelace/lovelace_push_admin_bench.py` → `bms_view`): özet gauge'lar (SoC/V/A/°C), **8 hücre 24s zaman grafiği** (sapan çizgi = zayıf hücre), anlık hücre listesi + en düşük/yüksek hücre no, balancing & MOSFET, pack durumu & BLE link/RSSI. Sekme entity ID'leri `neocamperbat` önekine ve `jk_cell_*` template sensörlerine bağlı; cihaz yeniden eşlenirse ikisini de güncelle. Hücre sensörlerinin **display precision**'ı (bms_ble/template `suggested_display_precision: 0` verdiği için kart tam sayıya yuvarlıyordu) push script'inde **entity registry override** ile ayarlanır: hücreler **3**, balance akımı **3** hane (JK ham veriyi mV/3 hane verir). Ayar restart'ta kalıcı; tam sıfırlamada `lovelace_push_admin_bench.py` yeniden uygular.
 
 ### HAOS'ta config.txt düzenleme (host erişimi)
 
@@ -342,6 +370,12 @@ Relay switch entity'leri: `switch.ch1_macerator_pump`, `switch.ch2_refrigerator`
 | `switch.ch2_refrigerator` … `switch.ch16_future_use` | Diğer kanallar (coil 1–15) |
 | **RS485 Relay (E)** | |
 | `switch.ch1_220v_outlets` … `ch8_future_use` | onboard **CH0** (`rs485_ch0`, `/dev/ttyAMA2`), slave **2** |
+| **JK BMS (BLE — `bms_ble`)** | |
+| `sensor.neocamperbat_voltage` / `_current` / `_power` | Paket V / A / W |
+| `sensor.neocamperbat_battery` | SoC (%) |
+| `sensor.neocamperbat_delta_cell_voltage` | Hücreler arası Δ (attr **`cell_voltages`** = 8 hücre) |
+| `sensor.neocamperbat_highest_cell_voltage` / `_lowest_cell_voltage` | En yüksek / en düşük hücre voltajı |
+| `binary_sensor.neocamperbat_problem` | BMS hata bayrağı (attr `problem_code`) |
 
 ## Donanım
 
@@ -352,3 +386,4 @@ Relay switch entity'leri: `switch.ch1_macerator_pump`, `switch.ch2_refrigerator`
 | Waveshare 8-Ch Analog Acquisition | onboard RS485 **CH1** (`/dev/ttyAMA3`, `rs485_bus`) | Modbus RTU, slave 3 | 0-20mA analog input; IO8 (slave 1) ile aynı CH1 hattında |
 | Waveshare Modbus RTU Relay (E) 8CH | onboard RS485 **CH0** (`/dev/ttyAMA2`, `rs485_ch0`) | Modbus RTU, slave 2 | 8× 32A; USB-RS485'ten taşındı |
 | Waveshare Modbus RTU IO 8CH | onboard RS485 **CH1** (`/dev/ttyAMA3`, `rs485_bus`) | Modbus RTU, slave 1 | DI/DO; analog ile aynı CH1 |
+| JK BMS 300 A (JK-B2A24S30P) | BLE → ESP32 proxy `cv-sensors-01` | BT MAC `C8:47:80:52:18:E0` | DIY 24V/314Ah paket; custom integration `bms_ble`; FW 19.28; RS485 ileride |

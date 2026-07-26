@@ -55,3 +55,13 @@ Testlerden herhangi birinde uyumsuzluk görülen hücre kabul edilmeyecek; deği
 | **TOPLAM (gerçekçi worst-case eşzamanlı)** | **~110 A sürekli** | **~300–330 A peak** |
 
 **Sonuç — JK BMS 300 A:** Sürekli yük (~110–150 A, tam inverter yükünde bile) 300 A'in rahat altında. ~300–330 A'lik teorik peak yalnızca inverter surge'ü (250 A, ~5 sn) + klima kalkışı (43 A) + DC-DC'nin **tam aynı anda** çakışmasıyla oluşur — düşük olasılık ve çok kısa. JK BMS'in ayarlanabilir aşırı-akım gecikmesi (OCP delay) bu kısa surge'leri koruyucu şekilde tolere eder; nadir tam-çakışmada tripleyip resetlenir (tehlike değil). Yani **300 A pratikte yeterli**. İleride daha fazla pay istenirse 400 A'e geçilebilir.
+
+### Teslim & HA Entegrasyonu (2026-07-26)
+
+BMS geldi ve HA'ya **BLE üzerinden** bağlandı (kurulum/gotcha ayrıntıları: `rpi-cm5/README.md` → "JK BMS (BLE — custom integration `bms_ble`)").
+
+- **Model:** JK-B2A24S30P (Jikong) · FW **19.28** · HW 19U · S/N 51226245 · BT MAC `C8:47:80:52:18:E0`.
+- **İlk okuma (paket boşta):** 28.48 V, 0.0 A, SoC %93, 25.4 °C; hücreler `[3.555 … 3.562] V`, Δ ≈ **7 mV** → 8S paket iyi dengeli, `problem` bayrağı OK.
+- **BT PIN:** 651651 (JK app girişi; HA okuması için gerekmedi).
+- **Not:** FW 19.28, BLE pairing duvarının (≥19.30) altında — bu yüzden proxy ile sorunsuz okundu. **Firmware güncellenmemeli**, yoksa BLE erişimi gider.
+- RS485/CAN gerçek zamanlı izleme (yukarıdaki "KRİTİK" başlığı) hâlâ hedef; BLE şu an ara/tezgâh çözümü.

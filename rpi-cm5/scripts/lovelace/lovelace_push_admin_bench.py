@@ -290,6 +290,29 @@ async def main() -> None:
             print("  [ERROR] Auth failed")
             sys.exit(1)
 
+        # JK BMS hücre sensörleri display precision — bms_ble/template `suggested_display_precision`
+        # 0 geliyor → kart tam sayıya yuvarlıyordu. Override: hücreler 3, balance akımı 3 hane
+        # (JK ham veriyi mV/3 hane veriyor). Entity registry ayarı restart'ta kalıcı; tam
+        # sıfırlamada burada tekrar uygulanır.
+        jk_precision = {f"sensor.jk_cell_{n}": 3 for n in range(1, 9)}
+        jk_precision["sensor.jk_balance_current"] = 3
+        pid = 40
+        for eid, prec in jk_precision.items():
+            await ws.send(
+                json.dumps(
+                    {
+                        "id": pid,
+                        "type": "config/entity_registry/update",
+                        "entity_id": eid,
+                        "options_domain": "sensor",
+                        "options": {"display_precision": prec},
+                    }
+                )
+            )
+            await ws.recv()  # entity yoksa hata döner; yok say (ilk push templates'ten sonra çalışır)
+            pid += 1
+        print("  [OK] JK BMS cell display precision (cells=4, balance=3)")
+
         await ws.send(json.dumps({"id": 1, "type": "lovelace/dashboards/list"}))
         msg = json.loads(await ws.recv())
         bench_exists = False
@@ -619,6 +642,93 @@ async def main() -> None:
             ],
         }
 
+        # ── JK BMS (BLE) view ─────────────────────────────────────────
+        # bms_ble (patman15) — DIY 24V/314Ah 8S paket, BLE proxy cv-sensors-01.
+        # Per-cell voltajlar template sensör (templates/40_jk_bms_cells.yaml); cihaz
+        # yeniden eşlenirse `neocamperbat` önekini + jk_cell_* sensörlerini güncelle.
+        JK = "sensor.neocamperbat"
+        JKB = "binary_sensor.neocamperbat"
+        JK_CELLS = [f"sensor.jk_cell_{i}" for i in range(1, 9)]
+        bms_info = (
+            "## JK BMS 300 A — DIY 24V / 314 Ah LiFePO4 (8S)\n"
+            "BLE via ESP32 proxy `cv-sensors-01` (onboard BT dead). Custom integration "
+            "**`bms_ble`** (patman15) — details in `rpi-cm5/README.md`. Per-cell voltages are "
+            "template sensors (`sensor.jk_cell_1…8`) fed from the `cell_voltages` attribute; "
+            "`bms_ble` does not expose them as separate entities.\n\n"
+            "| | |\n|---|---|\n"
+            "| **Model** | JK-B2A24S30P (Jikong) · FW 19.28 · HW 19U |\n"
+            "| **BT MAC** | `C8:47:80:52:18:E0` |\n"
+            "| **⚠ Single BLE link** | Close the JK phone app or HA loses the connection. |\n"
+            "| **⚠ Firmware** | Do NOT update to ≥ 19.30 (BLE pairing wall; host BT dead → use RS485). |"
+        )
+        bms_gauges = {
+            "type": "horizontal-stack",
+            "cards": [
+                _gauge(f"{JK}_battery", min_v=0, max_v=100, name="SoC (%)"),
+                _gauge(f"{JK}_voltage", min_v=20, max_v=29.2, name="Pack V"),
+                _gauge(f"{JK}_current", min_v=-200, max_v=200, name="Current A"),
+                _gauge(f"{JK}_temperature", min_v=0, max_v=60, name="Temp °C"),
+            ],
+        }
+        bms_cell_graph = {
+            "type": "history-graph",
+            "title": "Cell voltages — 24h (a diverging line = a weak/drifting cell)",
+            "hours_to_show": 24,
+            "entities": [{"entity": JK_CELLS[i], "name": f"Cell {i + 1}"} for i in range(8)],
+        }
+        bms_cell_now = {
+            "type": "entities",
+            "title": "Per-cell voltage (now)",
+            "show_header_toggle": False,
+            "entities": [{"entity": JK_CELLS[i], "name": f"Cell {i + 1}"} for i in range(8)]
+            + [
+                {"type": "divider"},
+                {"entity": f"{JK}_delta_cell_voltage", "name": "Delta (max − min)"},
+                {"entity": f"{JK}_highest_cell_voltage", "name": "Highest cell V"},
+                {"entity": f"{JK}_lowest_cell_voltage", "name": "Lowest cell V"},
+                {"entity": "sensor.jk_highest_cell_no", "name": "Highest cell #"},
+                {"entity": "sensor.jk_lowest_cell_no", "name": "Lowest cell #  (watch this one)"},
+            ],
+        }
+        bms_balance = {
+            "type": "entities",
+            "title": "Balancing & MOSFETs",
+            "show_header_toggle": False,
+            "entities": [
+                {"entity": f"{JKB}_balancer", "name": "Balancer active"},
+                {"entity": "sensor.jk_balance_current", "name": "Balance current"},
+                {"entity": f"{JKB}_charging", "name": "Charging"},
+                {"entity": f"{JKB}_charge_mosfet", "name": "Charge MOSFET"},
+                {"entity": f"{JKB}_discharge_mosfet", "name": "Discharge MOSFET"},
+                {"entity": f"{JKB}_problem", "name": "Problem flag"},
+            ],
+        }
+        bms_status = _entities_card(
+            "Pack status & BLE",
+            [
+                {"entity": f"{JK}_battery_health", "name": "Health"},
+                {"entity": f"{JK}_stored_energy", "name": "Stored energy"},
+                {"entity": f"{JK}_power", "name": "Power"},
+                {"entity": f"{JK}_cycles", "name": "Cycles"},
+                {"entity": f"{JK}_runtime", "name": "Runtime"},
+                {"entity": f"{JK}_link_quality", "name": "BLE link quality"},
+                {"entity": f"{JK}_signal_strength", "name": "BLE RSSI"},
+            ],
+        )
+        bms_view = {
+            "title": "JK BMS",
+            "path": "jk-bms",
+            "icon": "mdi:car-battery",
+            "cards": [
+                {"type": "markdown", "content": bms_info},
+                bms_gauges,
+                bms_cell_graph,
+                bms_cell_now,
+                bms_balance,
+                bms_status,
+            ],
+        }
+
         # ── ESPHome (ESP32) view ──────────────────────────────────────
         esphome_ingress = await _get_esphome_ingress_url(ws, msg_id=18)
         esphome_info_lines = [
@@ -715,6 +825,7 @@ async def main() -> None:
                 ai_view,
                 rpi_cm5_view,
                 victron_view,
+                bms_view,
                 esphome_view,
                 status_view,
             ]
@@ -727,7 +838,7 @@ async def main() -> None:
         if msg.get("success"):
             print(
                 "  [OK] Tabs WS-Relay-01, WS-Relay-02, WS-DI/DO-01, WS-AI-01, "
-                "RPi CM5, Victron Blue Smart, ESPHome, Status saved"
+                "RPi CM5, Victron Blue Smart, JK BMS, ESPHome, Status saved"
             )
         else:
             print(f"  [ERROR] {msg.get('error')}")

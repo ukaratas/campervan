@@ -1,0 +1,94 @@
+# JK BMS — hücre-bazı template sensörleri (Admin Bench "JK BMS" sekmesi için).
+#
+# Kaynak: bms_ble entegrasyonu 8 hücreyi AYRI entity olarak üretmez; hepsini
+# `sensor.neocamperbat_delta_cell_voltage` üzerindeki `cell_voltages` attribute'unda
+# (8 elemanlı liste) verir. Grafik/alarm/karşılaştırma için burada 8 sensöre açıyoruz
+# + en zayıf/en güçlü hücre numarasını hesaplıyoruz (sorunlu hücreyi işaretlemek için).
+#
+# Not: aiobmsble hangi hücrenin balance yediğini ayrı vermiyor (yalnız `balancer` on/off +
+# `balance_current`). Pratikte en yüksek hücre balanslanır → "En Yüksek Hücre No" onu gösterir.
+# Cihaz yeniden eşlenirse `neocamperbat` önekini güncelleyin.
+- sensor:
+    - name: "JK Cell 1"
+      unique_id: jk_cell_1
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 1 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[0] | float(0) | round(3) }}"
+    - name: "JK Cell 2"
+      unique_id: jk_cell_2
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 2 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[1] | float(0) | round(3) }}"
+    - name: "JK Cell 3"
+      unique_id: jk_cell_3
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 3 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[2] | float(0) | round(3) }}"
+    - name: "JK Cell 4"
+      unique_id: jk_cell_4
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 4 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[3] | float(0) | round(3) }}"
+    - name: "JK Cell 5"
+      unique_id: jk_cell_5
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 5 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[4] | float(0) | round(3) }}"
+    - name: "JK Cell 6"
+      unique_id: jk_cell_6
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 6 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[5] | float(0) | round(3) }}"
+    - name: "JK Cell 7"
+      unique_id: jk_cell_7
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 7 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[6] | float(0) | round(3) }}"
+    - name: "JK Cell 8"
+      unique_id: jk_cell_8
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length >= 8 }}"
+      state: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages'))[7] | float(0) | round(3) }}"
+
+    # Balance akımı: entity attribute'unda liste ([0.0]) gelebiliyor → sayıya indir.
+    - name: "JK Balance Current"
+      unique_id: jk_balance_current
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+      availability: "{{ state_attr('sensor.neocamperbat_current','balance_current') is not none }}"
+      state: >-
+        {% set b = state_attr('sensor.neocamperbat_current','balance_current') %}
+        {% if b is iterable and b is not string %}{{ b[0] | float(0) | round(3) }}{% else %}{{ b | float(0) | round(3) }}{% endif %}
+
+    # En düşük / en yüksek hücre NUMARASI (1-indeksli) — sorunlu hücreyi işaretler.
+    - name: "JK Lowest Cell No"
+      unique_id: jk_lowest_cell_no
+      icon: mdi:battery-arrow-down-outline
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length > 0 }}"
+      state: >-
+        {% set c = state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') %}
+        {{ c.index(c | min) + 1 }}
+    - name: "JK Highest Cell No"
+      unique_id: jk_highest_cell_no
+      icon: mdi:battery-arrow-up-outline
+      availability: "{{ (state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') or []) | length > 0 }}"
+      state: >-
+        {% set c = state_attr('sensor.neocamperbat_delta_cell_voltage','cell_voltages') %}
+        {{ c.index(c | max) + 1 }}
